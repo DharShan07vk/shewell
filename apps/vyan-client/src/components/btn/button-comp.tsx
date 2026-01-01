@@ -1,0 +1,28 @@
+import { Button } from "@repo/ui/src/@/components/button";
+type ButtonProps = {
+  text: string;
+
+  color: string;
+};
+const ButtonComp = (props: ButtonProps) => {
+  return (
+    <>
+      <Button variant="green">
+        <div className="mr-2">{props.text}</div>
+        <svg
+          width="15"
+          height="8"
+          viewBox="0 0 15 8"
+          fill={props.color}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1.13634 3.36357L12.3273 3.36357L10.2318 1.26807C9.98332 1.01959 9.98332 0.616643 10.2318 0.368122C10.4803 0.119643 10.8833 0.119643 11.1318 0.368122L14.3136 3.54994C14.5621 3.79842 14.5621 4.20136 14.3136 4.44989L11.1318 7.6317C11.0075 7.75596 10.8447 7.81812 10.6818 7.81812C10.5189 7.81812 10.3561 7.75596 10.2318 7.6317C9.98332 7.38322 9.98332 6.98028 10.2318 6.73176L12.3273 4.6363L1.13634 4.6363C0.7849 4.6363 0.499979 4.35138 0.499979 3.99993C0.499979 3.64849 0.7849 3.36357 1.13634 3.36357Z"
+            fill={props.color}
+          />
+        </svg>
+      </Button>
+    </>
+  );
+};
+export default ButtonComp;

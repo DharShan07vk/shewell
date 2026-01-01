@@ -1,0 +1,72 @@
+'use client'
+import { format, parse } from 'date-fns';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { Calendar } from 'primereact/calendar';
+import { Nullable } from 'primereact/ts-helpers';
+import { useEffect, useState } from 'react';
+
+const DateRangeForAppointmentData = () => {
+    const [dates, setDates] = useState<Nullable<(Date | null)[]>>(null);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const router = useRouter()
+
+ 
+
+   // Initialize dates from URL parameters on component mount
+   useEffect(() => {
+    const startDate = searchParams.get('startDate');
+    const endDate = searchParams.get('endDate');
+
+    if (startDate && endDate) {
+      const parsedStartDate = parse(startDate, 'yyyy-MM-dd', new Date());
+      const parsedEndDate = parse(endDate, 'yyyy-MM-dd', new Date());
+      setDates([parsedStartDate, parsedEndDate]);
+    }
+  }, [searchParams]);
+
+  const handleDateChange = (e: { value: Nullable<(Date | null)[]> }) => {
+    setDates(e.value);
+    
+    const params = new URLSearchParams(searchParams.toString());
+    
+    // Update date parameters
+    if (e.value?.[0]) {
+      params.set('startDate', format(e.value[0], 'yyyy-MM-dd'));
+    } else {
+      params.delete('startDate');
+    }
+    
+    if (e.value?.[1]) {
+      params.set('endDate', format(e.value[1], 'yyyy-MM-dd'));
+    } else {
+      params.delete('endDate');
+    }
+    
+
+    // Update URL 
+    router.push(`${pathname}?${params.toString()}`);
+  };
+  
+
+  return (
+    <>
+
+      <div className='my-4 '>
+      <Calendar
+        value={dates}
+        onChange={handleDateChange}
+        selectionMode="range"
+      
+        className="max-w-[380px]"
+        showIcon
+        dateFormat="yy-mm-dd"
+        placeholder="Select Date Range"
+      />
+      </div>
+    
+    </>
+  );
+};
+export default DateRangeForAppointmentData;

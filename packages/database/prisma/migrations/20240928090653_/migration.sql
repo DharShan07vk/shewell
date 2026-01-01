@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Document" ALTER COLUMN "comments" DROP NOT NULL,
+ALTER COLUMN "mimeType" DROP NOT NULL;

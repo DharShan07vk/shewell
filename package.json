@@ -1,0 +1,41 @@
+{
+  "name": "vyan",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "database:migration:dev": "cd packages/database && pnpx prisma migrate dev",
+    "database:migration:prod": "cd packages/database && pnpx prisma migrate deploy && pnpx prisma generate",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^22.7.5",
+    "bcryptjs": "2.4.3",
+    "prettier": "^3.3.3",
+    "turbo": "latest"
+  },
+  "packageManager": "pnpm@8.9.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@date-fns/tz": "^1.1.2",
+    "@tanstack/react-table": "^8.20.5",
+    "axios": "^1.7.7",
+    "date-fns-tz": "^3.2.0",
+    "embla-carousel-autoplay": "^8.3.0",
+    "fs": "0.0.1-security",
+    "googleapis": "^144.0.0",
+    "lucide-react": "^0.365.0",
+    "multiselect-react-dropdown": "^2.0.25",
+    "react-day-picker": "^8.10.1",
+    "recharts": "^2.12.7"
+  }
+}

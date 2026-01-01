@@ -1,0 +1,29 @@
+@import './_variables';
+@import "./_mixins";
+@import "./_main";
+@import "./_topbar";
+@import "./_menu";
+@import "./_config";
+@import "./_content";
+@import "./_footer";
+@import "./_responsive";
+@import "./_utils";
+@import "./_typography";
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  color: #ffffff;
+}
+.p-chips-token-label, .p-icon.p-chips-token-icon {
+  color: #ffffff;
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  color: #ffffff;
+}
+.p-datatable .p-datatable-tbody > tr.p-highlight {
+  color: #ffffff;
+}
+.p-datatable .p-sortable-column.p-highlight, .p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
+  color: #ffffff;
+}
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {
+  color: #ffffff;
+}

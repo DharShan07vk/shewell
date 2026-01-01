@@ -1,0 +1,75 @@
+import { FooterSection } from "@/components/FooterSection";
+import { NavigationHeaderSection } from "@/components/NavigationHeaderSection";
+import { FilterBar } from "@/components/FilterBar";
+import { SessionCard } from "@/components/SessionCard";
+import { api } from "~/trpc/server";
+import { format } from "date-fns";
+
+export default async function SessionsPage() {
+  // Fetch sessions from database
+  const sessions = await api.session.getAllSessions({});
+
+  console.log("Fetched sessions:", sessions.length, "sessions");
+
+  return (
+    <main className="flex w-full flex-col items-center bg-white">
+      {/* <NavigationHeaderSection /> */}
+
+      {/* Hero Section */}
+      <div className="mx-auto max-w-7xl px-6 py-16 text-center">
+        <h1 className="font-inter text-[48px] font-medium leading-[48px] text-gray-800">
+          Courses That Support You – Every Step of the Way
+        </h1>
+        <p className="mt-3 text-base text-gray-500">
+          From fertility to first steps – evidence-based, heart-led,
+          expert-designed just for you.
+        </p>
+      </div>
+
+      {/* Filter Bar */}
+      <FilterBar />
+
+      {/* Sessions List */}
+      <div className="mx-auto w-full max-w-7xl space-y-6 px-6 py-10">
+        {sessions.length === 0 ? (
+          <div className="py-12 text-center">
+            <p className="mb-2 text-xl text-gray-600">
+              No sessions available at the moment.
+            </p>
+            <p className="text-sm text-gray-400">
+              Please check back later or contact support if you believe this is
+              an error.
+            </p>
+          </div>
+        ) : (
+          sessions.map((session) => {
+            const sessionDate = format(
+              new Date(session.startAt),
+              "dd MMM yyyy",
+            );
+            const sessionTime = `${format(new Date(session.startAt), "h:mm a")} to ${format(new Date(session.endAt), "h:mm a")} IST`;
+
+            return (
+              <SessionCard
+                key={session.id}
+                language="English"
+                isOnline={true}
+                hasRecording={true}
+                sessionDate={sessionDate}
+                sessionTime={sessionTime}
+                title={session.title}
+                description={session.category?.name || ""}
+                date={sessionDate}
+                price={Number(session.price)}
+                timeSlot={sessionTime}
+                detailPath={`/session/${session.slug}`}
+              />
+            );
+          })
+        )}
+      </div>
+
+      
+    </main>
+  );
+}

@@ -1,0 +1,30 @@
+'use server';
+import React, { Suspense } from 'react';
+import { db } from '@/src/server/db';
+
+import { Skeleton } from 'primereact/skeleton';
+import LanguageTable from './language-table';
+
+
+const LanguagesPage = async () => {
+  const languages = await db.professionalLanguages.findMany({
+    select: {
+      id: true,
+      language: true,
+      active: true
+    },
+    orderBy: [
+      {
+        language: 'asc'
+      }
+    ]
+  });
+
+  return (
+    <Suspense fallback={<Skeleton width="100%" height="100px" />}>
+      <LanguageTable languages={languages}/>
+    </Suspense>
+  );
+};
+
+export default LanguagesPage;

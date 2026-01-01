@@ -1,0 +1,895 @@
+generator client {
+  provider = "prisma-client-js"
+  // previewFeatures = ["orderByRelation"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String            @id @default(cuid())
+  email              String            @unique
+  name               String
+  passwordHash       String
+  phoneNumber        String
+  otp                String
+  otpCreatedAt       DateTime?
+  coupon             Coupon[]
+  notification       Notification[]
+  verifiedAt         DateTime?
+  ageGreaterThan18   Boolean
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  reviews            Review[]
+  wishlistedProducts Product[]
+  addresses          Address[]
+  Order              Order[]
+  patient            Patient[]
+  appointments          BookAppointment[]
+  deletedAt             DateTime?
+  AuthSession           AuthSession[]
+  sessionRegistrations  SessionRegistration[]
+}
+
+model Notification {
+  id          String    @id @default(cuid())
+  title       String
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  description String
+  createdAt   DateTime
+  updatedAt   DateTime
+  deletedAt   DateTime?
+}
+
+// model Patient {
+//   id          String  @id @default(cuid())
+//   firstName   String
+//   lastName    String
+//   phoneNumber String
+//   email       String
+//   message     String
+//   User        User?   @relation(fields: [userId], references: [id])
+//   userId      String?
+// }
+
+model Address {
+  id          String    @id @default(cuid())
+  name        String
+  mobile      String
+  houseNo     String
+  area        String
+  city        String
+  country     Country   @relation(fields: [countryId], references: [id])
+  countryId   String
+  state       State     @relation(fields: [stateId], references: [id])
+  stateId     String
+  landmark    String
+  pincode     String
+  addressType String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  orders      Order[]
+}
+
+model BlogCategory {
+  id              String    @id @default(cuid())
+  name            String
+  slug            String    @unique
+  active          Boolean
+  deletedAt       DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  metaTitle       String?
+  metaDescription String?
+  metaKeywords    String[]  @default([])
+  blogs           Blog[]
+}
+
+model Blog {
+  id               String       @id @default(cuid())
+  title            String
+  slug             String       @unique
+  author           String
+  media            Media        @relation(fields: [mediaId], references: [id])
+  mediaId          String
+  body             String
+  shortDescription String?
+  category         BlogCategory @relation(fields: [categoryId], references: [id])
+  categoryId       String
+  active           Boolean
+  popularBlog      Boolean?     @default(false)
+  seoTitle         String?
+  seoDescription   String?
+  seoKeywords      String[]
+  deletedAt        DateTime?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+}
+
+enum OrderStatus {
+  CART
+  PAYMENT_SUCCESSFUL
+  PAYMENT_PENDING
+  PAYMMENT_FAILED
+  OUT_FOR_DELIVERY
+  CANCELLED
+  RETURNED
+  DELIVERED
+}
+
+model Order {
+  id                     String      @id @default(cuid())
+  user                   User        @relation(fields: [userId], references: [id])
+  userId                 String
+  status                 OrderStatus
+  discountInCent         Int?
+  expectedDelivery       DateTime?
+  subTotalInCent         Int
+  taxesInCent            Int
+  deliveryFeesInCent     Int
+  totalInCent            Int
+  coupon                 Coupon?     @relation(fields: [couponId], references: [id])
+  couponId               String?
+  lineItems              LineItem[]
+  address                Address     @relation(fields: [addressId], references: [id])
+  addressId              String
+  razorpay_order_id      String?
+  razorpay_payment_id    String?
+  razorpay_signature     String?
+  orderPlaced            DateTime
+  height                 Decimal?    @db.Decimal(9, 2)
+  breadth                Decimal?    @db.Decimal(9, 2)
+  weight                 Decimal?    @db.Decimal(9, 2)
+  length                 Decimal?    @db.Decimal(9, 2)
+  shiprocket_order_id    String?
+  shiprocket_shipment_id String?
+  razorpay_refund_id     String?
+  cancelledDate          DateTime?
+}
+
+model AppConfig {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Coupon {
+  id           String     @id @default(cuid())
+  code         String     @unique
+  amount       Int
+  isPercent    Boolean
+  description  String
+  newUser      Boolean
+  createdAt    DateTime   @default(now())
+  expiresAt    DateTime
+  numberOfTime Int
+  categories   Category[]
+  products     Product[]
+  users        User[]
+  orders       Order[]
+
+  updatedAt DateTime  @updatedAt
+  active    Boolean
+  deletedAt DateTime?
+}
+
+model LineItem {
+  id                 String         @id @default(cuid())
+  order              Order          @relation(fields: [orderId], references: [id])
+  orderId            String
+  productVariant     ProductVariant @relation(fields: [productVariantId], references: [id])
+  productVariantId   String
+  perUnitPriceInCent Int
+  quantity           Int
+  subTotalInCent     Int
+  discountInCent     Int
+  totalInCent        Int
+}
+
+model Country {
+  id             String    @id @default(cuid())
+  name           String
+  iso3           String
+  iso2           String
+  phoneCode      String
+  currency       String
+  currencyName   String
+  currencySymbol String
+  region         String?
+  regionId       String?
+  subRegion      String?
+  subregionId    String?
+  nationality    String?
+  timezones      Json?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  states         State[]
+  cities         City[]
+  addresses      Address[]
+  active         Boolean   @default(false)
+}
+
+model AvailablePincodes {
+  id        String    @id @default(cuid())
+  pincode   String
+  state     State?    @relation(fields: [stateId], references: [id])
+  stateId   String?
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model ProfessionalUser {
+  id                                String                             @id @default(cuid())
+  firstName                         String
+  lastName                          String?
+  phoneNumber                       String
+  dob                               DateTime
+  email                             String                             @unique
+  passwordHash                      String
+  createdAt                         DateTime                           @default(now())
+  updatedAt                         DateTime                           @updatedAt
+  qualifications                    ProfessionalQualifications[]
+  displayQualification              ProfessionalSpecializations?       @relation("DisplayQualification", fields: [displayQualificationId], references: [id])
+  displayQualificationId            String?
+  AuthSession                       AuthSession[]
+  ProfessionalSpecializations       ProfessionalSpecializations[]
+  avgRating                         Decimal?
+  totalConsultations                Int?
+  userName                          String?                            @unique
+  gender                            String?
+  sessionMode                       String?
+  // sessionType                       String?
+  // meetingType                       String?
+  listing                           String?
+  issue                             String?
+  aboutYou                          String?
+  aboutEducation                    String?
+  degrees                           ProfessionalDegree[]
+  languages                         ProfessionalLanguages[]            @relation("ProfessionalUser Languages")
+  experiences                       ProfessionalExperience[]
+  availability                      Availability[]
+  // bookingTables               BookingTable[]
+  unavailableDay                    UnAvailableDay[]
+  appointments                      BookAppointment[]
+  professionalUserAppointmentPrices professionalUserAppointmentPrice[]
+  // rating                            Int?
+  // review                            String?
+  ratings                           ProfessionalUserRating[]
+  media                             Media?                             @relation(fields: [mediaId], references: [id])
+  mediaId                           String?                            @unique
+  documents                         Document[]
+  googleAccessToken                 String?
+  googleRefreshToken                String?
+  deletedAt                         DateTime?
+}
+
+model ProfessionalSpecializationParentCategory {
+  id              String                        @id @default(cuid())
+  name            String
+  active          Boolean
+  deletedAt       DateTime?
+  specializations ProfessionalSpecializations[]
+  media           Media                         @relation(fields: [mediaId], references: [id])
+  mediaId         String
+}
+
+model ProfessionalSpecializations {
+  id                                         String                                    @id @default(cuid())
+  specialization                             String
+  active                                     Boolean
+  deletedAt                                  DateTime?
+  professionalUser                           ProfessionalUser[]
+  displayQualificationUsers                  ProfessionalUser[]                        @relation("DisplayQualification")
+  ProfessionalSpecializationParentCategory   ProfessionalSpecializationParentCategory? @relation(fields: [professionalSpecializationParentCategoryId], references: [id])
+  professionalSpecializationParentCategoryId String?
+}
+
+model ProfessionalUserRating {
+  id                 String            @id @default(cuid())
+  rating             Int
+  review             String
+  professionalUser   ProfessionalUser? @relation(fields: [professionalUserId], references: [id])
+  professionalUserId String
+  bookAppointment    BookAppointment   @relation(fields: [bookAppointmentId], references: [id])
+  bookAppointmentId  String            @unique
+  createdAt          DateTime          @default(now())
+}
+
+model professionalUserAppointmentPrice {
+  id                    String           @id @default(cuid())
+  // coupleSession      Boolean
+  time                  Int
+  priceInCentsForSingle Int
+  priceInCentsForCouple Int
+  professionalUser      ProfessionalUser @relation(fields: [professionalUserId], references: [id])
+  professionalUserId    String
+  createdAt             DateTime         @default(now())
+  updatedAt             DateTime         @updatedAt
+}
+
+model BookAppointment {
+  id                 String                  @id @default(cuid())
+  // each booking appointment can have only one service mode
+  // serviceMode        ServiceMode            @relation(fields: [serviceModeId], references: [id])
+  // serviceModeId      String
+  serviceType        AppointmentType
+  priceInCents       Int
+  taxedAmount        Int?
+  totalPriceInCents  Int?
+  description        String
+  planName           String
+  // each booking appointment can have only one expert
+  professionalUser   ProfessionalUser        @relation(fields: [professionalUserId], references: [id])
+  professionalUserId String
+  patient            Patient                 @relation(fields: [patientId], references: [id])
+  patientId          String
+  startingTime       DateTime
+  endingTime         DateTime
+  createdAt          DateTime                @default(now())
+  updatedAt          DateTime                @updatedAt
+  status             BookAppointmentStatus?
+  user               User                    @relation(fields: [userId], references: [id])
+  userId             String
+  razorpayOrderId    String?
+  razorpayPaymentId  String?
+  razorpayRefundId   String?
+  comments           Comment[]
+  professionalRating ProfessionalUserRating?
+  meeting            Json?
+  // professionalRatingId String?
+}
+
+model Comment {
+  id                String          @id @default(cuid())
+  comment           String
+  createdAt         DateTime        @default(now())
+  bookAppointment   BookAppointment @relation(fields: [bookAppointmentId], references: [id])
+  bookAppointmentId String
+}
+
+enum AppointmentType {
+  ONLINE
+  OFFLINE
+}
+
+enum BookAppointmentStatus {
+  PAYMENT_SUCCESSFUL
+  PAYMENT_PENDING
+  PAYMMENT_FAILED
+  CANCELLED
+  CANCELLED_WITH_REFUND
+  COMPLETED
+}
+
+// model ServiceMode {
+//   id           String            @id @default(cuid())
+//   serviceType  AppointmentType
+//   priceInCents Int
+//   description  String
+//   planName     String
+//   // one type of serviceMode can be associated with many type of BookAppointment
+//   appointments BookAppointment[]
+// }
+
+model Patient {
+  id          String    @id @default(cuid())
+  firstName   String
+  lastName    String?
+  email       String
+  phoneNumber String
+  message     String?
+  deletedAt   DateTime?
+
+  appointments       BookAppointment[]
+  // each patient is associated with one user
+  user               User?               @relation(fields: [userId], references: [id])
+  userId             String
+  additionalPatients AdditionalPatient[]
+}
+
+model AdditionalPatient {
+  id          String    @id @default(cuid())
+  firstName   String
+  lastName    String?
+  email       String
+  phoneNumber String
+  message     String?
+  deletedAt   DateTime?
+  Patient     Patient?  @relation(fields: [patientId], references: [id])
+  patientId   String?
+}
+
+model Availability {
+  id                 String                @id @default(cuid())
+  available          Boolean
+  day                Day
+  professionalUser   ProfessionalUser      @relation(fields: [professionalUserId], references: [id])
+  professionalUserId String
+  availableTimings   AvailabilityTimings[]
+}
+
+enum Day {
+  SUN
+  MON
+  TUE
+  WED
+  THU
+  FRI
+  SAT
+}
+
+model AvailabilityTimings {
+  id             String        @id @default(cuid())
+  startingTime   DateTime      @db.Time()
+  endingTime     DateTime      @db.Time()
+  availability   Availability? @relation(fields: [availabilityId], references: [id])
+  availabilityId String?
+}
+
+model UnAvailableDay {
+  id                 String            @id @default(cuid())
+  date               DateTime          @db.Date
+  professionalUser   ProfessionalUser? @relation(fields: [professionalUserId], references: [id])
+  professionalUserId String?
+}
+
+model ProfessionalDegree {
+  id                 String           @id @default(cuid())
+  degree             String
+  professionalUser   ProfessionalUser @relation(fields: [professionalUserId], references: [id])
+  professionalUserId String
+}
+
+model ProfessionalExperience {
+  id                 String           @id @default(cuid())
+  // years              String
+  startingYear       String
+  endingYear         String
+  department         String
+  position           String
+  location           String
+  ProfessionalUser   ProfessionalUser @relation(fields: [professionalUserId], references: [id])
+  professionalUserId String
+
+  ProfessionalQualifications   ProfessionalQualifications? @relation(fields: [professionalQualificationsId], references: [id])
+  professionalQualificationsId String?
+}
+
+model ProfessionalQualifications {
+  id                      String                   @id @default(cuid())
+  degree                  String[]
+  state                   State                    @relation(fields: [stateId], references: [id])
+  stateId                 String
+  city                    String
+  // city                    City                     @relation(fields: [cityId], references: [id])
+  // cityId                  String
+  // language                ProfessionalLanguages[]
+  professionalExperiences ProfessionalExperience[]
+  // displayedQualification   ProfessionalDisplayQualification @relation(fields: [displayedQualificationId], references: [id])
+  // displayedQualificationId String
+  createdAt               DateTime                 @default(now())
+  updatedAt               DateTime                 @updatedAt
+  professionalUser        ProfessionalUser         @relation(fields: [professionalUserId], references: [id])
+  professionalUserId      String
+  City                    City?                    @relation(fields: [cityId], references: [id])
+  cityId                  String?
+}
+
+// model ProfessionalDisplayQualification {
+//   id             String                       @id @default(cuid())
+//   name           String
+//   qualifications ProfessionalQualifications[]
+//   createdAt      DateTime                     @default(now())
+//   updatedAt      DateTime                     @updatedAt
+//   deletedAt      DateTime?
+// }
+
+model ProfessionalLanguages {
+  id        String    @id @default(cuid())
+  language  String
+  active    Boolean
+  deletedAt DateTime?
+  // ProfessionalUser   ProfessionalUser @relation(fields: [professionalUserId], references: [id])
+  // professionalUserId String
+
+  professionalUsers ProfessionalUser[] @relation("ProfessionalUser Languages")
+
+  // ProfessionalQualifications   ProfessionalQualifications? @relation(fields: [professionalQualificationsId], references: [id])
+  // professionalQualificationsId String?
+}
+
+model State {
+  id                String                       @id @default(cuid())
+  name              String
+  createdAt         DateTime                     @default(now())
+  updatedAt         DateTime                     @updatedAt
+  deletedAt         DateTime?
+  qualifications    ProfessionalQualifications[]
+  cities            City[]
+  stateCode         String
+  addresses         Address[]
+  country           Country                      @relation(fields: [countryId], references: [id])
+  countryId         String
+  AvailablePincodes AvailablePincodes[]
+}
+
+model City {
+  id             String                       @id @default(cuid())
+  country        Country                      @relation(fields: [countryId], references: [id])
+  countryId      String
+  name           String
+  createdAt      DateTime                     @default(now())
+  updatedAt      DateTime                     @updatedAt
+  deletedAt      DateTime?
+  qualifications ProfessionalQualifications[]
+  state          State                        @relation(fields: [stateId], references: [id])
+  stateId        String
+  latitude       Decimal
+  longitude      Decimal
+}
+
+model ProfessionalModes {
+  id String @id @default(cuid())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AuthSession {
+  id                 String           @id @default(cuid())
+  sessionToken       String           @unique
+  professionalUser   ProfessionalUser @relation(fields: [professionalUserId], references: [id])
+  professionalUserId String
+  expires            DateTime
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  userId             String
+  user               User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Media {
+  id                           String                                     @id @default(cuid())
+  fileKey                      String
+  comments                     String
+  fileUrl                      String?
+  mimeType                     String
+  createdAt                    DateTime                                   @default(now())
+  updatedAt                    DateTime                                   @updatedAt
+  // Products  Product[]
+  Category                     Category[]
+  products                     MediaOnProducts[]
+  blogs                        Blog[]
+  professionalUser             ProfessionalUser?
+  // ProfessionalPersonalInformation ProfessionalPersonalInformation[]
+  // ProfessionalUploads ProfessionalUploads[] @relation("uploadImage")
+  // documents           ProfessionalUploads[] @relation("uploadDocument")
+  homeBanners                  HomeBanner[]
+  testimonials                 Testimonials[]                             @relation("TestimonialMediaImage")
+  specializationParentCategory ProfessionalSpecializationParentCategory[]
+}
+
+enum DocumentType {
+  AADHAR_CARD
+  PAN_CARD
+  OTHER_DOCUMENTS
+}
+
+model Document {
+  id                 String           @id @default(cuid())
+  fileKey            String
+  comments           String?
+  fileUrl            String?
+  mimeType           String?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  professionalUser   ProfessionalUser @relation(fields: [professionalUserId], references: [id])
+  professionalUserId String
+  type               DocumentType?
+}
+
+model Product {
+  id               String            @id @default(cuid())
+  name             String
+  slug             String
+  description      String
+  shortDescription String
+  avgRating        Decimal
+  totalReviews     Int
+  bestSeller       Boolean           @default(false)
+  seoTitle         String?
+  seoDescription   String?
+  seoKeywords      String[]          @default([])
+  productBenefits  ProductBenefit[]
+  productVariants  ProductVariant[]
+  productStats     ProductStats[]
+  active           Boolean           @default(false)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  deletedAt        DateTime?
+  // media           Media?            @relation(fields: [mediaId], references: [id])
+  // mediaId         String?
+  category         Category          @relation(fields: [categoryId], references: [id])
+  categoryId       String
+  productCategory  ProductCategory?
+  media            MediaOnProducts[]
+  userWishlisted   User[]
+  review           Review[]
+  coupon           Coupon[]
+  faq              FAQ[]
+}
+
+model FAQ {
+  id        String  @id @default(cuid())
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  question  String
+  answer    String
+  order     Int     @default(0)
+}
+
+model ProductBenefit {
+  id        String    @id @default(cuid())
+  benefit   String
+  product   Product   @relation(fields: [productId], references: [id])
+  productId String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+}
+
+model ProductVariant {
+  id                       String                   @id @default(cuid())
+  sku                      String? // SKU should be unique when set for a product variant.
+  name                     String
+  priceInCents             Int
+  discountInCents          Int?
+  discountInPercentage     Int?
+  discountEndDate          DateTime?
+  product                  Product?                 @relation(fields: [productId], references: [id])
+  productId                String
+  createdAt                DateTime                 @default(now())
+  updatedAt                DateTime                 @updatedAt
+  deletedAt                DateTime?
+  lineItems                LineItem[]
+  productVariantInventory  ProductVariantInventory?
+  productVariantInventoyId String?
+}
+
+model ProductVariantInventory {
+  id                             String                          @id @default(cuid())
+  incoming                       Int                             @default(0) // Quantities that are incoming.
+  unavailable                    Int                             @default(0) // Inventory that is not available for sale or commited to an order
+  available                      Int                             @default(0) // Inventory in store that can be sold
+  onHand                         Int                             @default(0) // The total amount of inventory at a location. This is the sum of available, committed and unavailable items.
+  commited                       Int                             @default(0) // Inventory that is part of an unfullfilled order
+  productVariant                 ProductVariant                  @relation(fields: [productVariantId], references: [id])
+  productVariantId               String                          @unique
+  productVariantInventoryUpdates ProductVariantInventoryUpdate[]
+}
+
+model ProductVariantInventoryUpdate {
+  id                        String                            @id @default(cuid())
+  quantity                  Int
+  reason                    String
+  updateType                ProductVariantInventoryUpdateType
+  updateBy                  AdminUser                         @relation(fields: [updateById], references: [id])
+  updateById                String
+  productVariantInventory   ProductVariantInventory           @relation(fields: [productVariantInventoryId], references: [id])
+  productVariantInventoryId String
+}
+
+enum ProductVariantInventoryUpdateType {
+  ADJUST_AVAILABLE
+  MOVE_TO_UNAVAILABLE
+  ADJUST_ON_HAND
+}
+
+model ProductStats {
+  id        String    @id @default(cuid())
+  title     String
+  stat      String
+  product   Product   @relation(fields: [productId], references: [id])
+  productId String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+}
+
+model Category {
+  id               String     @id @default(cuid())
+  name             String
+  active           Boolean    @default(false)
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  deletedAt        DateTime?
+  slug             String
+  order            Int?       @unique
+  products         Product[]
+  parentCategory   Category?  @relation("CategorySelf", fields: [parentCategoryId], references: [id])
+  parentCategoryId String?
+  childCategories  Category[] @relation("CategorySelf")
+  media            Media?     @relation(fields: [mediaId], references: [id])
+  mediaId          String?
+  coupon           Coupon[]
+}
+
+enum ProductCategory {
+  MOTHER
+  CHILD
+}
+
+model AdminUser {
+  id                             String                          @id @default(cuid())
+  name                           String
+  email                          String                          @unique
+  passwordHash                   String
+  active                         Boolean                         @default(false)
+  createdAt                      DateTime                        @default(now())
+  updatedAt                      DateTime                        @updatedAt
+  productVariantInventoryUpdates ProductVariantInventoryUpdate[]
+}
+
+model MediaOnProducts {
+  order        Int
+  imageAltText String?
+  comment      String?
+  product      Product  @relation(fields: [productId], references: [id])
+  productId    String
+  media        Media    @relation(fields: [mediaId], references: [id])
+  mediaId      String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@id([mediaId, productId])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  rating    String
+  review    String
+  approved  Boolean  @default(false)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  active    Boolean? @default(false)
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+enum userType {
+  CLIENT
+  PROFESSIONAL_USER
+}
+
+model Newsletter {
+  id       String   @id @default(cuid())
+  email    String
+  userType userType
+
+  @@unique([email, userType])
+}
+
+// model ProfessionalPersonalInformation {
+//   id                     String @id @default(cuid())
+//   fullName               String
+//   email                  String
+//   phoneNumber            String
+//   alternativeNumber      String
+//   displayedQualification String
+//   bio                    String
+//   media                  Media  @relation(fields: [mediaId], references: [id])
+//   mediaId                String
+// }
+
+model HomeBanner {
+  id        String         @id @default(cuid())
+  order     Int
+  url       String?
+  media     Media?         @relation(fields: [mediaId], references: [id])
+  mediaId   String?
+  active    Boolean        @default(false)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  deletedAt DateTime?
+  usedFor   HomeBannerType
+}
+
+enum HomeBannerType {
+  HomeBannerClient
+  HomeBannerDoctor
+}
+
+model Testimonials {
+  id        String    @id @default(cuid())
+  title     String
+  name      String
+  media     Media?    @relation("TestimonialMediaImage", fields: [mediaId], references: [id])
+  mediaId   String?
+  active    Boolean
+  avgRating Decimal?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+}
+
+// ENUMS
+enum Trimester {
+  FIRST
+  SECOND
+  THIRD
+}
+
+enum SessionStatus {
+  DRAFT
+  PUBLISHED
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+// MODELS
+
+model SessionCategory {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  trimester Trimester
+
+  sessions  Session[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Session {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+
+  startAt     DateTime
+  endAt       DateTime
+
+  price       Decimal  @db.Decimal(10, 2)
+  status      SessionStatus @default(DRAFT)
+
+  categoryId  String
+  category    SessionCategory @relation(fields: [categoryId], references: [id])
+
+  registrations SessionRegistration[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model SessionRegistration {
+  id            String   @id @default(cuid())
+
+  sessionId     String
+  session       Session  @relation(fields: [sessionId], references: [id])
+
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+
+  paymentStatus PaymentStatus @default(PENDING)
+
+  createdAt     DateTime @default(now())
+
+  @@unique([sessionId, userId])
+}

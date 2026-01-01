@@ -1,0 +1,79 @@
+import { z } from "zod";
+import { db } from "~/server/db";
+import { createTRPCRouter, publicProcedure } from "../trpc";
+import { getServerSession } from "next-auth";
+export const similarDoctorProfileRouter = createTRPCRouter({
+  similarDoctorProfile: publicProcedure
+    .input(
+      z.object({
+        similarDoctorProfileId: z.string(),
+        displayQualificationId: z.string(),
+      }),
+    )
+    .query(async ({ input }) => {
+      const { displayQualificationId, similarDoctorProfileId } = input;
+      const session = await getServerSession();
+      console.log("session", session);
+      if (!session) {
+        throw new Error("Unauthorised");
+      }
+      if (!session.user.email) {
+        throw new Error("Unauthorised");
+      }
+      // const professionalUser = await db.professionalUser.findFirst({
+      //   where: {
+      //     email: session.user.email,
+      //   },
+      // });
+
+      const similarDoctorProfiles = await db.professionalUser.findMany({
+        select: {
+          firstName: true,
+          displayQualification: true,
+          avgRating: true,
+          totalConsultations: true,
+          ProfessionalSpecializations: true,
+          professionalUserAppointmentPrices : {
+            select : {
+              priceInCentsForSingle : true,
+              priceInCentsForCouple : true
+            },
+            orderBy :{
+              time : "asc"
+            }
+          },
+          userName: true,
+          media: {
+            select: {
+              fileUrl: true,
+            },
+          },
+          languages  : {
+            select : {
+              id : true,
+              language : true
+            }
+          }
+        },
+        where: {
+          NOT: {
+            id: similarDoctorProfileId,
+          },
+          displayQualificationId: displayQualificationId,
+        },
+      });
+
+      
+
+      //   const specialisations = await db.professionalSpecializations.findMany({
+      //     where : {
+      //         prof
+      //     }
+      //   })
+
+      //   console.log("meetingsForADayRange", meetingsForADayRange),
+      // unAvailableDays,
+      //   professionalUser;
+      return { similarDoctorProfiles };
+    }),
+});

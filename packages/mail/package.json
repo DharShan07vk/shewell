@@ -1,0 +1,22 @@
+{
+  "name": "@repo/mail",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\""
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^7.5.2"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "eslint": "^8.53.0",
+    "typescript": "5.5.2"
+  },
+  "packageManager": "pnpm@8.14.0",
+  "engines": {
+    "node": ">=20"
+  }
+}
