@@ -162,6 +162,11 @@ const AppMenu = () => {
           label: 'Sessions',
           icon: 'pi pi-calendar',
           to: '/manage-sessions/sessions'
+        },
+        {
+          label: 'Registrations',
+          icon: 'pi pi-users',
+          to: '/manage-sessions/registrations'
         }
       ]
     },
@@ -235,7 +240,7 @@ const AppMenu = () => {
           label: 'Appointments',
           icon: 'pi pi-book',
           to: '/view-doctors/appointments'
-        },
+        }
       ]
     }
     // {

@@ -8,8 +8,11 @@ import { CourseInfoSection } from "@/components/course-detail/CourseInfoSection"
 import { BookingSection } from "@/components/course-detail/BookingSection";
 import { FooterInfoSection } from "@/components/course-detail/FooterInfoSection";
 import { SupportContactSection } from "@/components/course-detail/SupportContactSection";
+import { MeetingLinkSection } from "@/components/course-detail/MeetingLinkSection";
 import { api } from "~/trpc/server";
 import { format } from "date-fns";
+import { getServerAuthSession } from "~/server/auth";
+import { PaymentStatus } from "@repo/database";
 
 // Generate metadata for SEO
 export async function generateMetadata({
@@ -44,6 +47,22 @@ export default async function SessionDetailPage({
   } catch (error) {
     notFound();
   }
+
+  // Get current user session
+  const userSession = await getServerAuthSession();
+  const currentUserId = userSession?.user?.id;
+
+  // Check if user is registered and has completed payment
+  const userRegistration = session.registrations.find(
+    (reg) =>
+      reg.userId === currentUserId &&
+      reg.paymentStatus === PaymentStatus.COMPLETED,
+  );
+
+  const canViewMeetingLink =
+    session.type === "ONLINE" &&
+    session.meetingLink &&
+    userRegistration !== undefined;
 
   // Format dates
   const sessionDate = format(new Date(session.startAt), "dd MMM yyyy");
@@ -96,21 +115,32 @@ export default async function SessionDetailPage({
       <CourseDetailHeaderSection
         title={session.title}
         instructor="Expert Instructor"
-        language="English"
-        isOnline={true}
-        hasRecording={true}
+        language={session.language || "English"}
+        isOnline={session.type === "ONLINE"}
+        hasRecording={session.type === "RECORDING"}
         date={sessionDate}
         time={sessionTime}
       />
 
       <SessionOverviewSection
-        description={session.category?.name || session.title}
+        description={
+          session.overview || session.category?.name || session.title
+        }
       />
 
       <CourseInfoSection whoIsItFor={whoIsItFor} whatYouLearn={whatYouLearn} />
 
+      {canViewMeetingLink && (
+        <MeetingLinkSection
+          meetingLink={session.meetingLink!}
+          sessionTitle={session.title}
+        />
+      )}
+
       <BookingSection
-        imageUrl={"/home/session-banner-sample.png"}
+        imageUrl={
+          session.bannerMedia?.fileUrl || "/home/session-banner-sample.png"
+        }
         price={Number(session.price)}
       />
       <FooterInfoSection terms={terms} />

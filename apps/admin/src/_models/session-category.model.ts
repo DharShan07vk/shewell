@@ -1,4 +1,4 @@
-import { Trimester } from "@prisma/client";
+import { Trimester } from "@repo/database";
 
 export interface ISessionCategory {
     id?: string;

@@ -114,13 +114,14 @@ export default async function SessionsPage({ searchParams }: SessionPageProps) {
             return (
               <SessionCard
                 key={session.id}
-                language="English"
-                isOnline={true}
-                hasRecording={true}
+                imageUrl={session.thumbnailMedia?.fileUrl ?? undefined}
+                language={session.language || "English"}
+                isOnline={session.type === "ONLINE"}
+                hasRecording={session.type === "RECORDING"}
                 sessionDate={sessionDate}
                 sessionTime={sessionTime}
                 title={session.title}
-                description={session.category?.name || ""}
+                description={"Session"}
                 date={sessionDate}
                 price={Number(session.price)}
                 timeSlot={sessionTime}

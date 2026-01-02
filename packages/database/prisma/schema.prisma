@@ -575,6 +575,8 @@ model Media {
   homeBanners                  HomeBanner[]
   testimonials                 Testimonials[]                             @relation("TestimonialMediaImage")
   specializationParentCategory ProfessionalSpecializationParentCategory[]
+  sessionThumbnails            Session[]                                  @relation("SessionThumbnail")
+  sessionBanners               Session[]                                  @relation("SessionBanner")
 }
 
 enum DocumentType {
@@ -837,6 +839,11 @@ enum SessionStatus {
   CANCELLED
 }
 
+enum SessionType {
+  ONLINE
+  RECORDING
+}
+
 enum PaymentStatus {
   PENDING
   COMPLETED
@@ -869,6 +876,21 @@ model Session {
   price       Decimal  @db.Decimal(10, 2)
   status      SessionStatus @default(DRAFT)
 
+  // Media fields
+  thumbnailMediaId  String?
+  thumbnailMedia    Media?   @relation("SessionThumbnail", fields: [thumbnailMediaId], references: [id])
+  
+  bannerMediaId     String?
+  bannerMedia       Media?   @relation("SessionBanner", fields: [bannerMediaId], references: [id])
+  
+  // Content fields
+  overview          String?  @db.Text
+  
+  // Delivery metadata
+  meetingLink       String?
+  language          String   @default("English")
+  type              SessionType @default(ONLINE)
+
   categoryId  String
   category    SessionCategory @relation(fields: [categoryId], references: [id])
 
@@ -888,6 +910,12 @@ model SessionRegistration {
   user          User     @relation(fields: [userId], references: [id])
 
   paymentStatus PaymentStatus @default(PENDING)
+  
+  // Payment details
+  amountPaid          Decimal? @db.Decimal(10, 2)
+  razorpayOrderId     String?
+  razorpayPaymentId   String?
+  razorpaySignature   String?
 
   createdAt     DateTime @default(now())
 

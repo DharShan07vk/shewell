@@ -1,23 +1,27 @@
-'use client'
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import "~/styles/globals.css";
 
 interface ICounsellingCardProps {
-    id: string
-    name: string;
-    media : {
-      id : string;
-      fileUrl : string | null
-    },
-    specializations: {
-      id: string;
-      specialization: string
-    }[]
+  id: string;
+  name: string;
+  media: {
+    id: string;
+    fileUrl: string | null;
+  };
+  specializations: {
+    id: string;
+    specialization: string;
+  }[];
 }
 
-const CounsellingCard = ({ counsellingCard }: {counsellingCard : ICounsellingCardProps[]}) => {
+const CounsellingCard = ({
+  counsellingCard,
+}: {
+  counsellingCard: ICounsellingCardProps[];
+}) => {
   const router = useRouter();
 
   const handleSpecializationClick = (specializationId: string) => {
@@ -29,15 +33,18 @@ const CounsellingCard = ({ counsellingCard }: {counsellingCard : ICounsellingCar
       {counsellingCard &&
         counsellingCard.map((item, index) => {
           return (
-            <div key={index} className="group 2xl:basis-[22.7%] xl:basis-[31.3%] lg:basis-[48%] w-full">
-              <div className="flex flex-row w-full z-10 gap-2 rounded-[10px] border border-primary from-[#00686C] to-[#6CDD37] pr-6 hover:bg-gradient-to-b transition-transform">
+            <div
+              key={index}
+              className="group w-full lg:basis-[48%] xl:basis-[31.3%] 2xl:basis-[22.7%]"
+            >
+              <div className="z-10 flex w-full flex-row gap-2 rounded-[10px] border border-primary from-[#00686C] to-[#6CDD37] pr-6 transition-transform hover:bg-gradient-to-b">
                 <div className="max-h-[262px]">
                   <div className="relative aspect-[130/262] w-[130px]">
                     <Image
                       src={item.media.fileUrl || ""}
                       alt=""
                       fill={true}
-                      className="object-cover relative z-0 rounded-l-[10px]"
+                      className="relative z-0 rounded-l-[10px] object-cover"
                     />
                   </div>
                 </div>
@@ -52,14 +59,16 @@ const CounsellingCard = ({ counsellingCard }: {counsellingCard : ICounsellingCar
                         return (
                           <div
                             key={feature.id}
-                            onClick={() => handleSpecializationClick(feature.id)}
-                            className="flex items-center align-middle justify-between group-hover:text-white lg:w-full w-3/4 mx-auto cursor-pointer"
+                            onClick={() =>
+                              handleSpecializationClick(feature.id)
+                            }
+                            className="mx-auto flex w-3/4 cursor-pointer items-center justify-between align-middle group-hover:text-white lg:w-full"
                           >
                             <div className="break-all font-inter text-sm font-medium md:text-base">
                               {feature.specialization}
                             </div>
-                            
-                            <div className="flex self-end items-end">
+
+                            <div className="flex items-end self-end">
                               <svg
                                 width="8"
                                 height="12"

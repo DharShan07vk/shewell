@@ -123,9 +123,11 @@ export const FilterBar = ({
     // Update URL params
     const params = new URLSearchParams(searchParams.toString());
 
-    if (filterToRemove?.startsWith("Category:")) {
+    if (filterToRemove?.startsWith("Categories:")) {
+      console.log("Removing category filter");
       params.delete("categoryId");
     } else if (filterToRemove?.startsWith("Trimester:")) {
+      console.log("Removing trimester filter");
       params.delete("trimester");
     } else if (filterToRemove?.startsWith("Min Price:")) {
       params.delete("minPrice");
@@ -133,8 +135,11 @@ export const FilterBar = ({
       params.delete("maxPrice");
     } else if (filterToRemove?.startsWith("Sort:")) {
       params.delete("sortBy");
+    } else if (filterToRemove?.startsWith("From:")) {
+      params.delete("startDate");
+    } else if (filterToRemove?.startsWith("To:")) {
+      params.delete("endDate");
     }
-
     router.push(`/session?${params.toString()}`);
   };
 

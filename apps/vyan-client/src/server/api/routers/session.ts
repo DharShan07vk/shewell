@@ -93,6 +93,15 @@ export const sessionRouter = createTRPCRouter({
           createdAt: true,
           updatedAt: true,
           categoryId: true,
+          thumbnailMediaId: true,
+          thumbnailMedia: {
+            select: {
+              id: true,
+              fileUrl: true,
+            },
+          },
+          language: true,
+          type: true,
           category: {
             select: {
               id: true,
@@ -174,6 +183,15 @@ export const sessionRouter = createTRPCRouter({
           status: true,
           createdAt: true,
           updatedAt: true,
+          thumbnailMediaId: true,
+          thumbnailMedia: {
+            select: {
+              id: true,
+              fileUrl: true,
+            },
+          },
+          language: true,
+          type: true,
           category: {
             select: {
               id: true,
@@ -212,6 +230,24 @@ export const sessionRouter = createTRPCRouter({
           status: true,
           createdAt: true,
           updatedAt: true,
+          thumbnailMediaId: true,
+          thumbnailMedia: {
+            select: {
+              id: true,
+              fileUrl: true,
+            },
+          },
+          bannerMediaId: true,
+          bannerMedia: {
+            select: {
+              id: true,
+              fileUrl: true,
+            },
+          },
+          overview: true,
+          meetingLink: true,
+          language: true,
+          type: true,
           category: {
             select: {
               id: true,
@@ -225,6 +261,7 @@ export const sessionRouter = createTRPCRouter({
               id: true,
               paymentStatus: true,
               createdAt: true,
+              userId: true,
               user: {
                 select: {
                   id: true,

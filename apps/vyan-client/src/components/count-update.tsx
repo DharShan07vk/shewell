@@ -1,13 +1,10 @@
 import { Button } from "@repo/ui/src/@/components/button";
 import { ICartLineItem } from "~/models/cart.model";
 import { useCartStore } from "~/store/cart.store";
-const CountUpdate = ({
-  item,
-
-}: {
-  item: ICartLineItem;
-}) => {
-  const chosenVarinat = item.product.productVariants.find((i) => i.id === item.productVariantId)
+const CountUpdate = ({ item }: { item: ICartLineItem }) => {
+  const chosenVarinat = item.product.productVariants.find(
+    (i) => i.id === item.productVariantId,
+  );
 
   const { addToCart, decrementFromCart } = useCartStore((state) => {
     return {
@@ -17,17 +14,17 @@ const CountUpdate = ({
   });
 
   const handleCartDecrement = () => {
-    decrementFromCart(item.product, chosenVarinat!)
-  }
+    decrementFromCart(item.product, chosenVarinat!);
+  };
 
   const handleCartIncrement = () => {
     addToCart(item.product, 1, chosenVarinat!);
-  }
+  };
   return (
     <>
       <div className="my-[12px] flex w-[137px] items-center rounded-md border border-border-color md:mt-5">
         <Button
-         onClick={handleCartDecrement}
+          onClick={handleCartDecrement}
           className="bg-white hover:bg-white "
         >
           <svg
@@ -50,7 +47,7 @@ const CountUpdate = ({
           {item.quantity}
         </div>
         <Button
-         onClick={handleCartIncrement}
+          onClick={handleCartIncrement}
           className="bg-white hover:bg-white "
         >
           <svg
