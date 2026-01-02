@@ -15,6 +15,8 @@ import { Controller, useForm } from 'react-hook-form';
 import { createSession, updateSession } from './session-actions';
 import { useRef, useState, useEffect } from 'react';
 import uploadProductImage from '../../upload-image-actions';
+import { set } from 'date-fns';
+import { slugifyName } from '@/src/lib/utils';
 
 type SessionFormProps = {
   hideDialog: () => void;
@@ -45,7 +47,14 @@ const SessionForm = ({ hideDialog, session, categories }: SessionFormProps) => {
   const sessionType = watch('type');
   const startAt = watch('startAt');
   const duration = watch('duration');
+  const title = watch('title');
 
+  const watchedTitle = watch('title');
+  const slug = slugifyName(watchedTitle);
+
+  useEffect(() => {
+    setValue('slug', slug);
+  }, [watchedTitle]);
   // Auto-calculate endAt based on startAt + duration
   useEffect(() => {
     if (startAt && duration && duration > 0) {
@@ -180,6 +189,9 @@ const SessionForm = ({ hideDialog, session, categories }: SessionFormProps) => {
                     {...field}
                     value={field.value || ''}
                     autoFocus
+                    onChange={(e) => {
+                      setValue('title', e.target.value);
+                    }}
                   />
                   {fieldState.error && <small className="p-error">{fieldState.error.message}</small>}
                 </>
@@ -209,6 +221,7 @@ const SessionForm = ({ hideDialog, session, categories }: SessionFormProps) => {
                     })}
                     {...field}
                     value={field.value || ''}
+                    disabled
                   />
                   {fieldState.error && <small className="p-error">{fieldState.error.message}</small>}
                 </>
