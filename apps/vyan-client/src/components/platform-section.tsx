@@ -50,20 +50,27 @@ export default function PlatformSection() {
     const [activeTab, setActiveTab] = useState(PLATFORM_DATA[0]);
 
     return (
-        <section className="w-full bg-[#F5F5F5] py-16 md:py-24 px-4 overflow-hidden">
-            <div className="max-w-7xl mx-auto border border-gray-200 rounded-[32px] overflow-hidden flex flex-col lg:flex-row h-[600px] lg:h-[650px] shadow-sm bg-white">
+        <section className="w-full bg-[#F5F5F5] py-16 md:py-24  overflow-hidden">
+
+            <div className="text-center mb-16">
+                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
+                            Courses That Support You - Every Step of the Way
+                        </h3>
+                        <p className="text-gray-500 max-w-2xl mx-auto text-sm md:text-base lg:text-lg">
+                            From fertility to first steps – evidence-based, heart-led,
+                            expert-designed just for you.
+                        </p>
+            </div>
+            <div className="max-w-7xl mx-auto border border-gray-200 rounded-[32px] overflow-hidden flex flex-col lg:flex-row h-[650px] lg:h-[600px] shadow-sm bg-white">
                 {/* LEFT NAVIGATION */}
-                <div className="w-full lg:w-[45%] flex flex-col justify-center px-6 md:px-10 py-8 gap-2 bg-white z-10 overflow-y-auto">
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 px-2">
-                        Explore Our Programs
-                    </h2>
-                    <div className="space-y-2">
+                <div className="w-full lg:w-[50%] flex flex-col  bg-white z-10">
+                    <div className="">
                         {PLATFORM_DATA.map((item) => (
                             <button
                                 key={item.id}
                                 onMouseEnter={() => setActiveTab(item)}
                                 onClick={() => setActiveTab(item)}
-                                className={`flex items-center justify-between w-full px-5 py-4 transition-colors duration-200 text-left group rounded-xl
+                                className={`flex items-center justify-between w-full px-5 py-4 transition-colors duration-200 text-left group rounded-lt-[32px] h-[125px]
                             ${activeTab?.id === item.id
                                         ? "bg-[#005F5F] text-white"
                                         : "bg-[#F5F5F5] text-gray-500 hover:bg-gray-200"

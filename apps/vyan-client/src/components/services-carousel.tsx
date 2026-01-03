@@ -185,15 +185,7 @@ const ServicesCarousel = () => {
                     </div>
 
                     {/* Footer Text */}
-                    <div className="text-center">
-                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
-                            Courses That Support You - Every Step of the Way
-                        </h3>
-                        <p className="text-gray-500 max-w-2xl mx-auto text-sm md:text-base lg:text-lg">
-                            From fertility to first steps – evidence-based, heart-led,
-                            expert-designed just for you.
-                        </p>
-                    </div>
+                   
                 </div>
             </div>
         </section>
