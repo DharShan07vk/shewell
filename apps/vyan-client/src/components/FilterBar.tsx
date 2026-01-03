@@ -213,10 +213,10 @@ export const FilterBar = ({
   };
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-3 font-inter">
       {/* CENTERED FILTER BAR */}
       <div className="flex justify-center">
-        <div className="inline-flex items-center rounded-2xl bg-gray-300 px-6 py-3 text-sm">
+        <div className="inline-flex items-center rounded-full bg-[#EEEEEE] px-6 py-3 text-sm">
           <FilterToggle
             label="Only Online Courses"
             enabled={isOnlineCourses}

@@ -1,108 +1,73 @@
-"use client";
-import React from "react";
 import Link from "next/link";
-import { ArrowUpRight, ShoppingBag } from "lucide-react";
-import { hover } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
-export default function Hero() {
+export default function Hero(): JSX.Element {
   return (
-    <section className="relative w-full min-h-[calc(100vh-76px)] overflow-hidden flex flex-col">
-      {/* Main Container */}
-      <div className="flex flex-col lg:flex-row w-full flex-grow h-full">
-        {/* Left Content Section */}
-        <div className="w-full lg:w-[55%] bg-white px-6 md:px-12 lg:px-16 xl:px-24 py-12 lg:py-0 flex flex-col justify-center relative z-10">
-          {/* Heading */}
-          <h1 className="text-4xl md:text-[56px] lg:text-[60px] font-bold leading-tight text-[#1B365D] mb-6">
-            Empowering{" "}
-            <span className="text-secondary">Women</span>,
-            <br />
-            Nurturing Families
-          </h1>
+    <section className="relative h-[400px] w-full overflow-hidden bg-white sm:h-[650px] md:h-[750px] lg:h-[880px]">
+      <div
+        className="absolute right-[-34%] top-[50%] z-20 hidden h-[1398px] w-[1398px] translate-y-[-50%] rounded-[50%]
+         bg-[#9D9D8D] lg:block"
+      />
 
-          {/* Description */}
-          <p className="text-[#4D4D4D] text-base md:text-xl lg:text-2xl max-w-[500px] mb-0 leading-relaxed">
-            A trusted digital companion for women's health, motherhood, mental
-            wellbeing, and mindful living—curated by experts and designed for
-            every stage of womanhood.
-          </p>
+      <div
+        className="absolute left-4 top-[30%]
+        flex w-[calc(100%-32px)] -translate-y-1/2 flex-col
+        gap-4 sm:left-8 sm:w-[calc(100%-64px)]
+        md:left-12 md:gap-6 lg:left-[80px] lg:w-[1100px]"
+      >
+        <h1
+          className="font-poppins text-[30px] font-bold
+          leading-tight text-[#114668] sm:text-[44px] md:text-[50px]
+          lg:text-[72px]"
+        >
+          Empowering <span className="text-[#51AF5A]">Women</span>, <br />
+           Nurturing Families
+        </h1>
 
-          {/* Watermark Text */}
-          <div className="pointer-events-none select-none mb-8">
-            <span className="text-[120px] md:text-[160px] lg:text-[180px] font-bold bg-gradient-to-b from-[#114668] to-white bg-clip-text text-transparent opacity-30 leading-none tracking-tight">
-              #shewell
+        <p
+          className="max-w-[700px] font-poppins font-medium leading-relaxed
+          text-base text-[#7b7b7b] sm:text-xl md:text-2xl
+          lg:text-[28px] lg:leading-[1.4]"
+        >
+          A trusted digital companion for women's health, motherhood, mental wellbeing, and mindful living—curated by experts and designed for every stage of womanhood.
+        </p>
+      </div>
+
+      <div className="absolute right-[-50px] top-0 z-30 hidden h-auto w-[700px] overflow-hidden lg:block">
+        <img src="/home/hero.png" alt="SheFit Hero" className="object-cover" />
+      </div>
+
+      <div
+        className="pointer-events-none absolute bottom-[60px] left-2 select-none
+        bg-[linear-gradient(180deg,#114668_1%,#FFFFFF_85%)] bg-clip-text
+        font-poppins text-[90px]
+        font-semibold text-transparent
+        opacity-20 sm:left-8 sm:text-[140px] md:text-[200px]
+        lg:left-[60px] lg:text-[300px]"
+      >
+        #sheWell
+      </div>
+
+      {/* CTA Buttons - Bottom positioned */}
+      <div className="absolute bottom-10 left-4 z-30 flex flex-wrap items-center gap-4 sm:bottom-6 sm:left-8 md:left-12 lg:bottom-24 lg:left-[80px]">
+        <Link href="/counselling">
+          <button className="group flex h-12 sm:h-14 items-center justify-between gap-3 rounded-full border border-gray-300 bg-white px-4 sm:px-5 text-gray-600 shadow-md transition-all duration-300 ease-in-out hover:border-primary hover:bg-primary hover:text-white">
+            <span className="text-sm sm:text-base font-medium">
+              Book Your Consultation
             </span>
-          </div>
-
-          {/* CTA Buttons - Now below the watermark */}
-          <div className="flex flex-wrap gap-4 relative z-20">
-            <Link href="/counselling">
-              <button
-                className="
-        group flex items-center justify-between
-        w-[290px] px-4 py-2 rounded-full
-        bg-white border border-gray-400 text-gray-500
-        transition-all duration-300 ease-in-out
-        hover:bg-primary hover:text-white
-      "
-              >
-                <span className="text-lg font-medium">
-                  Book Your Consultation
-                </span>
-
-                <span
-                  className="
-          ml-4 flex items-center justify-center
-          w-10 h-10 rounded-full
-          bg-teal-600 text-white
-          transition-all duration-300 rotate-[-45deg] group-hover:rotate-[135deg]
-          group-hover:bg-white group-hover:text-teal-600
-        "
-                >
-                  ➜
-                </span>
-              </button>
-            </Link>
-            <Link href="/products">
-              <button className="flex items-center gap-3 px-6 py-3 bg-white border-2 border-[#E9E9E9] rounded-full text-[#1B365D] font-medium hover:border-primary hover:bg-primary/5 transition-all duration-300 group">
-                Shop Essentials for Mom &amp; Baby
-                <span className="w-8 h-8 bg-primary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <ArrowUpRight className="w-4 h-4 text-white" />
-                </span>
-              </button>
-            </Link>
-          </div>
-        </div>
-
-        {/* Right Image Section with Curved Edge */}
-        <div className="w-full lg:w-[45%] bg-[#9BA88D] relative min-h-[400px] lg:min-h-auto flex-grow">
-          {/* Curved overlay from left side */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 lg:w-48 z-10">
-            <svg
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-              className="h-full w-full"
-            >
-              <path
-                d="M100,0 C20,0 0,100 0,100 L0,0 Z"
-                fill="white"
-              />
-            </svg>
-          </div>
-
-          {/* Hero Image */}
-          <img
-            src="/images/hero-pregnant-woman.png"
-            alt="Pregnant woman holding her belly"
-            className="w-full h-full object-cover object-center"
-          />
-
-          {/* Shopping Bag Icon */}
-          <Link href="/cart">
-            <button className="absolute bottom-6 right-6 w-12 h-12 bg-[#1B365D] rounded-full flex items-center justify-center shadow-lg hover:bg-[#2a4a7a] transition-colors duration-300 z-20">
-              <ShoppingBag className="w-5 h-5 text-white" />
-            </button>
-          </Link>
-        </div>
+            <span className="flex h-8 w-8 sm:h-9 sm:w-9 rotate-[-45deg] items-center justify-center rounded-full bg-primary text-white transition-all duration-300 group-hover:rotate-0 group-hover:bg-white group-hover:text-primary">
+              <ArrowUpRight className="h-4 w-4" />
+            </span>
+          </button>
+        </Link>
+        <Link href="/products">
+          <button className="group flex h-12 sm:h-14 items-center gap-3 rounded-full border border-gray-300 bg-white px-4 sm:px-5 font-medium text-[#1B365D] shadow-md transition-all duration-300 hover:border-primary hover:bg-primary/5">
+            <span className="text-sm sm:text-base">Shop Essentials for Mom & Baby</span>
+            <span className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-primary transition-transform group-hover:scale-110">
+              <ArrowUpRight className="h-4 w-4 text-white" />
+            </span>
+          </button>
+        </Link>
       </div>
     </section>
   );

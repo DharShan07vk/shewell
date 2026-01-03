@@ -1,4 +1,4 @@
-module.exports = {
+const baseconfig = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -86,3 +86,5 @@ module.exports = {
   },
   plugins: [require("tailwindcss-animate")],
 };
+
+export default baseconfig;

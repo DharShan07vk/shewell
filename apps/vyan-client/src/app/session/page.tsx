@@ -79,10 +79,10 @@ export default async function SessionsPage({ searchParams }: SessionPageProps) {
 
       {/* Hero Section */}
       <div className="mx-auto max-w-7xl px-6 py-16 text-center">
-        <h1 className="font-inter text-[48px] font-medium leading-[48px] text-gray-800">
+        <h1 className=" font-inter text-[48px] font-bold leading-[48px] text-[#333333]">
           Courses That Support You – Every Step of the Way
         </h1>
-        <p className="mt-3 text-base text-gray-500">
+        <p className="mt-3 font-inter text-base text-gray-500">
           From fertility to first steps – evidence-based, heart-led,
           expert-designed just for you.
         </p>

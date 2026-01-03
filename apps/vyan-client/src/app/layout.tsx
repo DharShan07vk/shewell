@@ -12,6 +12,8 @@ import { SessionProvider } from "next-auth/react";
 import { api } from "~/trpc/server";
 import { TRPCReactProvider } from "~/trpc/react";
 import { redirect } from "next/navigation";
+
+import { Poppins } from "next/font/google";
 // import { Header as NewHeader } from "./components/header";
 const inter = Inter({
   subsets: ["latin"],
@@ -23,7 +25,11 @@ const pacifico = Pacifico({
   subsets: ["latin"],
   variable: "--font-pacifico",
 });
-
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"], // Adjust as needed
+  variable: "--font-poppins",
+});
 export const metadata = {
   title: "Shewell",
   description: "Shewell",
@@ -124,16 +130,16 @@ export default async function RootLayout({
       specialization: true,
     },
     where: {
-
       active: true,
     },
-    take: 4
+    take: 4,
   });
-
 
   return (
     <html className="scroll-smooth" lang="en">
-      <body className={`relative font-sans ${inter.variable} ${pacifico.variable}`}>
+      <body
+        className={`relative font-sans ${inter.variable} ${pacifico.variable} ${poppins.variable}`}
+      >
         <div className="sticky top-0 z-40">
           <ClientSessionProvider session={session} verifiedAt={verifiedAt!}>
             <TRPCReactProvider>
