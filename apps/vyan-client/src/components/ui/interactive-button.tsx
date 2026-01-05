@@ -7,7 +7,7 @@ interface InteractiveButtonProps {
   onClick?: () => void;
   className?: string; // Optional: allows adding external margins
   color?: string;
-  active : Boolean;
+  active?: Boolean;
 }
 
 export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
