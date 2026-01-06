@@ -161,7 +161,7 @@ export default function ProductsGrid() {
                                     src={product.image}
                                     alt={product.name}
                                     className="w-full h-full object-cover"
-                                    onError={(e) => {
+                                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                                         (e.target as HTMLImageElement).src =
                                             "https://via.placeholder.com/300x200?text=Product";
                                     }}

@@ -59,7 +59,7 @@ const RelatedOrderCard = ({
 
   const { toast } = useToast();
   const session = useSession();
-  const errorHandler = (err: any) => {
+  const errorHandler = (err: unknown) => {
     console.log("error is", err);
   };
   const loginSubmit = (data: ReviewProps, productId: string) => {

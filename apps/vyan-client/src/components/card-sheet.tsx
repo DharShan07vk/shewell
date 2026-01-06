@@ -28,7 +28,7 @@ const CardSheet = () => {
   });
   return (
     <>
-      <Sheet open={sheetIsOpen} onOpenChange={(e) => setSheetIsOpen(e)}>
+      <Sheet open={sheetIsOpen} onOpenChange={(e: boolean) => setSheetIsOpen(e)}>
         <SheetContent side="signup" className="overflow-y-scroll   bg-white p-0 ">
           <SheetHeader>
             <SheetTitle>

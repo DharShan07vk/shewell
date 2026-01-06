@@ -60,7 +60,7 @@ export default function AddressForm({
     resolver: zodResolver(addressFormSchema),
     defaultValues: initialValues,
   });
-  const errorHandler = (err: any) => {
+  const errorHandler = (err: unknown) => {
     console.log("err", err);
   };
   const callServerAction = (data: IAddressForm) => {
@@ -149,7 +149,7 @@ export default function AddressForm({
                   <>
                     <Select
                       defaultValue={initialValues.countryId}
-                      onValueChange={(e) => {
+                      onValueChange={(e: string) => {
                         field.onChange(e);
                         setSelectedCountry(e);
                       }}
@@ -194,7 +194,7 @@ export default function AddressForm({
                     <>
                       <Select
                         defaultValue={initialValues.stateId}
-                        onValueChange={(e) => {
+                        onValueChange={(e: string) => {
                           field.onChange(e);
                         }}
                       >

@@ -43,7 +43,7 @@ export default function Subscribe() {
         });
       });
   };
-  const error = (e: any) => {
+  const error = (e: unknown) => {
     console.log("error", e);
   };
   return (

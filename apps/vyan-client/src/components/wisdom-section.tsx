@@ -111,7 +111,7 @@ export default function WisdomSection() {
                                     src={article.image}
                                     alt={article.title}
                                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                    onError={(e) => {
+                                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                                         (e.target as HTMLImageElement).src =
                                             "https://via.placeholder.com/400x300?text=Article";
                                     }}

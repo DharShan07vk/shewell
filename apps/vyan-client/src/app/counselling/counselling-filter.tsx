@@ -150,7 +150,7 @@ const CounsellingFilter = ({
             <div className="flex w-full  gap-2">
               <input
                 value={searchTherapist}
-                onChange={(e) => setSearchTherapist(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTherapist(e.target.value)}
                 className="w-full rounded-md border border-border-400 px-3 py-2 font-inter text-sm font-medium outline-none placeholder:font-inter placeholder:text-sm placeholder:font-medium hover:border-primary   hover:placeholder:content-none"
                 placeholder="Search by therapist"
                 type="text"
@@ -335,7 +335,7 @@ const CounsellingFilter = ({
               <Select
                 // value={selectedSpecialisation}
                 value={getSpecialisationId || ""}
-                onValueChange={(e) => {
+                onValueChange={(e: string) => {
                   // setSelectedSpecialisation(e),
                   handleSpecialisationChange(e);
                 }}

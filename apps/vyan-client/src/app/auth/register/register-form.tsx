@@ -103,7 +103,7 @@ const RegisterForm = () => {
       });
   };
 
-  const onError = (error: any) => {
+  const onError = (error: unknown) => {
     console.log(error);
   };
 

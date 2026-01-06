@@ -22,7 +22,7 @@ export default function BlogCategories({
   //     blogCategories.filter((i) => i.name === "PCOS")
   //   );
   //   console.log("selcted item is", selected);
-  const handleClick = (item: { id?: string; name?: string; slug: any }) => {
+  const handleClick = (item: { id?: string; name?: string; slug: string }) => {
     router.push(`/blogs-category/${item.slug}`);
     // setSelected(item.name);
   };

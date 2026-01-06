@@ -27,7 +27,7 @@ const AddToCart = () => {
       <div className="flex items-center justify-between">
         <Button
           className="rounded-md bg-black px-[70px] py-2 font-inter text-base font-medium text-white hover:bg-primary 2xl:text-lg "
-          onClick={(e) => {
+          onClick={(e: React.MouseEvent) => {
             e.stopPropagation();
             setSheetIsOpen(true);
           }}

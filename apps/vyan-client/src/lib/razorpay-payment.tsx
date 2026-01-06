@@ -83,7 +83,7 @@ export const makePayment = async ({
       patient,
       startingTime,
       endingTime,
-    }).then((data) => {
+    }).then((data: any) => {
       console.log("razorpayData", data);
       console.log("keyId", process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID);
 
@@ -105,14 +105,14 @@ export const makePayment = async ({
             },
             data?.orderId!,
           )
-            .then((resp) => {
+            .then((resp: { message: string }) => {
               // toast({
               //   title: resp?.message,
               //   variant: "success",
               // });
               console.log("verifyPayment", resp.message);
             })
-            .catch((err) => {
+            .catch((err: Error) => {
               // toast({
               //   variant: "destructive",
               //   title: err.message,

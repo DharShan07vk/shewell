@@ -135,7 +135,7 @@ const Filter = ({ categories }: IProductsProps) => {
               placeholder="Min Value"
               type="number"
               value={minValue}
-              onChange={(e) => handlePriceChange("min", e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePriceChange("min", e.target.value)}
             />
             <span>-</span>
             <input
@@ -143,7 +143,7 @@ const Filter = ({ categories }: IProductsProps) => {
               placeholder="Max Value"
               type="number"
               value={maxValue}
-              onChange={(e) => handlePriceChange("max", e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePriceChange("max", e.target.value)}
             />
           </div>
         </div>

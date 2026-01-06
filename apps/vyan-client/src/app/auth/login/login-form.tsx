@@ -98,7 +98,7 @@ const LoginForm = () => {
     }
   };
 
-  const loginErrorHandler = (e: any) => {
+  const loginErrorHandler = (e: unknown) => {
     console.log("loginErrorHandler", e),
       (errorMessage = "Invalid Email or Password");
   };

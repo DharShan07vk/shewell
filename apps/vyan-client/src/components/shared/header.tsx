@@ -535,7 +535,7 @@ const Header = ({
                   <div ref={dropdownRef} className="relative hidden md:block">
                     <input
                       value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
                       className=" border-1 rounded-lg border border-black p-2 pl-[38px] outline-none placeholder:font-inter  placeholder:text-sm placeholder:font-normal  hover:border-yellow-500 md:w-[300px] lg:w-[494px]  xl:w-[893px] 2xl:w-[1005px] "
                       type="search"
                       placeholder="Search"
@@ -577,7 +577,7 @@ const Header = ({
                               href={`/products/${item.slug}`}
                               className=" rounded-md p-2  hover:bg-slate-200"
                               key={index}
-                              onClick={(e) => {
+                              onClick={(e: React.MouseEvent) => {
                                 handleSearchResultClick();
                                 setSearchTerm(item.name);
                               }}

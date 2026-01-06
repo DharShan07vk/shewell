@@ -215,7 +215,7 @@ const PatientInformation = ({
                         handleSelectPatient(item),
                           handleFinalPriceOnSelectingCouple(item);
                       }}
-                      onClick={(e) => {
+                      onClick={(e: React.MouseEvent) => {
                         e.stopPropagation()
                       }}
                     />
