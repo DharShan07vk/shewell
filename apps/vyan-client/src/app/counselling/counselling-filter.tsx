@@ -388,7 +388,7 @@ const CounsellingFilter = ({
                     disabled={disabledDays}
                     mode="single"
                     selected={date}
-                    onSelect={(e) => {
+                    onSelect={(e: Date | undefined) => {
                       setDate(e), handleDateSelect(e!);
                       setLanguageDialog(false);
                       setSelectedDate(e);
