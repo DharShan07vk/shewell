@@ -39,7 +39,7 @@ const Blogs = async ({ params }: { params: { slug: string } }) => {
       slug: true,
       category: {
         select: {
-          id:true,
+          id: true,
           name: true,
         },
       },
@@ -50,13 +50,13 @@ const Blogs = async ({ params }: { params: { slug: string } }) => {
           fileKey: true,
         },
       },
-      shortDescription:true,
+      shortDescription: true,
       createdAt: true,
       body: true,
       active: true,
     },
-    orderBy:{
-      createdAt:"desc"
+    orderBy: {
+      createdAt: "desc",
     },
     where: {
       categoryId: pBlogCategory?.id,
@@ -89,14 +89,15 @@ const Blogs = async ({ params }: { params: { slug: string } }) => {
       active: true,
       popularBlog: true,
     },
-    orderBy:{
-      createdAt:"desc"
-    }
+    orderBy: {
+      createdAt: "desc",
+    },
   });
   console.log("blogsss with this category are", blogs);
 
   // blogs except first one
-  const [blog, ...blogsExceptFirstOne] = blogs;
+  const blog = blogs[0];
+  const blogsExceptFirstOne = blogs.slice(1);
   return (
     <>
       <section className="w-full lg:mt-[65px]">
@@ -134,7 +135,10 @@ const Blogs = async ({ params }: { params: { slug: string } }) => {
                           {/* Foods for the first trimester */}
                           {blog?.title}
                         </h1>
-                        <QuillHtml className="line-clamp-3 font-inter text-base leading-6 text-black" body={blog?.body!}/>
+                        <QuillHtml
+                          className="line-clamp-3 font-inter text-base leading-6 text-black"
+                          body={blog?.body!}
+                        />
                         {/* <p className="line-clamp-3 font-inter text-base leading-6 text-black" dangerouslySetInnerHTML={{ __html: blog?.body! }}>
                         </p> */}
 
@@ -202,30 +206,36 @@ const Blogs = async ({ params }: { params: { slug: string } }) => {
                     Category
                   </h2>
                   <div className="flex flex-wrap gap-4">
-                    <BlogCategories blogCategories={blogCategories} selectedCategory={blog?.category.id!} />
+                    <BlogCategories
+                      blogCategories={blogCategories}
+                      selectedCategory={blog?.category.id!}
+                    />
                   </div>
                 </div>
 
                 {/* Recent  Post */}
 
-                {blogsExceptFirstOne && blogsExceptFirstOne.length > 0 && 
-                <div className="order-2 flex w-full flex-col p-4 lg:order-3 xl:order-2 2xl:order-2">
-                <h2 className="mb-4 font-inter text-base font-semibold text-black lg:text-lg xl:mb-5 xl:text-2xl 2xl:text-[28px]">
-                  Recent Blogs
-                </h2>
-                <div className="flex flex-col gap-3">
-                 {blogsExceptFirstOne.map((b,index)=>(
-                  <>
-                  <RecentBlog key={index}
-                          slug={b.slug}
-                          fileUrl={b?.media.fileUrl!}
-                          createdAt={b.createdAt}
-                          title={b?.title}
-                          body={b.body} />
-                  </>
-                 ))}
-                </div>
-              </div>}
+                {blogsExceptFirstOne && blogsExceptFirstOne.length > 0 && (
+                  <div className="order-2 flex w-full flex-col p-4 lg:order-3 xl:order-2 2xl:order-2">
+                    <h2 className="mb-4 font-inter text-base font-semibold text-black lg:text-lg xl:mb-5 xl:text-2xl 2xl:text-[28px]">
+                      Recent Blogs
+                    </h2>
+                    <div className="flex flex-col gap-3">
+                      {blogsExceptFirstOne.map((b, index) => (
+                        <>
+                          <RecentBlog
+                            key={index}
+                            slug={b.slug}
+                            fileUrl={b?.media.fileUrl!}
+                            createdAt={b.createdAt}
+                            title={b?.title}
+                            body={b.body}
+                          />
+                        </>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* Related Tags */}
 
@@ -271,24 +281,25 @@ const Blogs = async ({ params }: { params: { slug: string } }) => {
                     </button>
                   </div>
                 </div> */}
-                    <div className="order-3 flex w-full flex-col p-4 lg:order-4 xl:order-3 2xl:order-2">
+                <div className="order-3 flex w-full flex-col p-4 lg:order-4 xl:order-3 2xl:order-2">
                   <h2 className="mb-4 font-inter text-base font-semibold text-black lg:text-lg xl:mb-5 xl:text-2xl 2xl:text-[28px]">
                     Popular Blogs
                   </h2>
                   <div className="flex flex-col gap-3">
-                   {popularBlogs.map((b,index)=>(
-                    <>
-                    <RecentBlog key={index}
-                            slug={b.slug}
-                            fileUrl={b?.media.fileUrl!}
-                            createdAt={b.createdAt}
-                            title={b?.title}
-                            body={b.body} />
-                    </>
-                   ))}
+                    {popularBlogs.map((b, index) => (
+                      <>
+                        <RecentBlog
+                          key={index}
+                          slug={b.slug}
+                          fileUrl={b?.media.fileUrl!}
+                          createdAt={b.createdAt}
+                          title={b?.title}
+                          body={b.body}
+                        />
+                      </>
+                    ))}
                   </div>
                 </div>
-
               </div>
               {/* subscription */}
               {/* <div className="order-4 mb-6 rounded-xl bg-[linear-gradient(180deg,_#001400_55.68%,_#1B4700_139.61%)] p-4 xl:p-5 2xl:p-6">
