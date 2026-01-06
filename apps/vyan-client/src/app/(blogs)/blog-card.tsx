@@ -5,28 +5,21 @@ import { Button } from "@repo/ui/src/@/components/button";
 import Link from "next/link";
 import { format } from "date-fns";
 import QuillHtml from "~/components/shared/quill-html";
-import { S } from "node_modules/framer-motion/dist/types.d-DagZKalS";
 
 type BlogCardProps = {
   fileUrl: string;
-  createdAt: String;
+  createdAt: Date;
   title: string;
   body: string;
   slug: string;
-  des: string | null;
+  des:string | null
 };
-const BlogCard = ({
-  fileUrl,
-  title,
-  createdAt,
-  body,
-  slug,
-  des,
-}: BlogCardProps) => {
+const BlogCard = ({ fileUrl, title, createdAt, body, slug,des }: BlogCardProps) => {
   return (
     <>
-      <Link href={`/blogs/${slug}`} className="h-full w-full">
-        <div className="border-3  group  h-full w-full rounded-md border  ">
+      <Link href={`/blogs/${slug}`} className="h-full w-full" >
+        <div className="group  w-full  h-full border border-3 rounded-md  ">
+
           <div className="relative aspect-square w-full   ">
             <Image
               src={fileUrl}
@@ -36,13 +29,15 @@ const BlogCard = ({
             />
           </div>
           <div className=" px-3  py-5 md:p-6">
-            <div className="font-inter text-base font-medium text-primary"></div>
+            <div className="font-inter text-base font-medium text-primary">
+            </div>
             <h2 className="mb-2 mt-[2px] line-clamp-2 font-inter  text-base font-semibold group-hover:text-secondary md:mb-3 md:mt-1  md:text-xl md:leading-[30px] xl:text-2xl 2xl:text-[28px] 2xl:leading-[38px]">
               {" "}
               {title}
             </h2>
-            <div className=" mb-6 line-clamp-3 font-inter text-sm font-normal text-inactive md:mb-8 md:text-base">
-              {" "}
+            <div
+              className=" mb-6 line-clamp-3 font-inter text-sm font-normal text-inactive md:mb-8 md:text-base"            >
+              {" "}          
               <QuillHtml className="line-clamp-3" body={des!} />
             </div>
 

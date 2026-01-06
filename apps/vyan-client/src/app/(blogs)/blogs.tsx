@@ -5,7 +5,7 @@ import { db } from "~/server/db";
 export const dynamic = "force-dynamic";
 
 const Blogs = async () => {
-  const blogsFromDb = await db.blog.findMany({
+  const blogCredentials = await db.blog.findMany({
     select: {
       id: true,
       media: {
@@ -24,12 +24,6 @@ const Blogs = async () => {
       active: true,
     },
   });
-
-  // 🔥 CRITICAL: serialize Date → string
-  const blogCredentials = blogsFromDb.map((blog) => ({
-    ...blog,
-    createdAt: blog.createdAt.toISOString(),
-  }));
 
   if (blogCredentials.length === 0) {
     return (

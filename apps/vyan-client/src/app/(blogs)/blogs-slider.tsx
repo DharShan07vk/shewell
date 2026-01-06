@@ -14,7 +14,7 @@ interface BlogCredentialsProps {
     media: {
       fileUrl: string | null;
     };
-    createdAt: string;
+    createdAt: Date;
     title: string;
     body: string;
     slug: string;
