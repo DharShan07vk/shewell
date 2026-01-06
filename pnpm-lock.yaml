@@ -334,6 +334,12 @@ importers:
       postcss:
         specifier: ^8.4.45
         version: 8.5.6
+      prettier:
+        specifier: ^3.3.3
+        version: 3.7.4
+      prettier-plugin-tailwindcss:
+        specifier: ^0.5.14
+        version: 0.5.14(prettier@3.7.4)
       prisma:
         specifier: ^5.20.0
         version: 5.22.0
@@ -382,13 +388,6 @@ importers:
       zustand:
         specifier: ^4.5.5
         version: 4.5.7(@types/react@18.3.27)(react@18.2.0)
-    devDependencies:
-      prettier:
-        specifier: ^3.3.3
-        version: 3.7.4
-      prettier-plugin-tailwindcss:
-        specifier: ^0.5.14
-        version: 0.5.14(prettier@3.7.4)
 
   apps/vyan-doctor:
     dependencies:
@@ -13211,13 +13210,11 @@ packages:
         optional: true
     dependencies:
       prettier: 3.7.4
-    dev: true
 
   /prettier@3.7.4:
     resolution: {integrity: sha512-v6UNi1+3hSlVvv8fSaoUbggEM5VErKmmpGA7Pl3HF8V6uKY7rvClBOJlH6yNwQtfTueNkGVpOv/mtWL9L4bgRA==}
     engines: {node: '>=14'}
     hasBin: true
-    dev: true
 
   /pretty-format@3.8.0:
     resolution: {integrity: sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==}
