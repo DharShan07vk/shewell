@@ -3,8 +3,8 @@
   "include": ["."],
   "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
-    "moduleResolution": "nodenext",
-    "module": "nodenext"
+    "moduleResolution": "Bundler",
+    "module": "ESNext"
   }
 }
 
