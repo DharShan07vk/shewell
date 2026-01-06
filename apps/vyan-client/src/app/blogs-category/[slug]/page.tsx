@@ -208,7 +208,7 @@ const Blogs = async ({ params }: { params: { slug: string } }) => {
                   <div className="flex flex-wrap gap-4">
                     <BlogCategories
                       blogCategories={blogCategories}
-                      selectedCategory={blog?.category.id!}
+                      selectedCategory={blog?.category?.id}
                     />
                   </div>
                 </div>
