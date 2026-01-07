@@ -143,7 +143,7 @@ const Blogs = async ({ params }: { params: { slug: string } }) => {
                     Popular Blogs
                   </h2>
                   <div className="flex flex-col gap-3">
-                    {popularBlogs.map((blog, index) => {
+                    {popularBlogs.map((blog : any, index : number) => {
                       return (
                         <div
                           key={blog.id}

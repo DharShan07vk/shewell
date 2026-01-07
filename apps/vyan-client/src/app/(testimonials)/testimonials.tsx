@@ -17,7 +17,7 @@ const Testimonials = async () => {
     },
   });
 
-  const updateTestimonials = testimonials.map((item,index) => ({
+  const updateTestimonials = testimonials.map((item : any,index : number) => ({
     ...item,
     avgRating : item.avgRating?.toString()
   }))

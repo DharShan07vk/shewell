@@ -179,9 +179,9 @@ const Orders = async() => {
     }
   })
 
-  const activeOrders = orders.filter((i) => i.status === OrderStatus.PAYMENT_SUCCESSFUL);
-  const deliveredOrders = orders.filter((i) => i.status === OrderStatus.DELIVERED);
-  const returnedAndCancelledOrders = orders.filter((i) => i.status === OrderStatus.RETURNED || i.status === OrderStatus.CANCELLED);
+  const activeOrders = orders.filter((i : any ) => i.status === OrderStatus.PAYMENT_SUCCESSFUL);
+  const deliveredOrders = orders.filter((i : any) => i.status === OrderStatus.DELIVERED);
+  const returnedAndCancelledOrders = orders.filter((i : any) => i.status === OrderStatus.RETURNED || i.status === OrderStatus.CANCELLED);
 
 
   const reviews=await db.review.findMany({
@@ -238,7 +238,7 @@ const Orders = async() => {
         <TabsTrigger className="pb-[6px] data-[state=active]:border-b-2 border-primary text-nowrap" value="Returned Orders">Returned/Cancelled Orders</TabsTrigger>
       </TabsList>
       <TabsContent value="Active Orders">
-        {activeOrders.map((order) => (
+        {activeOrders.map((order : any) => (
           <>
             <div key={order.id}>
               { /* TODO: fix the @ts-ignore */ }
@@ -250,7 +250,7 @@ const Orders = async() => {
       </TabsContent>
 
       <TabsContent value="Delivered Orders">
-        {deliveredOrders.map((order) => (
+        {deliveredOrders.map((order : any ) => (
           <div key={order.id}>
             { /* TODO: fix the @ts-ignore */ }
             {/* @ts-ignore */}
@@ -260,7 +260,7 @@ const Orders = async() => {
       </TabsContent>
 
       <TabsContent value="Returned Orders">
-        {returnedAndCancelledOrders.map((order) => (
+        {returnedAndCancelledOrders.map((order : any) => (
           <div key={order.id}>
             { /* TODO: fix the @ts-ignore */ }
             {/* @ts-ignore */}

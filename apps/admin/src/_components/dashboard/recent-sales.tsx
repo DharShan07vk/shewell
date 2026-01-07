@@ -96,7 +96,7 @@ const RecentSales = () => {
     );
   };
   const userDetail = (rowData: IOrderDetail) => {
-    const user = data?.users.find((i) => i.id === rowData.userId);
+    const user = data?.users.find((i: IUser) => i.id === rowData.userId);
     console.log('user is ', user);
     return (
       <>

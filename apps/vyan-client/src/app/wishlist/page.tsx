@@ -104,7 +104,7 @@ const Wishlist = async () => {
   }
 
   const formattedWishlistedProducts = wishlistCard.wishlistedProducts.map(
-    (item) => ({
+    (item : any) => ({
       ...item,
     }),
   );

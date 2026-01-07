@@ -151,7 +151,7 @@ const Products = async ({
 
  
 
-  const filteredProducts = product.filter((p) => p.productVariants.length > 0);
+  const filteredProducts = product.filter((p : any) => p.productVariants.length > 0);
   return (
     <>
       <div className="container mx-auto max-w-full">
@@ -176,7 +176,7 @@ const Products = async ({
             {/* Products-List */}
             <div className="grid grid-cols-1 gap-[30px] md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
               <AllProducts
-                product={filteredProducts.map((product) => ({
+                product={filteredProducts.map((product : any) => ({
                   ...product,
                   avgRating: product.avgRating.toFixed(1)
                 }))}

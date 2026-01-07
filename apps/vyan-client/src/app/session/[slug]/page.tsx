@@ -54,7 +54,7 @@ export default async function SessionDetailPage({
 
   // Check if user is registered and has completed payment
   const userRegistration = session.registrations.find(
-    (reg) =>
+    (reg : any) =>
       reg.userId === currentUserId &&
       reg.paymentStatus === PaymentStatus.COMPLETED,
   );

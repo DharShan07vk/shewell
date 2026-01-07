@@ -95,7 +95,7 @@ export const startBuyingProducts = async (cart: ICart) => {
   const updatedCartLineItems: ICartLineItem[] = [];
 
   for (const i of cart.lineItems) {
-    const variant = productVariants.find((p) => p.id === i.productVariantId);
+    const variant = productVariants.find((p : any) => p.id === i.productVariantId);
 
     if (!variant) {
       continue;
@@ -246,7 +246,7 @@ export const updateProductStatus = async ({
     };
   }
   try {
-    await db.$transaction(async (tx) => {
+    await db.$transaction(async (tx : any) => {
       await tx.order.updateMany({
         data: {
           status: OrderStatus.PAYMENT_SUCCESSFUL,

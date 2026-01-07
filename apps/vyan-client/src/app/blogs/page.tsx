@@ -231,7 +231,7 @@ const Blogs = async ({ params }: { params: { slug: string } }) => {
             {/* Blog list */}
             <div className="md:mt-[28px] lg:mt-[32px]  2xl:mt-[50px]">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2">
-                {BlogsExceptFirstOne.map((b, index) => (
+                {BlogsExceptFirstOne.map((b : any, index : number) => (
                   <BlogCard
                     key={b.id}
                     fileUrl={b.media.fileUrl!}
@@ -268,7 +268,7 @@ const Blogs = async ({ params }: { params: { slug: string } }) => {
                     Popular Blogs
                   </h2>
                   <div className="flex flex-col gap-3">
-                    {popularBlogs.map((blog, index) => {
+                    {popularBlogs.map((blog : any, index : number) => {
                       return (
                         <div
                           key={blog.id}

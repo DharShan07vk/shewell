@@ -1,0 +1,134 @@
+﻿node.exe : ÔÇó turbo 2.7.2
+At C:\Users\GSB\AppData\Roaming\npm\pnpm.ps1:24 char:5
++     & "node$exe"  "$basedir/node_modules/pnpm/bin/pnpm.cjs" $args
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ÔÇó turbo 2.7.2:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+ÔÇó Packages in scope: @repo/aws, @repo/config, @repo/database, @repo/eslint-config, @repo/mail, @repo/shiprocket, @repo/typescript-config, @repo/ui, admin, vyan-client, vyan-doctor
+ÔÇó Running build in 11 packages
+ÔÇó Remote caching disabled
+vyan-doctor:build: cache bypass, force executing 288f16319af68866
+vyan-client:build: cache bypass, force executing 03180d641b5eb460
+admin:build: cache bypass, force executing 3043df04c4a2bd6b
+vyan-client:build: 
+vyan-client:build: > vyan-client@0.1.0 build C:\Users\GSB\Desktop\Shewell\apps\vyan-client
+vyan-client:build: > next build
+vyan-client:build: 
+admin:build: 
+admin:build: > admin@0.0.1 build C:\Users\GSB\Desktop\Shewell\apps\admin
+admin:build: > next build
+admin:build: 
+vyan-doctor:build: 
+vyan-doctor:build: > vyan-doctor@0.1.0 build C:\Users\GSB\Desktop\Shewell\apps\vyan-doctor
+vyan-doctor:build: > next build
+vyan-doctor:build: 
+vyan-client:build:   Ôû▓ Next.js 14.2.35
+vyan-client:build:   - Environments: .env
+vyan-client:build: 
+admin:build:   Ôû▓ Next.js 14.2.35
+admin:build:   - Environments: .env
+admin:build: 
+vyan-client:build:    Creating an optimized production build ...
+vyan-doctor:build:   Ôû▓ Next.js 14.2.35
+vyan-doctor:build:   - Environments: .env
+vyan-doctor:build: 
+admin:build:    Creating an optimized production build ...
+vyan-doctor:build:    Creating an optimized production build ...
+admin:build:  Ô£ô Compiled successfully
+admin:build:    Linting and checking validity of types ...
+admin:build:    Collecting page data ...
+admin:build:    Generating static pages (0/36) ...
+admin:build: parentCategories are []
+admin:build: parentCategories are []
+admin:build: testimonials []
+admin:build: blogs are []
+admin:build: blogs are []
+admin:build: orders are finallyyy []
+admin:build:    Generating static pages (9/36) 
+admin:build: testimonials []
+admin:build: specialization parent categories at specialization server []
+admin:build: specialization parent categories at specialization server []
+admin:build: specialization parent categories at specialization table []
+admin:build:    Generating static pages (18/36) 
+admin:build:    Generating static pages (27/36) 
+admin:build:  Ô£ô Generating static pages (36/36)
+admin:build:    Finalizing page optimization ...
+admin:build:    Collecting build traces ...
+vyan-client:build:  Ô£ô Compiled successfully
+vyan-client:build:    Linting and checking validity of types ...
+admin:build: 
+admin:build: Route (app)                                                          Size     First Load JS
+admin:build: Ôöî Ôùï /                                                                8.01 kB         262 kB
+admin:build: Ôö£ Ôùï /_not-found                                                      874 B          88.3 kB
+admin:build: Ôö£ ãÆ /api/auth/[...nextauth]                                          0 B                0 B
+admin:build: Ôö£ ãÆ /api/trpc/[trpc]                                                 0 B                0 B
+admin:build: Ôö£ ãÆ /auth/access                                                     897 B           122 kB
+admin:build: Ôö£ ãÆ /auth/error                                                      892 B           122 kB
+admin:build: Ôö£ ãÆ /auth/forget-password                                            4.71 kB         160 kB
+admin:build: Ôö£ ãÆ /auth/login                                                      3.29 kB         165 kB
+admin:build: Ôö£ ãÆ /auth/reset-password                                             4.78 kB         169 kB
+admin:build: Ôö£ Ôùï /manage-blogs/blog-categories                                    6.52 kB         238 kB
+admin:build: Ôö£ Ôùï /manage-blogs/blogs                                              4.02 kB         272 kB
+admin:build: Ôö£ Ôùï /manage-blogs/homepage-banners                                   6.46 kB         281 kB
+admin:build: Ôö£ Ôùï /manage-blogs/testimonials                                       7.08 kB         245 kB
+admin:build: Ôö£ Ôùï /manage-locations/countries                                      4.63 kB         230 kB
+admin:build: Ôö£ Ôùï /manage-locations/pincodes                                       1.43 kB         112 kB
+admin:build: Ôö£ ãÆ /manage-locations/states                                         1.43 kB         112 kB
+admin:build: Ôö£ Ôùï /manage-products/categories                                      8.49 kB         259 kB
+admin:build: Ôö£ ãÆ /manage-products/coupons                                         15.6 kB         258 kB
+admin:build: Ôö£ ãÆ /manage-products/inventory                                       6.77 kB         239 kB
+admin:build: Ôö£ Ôùï /manage-products/media                                           4.99 kB         255 kB
+admin:build: Ôö£ Ôùï /manage-products/orders                                          4.59 kB         253 kB
+admin:build: Ôö£ Ôùï /manage-products/products                                        29.9 kB         319 kB
+admin:build: Ôö£ Ôùï /manage-session-categories/session-categories                    4.27 kB         247 kB
+admin:build: Ôö£ Ôùï /manage-sessions/registrations                                   3.12 kB         224 kB
+admin:build: Ôö£ Ôùï /manage-sessions/sessions                                        7.82 kB         280 kB
+admin:build: Ôö£ Ôùï /manage-specialization-languages/languages                       6.3 kB          231 kB
+admin:build: Ôö£ Ôùï /manage-specialization-languages/specialization-parent-category  6.21 kB         256 kB
+admin:build: Ôö£ Ôùï /manage-specialization-languages/specializations                 6.44 kB         231 kB
+admin:build: Ôö£ Ôùï /manage-testimonials/testimonials                                7.59 kB         258 kB
+admin:build: Ôö£ Ôùï /manage-users/admin-users                                        6.64 kB         240 kB
+admin:build: Ôö£ Ôùï /manage-users/users                                              6.67 kB         240 kB
+admin:build: Ôö£ ãÆ /pages/notfound                                                  178 B          96.3 kB
+admin:build: Ôö£ Ôùï /view-doctors                                                    142 B          87.6 kB
+admin:build: Ôö£ Ôùï /view-doctors/appointments                                       1.42 kB         240 kB
+admin:build: Ôöö Ôùï /view-doctors/doctors                                            15.1 kB         244 kB
+admin:build: + First Load JS shared by all                                        87.4 kB
+admin:build:   Ôö£ chunks/8790-7dd6fd302bdaf1bf.js                                  31.7 kB
+admin:build:   Ôö£ chunks/993558c5-6a6cff523214f8df.js                              53.6 kB
+admin:build:   Ôöö other shared chunks (total)                                      2.06 kB
+admin:build: 
+admin:build: 
+admin:build: ãÆ Middleware                                                         49.4 kB
+admin:build: 
+admin:build: Ôùï  (Static)   prerendered as static content
+admin:build: ãÆ  (Dynamic)  server-rendered on demand
+admin:build: 
+vyan-doctor:build:  Ô£ô Compiled successfully
+vyan-doctor:build:    Linting and checking validity of types ...
+vyan-client:build: Failed to compile.
+vyan-client:build: 
+vyan-client:build: ./src/components/experts-carousel.tsx:61:26
+vyan-client:build: Type error: Argument of type '{ position: number; id?: number | undefined; name?: string | undefined; role?: string | undefined; image?: string | undefined; }' is not assignable to parameter of type 'never'.
+vyan-client:build: 
+vyan-client:build: [0m [90m 59 |[39m             [36mif[39m (index [33m<[39m [35m0[39m) index [33m=[39m [33mEXPERTS_DATA[39m[33m.[39mlength [33m+[39m index[33m;[39m[0m
+vyan-client:build: [0m [90m 60 |[39m             [36mif[39m (index [33m>=[39m [33mEXPERTS_DATA[39m[33m.[39mlength) index [33m=[39m index [33m-[39m [33mEXPERTS_DATA[39m[33m.[39mlength[33m;[39m[0m
+vyan-client:build: [0m[31m[1m>[22m[39m[90m 61 |[39m             visible[33m.[39mpush({ [33m...[39m[33mEXPERTS_DATA[39m[index][33m,[39m position[33m:[39m i })[33m;[39m[0m
+vyan-client:build: [0m [90m    |[39m                          [31m[1m^[22m[39m[0m
+vyan-client:build: [0m [90m 62 |[39m         }[0m
+vyan-client:build: [0m [90m 63 |[39m         [36mreturn[39m visible[33m;[39m[0m
+vyan-client:build: [0m [90m 64 |[39m     }[33m;[39m[0m
+vyan-client:build: Next.js build worker exited with code: 1 and signal: null
+vyan-client:build: ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+vyan-client:build: ERROR: command finished with error: command (C:\Users\GSB\Desktop\Shewell\apps\vyan-client) 
+C:\Users\GSB\AppData\Local\pnpm\.tools\pnpm\8.9.0\bin\pnpm.CMD run build exited (1)
+vyan-client#build: command (C:\Users\GSB\Desktop\Shewell\apps\vyan-client) C:\Users\GSB\AppData\Local\pnpm\.tools\pnpm\8.9.0\bin\pnpm.CMD run build 
+exited (1)
+
+ Tasks:    1 successful, 3 total
+Cached:    0 cached, 3 total
+  Time:    31.754s 
+Failed:    vyan-client#build
+
+ ERROR  run failed: command  exited (1)

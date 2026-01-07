@@ -86,7 +86,7 @@ const AllProducts = ({ product }: { product: IProduct[] }) => {
 
   useEffect(() => {
     if (products) {
-      setFilteredProducts(products.updatedFilteredProducts.map(item => ({
+      setFilteredProducts(products.updatedFilteredProducts.map((item:any) => ({
         ...item,
         
       })));
@@ -101,7 +101,7 @@ const AllProducts = ({ product }: { product: IProduct[] }) => {
   return (
     <>
       {filteredProducts.length > 0 ? (
-        filteredProducts.map((item, index) => (
+        filteredProducts.map((item : any, index : any ) => (
           <ProductCard
             key={item.id} 
             productCard={{
