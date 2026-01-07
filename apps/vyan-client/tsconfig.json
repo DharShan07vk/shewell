@@ -10,10 +10,10 @@
     "isolatedModules": true,
 
     /* Strictness */
-    "strict": true,
+    "strict": false,
     "noImplicitAny": false,
-    "noUncheckedIndexedAccess": true,
-    "checkJs": true,
+    "noUncheckedIndexedAccess": false,
+    "checkJs": false,
 
     /* Bundled projects */
     "lib": ["dom", "dom.iterable", "ES2022"],

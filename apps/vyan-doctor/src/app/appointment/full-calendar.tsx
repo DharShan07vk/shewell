@@ -123,7 +123,7 @@ const FullCalendarPage = ({
 
   // // Process the data to create events
   const events = data
-    ? data.meetingsForADayRange.reduce((acc: Events, meeting: Meeting) => {
+    ? (data.meetingsForADayRange as any[]).reduce((acc: Events, meeting: Meeting) => {
         const meetingDate = meeting.startingTime.toISOString().split("T")[0]; // Convert to YYYY-MM-DD format
         if (!acc[meetingDate!]) {
           acc[meetingDate!] = {

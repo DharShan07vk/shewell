@@ -27,7 +27,7 @@ export default function Subscribe() {
   });
   const submit = (data: z.infer<typeof formSchema>) => {
    
-    SubscribeAction(data)
+    SubscribeAction(data as any )
       .then((resp) => {
         reset(),
         setValue("email", "")

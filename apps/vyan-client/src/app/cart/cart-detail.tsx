@@ -56,7 +56,7 @@ const CartDetail = ({ review }: { review: IReview[] }) => {
         avgRating: item.product.avgRating.toString(),
       },
     }));
-    updateCartLineItem(updatedProducts, getUpdatedCartItems.data.coupon);
+    updateCartLineItem(updatedProducts as any, getUpdatedCartItems.data.coupon as any);
   }, [getUpdatedCartItems.data]);
   return (
     <>

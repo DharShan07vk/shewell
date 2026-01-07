@@ -75,7 +75,7 @@ export default function ProductsGrid() {
     };
 
     const renderStars = (rating: number) => {
-        const stars = [];
+        const stars: React.ReactNode[] = [];
         const fullStars = Math.floor(rating);
         const hasHalf = rating % 1 !== 0;
 

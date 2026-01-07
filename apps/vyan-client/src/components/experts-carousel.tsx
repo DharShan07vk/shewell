@@ -53,12 +53,12 @@ export default function ExpertsCarousel() {
     const containerRef = useRef<HTMLDivElement>(null);
 
     const getVisibleExperts = () => {
-        const visible = [];
+        const visible: Array<(typeof EXPERTS_DATA)[number] & { position: number }> = [];
         for (let i = -2; i <= 2; i++) {
             let index = centerIndex + i;
             if (index < 0) index = EXPERTS_DATA.length + index;
             if (index >= EXPERTS_DATA.length) index = index - EXPERTS_DATA.length;
-            visible.push({ ...EXPERTS_DATA[index], position: i });
+            visible.push({ ...EXPERTS_DATA[index]!, position: i });
         }
         return visible;
     };

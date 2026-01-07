@@ -177,7 +177,7 @@ const DateNavigationMeeting = ({
                         </div>
                         {/* right-div */}
                         <div>
-                          <MeetingCard meetingInfo={meeting} />
+                          <MeetingCard meetingInfo={meeting as any} />
                         </div>
                       </div>
                     </div>

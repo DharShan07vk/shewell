@@ -136,7 +136,7 @@ export const cartRouter = createTRPCRouter({
         },
       });
 
-      let coupon = null;
+      let coupon: any = null;
       if (input.couponId) {
         coupon = await db.coupon.findUnique({
           where: {

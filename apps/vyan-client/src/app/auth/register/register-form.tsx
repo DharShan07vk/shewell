@@ -4,7 +4,7 @@ import UIFormLabel from "@repo/ui/src/@/components//form/label";
 import UIFormInput from "@repo/ui/src/@/components/form/input";
 import UIFormPasswordInput from "@repo/ui/src/@/components/form/password-input";
 import { Button } from "@repo/ui/src/@/components/button";
-import RegisterUserAction from "./register-user-action";
+import RegisterUserAction, { ISignUpFields } from "./register-user-action";
 import { Checkbox } from "@repo/ui/src/@/components/checkbox";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -73,7 +73,7 @@ const RegisterForm = () => {
 
   const submitForm = async (data: z.infer<typeof zodValidation>) => {
 
-    RegisterUserAction(data)
+    RegisterUserAction(data as ISignUpFields)
       .then(async(resp) => {
         const params = new URLSearchParams(searchParams);
         params.set("email", data.email);

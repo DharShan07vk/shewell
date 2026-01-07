@@ -8,55 +8,81 @@ At C:\Users\GSB\AppData\Roaming\npm\pnpm.ps1:24 char:5
 ÔÇó Packages in scope: @repo/aws, @repo/config, @repo/database, @repo/eslint-config, @repo/mail, @repo/shiprocket, @repo/typescript-config, @repo/ui, admin, vyan-client, vyan-doctor
 ÔÇó Running build in 11 packages
 ÔÇó Remote caching disabled
-vyan-doctor:build: cache bypass, force executing 288f16319af68866
-vyan-client:build: cache bypass, force executing 03180d641b5eb460
 admin:build: cache bypass, force executing 3043df04c4a2bd6b
-vyan-client:build: 
-vyan-client:build: > vyan-client@0.1.0 build C:\Users\GSB\Desktop\Shewell\apps\vyan-client
-vyan-client:build: > next build
-vyan-client:build: 
+vyan-client:build: cache bypass, force executing 96c33e7718c90977
+vyan-doctor:build: cache bypass, force executing b913d9b082174306
 admin:build: 
 admin:build: > admin@0.0.1 build C:\Users\GSB\Desktop\Shewell\apps\admin
 admin:build: > next build
 admin:build: 
+vyan-client:build: 
+vyan-client:build: > vyan-client@0.1.0 build C:\Users\GSB\Desktop\Shewell\apps\vyan-client
+vyan-client:build: > next build
+vyan-client:build: 
 vyan-doctor:build: 
 vyan-doctor:build: > vyan-doctor@0.1.0 build C:\Users\GSB\Desktop\Shewell\apps\vyan-doctor
 vyan-doctor:build: > next build
 vyan-doctor:build: 
-vyan-client:build:   Ôû▓ Next.js 14.2.35
-vyan-client:build:   - Environments: .env
-vyan-client:build: 
 admin:build:   Ôû▓ Next.js 14.2.35
 admin:build:   - Environments: .env
 admin:build: 
-vyan-client:build:    Creating an optimized production build ...
+vyan-client:build:   Ôû▓ Next.js 14.2.35
+vyan-client:build:   - Environments: .env
+vyan-client:build: 
+admin:build:    Creating an optimized production build ...
 vyan-doctor:build:   Ôû▓ Next.js 14.2.35
 vyan-doctor:build:   - Environments: .env
 vyan-doctor:build: 
-admin:build:    Creating an optimized production build ...
 vyan-doctor:build:    Creating an optimized production build ...
+vyan-client:build:    Creating an optimized production build ...
 admin:build:  Ô£ô Compiled successfully
 admin:build:    Linting and checking validity of types ...
 admin:build:    Collecting page data ...
 admin:build:    Generating static pages (0/36) ...
-admin:build: parentCategories are []
-admin:build: parentCategories are []
+admin:build: blogs are []
+admin:build: blogs are []
 admin:build: testimonials []
-admin:build: blogs are []
-admin:build: blogs are []
 admin:build: orders are finallyyy []
 admin:build:    Generating static pages (9/36) 
 admin:build: testimonials []
+admin:build:    Generating static pages (18/36) 
 admin:build: specialization parent categories at specialization server []
 admin:build: specialization parent categories at specialization server []
 admin:build: specialization parent categories at specialization table []
-admin:build:    Generating static pages (18/36) 
+vyan-client:build:  Ô£ô Compiled successfully
+vyan-client:build:    Skipping validation of types
+vyan-client:build:    Skipping linting
 admin:build:    Generating static pages (27/36) 
+admin:build: parentCategories are []
+admin:build: parentCategories are []
+vyan-client:build:    Collecting page data ...
 admin:build:  Ô£ô Generating static pages (36/36)
+vyan-doctor:build:  Ô£ô Compiled successfully
+vyan-doctor:build:    Skipping validation of types
+vyan-doctor:build:    Skipping linting
+vyan-client:build:    Generating static pages (0/26) ...
+vyan-client:build:    Generating static pages (6/26) 
+vyan-doctor:build:    Collecting page data ...
 admin:build:    Finalizing page optimization ...
 admin:build:    Collecting build traces ...
-vyan-client:build:  Ô£ô Compiled successfully
-vyan-client:build:    Linting and checking validity of types ...
+vyan-doctor:build:    Generating static pages (0/23) ...
+vyan-client:build:    Generating static pages (12/26) 
+vyan-client:build: blogCategories []
+vyan-client:build: blogCategories []
+vyan-client:build:    Generating static pages (19/26) 
+vyan-doctor:build:    Generating static pages (5/23) 
+vyan-client:build:  Ô£ô Generating static pages (26/26)
+vyan-doctor:build: blogCategories []
+vyan-doctor:build: blogs 0
+vyan-doctor:build: blogCategories []
+vyan-doctor:build: blogs 0
+vyan-doctor:build:    Generating static pages (11/23) 
+vyan-doctor:build:    Generating static pages (17/23) 
+vyan-doctor:build:  Ô£ô Generating static pages (23/23)
+vyan-client:build:    Finalizing page optimization ...
+vyan-client:build:    Collecting build traces ...
+vyan-doctor:build:    Finalizing page optimization ...
+vyan-doctor:build:    Collecting build traces ...
 admin:build: 
 admin:build: Route (app)                                                          Size     First Load JS
 admin:build: Ôöî Ôùï /                                                                8.01 kB         262 kB
@@ -105,30 +131,91 @@ admin:build:
 admin:build: Ôùï  (Static)   prerendered as static content
 admin:build: ãÆ  (Dynamic)  server-rendered on demand
 admin:build: 
-vyan-doctor:build:  Ô£ô Compiled successfully
-vyan-doctor:build:    Linting and checking validity of types ...
-vyan-client:build: Failed to compile.
 vyan-client:build: 
-vyan-client:build: ./src/components/experts-carousel.tsx:61:26
-vyan-client:build: Type error: Argument of type '{ position: number; id?: number | undefined; name?: string | undefined; role?: string | undefined; image?: string | undefined; }' is not assignable to parameter of type 'never'.
+vyan-client:build: Route (app)                              Size     First Load JS
+vyan-client:build: Ôöî ãÆ /                                    9.72 kB         150 kB
+vyan-client:build: Ôö£ ãÆ /_not-found                          880 B          88.4 kB
+vyan-client:build: Ôö£ ãÆ /api/auth/[...nextauth]              0 B                0 B
+vyan-client:build: Ôö£ ãÆ /api/trpc/[trpc]                     0 B                0 B
+vyan-client:build: Ôö£ ãÆ /api/webhook/razorpay                0 B                0 B
+vyan-client:build: Ôö£ ãÆ /auth/forgot-password                3.73 kB         118 kB
+vyan-client:build: Ôö£ ãÆ /auth/login                          6.99 kB         144 kB
+vyan-client:build: Ôö£ ãÆ /auth/register                       7.21 kB         147 kB
+vyan-client:build: Ôö£ ãÆ /auth/register-otp                   9.44 kB         146 kB
+vyan-client:build: Ôö£ ãÆ /auth/reset-password                 5.23 kB         132 kB
+vyan-client:build: Ôö£ ãÆ /blogs                               223 B           113 kB
+vyan-client:build: Ôö£ ãÆ /blogs-category/[slug]               999 B           113 kB
+vyan-client:build: Ôö£ ãÆ /blogs/[slug]                        676 B           102 kB
+vyan-client:build: Ôö£ ãÆ /cart                                6.45 kB         176 kB
+vyan-client:build: Ôö£ ãÆ /checkout                            3.73 kB         200 kB
+vyan-client:build: Ôö£ ãÆ /counselling                         31.7 kB         280 kB
+vyan-client:build: Ôö£ ãÆ /counselling/[username]              7.97 kB         227 kB
+vyan-client:build: Ôö£ ãÆ /doctor-profile/[userName]           7.93 kB         227 kB
+vyan-client:build: Ôö£ ãÆ /privacy-policy                      155 B          87.7 kB
+vyan-client:build: Ôö£ ãÆ /products                            7.67 kB         184 kB
+vyan-client:build: Ôö£ ãÆ /products/[slug]                     32.7 kB         224 kB
+vyan-client:build: Ôö£ ãÆ /profile/appointments                13.1 kB         261 kB
+vyan-client:build: Ôö£ ãÆ /profile/edit-profile                13.4 kB         156 kB
+vyan-client:build: Ôö£ ãÆ /profile/manage-address              3.05 kB         164 kB
+vyan-client:build: Ôö£ ãÆ /profile/notification                155 B          87.7 kB
+vyan-client:build: Ôö£ ãÆ /profile/orders                      10.9 kB         189 kB
+vyan-client:build: Ôö£ ãÆ /profile/orders/[orderId]            7.79 kB         266 kB
+vyan-client:build: Ôö£ ãÆ /profile/orders/[orderId]/invoice    1.66 kB         238 kB
+vyan-client:build: Ôö£ ãÆ /return-policy                       155 B          87.7 kB
+vyan-client:build: Ôö£ ãÆ /session                             9.27 kB         134 kB
+vyan-client:build: Ôö£ ãÆ /session/[slug]                      5.04 kB        99.7 kB
+vyan-client:build: Ôö£ ãÆ /shefit                              4.97 kB         138 kB
+vyan-client:build: Ôö£ ãÆ /terms                               155 B          87.7 kB
+vyan-client:build: Ôöö ãÆ /wishlist                            4.52 kB         129 kB
+vyan-client:build: + First Load JS shared by all            87.6 kB
+vyan-client:build:   Ôö£ chunks/6098-4a3fb91910ca54d5.js      31.9 kB
+vyan-client:build:   Ôö£ chunks/bc79b8a1-950564754b6e6d2e.js  53.6 kB
+vyan-client:build:   Ôöö other shared chunks (total)          2.01 kB
 vyan-client:build: 
-vyan-client:build: [0m [90m 59 |[39m             [36mif[39m (index [33m<[39m [35m0[39m) index [33m=[39m [33mEXPERTS_DATA[39m[33m.[39mlength [33m+[39m index[33m;[39m[0m
-vyan-client:build: [0m [90m 60 |[39m             [36mif[39m (index [33m>=[39m [33mEXPERTS_DATA[39m[33m.[39mlength) index [33m=[39m index [33m-[39m [33mEXPERTS_DATA[39m[33m.[39mlength[33m;[39m[0m
-vyan-client:build: [0m[31m[1m>[22m[39m[90m 61 |[39m             visible[33m.[39mpush({ [33m...[39m[33mEXPERTS_DATA[39m[index][33m,[39m position[33m:[39m i })[33m;[39m[0m
-vyan-client:build: [0m [90m    |[39m                          [31m[1m^[22m[39m[0m
-vyan-client:build: [0m [90m 62 |[39m         }[0m
-vyan-client:build: [0m [90m 63 |[39m         [36mreturn[39m visible[33m;[39m[0m
-vyan-client:build: [0m [90m 64 |[39m     }[33m;[39m[0m
-vyan-client:build: Next.js build worker exited with code: 1 and signal: null
-vyan-client:build: ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
-vyan-client:build: ERROR: command finished with error: command (C:\Users\GSB\Desktop\Shewell\apps\vyan-client) 
-C:\Users\GSB\AppData\Local\pnpm\.tools\pnpm\8.9.0\bin\pnpm.CMD run build exited (1)
-vyan-client#build: command (C:\Users\GSB\Desktop\Shewell\apps\vyan-client) C:\Users\GSB\AppData\Local\pnpm\.tools\pnpm\8.9.0\bin\pnpm.CMD run build 
-exited (1)
+vyan-client:build: 
+vyan-client:build: ãÆ  (Dynamic)  server-rendered on demand
+vyan-client:build: 
+vyan-doctor:build: 
+vyan-doctor:build: Route (app)                              Size     First Load JS
+vyan-doctor:build: Ôöî ãÆ /                                    7.91 kB         188 kB
+vyan-doctor:build: Ôö£ ãÆ /_not-found                          880 B          88.5 kB
+vyan-doctor:build: Ôö£ ãÆ /api/auth/[...nextauth]              0 B                0 B
+vyan-doctor:build: Ôö£ Ôùï /api/google-meet-auth                0 B                0 B
+vyan-doctor:build: Ôö£ ãÆ /api/google-meet-auth/callback       0 B                0 B
+vyan-doctor:build: Ôö£ ãÆ /api/trpc/[trpc]                     0 B                0 B
+vyan-doctor:build: Ôö£ ãÆ /appointment                         92.2 kB         338 kB
+vyan-doctor:build: Ôö£ ãÆ /auth/login                          5.82 kB         144 kB
+vyan-doctor:build: Ôö£ ãÆ /auth/register/modes                 4.99 kB         171 kB
+vyan-doctor:build: Ôö£ ãÆ /auth/register/personal-information  11.8 kB         197 kB
+vyan-doctor:build: Ôö£ ãÆ /auth/register/qualifications        5.96 kB         178 kB
+vyan-doctor:build: Ôö£ ãÆ /auth/register/uploads               9.89 kB         173 kB
+vyan-doctor:build: Ôö£ ãÆ /blogs                               2.66 kB         112 kB
+vyan-doctor:build: Ôö£ ãÆ /blogs-category/[slug]               2.66 kB         112 kB
+vyan-doctor:build: Ôö£ ãÆ /blogs/[slug]                        637 B           102 kB
+vyan-doctor:build: Ôö£ ãÆ /dashboard                           136 kB          329 kB
+vyan-doctor:build: Ôö£ ãÆ /doctor-profile                      3.42 kB         232 kB
+vyan-doctor:build: Ôö£ ãÆ /doctor-profile/[username]           1.47 kB         230 kB
+vyan-doctor:build: Ôö£ ãÆ /edit-profile                        152 B          87.8 kB
+vyan-doctor:build: Ôö£ ãÆ /edit-profile/personal-info          5.48 kB         153 kB
+vyan-doctor:build: Ôö£ ãÆ /edit-profile/prices                 6.71 kB         154 kB
+vyan-doctor:build: Ôö£ ãÆ /edit-profile/qualification          6.45 kB         154 kB
+vyan-doctor:build: Ôö£ ãÆ /edit-profile/specialization         3.52 kB         129 kB
+vyan-doctor:build: Ôö£ ãÆ /privacy-policy                      152 B          87.8 kB
+vyan-doctor:build: Ôö£ ãÆ /terms                               152 B          87.8 kB
+vyan-doctor:build: Ôöö ãÆ /time-picker                         785 B           135 kB
+vyan-doctor:build: + First Load JS shared by all            87.6 kB
+vyan-doctor:build:   Ôö£ chunks/6098-fdb21712cb031d8c.js      31.9 kB
+vyan-doctor:build:   Ôö£ chunks/bc79b8a1-5c8ca6432947ebb7.js  53.6 kB
+vyan-doctor:build:   Ôöö other shared chunks (total)          2.06 kB
+vyan-doctor:build: 
+vyan-doctor:build: 
+vyan-doctor:build: ãÆ Middleware                             49.4 kB
+vyan-doctor:build: 
+vyan-doctor:build: Ôùï  (Static)   prerendered as static content
+vyan-doctor:build: ãÆ  (Dynamic)  server-rendered on demand
+vyan-doctor:build: 
 
- Tasks:    1 successful, 3 total
+ Tasks:    3 successful, 3 total
 Cached:    0 cached, 3 total
-  Time:    31.754s 
-Failed:    vyan-client#build
+  Time:    31.032s 
 
- ERROR  run failed: command  exited (1)

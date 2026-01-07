@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
+  "types": "index.ts",
   "scripts": {
     "db:seed": "pnpm run db:seed:admin && pnpm run db:seed:country",
     "db:seed:admin": "npx ts-node prisma/seed-admin.ts",
@@ -18,14 +19,14 @@
   "license": "ISC",
   "dependencies": {
     "@next-auth/prisma-adapter": "0.4.4-canary.81",
-    "@prisma/client": "^5.20.0",
+    "@prisma/client": "5.22.0",
     "bcrypt": "^5.1.1",
     "bcryptjs": "2.4.3"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20.16.5",
-    "prisma": "^5.22.0",
+    "prisma": "5.22.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   }
