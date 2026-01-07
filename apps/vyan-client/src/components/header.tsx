@@ -11,9 +11,9 @@ export function Header() {
 
   return (
     <header className="relative sticky top-0 z-50 w-full bg-gradient-to-r from-[#0E3A47] to-[#13647A] shadow-sm">
-      <nav className="container mx-auto flex items-center justify-between px-6 py-4">
+      <nav className="container mx-auto flex items-center justify-between px-4 py-4 md:px-6">
         {/* Logo */}
-        <Link href="/" className="relative h-10 w-32">
+        <Link href="/" className="relative h-10 w-28 shrink-0 sm:w-32">
           <img
             src="/home/Logo.png"
             alt="Shewell"
@@ -21,8 +21,8 @@ export function Header() {
           />
         </Link>
 
-        {/* Navigation Links */}
-        <div className="flex items-center gap-8">
+        {/* Navigation Links - Improved spacing for laptops */}
+        <div className="hidden items-center gap-3 lg:flex xl:gap-8">
           <Link
             href="/session"
             className="font-medium text-white transition-colors hover:text-[#A5F3FC]"
@@ -38,7 +38,7 @@ export function Header() {
           </Link>
           <Link
             href="/counselling"
-            className="font-medium text-white transition-colors hover:text-[#A5F3FC]"
+            className="font-medium text-white transition-colors hover:text-[#A5F3FC] whitespace-nowrap"
           >
             Book experts
           </Link>
@@ -69,7 +69,7 @@ export function Header() {
 
             {isMoreOpen && (
               <div className="absolute left-0 top-full z-10 ">
-                <div className="w-48 rounded-md bg-white  shadow-lg">
+                <div className="w-48 rounded-md bg-white shadow-lg">
                   <Link
                     href="/shefit"
                     className="block rounded-t-md px-4 py-2 text-sm text-gray-700 hover:bg-[#f3f4f6]"
@@ -91,11 +91,11 @@ export function Header() {
         </div>
 
         {/* Right Side Icons */}
-        <div className="flex items-center gap-4  ">
+        <div className="flex items-center gap-3 lg:gap-4 shrink-0">
           <div className="relative">
             {!isSearchOpen ? (
               <button
-                className="absolute right-0 top-[-17.5px] rounded-full bg-[#1A8191] p-2 text-white transition-all duration-300 hover:bg-[#A5F3FC] hover:text-[#13647A]"
+                className="rounded-full bg-[#1A8191] p-2 text-white transition-all duration-300 hover:bg-[#A5F3FC] hover:text-[#13647A]"
                 aria-label="Search"
                 onClick={() => setIsSearchOpen(true)}
               >
@@ -107,7 +107,7 @@ export function Header() {
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-48 bg-transparent text-white placeholder-white/70 focus:outline-none"
+                  className="w-32 sm:w-48 bg-transparent text-white placeholder-white/70 focus:outline-none"
                   autoFocus
                   onBlur={() => setIsSearchOpen(false)}
                 />
@@ -125,7 +125,7 @@ export function Header() {
 
           <Link
             href={env.NEXT_PUBLIC_PROFESSIONAL + ""}
-            className="text-[#FFFFFF99] hover:text-white "
+            className="hidden text-[#FFFFFF99] hover:text-white sm:block whitespace-nowrap"
           >
             Register as Therapist
           </Link>
