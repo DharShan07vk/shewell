@@ -54,7 +54,7 @@ export default async function SessionDetailPage({
 
   // Check if user is registered and has completed payment
   const userRegistration = session.registrations.find(
-    (reg : any) =>
+    (reg: any) =>
       reg.userId === currentUserId &&
       reg.paymentStatus === PaymentStatus.COMPLETED,
   );
@@ -142,6 +142,7 @@ export default async function SessionDetailPage({
           session.bannerMedia?.fileUrl || "/home/session-banner-sample.png"
         }
         price={Number(session.price)}
+        sessionId={session.id}
       />
       <FooterInfoSection terms={terms} />
 

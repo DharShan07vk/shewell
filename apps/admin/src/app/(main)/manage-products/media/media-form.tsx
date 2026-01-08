@@ -27,18 +27,30 @@ const MediaForm = ({ media, hideDialog }: CurrencyFormProps) => {
     reset,
     formState: { isLoading }
   } = useForm<IMedia>({
-    defaultValues: media
+    defaultValues: {
+      id: '',
+      fileKey: '',
+      fileUrl: '',
+      comments: '',
+      mimeType: ''
+    }
   });
 
   useEffect(() => {
-    reset({ ...media });
-  }, [media]);
+    reset({
+      id: media?.id || '',
+      fileKey: media?.fileKey || '',
+      fileUrl: media?.fileUrl || '',
+      comments: media?.comments || '',
+      mimeType: media?.mimeType || ''
+    });
+  }, [media, reset]);
 
-  const callServerAction = (data: IMedia) => {
+  const callServerAction = async (data: IMedia) => {
     if (media?.id) {
-      return updateMedia(data);
+      return await updateMedia(data);
     } else {
-      return createMedia(data);
+      return await createMedia(data);
     }
   };
 
@@ -57,7 +69,7 @@ const MediaForm = ({ media, hideDialog }: CurrencyFormProps) => {
         showToast('error', 'Error', err.message);
         console.log(err);
       })
-      .finally(() => {});
+      .finally(() => { });
   };
 
   const onSelectImage = async (event: FileUploadSelectEvent) => {
@@ -66,42 +78,52 @@ const MediaForm = ({ media, hideDialog }: CurrencyFormProps) => {
     if (event.files.length > 0) {
       event.files.forEach((image) => {
         setUploadingState(1);
-        getPresignedMediaImageUrl(image.name)
+        getPresignedMediaImageUrl(image.name, image.type)
           .then(async (resp) => {
-            // if (resp.error) {
-            //   showToast('error', 'Error', resp.error);
-            //   return;
-            // }
+            if (resp.error) {
+              showToast('error', 'Error', resp.error);
+              setUploadingState(2);
+              fileInputRef.current?.clear();
+              return;
+            }
             const { key, imageUrl, presignedUrl } = resp;
             setValue('fileKey', key!);
             setValue('fileUrl', imageUrl);
             setValue('mimeType', image.type);
             const requestOptions = {
               method: 'PUT',
-              // headers: {
-              //   'Content-type': image.type
-              // 'x-amz-acl': 'public-read'
-              // },
+              headers: {
+                'Content-Type': image.type
+              },
               body: image
             };
             try {
               const res = await fetch(presignedUrl!, requestOptions);
-              console.log(res, presignedUrl);
-              fileInputRef.current?.clear();
+              console.log('S3 Upload Response:', res.status, res.statusText);
+
               if (res.ok) {
+                fileInputRef.current?.clear();
                 setUploadingState(0);
+                showToast('success', 'Success', 'File uploaded successfully');
                 return;
               }
+
+              // Log S3 error for debugging
+              const errorText = await res.text();
+              console.error('S3 Upload Error:', res.status, errorText);
+              showToast('error', 'Upload Failed', `S3 Error: ${res.status} - ${res.statusText}`);
+              fileInputRef.current?.clear();
               setUploadingState(2);
             } catch (e) {
+              console.error('Upload exception:', e);
+              showToast('error', 'Upload Failed', 'Network error during upload');
               fileInputRef.current?.clear();
               setUploadingState(2);
             }
-            // if (res.ok) {
-            //   setValue('imageKey', key);
-            // }
           })
           .catch((resp) => {
+            console.error('Presigned URL error:', resp);
+            showToast('error', 'Error', 'Failed to get upload URL');
             fileInputRef.current?.clear();
             setUploadingState(2);
           });
@@ -121,7 +143,7 @@ const MediaForm = ({ media, hideDialog }: CurrencyFormProps) => {
             return (
               <>
                 {field.value && <Image preview src={field.value} className="mb-2 h-60" />}
-                <input type="hidden" {...field} value={field.value!} />
+                <input type="hidden" {...field} value={field.value || ''} />
               </>
             );
           }}

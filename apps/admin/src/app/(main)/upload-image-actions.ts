@@ -2,12 +2,12 @@
 
 import { db } from '@/src/server/db';
 import { getServerSession } from 'next-auth';
-import { ObjectCannedACL, PutObjectCommand, S3 } from '@aws-sdk/client-s3';
+import { PutObjectCommand, S3 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { revalidatePath } from 'next/cache';
 import { env } from '@/env';
 
-const getUploadPresignedUrl = async (key: string, isPublic: boolean) => {
+const getUploadPresignedUrl = async (key: string, isPublic: boolean, contentType: string = 'application/octet-stream') => {
   const s3 = new S3({
     // forcePathStyle: false, // Configures to use subdomain/virtual calling format.
     // endpoint: process.env.S3_SPACES_URL!,
@@ -21,9 +21,9 @@ const getUploadPresignedUrl = async (key: string, isPublic: boolean) => {
   const fileParams = {
     Bucket: process.env.AWS_BUCKET,
     Key: key,
-    ContentType: 'text',
+    ContentType: contentType,
     // Expires: addSeconds(new Date(), 600),
-    ACL: isPublic ? ObjectCannedACL.public_read : ObjectCannedACL.private
+    // ACL removed - using Bucket Policy instead for best practice
   };
   const command = new PutObjectCommand(fileParams);
   return await getSignedUrl(s3, command, { expiresIn: 10 * 60 });
@@ -39,34 +39,34 @@ const uploadProductImage = async (fileName: string, mimeType: string, comments: 
   }
   const key = `media/${new Date().getTime()}-${fileName}`;
   const fileUrl = await getFileUrlFromKey(key);
- try{
-  const media = await db.media.create({
-    data: {
-      fileKey: key,
+  try {
+    const media = await db.media.create({
+      data: {
+        fileKey: key,
+        fileUrl,
+        comments,
+        mimeType
+      }
+    });
+    const url = await getUploadPresignedUrl(key, true, mimeType);
+
+    revalidatePath('/admin/media');
+
+    console.log("blog uploaded")
+    return {
+      id: media.id,
+      key,
       fileUrl,
-      comments,
-      mimeType
-    }
-  });
-  const url = await getUploadPresignedUrl(key, true);
-
-  revalidatePath('/admin/media');
-
-  console.log("blog uploaded")
-  return {
-    id: media.id,
-    key,
-    fileUrl,
-    presignedUrl: url
-  };
- }
- catch(e){
-  console.log("error while uploading blog",e);
-  throw new Error("Error while uploading blog")
- }
+      presignedUrl: url
+    };
+  }
+  catch (e) {
+    console.log("error while uploading blog", e);
+    throw new Error("Error while uploading blog")
+  }
 };
 
-export const getPresignedMediaImageUrl = async (fileName: string) => {
+export const getPresignedMediaImageUrl = async (fileName: string, mimeType: string = 'application/octet-stream') => {
   const session = await getServerSession();
 
   if (!session) {
@@ -76,11 +76,12 @@ export const getPresignedMediaImageUrl = async (fileName: string) => {
   }
   const key = `homePageBanner/${new Date().getTime()}-${fileName}`;
 
-  const url = await getUploadPresignedUrl(key, true);
+  const url = await getUploadPresignedUrl(key, true, mimeType);
+  const imageUrl = await getFileUrlFromKey(key);
 
   return {
     key: key,
-    imageUrl: getFileUrlFromKey(key),
+    imageUrl: imageUrl,
     presignedUrl: url
   };
 };

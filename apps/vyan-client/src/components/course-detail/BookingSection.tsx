@@ -9,12 +9,27 @@ import Image from "next/image";
 interface BookingSectionProps {
   price: number;
   imageUrl: string;
+  sessionId: string;
 }
 
-export const BookingSection = ({ price, imageUrl }: BookingSectionProps): JSX.Element => {
+export const BookingSection = ({ price, imageUrl, sessionId }: BookingSectionProps): JSX.Element => {
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [isPregnant, setIsPregnant] = useState(false);
   const [isNewMom, setIsNewMom] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Form state
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    trimester: "",
+    dueDate: "",
+    babyDob: "",
+    languages: [] as string[],
+    timeSlot: "",
+  });
 
   const containerVariants = {
     initial: { opacity: 0, x: 20 },
@@ -31,6 +46,108 @@ export const BookingSection = ({ price, imageUrl }: BookingSectionProps): JSX.El
     }
   };
 
+  // Load Razorpay SDK
+  const initializeRazorpay = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  const handleBooking = async () => {
+    setIsProcessing(true);
+    setError(null);
+
+    try {
+      // Load Razorpay SDK
+      const res = await initializeRazorpay();
+      if (!res) {
+        setError("Failed to load payment gateway. Please try again.");
+        setIsProcessing(false);
+        return;
+      }
+
+      // Import server actions dynamically
+      const { createSessionOrder, verifySessionPayment } = await import("~/lib/payment-actions");
+
+      // Create order
+      const orderResponse = await createSessionOrder({
+        sessionId,
+        name: formData.name,
+        email: formData.email,
+        mobile: formData.mobile,
+        isPregnant,
+        trimester: isPregnant ? formData.trimester : undefined,
+        dueDate: isPregnant ? formData.dueDate : undefined,
+        isNewMom,
+        babyDob: isNewMom ? formData.babyDob : undefined,
+        languages: formData.languages,
+        timeSlot: formData.timeSlot,
+      });
+
+      if (orderResponse.error) {
+        setError(orderResponse.error);
+        setIsProcessing(false);
+        return;
+      }
+
+      // Open Razorpay checkout
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: orderResponse.razorpay.amount,
+        currency: orderResponse.razorpay.currency,
+        name: "Shewell",
+        description: orderResponse.razorpay.description,
+        order_id: orderResponse.razorpay.razorpayOrderId,
+        handler: async function (response: any) {
+          try {
+            // Verify payment
+            const verifyResponse = await verifySessionPayment({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            });
+
+            if (verifyResponse.success) {
+              alert("Payment successful! Your session is booked.");
+              window.location.reload();
+            } else {
+              setError(verifyResponse.message || "Payment verification failed");
+            }
+          } catch (err: any) {
+            setError(err.message || "Payment verification failed");
+          } finally {
+            setIsProcessing(false);
+          }
+        },
+        prefill: {
+          name: orderResponse.razorpay.user.name,
+          email: orderResponse.razorpay.user.email,
+          contact: formData.mobile,
+        },
+        theme: {
+          color: "#00898F",
+        },
+      };
+
+      // @ts-ignore
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
+
+      paymentObject.on('payment.failed', function (response: any) {
+        setError("Payment failed. Please try again.");
+        setIsProcessing(false);
+      });
+
+    } catch (err: any) {
+      console.error("Booking error:", err);
+      setError(err.message || "Something went wrong. Please try again.");
+      setIsProcessing(false);
+    }
+  }
   return (
     <section className="w-full px-6 md:px-12 py-16 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -62,16 +179,16 @@ export const BookingSection = ({ price, imageUrl }: BookingSectionProps): JSX.El
 
           {/* RIGHT BOOKING CARD */}
           <div className="relative z-0 w-full flex justify-center md:justify-end md:pr-12 md:pl-[50%] py-12">
-            <motion.div 
-               initial={{ opacity: 0, y: 20 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true }}
-               className="  p-8 md:p-12 w-full max-w-[520px] min-h-[640px] flex flex-col relative"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="  p-8 md:p-12 w-full max-w-[520px] min-h-[640px] flex flex-col relative"
             >
-              
+
               {/* PRICE PILL */}
               <div className="mb-8 flex justify-center">
-                <motion.div 
+                <motion.div
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   className="bg-[#e6eff1] px-8 py-4 rounded-full flex items-center gap-3 border border-[#00898F]/10 shadow-sm"
@@ -98,7 +215,7 @@ export const BookingSection = ({ price, imageUrl }: BookingSectionProps): JSX.El
                         {step > s ? <Check size={16} /> : s}
                       </motion.div>
                       {step === s && (
-                        <motion.div 
+                        <motion.div
                           layoutId="step-label"
                           className="absolute -bottom-6 whitespace-nowrap text-[10px] font-bold text-[#00898F] uppercase tracking-tighter"
                         >
@@ -109,7 +226,7 @@ export const BookingSection = ({ price, imageUrl }: BookingSectionProps): JSX.El
 
                     {i < 2 && (
                       <div className="w-12 h-[2px] mx-2 bg-gray-100 relative">
-                        <motion.div 
+                        <motion.div
                           initial={{ width: 0 }}
                           animate={{ width: step > s ? "100%" : "0%" }}
                           className="absolute inset-0 bg-[#00898F]"
@@ -137,15 +254,31 @@ export const BookingSection = ({ price, imageUrl }: BookingSectionProps): JSX.El
                       <>
                         <div className="space-y-1">
                           <label className="text-xs font-semibold text-gray-500 ml-2">MOM NAME</label>
-                          <Input placeholder="Enter your full name" className="h-14 rounded-2xl bg-[#F3F7F8] border-none focus-visible:ring-1 focus-visible:ring-[#00898F]" />
+                          <Input
+                            placeholder="Enter your full name"
+                            className="h-14 rounded-2xl bg-[#F3F7F8] border-none focus-visible:ring-1 focus-visible:ring-[#00898F]"
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          />
                         </div>
                         <div className="space-y-1">
                           <label className="text-xs font-semibold text-gray-500 ml-2">EMAIL ADDRESS</label>
-                          <Input placeholder="Enter your email" type="email" className="h-14 rounded-2xl bg-[#F3F7F8] border-none focus-visible:ring-1 focus-visible:ring-[#00898F]" />
+                          <Input
+                            placeholder="Enter your email"
+                            type="email"
+                            className="h-14 rounded-2xl bg-[#F3F7F8] border-none focus-visible:ring-1 focus-visible:ring-[#00898F]"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          />
                         </div>
                         <div className="space-y-1">
                           <label className="text-xs font-semibold text-gray-500 ml-2">MOBILE NUMBER</label>
-                          <Input placeholder="Enter contact number" className="h-14 rounded-2xl bg-[#F3F7F8] border-none focus-visible:ring-1 focus-visible:ring-[#00898F]" />
+                          <Input
+                            placeholder="Enter contact number"
+                            className="h-14 rounded-2xl bg-[#F3F7F8] border-none focus-visible:ring-1 focus-visible:ring-[#00898F]"
+                            value={formData.mobile}
+                            onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+                          />
                         </div>
                       </>
                     )}
@@ -167,7 +300,7 @@ export const BookingSection = ({ price, imageUrl }: BookingSectionProps): JSX.El
                               />
                             </button>
                           </div>
-                          
+
                           <div className={`space-y-3 transition-all duration-300 ${isPregnant ? "opacity-100" : "opacity-30 pointer-events-none"}`}>
                             <div className="relative">
                               <Input placeholder="Trimester" disabled={!isPregnant} className="h-12 rounded-xl bg-white border-none pr-10" />
@@ -194,7 +327,7 @@ export const BookingSection = ({ price, imageUrl }: BookingSectionProps): JSX.El
                               />
                             </button>
                           </div>
-                          
+
                           <div className={`transition-all duration-300 ${isNewMom ? "opacity-100" : "opacity-30 pointer-events-none"}`}>
                             <div className="relative">
                               <Input placeholder="Baby's Date of Birth" disabled={!isNewMom} className="h-12 rounded-xl bg-white border-none pr-10" />
@@ -243,18 +376,33 @@ export const BookingSection = ({ price, imageUrl }: BookingSectionProps): JSX.El
                 </AnimatePresence>
               </div>
 
+              {/* ERROR MESSAGE */}
+              {error && (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-2xl text-sm">
+                  {error}
+                </div>
+              )}
+
               {/* WHITE SEPARATOR WITH BLUR */}
               <div className="h-[2px] bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8" />
 
               {/* CONTINUE BUTTON */}
               <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => setStep((prev) => (prev < 3 ? ((prev + 1) as any) : prev))}
-                className="group cursor-pointer flex items-center justify-between px-8 py-6 rounded-3xl bg-[#F8FAFB] transition-all duration-300 hover:bg-[#00898F] hover:shadow-lg"
+                whileHover={{ scale: isProcessing ? 1 : 1.02 }}
+                whileTap={{ scale: isProcessing ? 1 : 0.98 }}
+                onClick={() => {
+                  if (isProcessing) return;
+                  if (step === 3) {
+                    handleBooking();
+                  } else {
+                    setStep((prev) => (prev < 3 ? ((prev + 1) as any) : prev));
+                  }
+                }}
+                className={`group cursor-pointer flex items-center justify-between px-8 py-6 rounded-3xl bg-[#F8FAFB] transition-all duration-300 ${isProcessing ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#00898F] hover:shadow-lg'
+                  }`}
               >
                 <span className="text-xl font-bold text-gray-800 transition group-hover:text-white">
-                  {step === 3 ? "Complete Booking" : "Continue"}
+                  {isProcessing ? "Processing..." : step === 3 ? "Complete Booking" : "Continue"}
                 </span>
 
                 <InteractiveButton className="rotate-[-135deg] group-hover:rotate-[-180deg] transition-transform duration-500" />
