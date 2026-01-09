@@ -24,6 +24,11 @@
         "AWS_BUCKET"
       ]
     },
+    "prisma:generate": {
+      "cache": false,
+      "dependsOn": [],
+      "inputs": ["packages/database/prisma/schema.prisma"]
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },
