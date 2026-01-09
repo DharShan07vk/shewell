@@ -17,7 +17,11 @@
         "RAZORPAY_KEY_SECRET",
         "SHIP_ROCKET_AUTH_KEY",
         "SHIPROCKET_PASSWORD",
-        "SHIPROCKET_EMAIL"
+        "SHIPROCKET_EMAIL",
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+        "AWS_REGION",
+        "AWS_BUCKET"
       ]
     },
     "lint": {
