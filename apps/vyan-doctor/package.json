@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "next dev -p 3002",
-    "build": "next build",
+    "build": "pnpx prisma@5.22.0 generate --schema=../../packages/database/prisma/schema.prisma && next build",
     "start": "next start -p 6002",
     "lint": "next lint",
-    "postinstall": "cd ../../packages/database && pnpm prisma generate"
+    "prisma:generate": "pnpx prisma@5.22.0 generate --schema=../../packages/database/prisma/schema.prisma"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.428.0",
