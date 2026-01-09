@@ -475,21 +475,6 @@ importers:
       '@trpc/server':
         specifier: 11.0.0
         version: 11.0.0(typescript@5.9.3)
-      '@types/bcrypt':
-        specifier: ^5.0.2
-        version: 5.0.2
-      '@types/eslint':
-        specifier: ^8.56.12
-        version: 8.56.12
-      '@types/node':
-        specifier: ^20.16.5
-        version: 20.19.27
-      '@types/react':
-        specifier: ^18.3.5
-        version: 18.3.27
-      '@types/react-dom':
-        specifier: ^18.3.0
-        version: 18.3.7(@types/react@18.3.27)
       bcrypt:
         specifier: ^5.1.1
         version: 5.1.1
@@ -508,9 +493,6 @@ importers:
       next-auth:
         specifier: ^4.24.7
         version: 4.24.13(next@14.2.35)(react-dom@18.2.0)(react@18.2.0)
-      postcss:
-        specifier: ^8.4.45
-        version: 8.5.6
       razorpay:
         specifier: ^2.9.4
         version: 2.9.6
@@ -559,19 +541,28 @@ importers:
       tailwind-merge:
         specifier: ^2.5.2
         version: 2.6.0
-      tailwindcss:
-        specifier: ^3.4.10
-        version: 3.4.19
       timegrid:
         specifier: link:@fullcalendar/interaction/@fullcalendar/resource-timeline/@fullcalendar/timegrid
         version: link:@fullcalendar/interaction/@fullcalendar/resource-timeline/@fullcalendar/timegrid
-      typescript:
-        specifier: ^5.5.4
-        version: 5.9.3
       zod:
         specifier: ^3.23.8
         version: 3.25.76
     devDependencies:
+      '@types/bcrypt':
+        specifier: ^5.0.2
+        version: 5.0.2
+      '@types/eslint':
+        specifier: ^8.56.12
+        version: 8.56.12
+      '@types/node':
+        specifier: ^20.16.5
+        version: 20.19.27
+      '@types/react':
+        specifier: ^18.3.5
+        version: 18.3.27
+      '@types/react-dom':
+        specifier: ^18.3.0
+        version: 18.3.7(@types/react@18.3.27)
       '@typescript-eslint/eslint-plugin':
         specifier: ^7.18.0
         version: 7.18.0(@typescript-eslint/parser@7.18.0)(eslint@8.57.1)(typescript@5.9.3)
@@ -584,6 +575,15 @@ importers:
       eslint-config-next:
         specifier: ^14.2.8
         version: 14.2.35(eslint@8.57.1)(typescript@5.9.3)
+      postcss:
+        specifier: ^8.4.45
+        version: 8.5.6
+      tailwindcss:
+        specifier: ^3.4.10
+        version: 3.4.19
+      typescript:
+        specifier: ^5.5.4
+        version: 5.9.3
 
   packages/aws:
     dependencies:
