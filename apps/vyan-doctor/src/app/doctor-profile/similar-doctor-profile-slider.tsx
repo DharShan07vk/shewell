@@ -86,17 +86,37 @@ const SimilarDoctorProfileSlider = ({
         </div>
         {data?.similarDoctorProfiles.map((item, index) => {
           const convertedAvgRating = item.avgRating?.toString();
+          
+          // Find a valid displayQualification from ProfessionalSpecializations
+          const firstSpecialization = item.ProfessionalSpecializations?.find(
+            (spec) => spec.id && spec.specialization
+          );
+          const displayQualification = firstSpecialization?.id && firstSpecialization?.specialization
+            ? { id: firstSpecialization.id, specialization: firstSpecialization.specialization }
+            : null;
+
+          // Map specializations with required fields
+          const specializations = (item.ProfessionalSpecializations ?? [])
+            .filter((spec): spec is { specialization: string } & typeof spec => 
+              typeof spec.specialization === 'string'
+            )
+            .map((spec) => ({ specialization: spec.specialization }));
+
           return (
-            <div className="border-red flex w-full flex-row border">
-              <SwiperSlide className="pb-10" key={index}>
+            <div className="border-red flex w-full flex-row border" key={index}>
+              <SwiperSlide className="pb-10">
                 <SimilarDoctorProfileCard
-                  // doctorProfile={item}
                   doctorProfile={{
-                    ...item,
+                    firstName: item.firstName,
+                    displayQualification,
                     avgRating: convertedAvgRating,
+                    totalConsultations: item.totalConsultations,
+                    languages: item.languages ?? [],
+                    professionalUserAppointmentPrices: item.professionalUserAppointmentPrices ?? null,
+                    userName: item.userName,
+                    media: item.media ?? null,
                   }}
-                  // cardImage={item.cardImage}
-                  specialization={item.ProfessionalSpecializations}
+                  specialization={specializations}
                 />
               </SwiperSlide>
             </div>

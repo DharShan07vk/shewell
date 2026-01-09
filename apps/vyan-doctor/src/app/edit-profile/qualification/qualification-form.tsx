@@ -11,7 +11,7 @@ import {
 import UIFormLabel from "@repo/ui/src/@/components/form/label";
 import UIFormInput from "@repo/ui/src/@/components/form/input";
 import { Button } from "@repo/ui/src/@/components/button";
-import EditQualificationUserAction from "./qualification-user-action";
+import EditQualificationUserAction, { IQualification } from "./qualification-user-action";
 import { useToast } from "@repo/ui/src/@/components/use-toast";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -167,7 +167,7 @@ const QualificationForm = ({
   const submit = (data: z.infer<typeof formSchema>) => {
     setLoadingState(true);
     console.log("formData", data);
-    EditQualificationUserAction(data)
+    EditQualificationUserAction(data as IQualification)
       .then((resp) => {
         setLoadingState(false);
         toast({

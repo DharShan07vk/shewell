@@ -1,4 +1,4 @@
-export type IMedia = {
+export interface IMedia {
   id?: string;
   fileKey: string;
   fileUrl?: string | null;

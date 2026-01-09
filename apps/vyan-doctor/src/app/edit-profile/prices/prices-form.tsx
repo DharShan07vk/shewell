@@ -72,7 +72,7 @@ const PricesForm = ({ prices }: { prices: IPrices[] | null }) => {
   const router = useRouter();
   const onSubmit = (data: z.infer<typeof schema>) => {
     console.log("data", data);
-    SetPriceUserAction({ appointmentPrice: data.sessions })
+    SetPriceUserAction({ appointmentPrice: data.sessions as IPrices[] })
       .then((resp) => {
         toast({
           description: "Prices are set",

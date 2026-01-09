@@ -18,23 +18,23 @@ interface IDoctorProfileProps {
     avgRating?: string | null;
     totalConsultations?: number | null;
     languages: {
-      language: string;
+      language?: string;
     }[];
     professionalUserAppointmentPrices:
       | {
-          priceInCentsForSingle: number | null;
-          priceInCentsForCouple: number | null;
+          priceInCentsForSingle?: number | null;
+          priceInCentsForCouple?: number | null;
         }[]
       | null;
 
     userName: string | null;
     media: {
-      fileUrl: string | null;
+      fileUrl?: string | null;
     } | null;
   };
   // cardImage: React.ReactNode;
   specialization: {
-    specialization: string;
+    specialization?: string;
   }[];
 }
 

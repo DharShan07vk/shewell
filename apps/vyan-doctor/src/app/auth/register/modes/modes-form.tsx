@@ -87,7 +87,7 @@ const ModesForm = ({
     setLoadingState(true);
     // console.log(data);
 
-    ModesUserAction(data)
+    ModesUserAction(data as { sessionMode: string; listing: string })
       .then((resp) => {
         setLoadingState(false);
         console.log("uploads", resp?.message);

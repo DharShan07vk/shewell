@@ -3,12 +3,12 @@
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { db } from "~/server/db";
-interface IDegree {
+export interface IDegree {
   // id: string;
   degree: string;
 }
 
-interface IExperience {
+export interface IExperience {
   // id: string;
   // years: string;
   startingYear : string;
@@ -17,7 +17,7 @@ interface IExperience {
   department: string;
   location: string;
 }
-interface IQualification {
+export interface IQualification {
   education: string;
   degrees: IDegree[];
   experiences: IExperience[];

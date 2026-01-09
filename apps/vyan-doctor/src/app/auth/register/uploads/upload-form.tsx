@@ -136,7 +136,11 @@ const UploadForm = ({
   const onSubmit = (data: z.infer<typeof uploadSchema>) => {
     setLoadingState(true);
     console.log(data);
-    UploadsUserAction(data)
+    UploadsUserAction(data as {  aboutYou: string;
+  mediaId: string;
+  documents: {
+    documentId: string;
+  }[];})
       .then((resp) => {
         setLoadingState(false);
         console.log("Uploads", resp?.message);

@@ -95,7 +95,13 @@ const RegisterForm = () => {
     setLoadingState(true)
     
 
-    PersInfoUserAction(data)
+    PersInfoUserAction(data as {  firstName: string;
+  lastName?: string;
+  phoneNumber: string;
+  email: string;
+  password: string;
+  dob: Date;
+  userName: string;})
       .then(async (resp) => {
         setLoadingState(false);
         const loginResult = await signIn("CredentialsVyanDoctor", {

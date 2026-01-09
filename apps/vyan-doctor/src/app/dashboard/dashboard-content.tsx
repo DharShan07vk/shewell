@@ -66,9 +66,9 @@ const DashboardContent = () => {
     id: item.id,
     patientName: item.patient.firstName,
     patientEmail: item.patient.email,
-    bookingDate: item.startingTime,
-    startingTime: item.startingTime,
-    endingTime: item.endingTime,
+    bookingDate: new Date(item.startingTime),
+    startingTime: new Date(item.startingTime),
+    endingTime: new Date(item.endingTime),
     doctorSpecialicity:
       item.professionalUser.displayQualification?.specialization,
   }));

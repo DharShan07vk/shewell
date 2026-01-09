@@ -1,6 +1,6 @@
 import { Day } from "@repo/database";
 import { TimeValue } from "react-aria";
-export type IAvailability = {
+export interface IAvailability {
   availability: {
     available: boolean;
     day: Day;

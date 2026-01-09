@@ -1,4 +1,4 @@
-export type IProfessionalUser = {
+export interface IProfessionalUser {
   firstName: string;
   qualification: string;
   avgRating: string;
@@ -6,6 +6,6 @@ export type IProfessionalUser = {
   specializedIn: IProfessionalSpecializations[];
 };
 
-export type IProfessionalSpecializations = {
+export interface IProfessionalSpecializations {
   specialization: string;
 };

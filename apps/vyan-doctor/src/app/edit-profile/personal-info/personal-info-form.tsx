@@ -14,7 +14,7 @@ import UIFormLabel from "@repo/ui/src/@/components/form/label";
 import UIFormInput from "@repo/ui/src/@/components/form/input";
 import { Button } from "@repo/ui/src/@/components/button";
 import { useSession } from "next-auth/react";
-import PersonalInfoUserAction from "./personal-info-user-action";
+import PersonalInfoUserAction, { IPersonalInfo } from "./personal-info-user-action";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useToast } from "@repo/ui/src/@/components/use-toast";
 import { useEffect, useState } from "react";
@@ -120,7 +120,7 @@ const PersonalInfoForm = ({
   const submit = (data: z.infer<typeof formSchema>) => {
     setLoadingState(true);
     console.log("formData", data);
-    PersonalInfoUserAction(data)
+    PersonalInfoUserAction(data as IPersonalInfo)
       .then((resp) => {
         setLoadingState(false);
         toast({

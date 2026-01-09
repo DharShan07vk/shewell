@@ -4,12 +4,12 @@ import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { db } from "~/server/db";
 
-interface IPersonalInfo {
+export interface IPersonalInfo {
   fullName: string;
   phoneNumber: string;
   // alternativeNumber: string;
-  displayQualificationId: string;
-  bio: string;
+  displayQualificationId?: string;
+  bio?: string;
   // id: string
 }
 const PersonalInfoUserAction = async ({
@@ -18,7 +18,7 @@ const PersonalInfoUserAction = async ({
   // alternativeNumber,
   displayQualificationId,
   bio,
-  // id
+    // id
 }: IPersonalInfo) => {
   const session = await getServerSession();
   // console.log("bhu", session?.user.id);
