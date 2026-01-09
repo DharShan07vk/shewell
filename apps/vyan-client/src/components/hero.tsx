@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { InteractiveButton } from "./ui/interactive-button";
 
 export default function Hero(): JSX.Element {
   return (
@@ -8,7 +9,7 @@ export default function Hero(): JSX.Element {
       <div
         className="absolute right-[-25%] top-[50%] z-20 hidden h-[100px] w-[100px] translate-y-[-50%] rounded-full
          bg-[#9D9D8D]
-          md:right-[-20%] md:h-[600px] md:w-[600px] md:block
+          md:right-[-20%] md:block md:h-[600px] md:w-[600px]
           lg:right-[-20%] lg:h-[1000px] lg:w-[1000px] 
           xl:right-[-25%] xl:h-[1200px] xl:w-[1200px] 
           2xl:right-[-30%] 2xl:h-[1500px] 2xl:w-[1500px]"
@@ -30,19 +31,21 @@ export default function Hero(): JSX.Element {
         </h1>
 
         <p
-          className="max-w-[600px] font-poppins font-medium leading-relaxed
-          text-base text-[#7b7b7b] sm:text-lg md:text-xl
-          lg:text-[22px] xl:text-[26px] 2xl:text-[28px] lg:leading-[1.4]"
+          className="max-w-[600px] font-poppins text-base font-medium
+          leading-relaxed text-[#7b7b7b] sm:text-lg md:text-xl
+          lg:text-[22px] lg:leading-[1.4] xl:text-[26px] 2xl:text-[28px]"
         >
-          A trusted digital companion for women's health, motherhood, mental wellbeing, and mindful living—curated by experts and designed for every stage of womanhood.
+          A trusted digital companion for women's health, motherhood, mental
+          wellbeing, and mindful living—curated by experts and designed for
+          every stage of womanhood.
         </p>
       </div>
 
       <div className="absolute right-0 top-0 z-30 hidden h-full w-[50%] md:block md:w-[30%] lg:w-[45%] xl:w-[48%] 2xl:w-[50%]">
-        <img 
-          src="/home/hero.png" 
-          alt="SheFit Hero" 
-          className="h-full w-full object-contain object-right-top transition-transform duration-500 hover:scale-[1.02]" 
+        <img
+          src="/home/hero.png"
+          alt="SheFit Hero"
+          className="h-full w-full object-contain object-right-top transition-transform duration-500 hover:scale-[1.02]"
         />
       </div>
 
@@ -60,21 +63,19 @@ export default function Hero(): JSX.Element {
       {/* CTA Buttons - Responsive positioning */}
       <div className="absolute bottom-8 left-4 z-40 flex flex-wrap items-center gap-4 sm:bottom-10 sm:left-8 md:left-12 lg:bottom-16 xl:bottom-24 xl:left-[80px]">
         <Link href="/counselling">
-          <button className="group flex h-12 items-center justify-between gap-3 rounded-full border border-gray-300 bg-white px-4 text-gray-600 shadow-md transition-all duration-300 ease-in-out hover:border-primary hover:bg-primary hover:text-white sm:h-14 sm:px-5">
-            <span className="text-sm font-medium sm:text-base">
+          <button className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
+            <span className="text-lg font-medium text-[#00000066] sm:text-xl">
               Book Your Consultation
             </span>
-            <span className="flex h-8 w-8 rotate-[-45deg] items-center justify-center rounded-full bg-primary text-white transition-all duration-300 group-hover:rotate-0 group-hover:bg-white group-hover:text-primary sm:h-9 sm:w-9">
-              <ArrowUpRight className="h-4 w-4" />
-            </span>
+            <InteractiveButton />
           </button>
         </Link>
         <Link href="/products">
-          <button className="group flex h-12 items-center gap-3 rounded-full border border-gray-300 bg-white px-4 font-medium text-[#1B365D] shadow-md transition-all duration-300 hover:border-primary hover:bg-primary/5 sm:h-14 sm:px-5">
-            <span className="text-sm sm:text-base">Shop Essentials for Mom & Baby</span>
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary transition-transform group-hover:scale-110 sm:h-9 sm:w-9">
-              <ArrowUpRight className="h-4 w-4 text-white" />
+          <button className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
+            <span className="text-lg font-medium text-[#00000066] sm:text-xl">
+              Shop Essentials for Mom & Baby
             </span>
+            <InteractiveButton />
           </button>
         </Link>
       </div>

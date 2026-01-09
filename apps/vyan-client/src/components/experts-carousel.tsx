@@ -2,6 +2,7 @@
 import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowDownLeft } from "lucide-react";
+import { InteractiveButton } from "./ui/interactive-button";
 
 const EXPERTS_DATA = [
     {
@@ -90,95 +91,90 @@ export default function ExpertsCarousel() {
     };
 
     return (
-        <section className="w-full py-16 md:py-24 bg-white overflow-hidden">
-            <div className="max-w-6xl mx-auto px-4">
-                {/* Section Header */}
-                <div className="text-center mb-12 md:mb-16">
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                        You're Not Alone - We're Just a Click Away
-                    </h2>
-                    <p className="text-gray-600 max-w-3xl mx-auto text-base md:text-lg">
-                        Consult with empathetic, qualified specialists who listen, guide,
-                        and support your health decisions.
-                    </p>
-                </div>
+      <section className="w-full overflow-hidden bg-white py-16 md:py-24">
+        <div className="-mx-auto max-w-8xl px-20">
+          {/* Section Header */}
+          <div className="mb-12 text-center md:mb-16">
+            <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl lg:text-5xl">
+              You're Not Alone - We're Just a Click Away
+            </h2>
+            <p className="mx-auto max-w-3xl text-base text-gray-600 md:text-lg">
+              Consult with empathetic, qualified specialists who listen, guide,
+              and support your health decisions.
+            </p>
+          </div>
 
-                {/* Experts Carousel */}
-                <div className="relative flex items-center justify-center">
-                    {/* Left Arrow */}
-                    <button
-                        onClick={prevSlide}
-                        className="absolute left-0 md:left-4 z-20 p-3 rounded-full border border-gray-300 text-gray-600 hover:bg-gray-300 hover:text-gray-800 transition-all"
-                    >
-                        <ChevronLeft size={24} />
-                    </button>
+          {/* Experts Carousel */}
+          <div className="relative flex items-center justify-center">
+            {/* Left Arrow */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-0 z-20 rounded-full border border-gray-300 p-3 text-gray-600 transition-all hover:bg-gray-300 hover:text-gray-800 md:left-4"
+            >
+              <ChevronLeft size={24} />
+            </button>
 
-                    {/* Experts Container */}
-                    <div
-                        ref={containerRef}
-                        className="flex items-center justify-center gap-2 md:gap-4 py-8"
-                    >
-                        {getVisibleExperts().map((expert) => (
-                            <motion.div
-                                key={`${expert.id}-${expert.position}`}
-                                animate={{
-                                    scale: getScale(expert.position),
-                                    opacity: getOpacity(expert.position),
-                                    zIndex: getZIndex(expert.position),
-                                }}
-                                transition={{ duration: 0.4, ease: "easeOut" }}
-                                className="relative flex flex-col items-center"
-                            >
-                                {/* Avatar */}
-                                <div
-                                    className={`relative rounded-full overflow-hidden border-4 border-white shadow-lg ${expert.position === 0
-                                        ? "w-28 h-28 md:w-40 md:h-40"
-                                        : "w-20 h-20 md:w-28 md:h-28"
-                                        }`}
-                                >
-                                    <img
-                                        src={expert.image}
-                                        alt={expert.name}
-                                        className="w-full h-full object-cover"
-                                    />
-                                </div>
+            {/* Experts Container */}
+            <div
+              ref={containerRef}
+              className="flex items-center justify-center gap-2 py-8 md:gap-4"
+            >
+              {getVisibleExperts().map((expert) => (
+                <motion.div
+                  key={`${expert.id}-${expert.position}`}
+                  animate={{
+                    scale: getScale(expert.position),
+                    opacity: getOpacity(expert.position),
+                    zIndex: getZIndex(expert.position),
+                  }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="relative flex flex-col items-center"
+                >
+                  {/* Avatar */}
+                  <div
+                    className={`relative overflow-hidden rounded-full border-4 border-white shadow-lg ${
+                      expert.position === 0
+                        ? "h-28 w-28 md:h-40 md:w-40"
+                        : "h-20 w-20 md:h-28 md:w-28"
+                    }`}
+                  >
+                    <img
+                      src={expert.image}
+                      alt={expert.name}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
 
-                                {/* Role Badge */}
-                                <div className="absolute -bottom-2 flex items-center gap-1 bg-white px-3 py-1 rounded-full shadow-md">
-                                    <span className="w-2 h-2 bg-primary rounded-full"></span>
-                                    <span className="text-xs font-medium text-gray-700">
-                                        {expert.role}
-                                    </span>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-
-                    {/* Right Arrow */}
-                    <button
-                        onClick={nextSlide}
-                        className="absolute right-0 md:right-4 z-30 p-3 rounded-full border border-gray-300 text-gray-600 z-20 hover:bg-gray-300 hover:text-gray-800 transition-all"
-                    >
-                        <ChevronRight size={24} />
-                    </button>
-                </div>
-
-                {/* CTA Button */}
-                <div className="mt-12 md:mt-16 flex justify-center w-full">
-                    <button
-                        className="group flex items-center justify-between w-full  px-4 py-2 rounded-full bg-white border border-gray-400 text-gray-500 transition-all duration-300 ease-in-out hover:bg-primary hover:text-white"
-                    >
-                        <span className="text-sm md:text-base font-medium uppercase tracking-widest">
-                            Book a Session
-                        </span>
-                        <span
-                            className="ml-4 flex items-center justify-center w-10 h-10 rounded-full bg-teal-600 text-white transition-all duration-300 rotate-[-45deg] group-hover:rotate-[135deg] group-hover:bg-white group-hover:text-teal-600"
-                        >
-                            ➜
-                        </span>
-                    </button>
-                </div>
+                  {/* Role Badge */}
+                  <div className="absolute -bottom-2 flex items-center gap-1 rounded-full bg-white px-3 py-1 shadow-md">
+                    <span className="h-2 w-2 rounded-full bg-primary"></span>
+                    <span className="text-xs font-medium text-gray-700">
+                      {expert.role}
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-        </section>
+
+            {/* Right Arrow */}
+            <button
+              onClick={nextSlide}
+              className="absolute right-0 z-20 z-30 rounded-full border border-gray-300 p-3 text-gray-600 transition-all hover:bg-gray-300 hover:text-gray-800 md:right-4"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
+
+          {/* CTA Button */}
+          <div className="mt-12 flex w-full justify-center md:mt-16">
+            <button className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-3xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
+              <span className="text-lg font-medium text-[#00000066] sm:text-xl">
+                Book a Session
+              </span>
+              <InteractiveButton />
+            </button>
+          </div>
+        </div>
+      </section>
     );
 }

@@ -8,21 +8,24 @@ interface InteractiveButtonProps {
   className?: string; // Optional: allows adding external margins
   color?: string;
   active?: Boolean;
+  size?: "small" | "medium" | "large";
   as?: "button" | "span" | "div"; // Allows rendering as different elements to avoid nested buttons
 }
 
 export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
   onClick,
+  
   className = "",
   color = "bg-[#00898F]",
   active = false,
+  size = "medium",
   as: Component = "button",
 }) => {
   const baseProps = {
     onClick,
     className: `
       group 
-      flex h-16 w-16 
+      flex ${size === "small" ? "h-8 w-8" : size === "large" ? "h-16 w-16" : "h-12 w-12"}
       items-center justify-center 
       rounded-full
       hover:bg-white
