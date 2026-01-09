@@ -11,6 +11,8 @@
     "prisma:generate": "pnpx prisma@5.22.0 generate --schema=../../packages/database/prisma/schema.prisma"
   },
   "dependencies": {
+    "@prisma/client": "5.22.0",
+    "prisma": "5.22.0",
     "@aws-sdk/client-s3": "3.428.0",
     "@aws-sdk/s3-request-presigner": "3.428.0",
     "@fullcalendar/core": "^6.1.15",

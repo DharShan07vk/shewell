@@ -3,9 +3,12 @@
  * for Docker builds.
  */
 await import("./src/env.js");
+import path from "path";
 
 /** @type {import("next").NextConfig} */
 const config = {
+  // Required for monorepo Prisma support on Vercel
+  outputFileTracingRoot: path.join(import.meta.dirname, "../../"),
   typescript: {
     ignoreBuildErrors: true,
   },
