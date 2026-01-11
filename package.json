@@ -30,13 +30,13 @@
     "@tanstack/react-table": "^8.20.5",
     "axios": "^1.7.7",
     "date-fns-tz": "^3.2.0",
-    "dotenv": "^17.2.3",
+    
     "embla-carousel-autoplay": "^8.3.0",
     "fs": "0.0.1-security",
     "googleapis": "^144.0.0",
     "lucide-react": "^0.365.0",
     "multiselect-react-dropdown": "^2.0.25",
-    "pg": "^8.16.3",
+    
     "react-day-picker": "^8.10.1",
     "recharts": "^2.12.7"
   }
