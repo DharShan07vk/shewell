@@ -8,6 +8,11 @@ import { revalidatePath } from 'next/cache';
 import { env } from '@/env';
 
 const getUploadPresignedUrl = async (key: string, isPublic: boolean, contentType: string = 'application/octet-stream') => {
+  
+  if (!env.AWS_BUCKET) {
+    console.error('Missing AWS_BUCKET env var; cannot get presigned URL for', key);
+    throw new Error('Missing AWS_BUCKET env var');
+  }
   const s3 = new S3({
     // forcePathStyle: false, // Configures to use subdomain/virtual calling format.
     // endpoint: process.env.S3_SPACES_URL!,
@@ -87,7 +92,16 @@ export const getPresignedMediaImageUrl = async (fileName: string, mimeType: stri
 };
 
 export const getFileUrlFromKey = (key: string) => {
-  return `https://${env.AWS_BUCKET}.s3.${env.AWS_REGION}.amazonaws.com/${key}`;
+  if (!env.AWS_BUCKET) {
+    console.error('Missing AWS_BUCKET env var; cannot construct file URL for', key);
+    throw new Error('Missing AWS_BUCKET env var');
+  }
+
+  const host = env.AWS_REGION
+    ? `${env.AWS_BUCKET}.s3.${env.AWS_REGION}.amazonaws.com`
+    : `${env.AWS_BUCKET}.s3.amazonaws.com`;
+
+  return `https://${host}/${key}`;
 };
 
 export const deleteImageFromKey = async (key: string) => {

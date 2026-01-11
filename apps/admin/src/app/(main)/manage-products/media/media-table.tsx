@@ -75,9 +75,14 @@ const MediaTable = ({ media: mediaTableData }: IMediaTableProps) => {
   };
 
   const fileKeyBodyTemplate = (rowData: IMedia) => {
-    if (!rowData.fileUrl) {
+    const isValidFileUrl = (u?: string) => {
+      return !!u && typeof u === 'string' && !u.includes('undefined.s3.undefined.amazonaws.com') && (u.startsWith('http://') || u.startsWith('https://'));
+    };
+
+    if (!isValidFileUrl(rowData.fileUrl)) {
       return;
     }
+
     if (rowData.mimeType?.includes('image')) {
       return (
         <div className="flex justify-content-center relative">
