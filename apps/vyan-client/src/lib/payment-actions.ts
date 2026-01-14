@@ -1,4 +1,4 @@
-'use server'
+"use server";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import Razorpay from "razorpay";
@@ -13,18 +13,45 @@ interface IRazorPayDetails {
   razorpay_signature: string;
 }
 
-export const createRazorpayOrder = async ({ amount, currency, receipt }: { amount: number, currency: string, receipt: string, name: string }) => {
-  var razorpayInstance = new Razorpay({
-    key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
-    key_secret: process.env.RAZORPAY_KEY_SECRET!
-  });
+export const createRazorpayOrder = async ({
+  amount,
+  currency,
+  receipt,
+}: {
+  amount: number;
+  currency: string;
+  receipt: string;
+  name: string;
+}) => {
+  try {
+    // Validate environment variables
+    if (
+      !process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID ||
+      !process.env.RAZORPAY_KEY_SECRET ||
+      process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID === "" ||
+      process.env.RAZORPAY_KEY_SECRET === ""
+    ) {
+      console.error(
+        "Razorpay credentials are not configured. Please set NEXT_PUBLIC_RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET.",
+      );
+      return null;
+    }
 
-  return await razorpayInstance.orders.create({
-    amount,
-    currency,
-    receipt,
-  })
-}
+    const razorpayInstance = new Razorpay({
+      key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET,
+    });
+
+    return await razorpayInstance.orders.create({
+      amount,
+      currency,
+      receipt,
+    });
+  } catch (error) {
+    console.error("Failed to create Razorpay order:", error);
+    return null;
+  }
+};
 
 export const startBuyingProducts = async (cart: ICart) => {
   let messageError: string | null = null;
@@ -33,27 +60,27 @@ export const startBuyingProducts = async (cart: ICart) => {
 
   if (!session) {
     return {
-      error: "You need to signIn to buy products."
-    }
+      error: "You need to signIn to buy products.",
+    };
   }
 
   const user = await db.user.findFirst({
     where: {
-      email: session.user.email!
-    }
-  })
+      email: session.user.email!,
+    },
+  });
 
   //productvaraint ids of all the items in the cart
-  const productVarinatIds = cart.lineItems.map((p) => p.productVariantId)
+  const productVarinatIds = cart.lineItems.map((p) => p.productVariantId);
 
   //fetching the prices of all the productVariants in the cart
   const productVariants = await db.productVariant.findMany({
     where: {
       id: {
-        in: productVarinatIds
-      }
-    }
-  })
+        in: productVarinatIds,
+      },
+    },
+  });
   //updated cart line items
   const updatedCartLineItems: ICartLineItem[] = [];
 
@@ -68,7 +95,7 @@ export const startBuyingProducts = async (cart: ICart) => {
       variant.priceInCents,
       variant.discountInCents,
       variant.discountInPercentage,
-      variant.discountEndDate
+      variant.discountEndDate,
       // variant.discountEndDate,
     );
     if (perUnitPriceInCent) {
@@ -80,28 +107,34 @@ export const startBuyingProducts = async (cart: ICart) => {
     }
   }
   //reCalculated cart
-  const recalCulatedCart = recalculateCart(cart, updatedCartLineItems)
-  console.log("cart is", cart.totalInCent)
+  const recalCulatedCart = recalculateCart(cart, updatedCartLineItems);
+  console.log("cart is", cart.totalInCent);
 
-  console.log("reCalculated cart is", recalCulatedCart.totalInCent)
+  console.log("reCalculated cart is", recalCulatedCart.totalInCent);
   if (recalCulatedCart.totalInCent != cart.totalInCent) {
-    console.log("prices don't match")
+    console.log("prices don't match");
     return {
       error: "Retry!!! Prices may have changed",
-      url: '/cart',
-    }
+      url: "/cart",
+    };
   }
-
 
   //created razorpay order
   const razorpayOrder = await createRazorpayOrder({
     amount: recalCulatedCart.totalInCent,
     currency: "INR",
     receipt: "SheWell Products",
-    name: "SheWell"
-  })
+    name: "SheWell",
+  });
 
-  console.log("razorpay order created", razorpayOrder)
+  console.log("razorpay order created", razorpayOrder);
+
+  // Guard against undefined razorpay order
+  if (!razorpayOrder || !razorpayOrder.id) {
+    return {
+      error: "Failed to create payment order. Please try again.",
+    };
+  }
 
   try {
     await db.order.create({
@@ -125,14 +158,13 @@ export const startBuyingProducts = async (cart: ICart) => {
               quantity: lineItem.quantity,
               totalInCent: lineItem.totalInCent,
               subTotalInCent: lineItem.subTotalInCent,
-            }))
-          }
-        }
-      }
-    })
+            })),
+          },
+        },
+      },
+    });
     revalidatePath("/profile/orders");
-  }
-  catch (err: any) {
+  } catch (err: any) {
     messageError: err.message;
   }
 
@@ -144,22 +176,20 @@ export const startBuyingProducts = async (cart: ICart) => {
     razorpayOrderId: razorpayOrder.id,
     amount: razorpayOrder.amount,
     currency: razorpayOrder.currency,
-    description: razorpayOrder.description
-  }
-  return { error: messageError, razorpay: razorpayConfig }
-}
+    description: razorpayOrder.description,
+  };
+  return { error: messageError, razorpay: razorpayConfig };
+};
 
 export const updateProductStatus = async ({
   razorpay_order_id,
   razorpay_payment_id,
   razorpay_signature,
-
 }: IRazorPayDetails) => {
   const session = await getServerSession();
   const user = await db.user.findFirst({
     where: {
       email: session?.user.email || "",
-
     },
   });
 
@@ -173,7 +203,6 @@ export const updateProductStatus = async ({
     .update(`${razorpay_order_id}|${razorpay_payment_id}`)
     .digest("hex");
 
-
   if (generated_signature !== razorpay_signature) {
     return {
       message: "Payment is not verified",
@@ -186,14 +215,14 @@ export const updateProductStatus = async ({
   });
 
   const orderDetails = await razorpayInstance.orders.fetch(razorpay_order_id);
-  console.log("order details are", orderDetails)
+  console.log("order details are", orderDetails);
   if (!orderDetails.amount_paid) {
     return {
       message: "Payment is not verified",
     };
   }
   try {
-    await db.$transaction((async (tx) => {
+    await db.$transaction(async (tx) => {
       await tx.order.updateMany({
         data: {
           status: "PAYMENT_SUCCESSFUL",
@@ -213,8 +242,7 @@ export const updateProductStatus = async ({
           updatedAt: new Date(),
         },
       });
-
-    }))
+    });
 
     revalidatePath("/profile/orders");
     return {
@@ -296,6 +324,13 @@ export const createSessionOrder = async (bookingData: ISessionBookingData) => {
 
     console.log("Razorpay order created for session:", razorpayOrder);
 
+    // Guard against null razorpay order
+    if (!razorpayOrder || !razorpayOrder.id) {
+      return {
+        error: "Failed to create payment order. Please try again.",
+      };
+    }
+
     // Create pending SessionRegistration
     await db.sessionRegistration.create({
       data: {
@@ -322,7 +357,7 @@ export const createSessionOrder = async (bookingData: ISessionBookingData) => {
 
     return { error: messageError, razorpay: razorpayConfig };
   } catch (err: any) {
-    messageError = err.message || "Failed to create order";
+    messageError = err.message;
     return {
       error: messageError,
     };
