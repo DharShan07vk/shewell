@@ -95,7 +95,7 @@ export default function ExpertsCarousel() {
         <div className="-mx-auto max-w-8xl px-20">
           {/* Section Header */}
           <div className="mb-12 text-center md:mb-16">
-            <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl lg:text-5xl">
+            <h2 className="mb-4 text-3xl font-medium text-gray-900 md:text-4xl lg:text-5xl">
               You're Not Alone - We're Just a Click Away
             </h2>
             <p className="mx-auto max-w-3xl text-base text-gray-600 md:text-lg">
@@ -169,7 +169,7 @@ export default function ExpertsCarousel() {
           <div className="mt-12 flex w-full justify-center md:mt-16">
             <button className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-3xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
               <span className="text-lg font-medium text-[#00000066] sm:text-xl">
-                Book a Session
+                Consult an Expert Now
               </span>
               <InteractiveButton />
             </button>

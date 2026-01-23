@@ -67,7 +67,7 @@ export default function WisdomSection() {
         {/* Section Header */}
         <div className="mb-12 flex items-start justify-between">
           <div>
-            <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl lg:text-5xl">
+            <h2 className="mb-4 text-3xl font-medium text-gray-900 md:text-4xl lg:text-5xl">
               Wisdom That Grows With You.
             </h2>
             <p className="max-w-2xl text-base text-gray-600 md:text-lg">

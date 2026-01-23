@@ -37,7 +37,7 @@ const ShewellFAQ = () => {
             <div className="max-w-4xl mx-auto">
                 {/* Title Section */}
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl font-semibold text-gray-800 mb-2">
+                    <h2 className="text-4xl font-medium text-gray-800 mb-2">
                         Something on Your Mind? Let's Talk.
                     </h2>
                     <p className="text-gray-500 text-sm">
@@ -45,7 +45,7 @@ const ShewellFAQ = () => {
                     </p>
                 </div>
 
-                {/* Pill Tabs */}
+                {/*  Pill Tabs 
                 <div className="flex justify-center gap-3 mb-12">
                     {tabs.map((tab) => (
                         <button
@@ -60,7 +60,7 @@ const ShewellFAQ = () => {
                             {tab}
                         </button>
                     ))}
-                </div>
+                </div> */}
 
                 {/* FAQ List */}
                 <div className="space-y-4">

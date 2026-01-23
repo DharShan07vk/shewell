@@ -31,12 +31,6 @@ export function Header() {
           </Link>
 
           <Link
-            href="/products"
-            className="font-medium text-white transition-colors hover:text-[#A5F3FC]"
-          >
-            Product
-          </Link>
-          <Link
             href="/counselling"
             className="font-medium text-white transition-colors hover:text-[#A5F3FC] whitespace-nowrap"
           >
@@ -44,50 +38,26 @@ export function Header() {
           </Link>
 
           <Link
+            href="/products"
+            className="font-medium text-white transition-colors hover:text-[#A5F3FC]"
+          >
+            Product
+          </Link>
+
+          {/* <Link
             href="/blogs"
             className="font-medium text-white transition-colors hover:text-[#A5F3FC]"
           >
             Blog
+          </Link> */}
+
+          <Link
+            href="/shefit"
+            className="font-medium text-white transition-colors hover:text-[#A5F3FC]"
+          >
+              SheFit
           </Link>
 
-          <div
-            className="relative"
-            onMouseEnter={() => setIsMoreOpen(true)}
-            onMouseLeave={() => setIsMoreOpen(false)}
-          >
-            <button
-              className="flex items-center gap-1 font-medium text-white transition-colors hover:text-[#A5F3FC]"
-              onClick={() => setIsMoreOpen(!isMoreOpen)}
-            >
-              More
-              <ChevronDown
-                className={`h-4 w-4 transition-transform ${
-                  isMoreOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-
-            {isMoreOpen && (
-              <div className="absolute left-0 top-full z-10 ">
-                <div className="w-48 rounded-md bg-white shadow-lg">
-                  <Link
-                    href="/shefit"
-                    className="block rounded-t-md px-4 py-2 text-sm text-gray-700 hover:bg-[#f3f4f6]"
-                    onClick={() => setIsMoreOpen(false)}
-                  >
-                    SheFit
-                  </Link>
-                  <Link
-                    href="/shefit/sessions"
-                    className="block rounded-b-md px-4 py-2 text-sm text-gray-700 hover:bg-[#f3f4f6]"
-                    onClick={() => setIsMoreOpen(false)}
-                  >
-                    Retreat Retreat
-                  </Link>
-                </div>
-              </div>
-            )}
-          </div>
         </div>
 
         {/* Right Side Icons */}

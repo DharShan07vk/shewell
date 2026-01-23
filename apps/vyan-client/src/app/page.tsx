@@ -75,7 +75,7 @@ const HomePage = async () => {
 
         {/* <HomePageProducts /> */}
         <WhyShewell />
-        <WisdomSection />
+        {/* <WisdomSection /> */}
         <ShewellFAQ />
         {/* <Testimonials /> */}
         {/* <Subscribe /> */}

@@ -108,7 +108,7 @@ export default function ProductsGrid() {
         {/* Section Header */}
         <div className="mb-10 flex items-start justify-between">
           <div>
-            <h2 className="mb-3 text-3xl font-bold text-gray-900 md:text-4xl lg:text-5xl">
+            <h2 className="mb-3 text-3xl font-medium text-gray-900 md:text-4xl lg:text-5xl">
               Clean, Safe, Conscious - For You and Baby.
             </h2>
             <p className="max-w-3xl text-base text-gray-600 md:text-lg">
@@ -123,13 +123,13 @@ export default function ProductsGrid() {
               onClick={() => scroll("left")}
               className="rounded-full border border-gray-300 p-3 text-gray-800 transition-all hover:bg-gray-300 hover:text-gray-800"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={24} color={"#E0E0E0"}/>
             </button>
             <button
               onClick={() => scroll("right")}
               className="rounded-full border border-gray-300 p-3 text-gray-800 transition-all hover:bg-gray-300 hover:text-gray-800"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={24} color={"#E0E0E0"}/>
             </button>
           </div>
         </div>

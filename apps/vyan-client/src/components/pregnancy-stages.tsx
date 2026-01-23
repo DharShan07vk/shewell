@@ -58,13 +58,13 @@ export default function PregnancyStages() {
                         >
                             {/* The large Gradient Text */}
                             <h1 className="absolute left-4 top-0 text-[80px] font-black leading-none tracking-tighter select-none">
-                                <span className={`bg-gradient-to-b from-black/40 to-transparent bg-clip-text text-transparent`}>
+                                <span className={`bg-gradient-to-b from-black/30 to-transparent bg-clip-text text-transparent`}>
                                     {stage.prefix}
                                 </span>
                             </h1>
 
                             {/* The Title Text */}
-                            <h2 className="relative mt-16 self-end text-right text-xl font-extrabold tracking-tight text-white z-10 drop-shadow-sm uppercase">
+                            <h2 className="relative mt-14 self-end text-right text-3xl font-extrabold tracking-tight text-white z-20 drop-shadow-sm uppercase">
                                 {stage.title}
                             </h2>
                         </motion.div>

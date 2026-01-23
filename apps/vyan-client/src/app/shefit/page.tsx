@@ -10,10 +10,12 @@ import { FooterSection } from "~/components/FooterSection";
 const shefit = () => {
   return (
     <main className="relative flex w-full flex-col items-center bg-white">
-      <HeroSection />
+      {/* <HeroSection />
       <WhyChooseUsSection />
       <PregnancyStagesInfoSection />
-      <SessionScheduleSection />
+      <SessionScheduleSection /> */}
+
+      COMING SOON !
     </main>
   );
 };

@@ -40,7 +40,7 @@ const Partners = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
                     viewport={{ once: true, amount: 0.5 }}
-                    className="text-center text-3xl font-bold text-gray-800 tracking-wider mb-12"
+                    className="text-center text-3xl font-medium text-gray-800 tracking-wider mb-12"
                 >
                     FUNDED BY
                 </motion.h2>
