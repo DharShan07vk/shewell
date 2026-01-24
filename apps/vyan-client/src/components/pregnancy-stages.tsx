@@ -45,7 +45,7 @@ export default function PregnancyStages() {
 
     return (
         <section className="w-full bg-white">
-            <div className="mx-auto px-8 lg:px-16 xl:px-24">
+            <div className="mx-auto px-0">
 
                 {/* Stages Cards */}
                 <div className="grid w-full grid-cols-5 gap-6">

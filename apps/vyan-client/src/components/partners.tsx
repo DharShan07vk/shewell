@@ -33,7 +33,7 @@ const Partners = () => {
 
     return (
         <section className="bg-white py-16">
-            <div className="max-w-7xl mx-auto px-4">
+            <div className="max-w-7xl mx-auto px-0">
                 {/* Section Heading */}
                 <motion.h2
                     initial={{ opacity: 0, y: 30 }}

@@ -33,7 +33,7 @@ const ShewellFAQ = () => {
     const tabs = ["What We Offer", "Plans & Pricing", "Trust & Safety"];
 
     return (
-        <section className="bg-white min-h-screen py-20 px-4">
+        <section className="bg-white min-h-screen py-20 px-0">
             <div className="max-w-4xl mx-auto">
                 {/* Title Section */}
                 <div className="text-center mb-12">
@@ -69,29 +69,26 @@ const ShewellFAQ = () => {
                             key={index}
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}
-                            className={`relative rounded-2xl transition-all duration-300 border overflow-hidden ${
-                                hoveredIndex === index
+                            className={`relative rounded-2xl transition-all duration-300 border overflow-hidden ${hoveredIndex === index
                                     ? "bg-[#167D71] border-[#167D71] shadow-lg"
                                     : "bg-[#F8F9FA] border-transparent"
-                            }`}
+                                }`}
                         >
                             {/* Question Row */}
                             <div className="flex items-center justify-between px-8 py-6 cursor-pointer">
                                 <span
-                                    className={`text-lg font-medium transition-colors duration-300 ${
-                                        hoveredIndex === index ? "text-white" : "text-gray-700"
-                                    }`}
+                                    className={`text-lg font-medium transition-colors duration-300 ${hoveredIndex === index ? "text-white" : "text-gray-700"
+                                        }`}
                                 >
                                     {item.question}
                                 </span>
 
                                 {/* Dynamic Icon */}
                                 <div
-                                    className={`p-1.5 rounded-full transition-all duration-300 border ${
-                                        hoveredIndex === index
+                                    className={`p-1.5 rounded-full transition-all duration-300 border ${hoveredIndex === index
                                             ? "bg-white text-[#167D71] border-white rotate-0"
                                             : "bg-white text-[#167D71] border-gray-100"
-                                    }`}
+                                        }`}
                                 >
                                     {hoveredIndex === index ? (
                                         <ChevronDown size={20} />

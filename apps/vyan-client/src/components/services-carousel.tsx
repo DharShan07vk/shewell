@@ -101,7 +101,7 @@ const ServicesCarousel = () => {
           Shewell isn’t just for India. It’s for every woman, everywhere
         </motion.p>
       </div>
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-7xl px-0">
         {/* Carousel Container */}
         <div className="relative flex flex-col items-center">
           {/* Main Image Area with Title Integrated */}
@@ -158,7 +158,7 @@ const ServicesCarousel = () => {
             {/* Navigation Arrows */}
             <button
               onClick={prevSlide}
-              className="absolute left-0 top-1/2 z-30 -translate-y-1/2 cursor-pointer rounded-full border border-gray-200 p-2 text-gray-600 transition-all hover:bg-gray-50 hover:text-gray-600 md:left-4 md:p-3"
+              className="absolute left-[-100px] top-1/2 z-30 -translate-y-1/2 cursor-pointer rounded-full border border-gray-200 p-2 text-gray-600 transition-all hover:bg-gray-50 hover:text-gray-600 md:left-4 md:p-3"
             >
               <ChevronLeft size={32} />
             </button>
@@ -176,11 +176,10 @@ const ServicesCarousel = () => {
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
-                className={`h-3 w-3 rounded-full transition-all ${
-                  idx === currentIndex
+                className={`h-3 w-3 rounded-full transition-all ${idx === currentIndex
                     ? "w-8 bg-[#167D71]"
                     : "bg-gray-300 hover:bg-gray-400"
-                }`}
+                  }`}
               />
             ))}
           </div>

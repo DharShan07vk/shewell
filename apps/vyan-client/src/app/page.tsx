@@ -1,6 +1,6 @@
 "use server";
 
-{/*old ui components*/}
+{/*old ui components*/ }
 // import Header from "~/components/shared/header";
 // import News from "./(news)/news";
 // import KeyFeatures from "./(key-features)/key-features";
@@ -52,7 +52,7 @@ const HomePage = async () => {
   });
   return (
     <>
-      <div>
+      <div className="px-0 sm:px-8 md:px-12 lg:px-[0] xl:px-[0]">
         <Hero />
         <WellnessCircle />
         <ServicesCarousel />

@@ -104,7 +104,7 @@ export default function ProductsGrid() {
 
   return (
     <section className="w-full bg-gray-50 py-16 md:py-24">
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-7xl px-0">
         {/* Section Header */}
         <div className="mb-10 flex items-start justify-between">
           <div>
@@ -123,13 +123,13 @@ export default function ProductsGrid() {
               onClick={() => scroll("left")}
               className="rounded-full border border-gray-300 p-3 text-gray-800 transition-all hover:bg-gray-300 hover:text-gray-800"
             >
-              <ChevronLeft size={24} color={"#E0E0E0"}/>
+              <ChevronLeft size={24} color={"#E0E0E0"} />
             </button>
             <button
               onClick={() => scroll("right")}
               className="rounded-full border border-gray-300 p-3 text-gray-800 transition-all hover:bg-gray-300 hover:text-gray-800"
             >
-              <ChevronRight size={24} color={"#E0E0E0"}/>
+              <ChevronRight size={24} color={"#E0E0E0"} />
             </button>
           </div>
         </div>
@@ -149,9 +149,8 @@ export default function ProductsGrid() {
                 scale: hoveredId === product.id ? 1.02 : 1,
               }}
               transition={{ duration: 0.2 }}
-              className={`w-64 flex-shrink-0 overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-lg md:w-72 ${
-                hoveredId === product.id ? "ring-2 ring-primary/30" : ""
-              }`}
+              className={`w-64 flex-shrink-0 overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-lg md:w-72 ${hoveredId === product.id ? "ring-2 ring-primary/30" : ""
+                }`}
             >
               {/* Product Image */}
               <div className="flex h-48 w-full items-center justify-center overflow-hidden bg-[#F5FBFB] md:h-56">

@@ -63,7 +63,7 @@ export default function WisdomSection() {
 
   return (
     <section className="w-full bg-white py-16 md:py-24">
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-7xl px-0">
         {/* Section Header */}
         <div className="mb-12 flex items-start justify-between">
           <div>
