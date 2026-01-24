@@ -318,7 +318,7 @@ export const createSessionOrder = async (bookingData: ISessionBookingData) => {
     const razorpayOrder = await createRazorpayOrder({
       amount: amountInPaise,
       currency: "INR",
-      receipt: `session_${bookingData.sessionId}_${Date.now()}`,
+      receipt: `session_${bookingData.sessionId}_${Date.now()}`.slice(0, 36),
       name: "Shewell Session Booking",
     });
 
