@@ -11,10 +11,8 @@
 // import Features from "./(features)/features";
 // import CounsellingCard from "~/components/counselling-card";
 // import ExamplePopover from "~/components/exam-popover";
-import { useSession } from "next-auth/react";
 // import SectionTitle from "~/components/shared/section-title";
 // import BlogSlider from "./(blogs)/blogs-slider";
-import { startOfDay } from "date-fns";
 // import WhySheWellCare from "./(why-shewellcare)/why-she-well-care";
 // import HomePageProducts from "./(homepage-products)/homepage-products";
 // import Testimonials from "./(testimonials)/testimonials";

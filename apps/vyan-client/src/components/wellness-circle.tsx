@@ -7,9 +7,9 @@ const WellnessCircle = () => {
         <div className="relative min-h-screen w-full bg-white flex flex-col items-center justify-start overflow-hidden pt-16 md:pt-24">
             {/* 1. Illustration Area */}
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: "easeOut" }}
+                transition={{ duration: 1.2, ease: "easeInOut" }}
                 className="w-full px-0 mb-8"
             >
                 {/* Mother and Baby Illustration */}
@@ -22,12 +22,12 @@ const WellnessCircle = () => {
 
             {/* 2. Cursive Script Heading */}
             <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 1 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3, duration: 1.2, ease: "easeInOut" }}
                 className="text-center mb-0"
             >   
-                <h2 className="text-primary font-pacifico text-3xl md:text-4xl lg:text-5xl tracking-wide">
+                <h2 className="text-primary font-amatic-sc font-bold text-8xl tracking-wide">
                     <span className="text-primary opacity-50 hover:opacity-100">For her body, </span> < span className="text-primary opacity-50 hover:opacity-100">her mind, </span> <span className="text-primary opacity-50 hover:opacity-100">and her baby</span>
                 </h2>
             </motion.div>

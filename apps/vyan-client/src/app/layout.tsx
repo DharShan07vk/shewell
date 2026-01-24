@@ -4,7 +4,7 @@ import { api } from "~/trpc/server";
 import { SessionProvider } from "next-auth/react";
 import Hero from "~/components/hero";
 import "~/styles/globals.css";
-import { Inter, Pacifico, Playfair_Display } from "next/font/google";
+import { Inter, Pacifico, Playfair_Display, Amatic_SC } from "next/font/google";
 import { Toaster } from "@repo/ui/src/@/components/toaster";
 import { Header } from "~/components/header";
 import NewFooter from "~/components/new-footer";
@@ -34,6 +34,13 @@ const poppins = Poppins({
   weight: ["400", "500", "600", "700"], // Adjust as needed
   variable: "--font-poppins",
 });
+
+const amaticSC = Amatic_SC({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-amatic-sc",
+});
+
 export const metadata = {
   title: "Shewell",
   description: "Shewell",
@@ -142,7 +149,7 @@ export default async function RootLayout({
   return (
     <html className="scroll-smooth" lang="en">
       <body
-        className={`relative font-sans ${poppins.variable} ${inter.variable} ${pacifico.variable} ${playfair.variable}`}
+        className={`relative font-sans ${poppins.variable} ${inter.variable} ${pacifico.variable} ${playfair.variable} ${amaticSC.variable}`}
       >
         <div className="sticky top-0 z-40">
           <ClientSessionProvider session={session} verifiedAt={verifiedAt!}>

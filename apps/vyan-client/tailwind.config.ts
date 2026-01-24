@@ -22,6 +22,7 @@ const config: Config = {
         pacifico: "var(--font-pacifico)",
         playfair: "var(--font-playfair)",
         epicgant: ["Epicgant", "sans-serif"],
+        "amatic-sc": "var(--font-amatic-sc)",
       },
     },
   },
