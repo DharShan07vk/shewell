@@ -45,6 +45,7 @@ export const FilterBar = ({
   const [sortBy, setSortBy] = useState<string>("");
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   // Update URL params helper
   const updateURLParams = useCallback(
@@ -150,8 +151,10 @@ export const FilterBar = ({
     const params = new URLSearchParams(searchParams.toString());
     if (newValue) {
       params.set("maxPrice", "0");
+      params.delete("minPrice");
     } else {
       params.delete("maxPrice");
+      params.delete("minPrice");
     }
     router.push(`/session?${params.toString()}`);
   };
@@ -179,6 +182,12 @@ export const FilterBar = ({
 
   // Handle price range
   const handlePriceChange = () => {
+    if (minPrice > maxPrice && maxPrice !== "") {
+      setErrorMessage("Min price cannot be greater than max price.");
+      return;
+    }
+    setErrorMessage("");
+    
     updateURLParams({
       minPrice: minPrice || null,
       maxPrice: maxPrice || null,
@@ -212,6 +221,18 @@ export const FilterBar = ({
     router.push(pathname);
   };
 
+  function handleOnlyOnlineCoursesToggle(): import("react").SetStateAction<boolean> {
+    const newValue = !isOnlineCourses;
+    const params = new URLSearchParams(searchParams.toString());
+    if (newValue) {
+      params.set("isOnlyOnline", "true");
+    } else {
+      params.delete("isOnlyOnline");
+    }
+    router.push(`/session?${params.toString()}`);
+    return newValue;
+  }
+
   return (
     <div className="w-full space-y-3 font-inter">
       {/* CENTERED FILTER BAR */}
@@ -220,7 +241,7 @@ export const FilterBar = ({
           <FilterToggle
             label="Only Online Courses"
             enabled={isOnlineCourses}
-            onClick={() => setIsOnlineCourses(!isOnlineCourses)}
+            onClick={() => setIsOnlineCourses(handleOnlyOnlineCoursesToggle())}
           />
 
           <Divider />
@@ -312,6 +333,9 @@ export const FilterBar = ({
                     className="w-24"
                   />
                 </div>
+                {errorMessage && (
+                  <div className="text-red-500 text-xs">{errorMessage}</div>
+                )}
                 <Button
                   onClick={handlePriceChange}
                   size="small"
