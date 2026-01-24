@@ -21,6 +21,7 @@ export const sessionRouter = createTRPCRouter({
         status: z.nativeEnum(SessionStatus).optional(),
         startDate: z.string().optional(),
         endDate: z.string().optional(),
+        isOnlyOnline: z.string().optional(),
       }),
     )
     .query(async ({ input }) => {
@@ -44,7 +45,10 @@ export const sessionRouter = createTRPCRouter({
           trimester: input.trimester,
         };
       }
-
+      // Filter by online sessions only
+      if (input.isOnlyOnline) {
+        whereCondition.type = "ONLINE";
+      }
       // Build price filter conditions
       const priceConditions = [];
       if (input.minPrice !== undefined) {

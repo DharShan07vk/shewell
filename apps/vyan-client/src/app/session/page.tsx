@@ -9,13 +9,14 @@ import { SessionStatus } from "@repo/database";
 type SessionPageProps = {
   searchParams: {
     categoryId?: string | string[];
-    trimester?: string;
+    trimester?: "FIRST" | "SECOND" | "THIRD";
     minPrice?: string;
     maxPrice?: string;
     sortBy?: "price-asc" | "price-desc";
-    status?: string;
+    status?: "CANCELLED" | "COMPLETED" | "DRAFT" | "PUBLISHED";
     startDate?: string;
     endDate?: string;
+    isOnlyOnline?: string;
   };
 };
 
@@ -42,7 +43,7 @@ export default async function SessionsPage({ searchParams }: SessionPageProps) {
   const trimester = searchParams.trimester || undefined;
   const startDate = searchParams.startDate;
   const endDate = searchParams.endDate;
-
+  const isOnlyOnline = searchParams.isOnlyOnline || undefined;
   console.log("Filter params:", {
     categoryId,
     trimester,
@@ -52,6 +53,7 @@ export default async function SessionsPage({ searchParams }: SessionPageProps) {
     status,
     startDate,
     endDate,
+    isOnlyOnline,
   });
 
   // Fetch sessions using the filter endpoint
@@ -64,6 +66,7 @@ export default async function SessionsPage({ searchParams }: SessionPageProps) {
     status,
     startDate,
     endDate,
+    isOnlyOnline,
   });
 
   const sessions = result.sessions || [];
