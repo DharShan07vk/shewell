@@ -101,7 +101,7 @@ export default function PlatformSection() {
           expert-designed just for you.
         </p>
       </div>
-      <div className="mx-auto flex   h-[650px] max-w-[1720px] flex-col overflow-hidden rounded-[32px] bg-white shadow-sm lg:h-[795px] lg:flex-row">
+      <div className=" flex   h-[650px] max-w-full flex-col overflow-hidden rounded-[32px] bg-white shadow-sm lg:h-[795px] lg:flex-row">
         {/* LEFT NAVIGATION */}
         <div className="z-10 flex w-full flex-col  bg-white lg:w-[50%]">
           <div className="">
