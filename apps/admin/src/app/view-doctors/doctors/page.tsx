@@ -1,5 +1,6 @@
 'use client';
 import { env } from '@/env';
+import { db } from '@/src/server/db';
 import { apiClient } from '@/src/trpc/react';
 import { format } from 'date-fns';
 import Link from 'next/link';
@@ -11,11 +12,13 @@ import { InputText } from 'primereact/inputtext';
 import { useState } from 'react';
 
 interface IRecentAppointments {
+  id: string;
   firstName: string;
   email: string;
   createdAt: Date;
   phoneNumber: string;
   userName: string;
+  isapproved: boolean;
   displayQualification: {
     specialization: string;
   };
@@ -84,7 +87,43 @@ const Doctors = () => {
     );
   };
   const header = renderHeader();
+  const utils = apiClient.useUtils();
+  const updateMutation = apiClient.proffessionalUpdateRouter.proffessionalUpdate.useMutation({
+    onSuccess: () => {
+      utils.totalOnlineAppointments.totalOnlineAppointments.invalidate();
+    }
+  });
+  
+  const doctorStatusTemplate = (row: IRecentAppointments) => {
+    return (
+      <>
+        <div className="text-sm">{row.isapproved ? "Approved" : "Not Approved"}</div>
+      </>
+    );
+  }
+  const doctorActionsTemplate = (row: IRecentAppointments) => {
+    function handleDeactivate(): void {
+      updateMutation.mutate({
+        id: row.id,
+        isapproved: false
+      });
+    }
 
+    function handleApprove(): void {
+      updateMutation.mutate({
+        id: row.id,
+        isapproved: true
+      });
+    }
+
+    return (
+      <>
+       <button className={` ${row.isapproved ? "bg-red-500 text-white" : "bg-green-500 text-white"} border-none hover:bg-blue-700 p-2 rounded-full`} onClick={row.isapproved ? handleDeactivate : handleApprove}>
+        {row.isapproved ? "Deactivate" : "Approve"}
+       </button>
+      </>
+    );
+  };
   return (
     <>
       <div className="card">
@@ -97,6 +136,8 @@ const Doctors = () => {
           <Column field="professionalUser" header="Doctor Phone Number" body={doctorPhoneNumberTemplate}></Column>
           <Column field="professionalUser" header="Doctor's Joining Date" body={doctorDateOfJoiningTemplate}></Column>
           <Column field="professionalUser" header="Doctor Speciality" body={doctorDateSpecialityTemplate}></Column>
+          <Column field="status" header="Status" body={doctorStatusTemplate}></Column>
+          <Column field="actions" header="Actions" body={doctorActionsTemplate}></Column>
         </DataTable>
       </div>
     </>

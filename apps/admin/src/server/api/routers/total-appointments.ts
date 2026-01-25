@@ -23,6 +23,7 @@ export const totalOnlineAppointmentsRouter = createTRPCRouter({
         email: true,
         phoneNumber: true,
         userName: true,
+        isapproved: true,
         displayQualification: {
           select: {
             specialization: true
