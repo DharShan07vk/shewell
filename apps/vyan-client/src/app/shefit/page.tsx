@@ -14,8 +14,6 @@ const shefit = () => {
       <WhyChooseUsSection />
       <PregnancyStagesInfoSection />
       <SessionScheduleSection /> */}
-
-      COMING SOON !
     </main>
   );
 };
