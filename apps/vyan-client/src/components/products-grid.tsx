@@ -190,12 +190,12 @@ export default function ProductsGrid() {
                 </div>
 
                 {/* Shop Now Button */}
-                <button className="order-0 group flex h-[45px] w-full flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-4 py-0 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
+                <div className="order-0 group flex h-[45px] w-full flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-4 py-0 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
                   <span className="text-lg font-medium text-[#00000066] sm:text-[17px]">
                     Shop Now
                   </span>
                   <InteractiveButton size="small" />
-                </button>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -203,19 +203,19 @@ export default function ProductsGrid() {
 
         {/* CTA Buttons */}
         <div className="mt-12 flex flex-col justify-center gap-4 md:flex-row">
-          <button className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
+          <div className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
             <span className="text-lg font-medium text-[#00000066] sm:text-xl">
               Explore All Products
             </span>
             <InteractiveButton />
-          </button>
+          </div>
 
-          <button className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
+          <div className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
             <span className="text-lg font-medium text-[#00000066] sm:text-xl">
               Shop by Trimester
             </span>
             <InteractiveButton />
-          </button>
+          </div>
         </div>
       </div>
     </section>

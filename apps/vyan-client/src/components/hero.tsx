@@ -63,20 +63,20 @@ export default function Hero(): JSX.Element {
       {/* CTA Buttons - Responsive positioning */}
       <div className="absolute bottom-12 left-0 z-40 flex flex-wrap items-center gap-4 sm:bottom-14 sm:left-0 md:bottom-16 md:left-0 lg:bottom-20 xl:bottom-24 xl:left-0">
         <Link href="/counselling">
-          <button className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
+          <div className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
             <span className="text-lg font-medium text-[#00000066] sm:text-xl">
               Book Your Consultation
             </span>
             <InteractiveButton />
-          </button>
+          </div>
         </Link>
         <Link href="/products">
-          <button className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
+          <div className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
             <span className="text-lg font-medium text-[#00000066] sm:text-xl">
               Shop Essentials for Mom & Baby
             </span>
             <InteractiveButton />
-          </button>
+          </div>
         </Link>
       </div>
     </section>

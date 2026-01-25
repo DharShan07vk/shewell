@@ -166,12 +166,12 @@ export default function ExpertsCarousel() {
 
         {/* CTA Button */}
         <div className="mt-12 flex w-full justify-center md:mt-16">
-          <button className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-3xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
+          <div className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-3xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
             <span className="text-lg font-medium text-[#00000066] sm:text-xl">
               Consult an Expert Now
             </span>
             <InteractiveButton />
-          </button>
+          </div>
         </div>
       </div>
     </section>
