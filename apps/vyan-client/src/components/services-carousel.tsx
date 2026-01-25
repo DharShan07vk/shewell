@@ -101,7 +101,7 @@ const ServicesCarousel = () => {
           Shewell isn’t just for India. It’s for every woman, everywhere
         </motion.p>
       </div>
-      <div className="mx-auto max-w-7xl px-0">
+      <div className=" w-full px-0">
         {/* Carousel Container */}
         <div className="relative flex flex-col items-center">
           {/* Main Image Area with Title Integrated */}
@@ -158,13 +158,13 @@ const ServicesCarousel = () => {
             {/* Navigation Arrows */}
             <button
               onClick={prevSlide}
-              className="absolute left-[-100px] top-1/2 z-30 -translate-y-1/2 cursor-pointer rounded-full border border-gray-200 p-2 text-gray-600 transition-all hover:bg-gray-50 hover:text-gray-600 md:left-4 md:p-3"
+              className="absolute left-[0px] top-1/2 z-30 -translate-y-1/2 cursor-pointer rounded-full border border-gray-200 p-2 text-gray-600 transition-all hover:bg-gray-50 hover:text-gray-600 md:left-0 md:p-3"
             >
               <ChevronLeft size={32} />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-0 top-1/2 z-30 -translate-y-1/2 cursor-pointer rounded-full border border-gray-200 p-2 text-gray-600 transition-all hover:bg-gray-50 hover:text-gray-600 md:right-4 md:p-3"
+              className="absolute right-0 top-1/2 z-30 -translate-y-1/2 cursor-pointer rounded-full border border-gray-200 p-2 text-gray-600 transition-all hover:bg-gray-50 hover:text-gray-600 md:right-0 md:p-3"
             >
               <ChevronRight size={32} />
             </button>
