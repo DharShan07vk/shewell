@@ -2,6 +2,7 @@ import { createTRPCRouter } from '@/src/server/api/trpc';
 import { mediaRouter } from '@/src/server/api/routers/media';
 import { noOfOnlineAppointmentsRouter } from './routers/dashboard-data-for-date-range';
 import { totalOnlineAppointmentsRouter } from './routers/total-appointments';
+import { proffessionalUpdateRouter } from './routers/proffessionalUpdate';
 
 /**
  * This is the primary router for your server.
@@ -11,7 +12,8 @@ import { totalOnlineAppointmentsRouter } from './routers/total-appointments';
 export const appRouter = createTRPCRouter({
   mediaRouter: mediaRouter,
   noOfOnlineAppointments: noOfOnlineAppointmentsRouter,
-  totalOnlineAppointments : totalOnlineAppointmentsRouter
+  totalOnlineAppointments : totalOnlineAppointmentsRouter,
+  proffessionalUpdateRouter: proffessionalUpdateRouter
 });
 
 // export type definition of API
