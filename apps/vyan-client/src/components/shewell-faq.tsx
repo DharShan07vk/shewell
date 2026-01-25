@@ -34,7 +34,7 @@ const ShewellFAQ = () => {
 
     return (
         <section className="bg-white min-h-screen py-20 px-0">
-            <div className="max-w-4xl mx-auto">
+            <div className="w-full o">
                 {/* Title Section */}
                 <div className="text-center mb-12">
                     <h2 className="text-4xl font-medium text-gray-800 mb-2">

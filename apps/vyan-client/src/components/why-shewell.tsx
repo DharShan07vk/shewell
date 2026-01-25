@@ -47,7 +47,7 @@ const WhyShewell = () => {
 
     return (
         <section className="bg-[#F5F5F5] py-20 px-0">
-            <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 items-stretch h-full">
+            <div className="w-full flex flex-col lg:flex-row gap-8 items-stretch h-full">
                 {/* Left Image Section */}
                 <div className="w-full lg:w-[50%] relative rounded-3xl overflow-hidden shadow-lg h-[500px] lg:h-[500px]">
                     <Image

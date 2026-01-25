@@ -104,7 +104,7 @@ export default function ProductsGrid() {
 
   return (
     <section className="w-full bg-gray-50 py-16 md:py-24">
-      <div className="mx-auto max-w-7xl px-0">
+      <div className=" w-full px-0">
         {/* Section Header */}
         <div className="mb-10 flex items-start justify-between">
           <div>
