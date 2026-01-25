@@ -271,6 +271,7 @@ model ProfessionalUser {
   googleAccessToken                 String?
   googleRefreshToken                String?
   deletedAt                         DateTime?
+  isapproved                         Boolean                          @default(false)
 }
 
 model ProfessionalSpecializationParentCategory {
