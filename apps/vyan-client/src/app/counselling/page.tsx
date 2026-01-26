@@ -29,7 +29,7 @@ const Counselling = () => {
   }
 
   const searchParams = useSearchParams();
-
+  console.log("searchParams", searchParams);
   const specialisationId = searchParams.get("specialisationId");
   const selectedDate = searchParams.get("selectedDate");
   const languageId = searchParams.get("languageId");
@@ -45,7 +45,10 @@ const Counselling = () => {
 
   const formattedLanguageIds: string[] =
     typeof languageId === "string" ? languageId.split(",") : [];
-
+  console.log("formattedLanguageIds", formattedLanguageIds);
+  console.log("selectedDate", selectedDate);
+  console.log("time", time);
+  console.log("inputSearch", inputSearch);
   const {
     data: filteredDoctors,
     refetch,
@@ -57,7 +60,7 @@ const Counselling = () => {
     time: time,
     inputSearch: inputSearch,
   });
-
+  console.log("filteredDoctors", filteredDoctors);
   useEffect(() => {
     refetch();
   }, [specialisationId]);

@@ -309,7 +309,7 @@ export const findDoctorRouter = createTRPCRouter({
           };
         }
       }
-      whereCondition = { ...whereCondition, AND : [{ isapproved: true }] };
+      whereCondition = { AND: [whereCondition, { isapproved: true }] };
       const professionalUsers = await db.professionalUser.findMany({
         select: {
           id: true,
@@ -336,10 +336,10 @@ export const findDoctorRouter = createTRPCRouter({
           availability: true,
           ProfessionalSpecializations: true,
           languages: {
-            select : {
-              id : true,
-              language : true
-            }
+            select: {
+              id: true,
+              language: true,
+            },
           },
           qualifications: {
             select: {

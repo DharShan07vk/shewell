@@ -106,7 +106,7 @@ export default async function SessionsPage({ searchParams }: SessionPageProps) {
             </p>
           </div>
         ) : (
-          sessions.map((session : any ) => {
+          sessions.map((session: any) => {
             const sessionDate = format(
               new Date(session.startAt),
               "dd MMM yyyy",
