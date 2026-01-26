@@ -94,11 +94,9 @@ const CompleteDoctorProfile = ({
             {/* image */}
             <div className="relative flex aspect-square items-center justify-center xs:w-[116px] sm:w-[138px]">
               {/* Decorative ring */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#00898F]/20 to-[#51AF5A]/20 p-1 sm:p-2">
-                <div className="h-full w-full rounded-full bg-white"></div>
-              </div>
-              <div className="z-10 xs:w-[90px] sm:w-[116px]">
-                <div className="relative aspect-square overflow-hidden rounded-full shadow-lg ring-2 ring-white">
+              <div className="absolute inset-0 h-[150px] w-[150px] rounded-full bg-gradient-to-br from-[#00898F]/20 to-[#51AF5A]/20 p-1 sm:p-2">
+                {/* <div className="h-[140px] w-[140px] rounded-full bg-white"></div> */}
+                <div className="relative aspect-square overflow-hidden rounded-full shadow-lg ring-2 ring-white bg-white">
                   <Image
                     src={
                       doctorProfile.media?.fileUrl ||
