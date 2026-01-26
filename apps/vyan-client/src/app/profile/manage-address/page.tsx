@@ -37,9 +37,9 @@ export default async function ManageAddress() {
       id: true,
       name: true,
     },
-    where:{
-      active: true
-    }
+    where: {
+      active: true,
+    },
   });
 
   console.log("countries are", countries);
@@ -77,9 +77,7 @@ export default async function ManageAddress() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbLink >
-                    Manage Addresses
-                  </BreadcrumbLink>
+                  <BreadcrumbLink>Manage Addresses</BreadcrumbLink>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
@@ -93,10 +91,10 @@ export default async function ManageAddress() {
              name={userDetails?.name!}
                 />
               </div> */}
-              <div className="w-full rounded-md border border-border-400 bg-white px-2 py-4 lg:px-4 lg:py-[28px] xl:px-5 xl:py-8 2xl:px-6 2xl:py-9">
-                <div className="mb-10 text-base  text-[#181818] lg:text-xl font-semibold xl:text-2xl 2xl:text-[28px] 2xl:leading-[38px]">
+              <div className="w-full rounded-3xl border border-gray-100 bg-white p-6 shadow-[0_4px_20px_rgba(0,0,0,0.08)] md:p-10">
+                <div className="mb-10 flex items-center gap-3 font-poppins text-xl font-semibold text-[#181818] lg:text-2xl xl:text-3xl">
                   <svg
-                    className="mr-2 inline size-[18px] lg:size-6 xl:size-[28px] 2xl:size-[32px]"
+                    className="size-6 xl:size-8"
                     viewBox="0 0 32 32"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -104,21 +102,21 @@ export default async function ManageAddress() {
                     <path
                       d="M25.3307 16H6.66406"
                       stroke="#434343"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M15.9974 25.3334L6.66406 16.0001L15.9974 6.66675"
                       stroke="#434343"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                   Manage Addresses
                 </div>
-                <div className="mb-8 flex-wrap text-center text-sm font-normal text-active xl:px-[105px] 2xl:px-[180px]">
+                <div className="mb-8 flex-wrap text-center font-inter text-sm font-normal text-[#666666] xl:px-[105px] 2xl:px-[180px]">
                   Quickly add new delivery addresses to your account and choose
                   your preferred default for faster checkouts.
                 </div>

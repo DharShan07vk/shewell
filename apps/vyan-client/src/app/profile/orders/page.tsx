@@ -22,7 +22,7 @@ import ActiveOrders from "./active-order";
 import DeliveredOrders from "./delivered-order";
 import RacOrders from "./rac-orders";
 
-const Orders = async() => {
+const Orders = async () => {
   const session = await getServerSession();
   const userDetails = await db.user.findFirst({
     select: {
@@ -41,7 +41,7 @@ const Orders = async() => {
       id: true,
       discountInCent: true,
       orderPlaced: true,
-      cancelledDate:true,
+      cancelledDate: true,
       expectedDelivery: true,
       userId: true,
       status: true,
@@ -57,7 +57,7 @@ const Orders = async() => {
           code: true,
           isPercent: true,
           amount: true,
-        }
+        },
       },
       lineItems: {
         select: {
@@ -79,7 +79,7 @@ const Orders = async() => {
               deletedAt: true,
               priceInCents: true,
               discountInCents: true,
-              discountEndDate:true,
+              discountEndDate: true,
               discountInPercentage: true,
               productVariantInventory: {
                 select: {
@@ -101,22 +101,22 @@ const Orders = async() => {
                       id: true,
                       review: true,
                       rating: true,
-                      approved:true,
-                      createdAt:true,
-                      productId:true,
-                      user:{
-                        select:{
-                          id:true,
-                          name:true,
-                          email:true,
-                        }
-                      }
-                    }
+                      approved: true,
+                      createdAt: true,
+                      productId: true,
+                      user: {
+                        select: {
+                          id: true,
+                          name: true,
+                          email: true,
+                        },
+                      },
+                    },
                   },
                   userWishlisted: {
                     select: {
                       email: true,
-                    }
+                    },
                   },
                   media: {
                     select: {
@@ -125,14 +125,14 @@ const Orders = async() => {
                           id: true,
                           fileUrl: true,
                           fileKey: true,
-                        }
-                      }
-                    }
+                        },
+                      },
+                    },
                   },
                   productVariants: {
                     select: {
                       id: true,
-                      discountEndDate:true,
+                      discountEndDate: true,
                       productVariantInventory: {
                         select: {
                           id: true,
@@ -144,14 +144,13 @@ const Orders = async() => {
                       discountInCents: true,
                       discountInPercentage: true,
                       name: true,
-                    }
-                  }
-                }
-              }
-            }
-
+                    },
+                  },
+                },
+              },
+            },
           },
-        }
+        },
       },
       address: {
         select: {
@@ -170,108 +169,145 @@ const Orders = async() => {
           createdAt: true,
           deletedAt: true,
           updatedAt: true,
-        }
-
-      }
+        },
+      },
     },
     where: {
       userId: userDetails?.id,
-    }
-  })
+    },
+  });
 
-  const activeOrders = orders.filter((i : any ) => i.status === OrderStatus.PAYMENT_SUCCESSFUL);
-  const deliveredOrders = orders.filter((i : any) => i.status === OrderStatus.DELIVERED);
-  const returnedAndCancelledOrders = orders.filter((i : any) => i.status === OrderStatus.RETURNED || i.status === OrderStatus.CANCELLED);
+  const activeOrders = orders.filter(
+    (i: any) => i.status === OrderStatus.PAYMENT_SUCCESSFUL,
+  );
+  const deliveredOrders = orders.filter(
+    (i: any) => i.status === OrderStatus.DELIVERED,
+  );
+  const returnedAndCancelledOrders = orders.filter(
+    (i: any) =>
+      i.status === OrderStatus.RETURNED || i.status === OrderStatus.CANCELLED,
+  );
 
-
-  const reviews=await db.review.findMany({
-    select:{
-      id:true,
-      review:true,
-      rating:true,
-      approved:true,
-      createdAt:true,
-      productId:true,
-      user:{
-        select:{
-          id:true,
-          name:true,
-          email:true,
-        }
-      }
-    }
-  })
+  const reviews = await db.review.findMany({
+    select: {
+      id: true,
+      review: true,
+      rating: true,
+      approved: true,
+      createdAt: true,
+      productId: true,
+      user: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      },
+    },
+  });
 
   return (
     <>
-        <div className="container mx-auto flex flex-col items-start max-w-full">
+      <div className="container mx-auto flex max-w-full flex-col items-start">
+        <div className="py-[18px] lg:py-6 xl:py-7 2xl:py-[30px]">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink>Orders</BreadcrumbLink>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
 
-<div className="2xl:py-[30px] xl:py-7 lg:py-6 py-[18px]">
-  <Breadcrumb>
-    <BreadcrumbList>
-      <BreadcrumbItem>
-        <BreadcrumbLink href="/">Home</BreadcrumbLink>
-      </BreadcrumbItem>
-      <BreadcrumbSeparator />
-      <BreadcrumbItem>
-        <BreadcrumbLink>Orders</BreadcrumbLink>
-      </BreadcrumbItem>
-
-    </BreadcrumbList>
-  </Breadcrumb>
-</div>
-
-<div className="w-full 2xl:py-9 2xl:px-6 xl:py-8 lg:py-[28px] lg:px-5 py-4 px-2 border border-border-400 rounded-md">
-  <div className="mb-10 text-base  text-[#181818] lg:text-xl font-semibold xl:text-2xl 2xl:text-[28px] 2xl:leading-[38px]">
-    <svg className="mr-2 inline 2xl:size-[32px] xl:size-[28px] lg:size-6 size-[18px]" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M25.3307 16H6.66406" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M15.9974 25.3334L6.66406 16.0001L15.9974 6.66675" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-    </svg>
-
-    Orders
-  </div>
-  <div>
-    <Tabs defaultValue="Active Orders">
-      <TabsList className="flex justify-center gap-4 md:gap-10 text-lg font-medium text-black-200 overflow-item">
-        <TabsTrigger className="pb-[6px] data-[state=active]:border-b-2 border-primary text-nowrap" value="Active Orders">Active Orders</TabsTrigger>
-        <TabsTrigger className="pb-[6px] data-[state=active]:border-b-2 border-primary text-nowrap" value="Delivered Orders">Delivered Orders</TabsTrigger>
-        <TabsTrigger className="pb-[6px] data-[state=active]:border-b-2 border-primary text-nowrap" value="Returned Orders">Returned/Cancelled Orders</TabsTrigger>
-      </TabsList>
-      <TabsContent value="Active Orders">
-        {activeOrders.map((order : any) => (
-          <>
-            <div key={order.id}>
-              { /* TODO: fix the @ts-ignore */ }
-              {/* @ts-ignore */}
-              <ActiveOrders activeOrders={order} reviews={reviews}/>
-            </div>
-          </>
-        ))}
-      </TabsContent>
-
-      <TabsContent value="Delivered Orders">
-        {deliveredOrders.map((order : any ) => (
-          <div key={order.id}>
-            { /* TODO: fix the @ts-ignore */ }
-            {/* @ts-ignore */}
-            <DeliveredOrders deliveredOrders={order} reviews={reviews}/>
+        <div className="w-full rounded-3xl border border-gray-100 bg-white p-6 shadow-[0_4px_20px_rgba(0,0,0,0.08)] md:p-10">
+          <div className="mb-10 flex items-center gap-3 font-poppins text-xl font-semibold text-[#181818] lg:text-2xl xl:text-3xl">
+            <svg
+              className="size-6 xl:size-8"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M25.3307 16H6.66406"
+                stroke="black"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M15.9974 25.3334L6.66406 16.0001L15.9974 6.66675"
+                stroke="black"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            Orders
           </div>
-        ))}
-      </TabsContent>
+          <div>
+            <Tabs defaultValue="Active Orders">
+              <TabsList className="overflow-item text-black-200 flex justify-center gap-4 text-lg font-medium md:gap-10">
+                <TabsTrigger
+                  className="text-nowrap border-primary pb-[6px] font-poppins data-[state=active]:border-b-2"
+                  value="Active Orders"
+                >
+                  Active Orders
+                </TabsTrigger>
+                <TabsTrigger
+                  className="text-nowrap border-primary pb-[6px] font-poppins data-[state=active]:border-b-2"
+                  value="Delivered Orders"
+                >
+                  Delivered Orders
+                </TabsTrigger>
+                <TabsTrigger
+                  className="text-nowrap border-primary pb-[6px] font-poppins data-[state=active]:border-b-2"
+                  value="Returned Orders"
+                >
+                  Returned/Cancelled Orders
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="Active Orders">
+                {activeOrders.map((order: any) => (
+                  <>
+                    <div key={order.id}>
+                      {/* TODO: fix the @ts-ignore */}
+                      {/* @ts-ignore */}
+                      <ActiveOrders activeOrders={order} reviews={reviews} />
+                    </div>
+                  </>
+                ))}
+              </TabsContent>
 
-      <TabsContent value="Returned Orders">
-        {returnedAndCancelledOrders.map((order : any) => (
-          <div key={order.id}>
-            { /* TODO: fix the @ts-ignore */ }
-            {/* @ts-ignore */}
-            <RacOrders racOrders={order} reviews={reviews}/>
+              <TabsContent value="Delivered Orders">
+                {deliveredOrders.map((order: any) => (
+                  <div key={order.id}>
+                    {/* TODO: fix the @ts-ignore */}
+                    {/* @ts-ignore */}
+                    <DeliveredOrders
+                      deliveredOrders={order}
+                      reviews={reviews}
+                    />
+                  </div>
+                ))}
+              </TabsContent>
+
+              <TabsContent value="Returned Orders">
+                {returnedAndCancelledOrders.map((order: any) => (
+                  <div key={order.id}>
+                    {/* TODO: fix the @ts-ignore */}
+                    {/* @ts-ignore */}
+                    <RacOrders racOrders={order} reviews={reviews} />
+                  </div>
+                ))}
+              </TabsContent>
+            </Tabs>
           </div>
-        ))}
-        </TabsContent>
-    </Tabs>
-  </div>
-</div>
-</div>
+        </div>
+      </div>
     </>
   );
 };
