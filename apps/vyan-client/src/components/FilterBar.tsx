@@ -238,13 +238,13 @@ export const FilterBar = ({
       {/* CENTERED FILTER BAR */}
       <div className="flex justify-center">
         <div className="inline-flex items-center rounded-full bg-[#EEEEEE] px-6 py-3 text-sm">
-          <FilterToggle
+          {/* <FilterToggle
             label="Only Online Courses"
             enabled={isOnlineCourses}
             onClick={() => setIsOnlineCourses(handleOnlyOnlineCoursesToggle())}
           />
 
-          <Divider />
+          <Divider /> */}
 
           {/* Category Dropdown */}
           <Popover>

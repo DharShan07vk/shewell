@@ -47,8 +47,7 @@ export const BookingSection = ({
         return "/shefit/why-shefit-1.png";
       case 2:
         return "/shefit/why-shefit-2.png";
-      case 3:
-        return "/shefit/why-shefit-3.png";
+
       default:
         return "/shefit/hero.png";
     }
@@ -212,7 +211,7 @@ export const BookingSection = ({
 
               {/* STEPPER */}
               <div className="mb-10 flex items-center justify-center">
-                {[1, 2, 3].map((s, i) => (
+                {[1, 2].map((s, i) => (
                   <div key={s} className="flex items-center">
                     <div className="relative flex flex-col items-center">
                       <motion.div
@@ -235,7 +234,7 @@ export const BookingSection = ({
                       )}
                     </div>
 
-                    {i < 2 && (
+                    {i < 1 && (
                       <div className="relative mx-2 h-[2px] w-12 bg-gray-100">
                         <motion.div
                           initial={{ width: 0 }}
@@ -421,7 +420,7 @@ export const BookingSection = ({
                     )}
 
                     {/* STEP 3 */}
-                    {step === 3 && (
+                    {/* {step === 3 && (
                       <div className="space-y-6">
                         <div className="space-y-3">
                           <label className="ml-2 text-xs font-semibold text-gray-500">
@@ -509,8 +508,8 @@ export const BookingSection = ({
                             <ChevronDown className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#00898F]" />
                           </div>
                         </div>
-                      </div>
-                    )}
+                      </div> */}
+                    {/* )} */}
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -529,10 +528,10 @@ export const BookingSection = ({
               <div
                 onClick={() => {
                   if (isProcessing) return;
-                  if (step === 3) {
+                  if (step === 2) {
                     handleBooking();
                   } else {
-                    setStep((prev) => (prev < 3 ? ((prev + 1) as any) : prev));
+                    setStep((prev) => (prev < 2 ? ((prev + 1) as any) : prev));
                   }
                 }}
                 className="order-0 group flex w-full cursor-pointer items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#00898F] hover:text-white"
@@ -540,7 +539,7 @@ export const BookingSection = ({
                 <span className="text-lg font-medium text-[#00000066] group-hover:text-white sm:text-xl">
                   {isProcessing
                     ? "Processing..."
-                    : step === 3
+                    : step === 2
                       ? "Proceed to Pay"
                       : "Continue"}
                 </span>

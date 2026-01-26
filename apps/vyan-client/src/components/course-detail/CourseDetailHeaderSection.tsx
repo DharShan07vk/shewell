@@ -47,7 +47,7 @@ export const CourseDetailHeaderSection = ({
 
             {hasRecording && (
               <Badge className="rounded-full border border-gray-200 bg-white px-4 py-2">
-                . Live
+                Recording
               </Badge>
             )}
           </div>
