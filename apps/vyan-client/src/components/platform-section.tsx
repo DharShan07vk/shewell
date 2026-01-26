@@ -10,7 +10,7 @@ const PLATFORM_DATA = [
     title: "Pre-Pregnancy Webinars",
     description:
       "Prepare your mind and body for a healthy pregnancy journey with expert lifestyle and nutrition guidance.",
-    image: "/home/4.png",
+    image: "/home/1.webp",
     color: "bg-[#1D4D4F]",
   },
   {
@@ -18,7 +18,7 @@ const PLATFORM_DATA = [
     title: "Childbirth Preparatory Classes",
     description:
       "Understand every trimester, your body changes, and how to confidently prepare for labor and delivery.",
-    image: "/home/5.png",
+    image: "/home/1-1.webp",
     color: "bg-[#5B418F]",
   },
   {
@@ -26,7 +26,7 @@ const PLATFORM_DATA = [
     title: "Breastfeeding Classes",
     description:
       "Master latching, milk supply, and common challenges to make breastfeeding natural and stress-free.",
-    image: "/home/6.png",
+    image: "/home/1-2.webp",
     color: "bg-[#917C5D]",
   },
   {
@@ -34,7 +34,7 @@ const PLATFORM_DATA = [
     title: "Starting Solids",
     description:
       "Learn when and how to start solids with balanced, safe meal plans curated by child nutrition experts.",
-    image: "/home/7.png",
+    image: "/home/1-3.webp",
     color: "bg-[#167D71]",
   },
   {
@@ -42,15 +42,15 @@ const PLATFORM_DATA = [
     title: "Postpartum Mental Wellbeing",
     description:
       "Prioritize your emotional health with tools and therapy to navigate postpartum changes with strength.",
-    image: "/home/2.png",
+    image: "/home/1-4.webp",
     color: "bg-[#7A6451]",
   },
   {
     id: "6",
-    title: "Postpartum Mental Wellbeing",
+    title: "Workshop",
     description:
-      "Prioritize your emotional health with tools and therapy to navigate postpartum changes with strength.",
-    image: "/home/3.png",
+      "Explore ancient prenatal wisdom with guided meditation, positive affirmations, and mindful parenting",
+    image: "/home/1-5.webp",
     color: "bg-[#7A6451]",
   },
 ];
@@ -64,7 +64,7 @@ export default function PlatformSection() {
     intervalRef.current = setInterval(() => {
       indexRef.current = (indexRef.current + 1) % PLATFORM_DATA.length;
       setActiveTab(PLATFORM_DATA[indexRef.current]);
-    }, 2000); // Change every 4 seconds
+    }, 4000);
 
     return () => {
       if (intervalRef.current) {
@@ -73,7 +73,6 @@ export default function PlatformSection() {
     };
   }, []);
 
-  // Reset timer when user manually selects a tab
   const handleTabClick = (
     item: (typeof PLATFORM_DATA)[0],
     isHover: boolean,
@@ -86,22 +85,22 @@ export default function PlatformSection() {
       intervalRef.current = setInterval(() => {
         indexRef.current = (indexRef.current + 1) % PLATFORM_DATA.length;
         setActiveTab(PLATFORM_DATA[indexRef.current]);
-      }, 2000); // Change every 4 seconds
+      }, 4000);
     }
   };
 
   return (
-    <section className="w-full  overflow-hidden py-16   md:py-24">
-      <div className="mb-16 text-center">
-        <h3 className="mb-3 text-2xl font-bold text-gray-900 md:mb-4 md:text-3xl lg:text-4xl">
+    <section className="px-[100px] py-12 md:py-16 w-full overflow-hidden">
+      <div className="mb-32 text-center">
+        <h3 className="mb-3 text-2xl font-medium text-gray-900 md:mb-4 md:text-4xl lg:text-[54px]">
           Courses That Support You - Every Step of the Way
         </h3>
-        <p className="mx-auto max-w-2xl text-sm text-gray-500 md:text-base lg:text-lg">
+        <p className="mx-auto text-[#33333399] text-[24px]  ">
           From fertility to first steps – evidence-based, heart-led,
           expert-designed just for you.
         </p>
       </div>
-      <div className="mx-auto flex   h-[650px] max-w-[1720px] flex-col overflow-hidden rounded-[32px] bg-white shadow-sm lg:h-[795px] lg:flex-row">
+      <div className=" flex   h-[650px] max-w-full flex-col overflow-hidden rounded-[32px] bg-white shadow-sm lg:h-[795px] lg:flex-row">
         {/* LEFT NAVIGATION */}
         <div className="z-10 flex w-full flex-col  bg-white lg:w-[50%]">
           <div className="">

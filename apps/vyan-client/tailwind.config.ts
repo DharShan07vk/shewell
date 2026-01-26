@@ -15,6 +15,14 @@ const config: Config = {
       ...baseConfig.theme?.extend,
       fontFamily: {
         ...baseConfig.theme?.extend?.fontFamily,
+        // Original font names
+        sans: "var(--font-poppins)",
+        poppins: "var(--font-poppins)",
+        inter: "var(--font-inter)",
+        pacifico: "var(--font-pacifico)",
+        playfair: "var(--font-playfair)",
+        epicgant: ["Epicgant", "sans-serif"],
+        "amatic-sc": "var(--font-amatic-sc)",
       },
     },
   },

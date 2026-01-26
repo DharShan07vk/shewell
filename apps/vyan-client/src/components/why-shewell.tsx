@@ -46,12 +46,12 @@ const WhyShewell = () => {
     const [hoveredId, setHoveredId] = useState<number | null>(null);
 
     return (
-        <section className="bg-[#F5F5F5] py-20 px-4 md:px-8">
-            <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 items-stretch h-full">
+        <section className="bg-[#F5F5F5] py-12 md:py-16 px-[100px] overflow-hidden">
+            <div className="w-full flex flex-col lg:flex-row gap-8 items-stretch h-full">
                 {/* Left Image Section */}
                 <div className="w-full lg:w-[50%] relative rounded-3xl overflow-hidden shadow-lg h-[500px] lg:h-[500px]">
                     <Image
-                        src="/home/why-shewell.png"
+                        src="/home/why-shewell.webp"
                         alt="Why Shewell"
                         fill
                         className="object-cover"
@@ -67,25 +67,22 @@ const WhyShewell = () => {
                             key={item.id}
                             onMouseEnter={() => setHoveredId(item.id)}
                             onMouseLeave={() => setHoveredId(null)}
-                            className={`rounded-2xl md:rounded-3xl shadow-sm border transition-all duration-300 p-4 flex items-center gap-4 cursor-pointer ${
-                                hoveredId === item.id
+                            className={`rounded-2xl md:rounded-3xl shadow-sm border transition-all duration-300 p-4 flex items-center gap-4 cursor-pointer ${hoveredId === item.id
                                     ? "bg-[#007D79] border-[#007D79] shadow-lg"
                                     : "bg-white border-transparent hover:shadow-md"
-                            }`}
+                                }`}
                         >
                             {/* Icon Circle */}
-                            <div className={`w-12 h-12 flex-shrink-0 rounded-full flex items-center justify-center transition-colors duration-300 ${
-                                hoveredId === item.id
+                            <div className={`w-12 h-12 flex-shrink-0 rounded-full flex items-center justify-center transition-colors duration-300 ${hoveredId === item.id
                                     ? "bg-white text-[#007D79]"
                                     : "bg-[#E0F2F1] text-[#007D79]"
-                            }`}>
+                                }`}>
                                 {item.icon}
                             </div>
 
                             <div className="flex-1">
-                                <h3 className={`text-base md:text-lg font-medium transition-colors duration-300 ${
-                                    hoveredId === item.id ? "text-white" : "text-[#4A4A4A]"
-                                }`}>
+                                <h3 className={`text-base md:text-lg font-medium transition-colors duration-300 ${hoveredId === item.id ? "text-white" : "text-[#4A4A4A]"
+                                    }`}>
                                     {item.title}
                                 </h3>
                                 {/* Description shows on hover */}

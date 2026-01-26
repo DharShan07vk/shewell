@@ -103,15 +103,15 @@ export default function ProductsGrid() {
   };
 
   return (
-    <section className="w-full bg-gray-50 py-16 md:py-24">
-      <div className="mx-auto max-w-7xl px-4">
+    <section className="w-full bg-gray-50 py-16 md:py-24 px-[100px]">
+      <div className=" w-full px-0">
         {/* Section Header */}
         <div className="mb-10 flex items-start justify-between">
           <div>
-            <h2 className="mb-3 text-3xl font-bold text-gray-900 md:text-4xl lg:text-5xl">
+            <h2 className="mb-3 text-3xl font-medium text-gray-900 md:text-4xl lg:text-5xl">
               Clean, Safe, Conscious - For You and Baby.
             </h2>
-            <p className="max-w-3xl text-base text-gray-600 md:text-lg">
+            <p className="text-[24px] text-[#33333399]">
               Toxin-free, cruelty-free, and consciously created maternity
               products - all validated by experts and moms alike.
             </p>
@@ -123,13 +123,13 @@ export default function ProductsGrid() {
               onClick={() => scroll("left")}
               className="rounded-full border border-gray-300 p-3 text-gray-800 transition-all hover:bg-gray-300 hover:text-gray-800"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={24} color={"#E0E0E0"} />
             </button>
             <button
               onClick={() => scroll("right")}
               className="rounded-full border border-gray-300 p-3 text-gray-800 transition-all hover:bg-gray-300 hover:text-gray-800"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={24} color={"#E0E0E0"} />
             </button>
           </div>
         </div>
@@ -137,7 +137,7 @@ export default function ProductsGrid() {
         {/* Products Carousel */}
         <div
           ref={scrollRef}
-          className="scrollbar-hide flex gap-4 overflow-x-auto pb-4 md:gap-6"
+          className="scrollbar-hide flex gap-4 overflow-x-auto pb-4 md:gap-6 z-10 pt-4 pl-2"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {PRODUCTS_DATA.map((product) => (
@@ -149,16 +149,15 @@ export default function ProductsGrid() {
                 scale: hoveredId === product.id ? 1.02 : 1,
               }}
               transition={{ duration: 0.2 }}
-              className={`w-64 flex-shrink-0 overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-lg md:w-72 ${
-                hoveredId === product.id ? "ring-2 ring-primary/30" : ""
-              }`}
+              className={`w-64 flex-shrink-0 overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-lg md:w-72 ${hoveredId === product.id ? "ring-2 ring-primary/30" : ""
+                }`}
             >
               {/* Product Image */}
-              <div className="flex h-48 w-full items-center justify-center overflow-hidden bg-[#F5FBFB] md:h-56">
+              <div className="flex h-48 w-full items-center justify-center overflow-hidden bg-[#F5FBFB] md:h-56 p-4 ">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover rounded-lg"
                   onError={(
                     e: React.SyntheticEvent<HTMLImageElement, Event>,
                   ) => {
@@ -191,12 +190,12 @@ export default function ProductsGrid() {
                 </div>
 
                 {/* Shop Now Button */}
-                <button className="order-0 group flex h-[45px] w-full flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-4 py-0 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
+                <div className="order-0 group flex h-[45px] w-full flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-4 py-0 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
                   <span className="text-lg font-medium text-[#00000066] sm:text-[17px]">
                     Shop Now
                   </span>
                   <InteractiveButton size="small" />
-                </button>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -204,19 +203,19 @@ export default function ProductsGrid() {
 
         {/* CTA Buttons */}
         <div className="mt-12 flex flex-col justify-center gap-4 md:flex-row">
-          <button className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
+          <div className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
             <span className="text-lg font-medium text-[#00000066] sm:text-xl">
               Explore All Products
             </span>
             <InteractiveButton />
-          </button>
+          </div>
 
-          <button className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
+          <div className="order-0 group flex h-[80px] w-auto flex-none flex-grow flex-row items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
             <span className="text-lg font-medium text-[#00000066] sm:text-xl">
               Shop by Trimester
             </span>
             <InteractiveButton />
-          </button>
+          </div>
         </div>
       </div>
     </section>
