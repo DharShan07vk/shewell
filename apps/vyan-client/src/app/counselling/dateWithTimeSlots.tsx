@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
+import { Clock } from "lucide-react";
 import {
   addDays,
   subDays,
@@ -78,7 +79,6 @@ const DayNavigatorWithTimeSlots = ({
     // console.log("selected Date On Click", selectedDate);
   };
 
- 
   const handleTimeSlotClick = (
     timing: { startTime: Date; endTime: Date },
     priceInCents: number,
@@ -117,9 +117,6 @@ const DayNavigatorWithTimeSlots = ({
     timeSlotsData?.bookedSlots ?? [],
   );
 
-  
-
-  
   const { data: minTimeDurationData } =
     api.appointmentTimeDuration.appointmentTimeDuration.useQuery({
       professionalUserId: professionalUserId,
@@ -175,10 +172,7 @@ const DayNavigatorWithTimeSlots = ({
     }
   }, [timeSlotsData, timeDuration, minTimeDurationData, selectedDate]);
 
- 
-  
   // working generate time slots
-  
 
   // const generateTimeSlots = (
   //   timeSlots: { startTime: Date; endTime: Date }[],
@@ -290,74 +284,86 @@ const DayNavigatorWithTimeSlots = ({
     return generatedTimeSlots;
   };
 
-  
   // useEffect(() => {setSelectedTimeSlot(selectedTimeSlot)},[selectedTimeSlot])
   return (
     <>
+      <div className="mb-6 flex items-center gap-2">
+        <Clock className="h-5 w-5 text-[#00898F]" />
+        <span className="text-lg font-semibold text-[#333333]">
+          Available Time Slots
+        </span>
+      </div>
+      <div className="mb-6 mt-4 h-px w-full bg-gray-100"></div>
       <div className="flex flex-wrap justify-between gap-y-5">
-        <div className="mt-[10px] flex flex-wrap items-center gap-y-2">
-          <button onClick={handlePrevDay} disabled={isPrevDisabled}>
+        <div className="flex items-center gap-2 rounded-2xl bg-[#F8F8F8] p-1.5">
+          <button
+            onClick={handlePrevDay}
+            disabled={isPrevDisabled}
+            className={`flex h-10 w-10 items-center justify-center rounded-xl bg-white shadow-sm transition-all hover:bg-gray-50 ${isPrevDisabled ? "cursor-not-allowed opacity-50" : "hover:text-[#00898F]"}`}
+          >
             <svg
-              width="12"
-              height="13"
-              viewBox="0 0 12 13"
+              width="8"
+              height="12"
+              viewBox="0 0 8 12"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M6 12.5C7.60266 12.5 9.10938 11.8759 10.2427 10.7427C11.3759 9.60938 12 8.10266 12 6.5C12 4.89734 11.3759 3.39062 10.2427 2.25734C9.10938 1.12412 7.60266 0.5 6 0.5C4.39734 0.5 2.89062 1.12412 1.75734 2.25734C0.624118 3.39062 0 4.89734 0 6.5C0 8.10266 0.624118 9.60938 1.75734 10.7427C2.89062 11.8759 4.39734 12.5 6 12.5ZM6 1.4375C7.35225 1.4375 8.62355 1.96409 9.57973 2.92027C10.5359 3.87645 11.0625 5.14775 11.0625 6.5C11.0625 7.85225 10.5359 9.12355 9.57973 10.0797C8.62355 11.0359 7.35225 11.5625 6 11.5625C4.64777 11.5625 3.37645 11.0359 2.42027 10.0797C1.46409 9.12355 0.9375 7.85225 0.9375 6.5C0.9375 5.14775 1.46409 3.87645 2.42027 2.92027C3.37645 1.96409 4.64777 1.4375 6 1.4375ZM7.05788 9.31599L7.6538 8.59227L5.11275 6.5L7.6538 4.40773L7.05788 3.68401L3.63783 6.5L7.05788 9.31599Z"
-                fill="#00898F"
+                d="M6.5 11L1.5 6L6.5 1"
+                stroke="#333333"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </button>
-          {days.map((day) => (
-            <span
-              key={day.toISOString()}
-              className={`pb-[6px] font-inter font-normal xs:text-xs sm:text-sm 2xl:text-base ${
-                format(day, "yyyy-MM-dd") === format(selectedDate, "yyyy-MM-dd")
-                  ? " border-b-[2px] border-primary"
-                  : ""
-              }`}
-              style={{
-                margin: "0 10px",
-                cursor: "pointer",
-                boxSizing: "border-box",
-                paddingBottom:
+          <div className="scrollbar-hide flex gap-1 overflow-x-auto px-1">
+            {days.map((day) => (
+              <div
+                key={day.toISOString()}
+                onClick={() => handleDayClick(day)}
+                className={`flex cursor-pointer flex-col items-center justify-center rounded-xl px-4 py-2 transition-all duration-300 ${
                   format(day, "yyyy-MM-dd") ===
                   format(selectedDate, "yyyy-MM-dd")
-                    ? "2px"
-                    : "6px",
-              }}
-              onClick={() => {
-                handleDayClick(day);
-              }}
-            >
-              {format(day, "d LLL")}
-            </span>
-          ))}
+                    ? "bg-[#00898F] text-white shadow-md"
+                    : "bg-transparent text-[#666666] hover:bg-white hover:text-[#00898F]"
+                }`}
+              >
+                <span className="text-xs font-medium uppercase opacity-80">
+                  {format(day, "EEE")}
+                </span>
+                <span className="text-sm font-semibold">
+                  {format(day, "d")}
+                </span>
+              </div>
+            ))}
+          </div>
 
-          <button onClick={handleNextDay}>
+          <button
+            onClick={handleNextDay}
+            className="flex h-10 w-10 items-center justify-center rounded-xl bg-white shadow-sm transition-all hover:bg-gray-50 hover:text-[#00898F]"
+          >
             <svg
-              width="12"
-              height="13"
-              viewBox="0 0 12 13"
+              width="8"
+              height="12"
+              viewBox="0 0 8 12"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M6 12.5C7.60266 12.5 9.10938 11.8759 10.2427 10.7427C11.3759 9.60938 12 8.10266 12 6.5C12 4.89734 11.3759 3.39062 10.2427 2.25734C9.10938 1.12412 7.60266 0.5 6 0.5C4.39734 0.5 2.89062 1.12412 1.75734 2.25734C0.624118 3.39062 0 4.89734 0 6.5C0 8.10266 0.624118 9.60938 1.75734 10.7427C2.89062 11.8759 4.39734 12.5 6 12.5ZM6 1.4375C7.35225 1.4375 8.62355 1.96409 9.57973 2.92027C10.5359 3.87645 11.0625 5.14775 11.0625 6.5C11.0625 7.85225 10.5359 9.12355 9.57973 10.0797C8.62355 11.0359 7.35225 11.5625 6 11.5625C4.64777 11.5625 3.37645 11.0359 2.42027 10.0797C1.46409 9.12355 0.9375 7.85225 0.9375 6.5C0.9375 5.14775 1.46409 3.87645 2.42027 2.92027C3.37645 1.96409 4.64777 1.4375 6 1.4375ZM4.94212 9.31599L4.3462 8.59227L6.88725 6.5L4.3462 4.40773L4.94212 3.68401L8.36217 6.5L4.94212 9.31599Z"
-                fill="#00898F"
+                d="M1.5 1L6.5 6L1.5 11"
+                stroke="#333333"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </button>
         </div>
 
         {/* add time */}
-        <div className="mt-3 md:ml-4 md:w-[103px] xl:w-[136px]">
-          <UIFormLabel className="font-inter text-sm font-medium text-active 2xl:text-base ">
-            Add Time
-          </UIFormLabel>
-
+        <div className="flex items-center gap-3">
+          <span className="text-sm font-medium text-[#333333]">Duration:</span>
           <Select
             value={
               timeDuration?.toString() ||
@@ -371,16 +377,14 @@ const DayNavigatorWithTimeSlots = ({
               );
             }}
           >
-            <SelectTrigger className="w-full">
-              <SelectValue
-                className="placeholder:font-inter placeholder:text-xs placeholder:font-normal placeholder:text-inactive 2xl:placeholder:text-sm"
-                placeholder="Select"
-              />
+            <SelectTrigger className="w-[120px] rounded-xl border-gray-200 bg-white font-medium text-[#333333] shadow-sm">
+              <SelectValue placeholder="Duration" />
             </SelectTrigger>
-            <SelectContent className="bg-white">
+            <SelectContent className="rounded-xl border-gray-100 bg-white shadow-lg">
               <SelectGroup>
                 {timeDurations?.timeDurations.map((timeDuration) => (
                   <SelectItem
+                    className="cursor-pointer rounded-lg bg-white px-2 py-1.5 text-sm font-medium text-[#333333] hover:bg-gray-50"
                     key={timeDuration.time}
                     value={timeDuration.time.toString()}
                   >
@@ -392,8 +396,10 @@ const DayNavigatorWithTimeSlots = ({
           </Select>
         </div>
       </div>
-      <div className="mt-[18px] max-h-[78px] overflow-y-auto ">
-        {timeSlots.length > 0 ? (
+      <div
+        className={`mt-[18px] ${filteredTimeSlots.length > 0 ? "max-h-[78px] overflow-y-auto" : ""}`}
+      >
+        {filteredTimeSlots.length > 0 ? (
           <div className="flex flex-wrap gap-[18px]">
             {filteredTimeSlots.map((slot, index) => (
               <div key={index} className="flex flex-col gap-2">
@@ -427,7 +433,14 @@ const DayNavigatorWithTimeSlots = ({
             ))}
           </div>
         ) : (
-          <p>No available time slots.</p>
+          <div className="mt-2 flex min-h-[100px] w-full items-center justify-center rounded-2xl border border-gray-100 bg-[#FCFCFD]">
+            <div className="flex flex-col items-center gap-2 text-[#999999]">
+              <Clock className="h-6 w-6 opacity-50" />
+              <p className="text-sm font-medium">
+                No available slots for this date
+              </p>
+            </div>
+          </div>
         )}
       </div>
     </>

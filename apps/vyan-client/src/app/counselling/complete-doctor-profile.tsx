@@ -96,7 +96,7 @@ const CompleteDoctorProfile = ({
               {/* Decorative ring */}
               <div className="absolute inset-0 h-[150px] w-[150px] rounded-full bg-gradient-to-br from-[#00898F]/20 to-[#51AF5A]/20 p-1 sm:p-2">
                 {/* <div className="h-[140px] w-[140px] rounded-full bg-white"></div> */}
-                <div className="relative aspect-square overflow-hidden rounded-full shadow-lg ring-2 ring-white bg-white">
+                <div className="relative aspect-square overflow-hidden rounded-full bg-white shadow-lg ring-2 ring-white">
                   <Image
                     src={
                       doctorProfile.media?.fileUrl ||
@@ -207,24 +207,6 @@ const CompleteDoctorProfile = ({
 
           {/* Available time slots */}
           <div className="mb-6 mt-6 md:my-8">
-            <div className="border-gradient-to-r flex items-center gap-2 border-b-2 from-[#00898F] to-[#51AF5A] pb-3 font-poppins text-lg font-semibold text-[#333333] 2xl:text-xl">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 6V12L16 14M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
-                  stroke="#00898F"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              Available Time Slots
-            </div>
             <div className="mt-4">
               <DayNavigatorWithTimeSlots
                 onSelectDuration={handleDuration}
