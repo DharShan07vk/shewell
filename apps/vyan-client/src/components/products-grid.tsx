@@ -103,7 +103,7 @@ export default function ProductsGrid() {
   };
 
   return (
-    <section className="w-full bg-gray-50 py-16 md:py-24">
+    <section className="w-full bg-gray-50 py-16 md:py-24 px-[100px]">
       <div className=" w-full px-0">
         {/* Section Header */}
         <div className="mb-10 flex items-start justify-between">
@@ -111,7 +111,7 @@ export default function ProductsGrid() {
             <h2 className="mb-3 text-3xl font-medium text-gray-900 md:text-4xl lg:text-5xl">
               Clean, Safe, Conscious - For You and Baby.
             </h2>
-            <p className="max-w-3xl text-base text-gray-600 md:text-lg">
+            <p className="text-[24px] text-[#33333399]">
               Toxin-free, cruelty-free, and consciously created maternity
               products - all validated by experts and moms alike.
             </p>
@@ -137,7 +137,7 @@ export default function ProductsGrid() {
         {/* Products Carousel */}
         <div
           ref={scrollRef}
-          className="scrollbar-hide flex gap-4 overflow-x-auto pb-4 md:gap-6"
+          className="scrollbar-hide flex gap-4 overflow-x-auto pb-4 md:gap-6 z-10 pt-4 pl-2"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {PRODUCTS_DATA.map((product) => (
@@ -153,11 +153,11 @@ export default function ProductsGrid() {
                 }`}
             >
               {/* Product Image */}
-              <div className="flex h-48 w-full items-center justify-center overflow-hidden bg-[#F5FBFB] md:h-56">
+              <div className="flex h-48 w-full items-center justify-center overflow-hidden bg-[#F5FBFB] md:h-56 p-4 ">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover rounded-lg"
                   onError={(
                     e: React.SyntheticEvent<HTMLImageElement, Event>,
                   ) => {

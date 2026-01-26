@@ -16,11 +16,12 @@ const Partners = () => {
     return (
         <section className="bg-white px-6 md:px-20 xl:px-48 py-12 md:py-16 overflow-hidden">
             <div className="max-w-full px-0 text-center">
-                <motion.h1
+                <div className="mb-[85px]">
+                    <motion.h1
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8, duration: 0.8 }}
-                  className=" mb-6 font-poppins text-xl font-medium leading-tight text-[#333333] md:text-2xl lg:text-5xl"
+                  className=" mb-3 font-poppins text-xl font-medium leading-tight text-[#333333] md:text-2xl lg:text-5xl"
                 >
                     Our Partners in Care
                 </motion.h1>
@@ -29,17 +30,19 @@ const Partners = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1.1, duration: 0.8 }}
-                  className="mx-auto mb-[100px] max-w-5xl font-poppins text-lg font-medium leading-relaxed text-gray-600 md:text-xl"
+                  className="mx-auto text-[24px] text-[#33333399] "
                 >
                   Together, we empower motherhood with expertise.
                 </motion.p>
+                </div>
+                
 
                 {/* Logo Container - Infinite Scroll Wrapper */}
-                <div className="relative w-full overflow-hidden">
+                <div className="relative w-full overflow-hidden mb-[65px]" >
 
-                    <div className="absolute left-0 top-0 h-full w-8 md:w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-20 pointer-events-none" />
+                    <div className="absolute left-0 top-0 h-full w-8 md:w-[800px] bg-gradient-to-r from-white via-white/80 to-transparent z-20 pointer-events-none" />
 
-                    <div className="absolute right-0 top-0 h-full w-8 md:w-32 bg-gradient-to-l from-white via-white/80 to-transparent z-20 pointer-events-none" />
+                    <div className="absolute right-0 top-0 h-full w-8 md:w-[800px] bg-gradient-to-l from-white via-white/80 to-transparent z-20 pointer-events-none" />
 
 
                     {/* The Moving Track */}
@@ -56,12 +59,12 @@ const Partners = () => {
                         {duplicatedPartners.map((partner, index) => (
                             <div
                                 key={index}
-                                className="bg-white relative z-10 p-4 rounded-xl border border-slate-200/80 flex items-center justify-center w-48 h-24 shadow-sm"
+                                className="bg-white relative z-10 p-4 rounded-xl border border-slate-200/80 flex items-center justify-center w-48 h-28 shadow-sm"
                             >
                                 <img
                                     src={partner.logo}
                                     alt={partner.name}
-                                    className="max-h-10 md:max-h-16 max-w-[80%] object-contain opacity-90 hover:opacity-100 transition-all duration-100"
+                                    className="max-h-10 md:max-h-full max-w-full object-cover opacity-90 hover:opacity-100 transition-all duration-100"
                                 />
                             </div>
                         ))}

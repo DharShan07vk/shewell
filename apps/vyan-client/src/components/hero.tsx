@@ -4,7 +4,7 @@ import { InteractiveButton } from "./ui/interactive-button";
 
 export default function Hero(): JSX.Element {
   return (
-    <section className="relative h-[500px] w-full overflow-hidden bg-white sm:h-[600px] md:h-[700px] lg:h-[800px] xl:h-[880px] pl-2 md:pl-12 pt-12 pb-8 lg:pl-12 lg:pt-12 lg:pb-12">
+    <section className="relative h-[500px] w-full overflow-hidden bg-white sm:h-[600px] md:h-[700px] lg:h-[800px] xl:h-[880px] pl-2 md:pl-[100px] lg:pl-[100px] pt-12 pb-8  lg:pt-12 lg:pb-12">
       <div
         className=""
       >
@@ -13,7 +13,7 @@ export default function Hero(): JSX.Element {
           leading-tight text-[#114668] sm:text-[44px] md:text-[48px]
           lg:text-[56px] xl:text-[72px] 2xl:text-[88px]"
         >
-          Empowering <span className="font-epicgant text-[#51AF5A]">Women</span>
+          Empowering <span className="font-epicgant font-medium text-[#51AF5A]">Women</span>
           , <br />
           Nurturing Families
         </h1>
@@ -30,7 +30,7 @@ export default function Hero(): JSX.Element {
       </div>
 
       {/* Right-side hero image */}
-      <div className="pointer-events-none absolute right-0 top-0 hidden h-full w-[40%] md:block">
+      <div className="pointer-events-none absolute right-0 top-0 hidden h-full w-[40%] md:block z-30">
         <img
           src="/home/hero.webp"
           alt="Expecting mother"
@@ -39,11 +39,11 @@ export default function Hero(): JSX.Element {
         />
       </div>
       <div
-        className="pointer-events-none   
+        className="pointer-events-none  leading-none
         bg-[linear-gradient(180deg,#114668_1%,#FFFFFF_85%)] bg-clip-text
-        font-poppins line-height-[0.5] text-[100px]
+        font-poppins  text-[200px]
         font-semibold text-transparent
-        opacity-20  lg:left-0 lg:text-[180px] xl:left-0 xl:text-[210px] 2xl:text-[220px]"
+        opacity-20  lg:left-0 lg:text-[200px] xl:left-0 xl:text-[250px] 2xl:text-[260px]"
       >
         #shewell
       </div>

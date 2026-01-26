@@ -79,13 +79,13 @@ const ServicesCarousel = () => {
   };
 
   return (
-    <section className="px-48 py-6 relative w-full overflow-hidden bg-white">
-      <div className="z-10 max-w-full px-0 text-center ">
+    <section className="px-[100px] py-6 relative w-full overflow-hidden bg-white">
+      <div className="z-10 max-w-full px-0 text-center">
         <motion.h1
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
-          className=" mb-6 font-poppins text-xl font-medium leading-tight text-[#333333] md:text-2xl lg:text-5xl"
+          className=" mb-6 font-poppins text-xl font-medium leading-tight text-[#333333] md:text-2xl lg:text-[54px]"
         >
           India's Wellness Circle For Women Who Mother With Intention
         </motion.h1>
@@ -94,7 +94,7 @@ const ServicesCarousel = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.1, duration: 0.8 }}
-          className="mx-auto mb-[100px] max-w-5xl font-poppins text-lg font-medium leading-relaxed text-gray-600 md:text-xl"
+          className=" text-[24px] text-[#33333399] md:text-[26px] lg:text-[28px] mb-24 px-4 md:px-6 lg:px-6"
         >
           Tap into curated care programs and ancient wisdom to raise happy moms
           and healthy babies with expert-led sessions and wellness products.

@@ -15,7 +15,7 @@ const overallVariant = {
 
 const WellnessCircle = () => {
     return (
-        <div className="py-12 md:py-16 px-6 md:px-20 xl:px-48 w-full bg-white flex flex-col items-center overflow-hidden">
+        <div className="py-12 md:py-16  w-full bg-white flex flex-col items-center overflow-hidden">
             {/* 1. Illustration Area */}
             <motion.div
                 initial={{ opacity: 0, y: 40 }}
@@ -27,7 +27,7 @@ const WellnessCircle = () => {
                 <img
                     src="/home/Vector.png"
                     alt="Mother and baby illustration"
-                    className="w-full h-auto object-cover mx-auto opacity-20 hover:opacity-100 transition-opacity ease-in-out cursor-pointer"
+                    className="w-full h-auto object-cover mx-auto opacity-20 hover:opacity-100 transition-opacity ease-in-out cursor-pointer mb-8"
                 />
             </motion.div>
 

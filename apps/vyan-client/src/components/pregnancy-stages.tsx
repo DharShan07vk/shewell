@@ -44,7 +44,7 @@ export default function PregnancyStages() {
     const [hoveredId, setHoveredId] = useState<string | null>(null);
 
     return (
-        <section className="px-6 md:px-20 xl:px-48 pt-2 md:pt-6 pb-12 md:pb-16 w-full bg-white overflow-hidden">
+        <section className="px-6 px-[100px] pt-2 md:pt-6 pb-12 md:pb-16 w-full bg-white overflow-hidden">
             <div className="mx-auto px-0">
 
                 {/* Stages Cards */}

@@ -90,12 +90,12 @@ export default function PlatformSection() {
   };
 
   return (
-    <section className="px-6 md:px-20 xl:px-48 py-12 md:py-16 w-full overflow-hidden">
-      <div className="mb-16 text-center">
-        <h3 className="mb-3 text-2xl font-medium text-gray-900 md:mb-4 md:text-3xl lg:text-4xl">
+    <section className="px-[100px] py-12 md:py-16 w-full overflow-hidden">
+      <div className="mb-32 text-center">
+        <h3 className="mb-3 text-2xl font-medium text-gray-900 md:mb-4 md:text-4xl lg:text-[54px]">
           Courses That Support You - Every Step of the Way
         </h3>
-        <p className="mx-auto max-w-2xl text-sm text-gray-500 md:text-base lg:text-lg">
+        <p className="mx-auto text-[#33333399] text-[24px]  ">
           From fertility to first steps – evidence-based, heart-led,
           expert-designed just for you.
         </p>
