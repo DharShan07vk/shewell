@@ -46,12 +46,12 @@ const WhyShewell = () => {
     const [hoveredId, setHoveredId] = useState<number | null>(null);
 
     return (
-        <section className="bg-[#F5F5F5] py-20 px-0">
+        <section className="bg-[#F5F5F5] py-12 md:py-16 px-6 md:px-20 xl:px-48 overflow-hidden">
             <div className="w-full flex flex-col lg:flex-row gap-8 items-stretch h-full">
                 {/* Left Image Section */}
                 <div className="w-full lg:w-[50%] relative rounded-3xl overflow-hidden shadow-lg h-[500px] lg:h-[500px]">
                     <Image
-                        src="/home/why-shewell.png"
+                        src="/home/why-shewell.webp"
                         alt="Why Shewell"
                         fill
                         className="object-cover"

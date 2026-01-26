@@ -3,61 +3,61 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import { InteractiveButton } from "./ui/interactive-button";
 
 const COURSES_DATA = [
   {
     id: 1,
-    category: "Child Healthcare",
-    mainImage: "/home/Group 39661.png",
+    category: "Woman Wellbeing",
+    mainImage: "/home/service-wellbeing.webp",
     services: [
       { label: "Lifestyle Issue", position: "top-[10%] left-[5%]" },
-      { label: "Nutritional Issue", position: "top-[10%] right-[5%]" },
-      { label: "Development Challenge", position: "bottom-[20%] left-[5%]" },
-      { label: "Behavioral Challenge", position: "bottom-[20%] right-[5%]" },
+      { label: "Mental Wellbeing", position: "top-[10%] right-[5%]" },
+      { label: "Overweight", position: "bottom-[20%] left-[5%]" },
+      { label: "Physical Health", position: "bottom-[20%] right-[5%]" },
     ],
   },
   {
     id: 2,
-    category: "Woman Wellbeing",
-    mainImage: "/home/Group 39661-2.png",
+    category: "Prenatal Care",
+    mainImage: "/home/service-prenatal.webp",
     services: [
-      { label: "Mental Wellbeing", position: "top-[10%] right-[5%]" },
-      { label: "Physical Health", position: "bottom-[20%] right-[5%]" },
-      { label: "Lifestyle Issue", position: "top-[10%] left-[5%]" },
-      { label: "Overweight", position: "bottom-[20%] left-[5%]" },
+      { label: "Pregnancy Loss", position: "top-[10%] right-[5%]" },
+      { label: "Prenatal Weight Issue", position: "bottom-[20%] right-[5%]" },
+      { label: "Childbirth Education", position: "top-[10%] left-[5%]" },
+      { label: "Gestational Diabetes", position: "bottom-[20%] left-[5%]" },
     ],
   },
   {
     id: 3,
-    category: "Pregnancy Care",
-    mainImage: "/home/Group 39661-3.png",
+    category: "Postnatal Care",
+    mainImage: "/home/service-postnatal.webp",
     services: [
-      { label: "Prenatal Care", position: "top-[10%] left-[5%]" },
-      { label: "Nutrition Guide", position: "top-[10%] right-[5%]" },
-      { label: "Exercise Programs", position: "bottom-[20%] left-[5%]" },
-      { label: "Mental Support", position: "bottom-[20%] right-[5%]" },
+      { label: "Lactation Counselling", position: "top-[10%] left-[5%]" },
+      { label: "Postpartum Mental Wellbeing", position: "top-[10%] right-[5%]" },
+      { label: "Postnatal Weight Loss", position: "bottom-[20%] left-[5%]" },
+      { label: "Postnatal Recovery", position: "bottom-[20%] right-[5%]" },
     ],
   },
   {
     id: 4,
-    category: "Postnatal Support",
-    mainImage: "/home/Group 39661-4.png",
+    category: "PCOS",
+    mainImage: "/home/service-pcos.webp",
     services: [
-      { label: "Recovery Care", position: "top-[10%] left-[5%]" },
-      { label: "Breastfeeding", position: "top-[10%] right-[5%]" },
-      { label: "Baby Care", position: "bottom-[20%] left-[5%]" },
-      { label: "Mental Health", position: "bottom-[20%] right-[5%]" },
+      { label: "Polycystic Ovary Syndrome", position: "top-[10%] left-[5%]" },
+      { label: "Psychological Support", position: "top-[10%] right-[5%]" },
+      { label: "Overweight Issue", position: "bottom-[20%] left-[5%]" },
     ],
   },
   {
     id: 5,
-    category: "Family Wellness",
-    mainImage: "/home/Group 39661-5.png",
+    category: "Child Healthcare",
+    mainImage: "/home/service-child.webp",
     services: [
       { label: "Parenting Tips", position: "top-[10%] left-[5%]" },
-      { label: "Family Bonding", position: "top-[10%] right-[5%]" },
-      { label: "Child Development", position: "bottom-[20%] left-[5%]" },
-      { label: "Healthy Habits", position: "bottom-[20%] right-[5%]" },
+      { label: "Development Challenges", position: "top-[10%] right-[5%]" },
+      { label: "Nutritional Issue", position: "bottom-[20%] left-[5%]" },
+      { label: "Behavioral Challenges", position: "bottom-[20%] right-[5%]" },
     ],
   },
 ];
@@ -79,7 +79,7 @@ const ServicesCarousel = () => {
   };
 
   return (
-    <section className="relative mt-[70px] min-h-screen w-full overflow-hidden bg-white py-12 md:py-20">
+    <section className="px-48 py-6 relative w-full overflow-hidden bg-white">
       <div className="z-10 max-w-full px-0 text-center ">
         <motion.h1
           initial={{ opacity: 0, y: 10 }}
@@ -145,8 +145,9 @@ const ServicesCarousel = () => {
                                     hover:bg-white/30 md:h-[80px] md:w-[300px]
                                     md:px-5 lg:h-[100px] lg:w-[380px] ${service.position}`}
                 >
-                  <div className="flex-shrink-0 rounded-full bg-[#167D71] p-2 text-white md:p-3">
-                    <ArrowUpRight size={18} className="md:h-5 md:w-5" />
+                  <div className="flex-shrink-0 p-2 text-white md:p-3">
+                    {/* <ArrowUpRight size={18} className="md:h-5 md:w-5" /> */}
+                    <InteractiveButton />
                   </div>
                   <span className="whitespace-nowrap text-sm font-semibold text-gray-800 md:text-base lg:text-lg">
                     {service.label}
@@ -170,7 +171,7 @@ const ServicesCarousel = () => {
             </button>
           </div>
 
-          {/* Dots Indicator */}
+          {/* Dots Indicator
           <div className="mb-12 flex gap-2 md:mb-16">
             {COURSES_DATA.map((_, idx) => (
               <button
@@ -182,9 +183,8 @@ const ServicesCarousel = () => {
                   }`}
               />
             ))}
-          </div>
+          </div> */}
 
-          {/* Footer Text */}
         </div>
       </div>
     </section>

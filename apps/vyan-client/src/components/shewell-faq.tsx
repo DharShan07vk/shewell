@@ -33,8 +33,8 @@ const ShewellFAQ = () => {
     const tabs = ["What We Offer", "Plans & Pricing", "Trust & Safety"];
 
     return (
-        <section className="bg-white min-h-screen py-20 px-0">
-            <div className="w-full o">
+        <section className="bg-white px-6 md:px-20 xl:px-48 py-12 md:py-16 overflow-hidden">
+            <div className="w-full">
                 {/* Title Section */}
                 <div className="text-center mb-12">
                     <h2 className="text-4xl font-medium text-gray-800 mb-2">

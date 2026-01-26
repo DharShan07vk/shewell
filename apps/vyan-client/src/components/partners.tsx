@@ -4,81 +4,72 @@ import { motion } from "framer-motion";
 
 const Partners = () => {
     const partners = [
-        { name: "Startup India", logo: "/images/fundedby/funded1-active.png" },
-        { name: "DST NIDHI", logo: "/images/fundedby/funded2-active.png" },
+        { name: "IIT Mandi", logo: "/images/trustees/iitmandi.webp" },
+        { name: "DST NIDHI", logo: "/images/trustees/dstnidhi.webp" },
+        { name: "Meit", logo: "/images/trustees/meit.webp" },
+        { name: "BBCentre", logo: "/images/trustees/bbc-logo.webp" },
+        { name: "Startup India", logo: "/images/trustees/startup.webp" },
     ];
 
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.3,
-            },
-        },
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 50, scale: 0.8 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            transition: {
-                duration: 0.6,
-                ease: [0.25, 0.46, 0.45, 0.94] as const,
-            },
-        },
-    };
+    const duplicatedPartners = [...partners, ...partners];
 
     return (
-        <section className="bg-white py-16">
-            <div className="max-w-7xl mx-auto px-0">
-                {/* Section Heading */}
-                <motion.h2
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    className="text-center text-3xl font-medium text-gray-800 tracking-wider mb-12"
+        <section className="bg-white px-6 md:px-20 xl:px-48 py-12 md:py-16 overflow-hidden">
+            <div className="max-w-full px-0 text-center">
+                <motion.h1
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8, duration: 0.8 }}
+                  className=" mb-6 font-poppins text-xl font-medium leading-tight text-[#333333] md:text-2xl lg:text-5xl"
                 >
-                    FUNDED BY
-                </motion.h2>
+                    Our Partners in Care
+                </motion.h1>
+                
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.1, duration: 0.8 }}
+                  className="mx-auto mb-[100px] max-w-5xl font-poppins text-lg font-medium leading-relaxed text-gray-600 md:text-xl"
+                >
+                  Together, we empower motherhood with expertise.
+                </motion.p>
 
-                {/* Logo Container */}
-                <motion.div
-                    className="flex flex-wrap justify-center items-center gap-8 md:gap-16"
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                >
-                    {partners.map((partner, index) => (
-                        <motion.div
-                            key={index}
-                            variants={itemVariants}
-                            whileHover={{
-                                scale: 1.05,
-                                y: -5,
-                                boxShadow: "0 10px 30px rgba(0,0,0,0.1)"
-                            }}
-                            className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center justify-center w-64 h-32 cursor-pointer"
-                        >
-                            <motion.img
-                                src={partner.logo}
-                                alt={partner.name}
-                                className="max-h-full max-w-full object-contain"
-                                initial={{ filter: "grayscale(100%)" }}
-                                whileHover={{ filter: "grayscale(0%)" }}
-                                transition={{ duration: 0.3 }}
-                            />
-                        </motion.div>
-                    ))}
-                </motion.div>
+                {/* Logo Container - Infinite Scroll Wrapper */}
+                <div className="relative w-full overflow-hidden">
+
+                    <div className="absolute left-0 top-0 h-full w-8 md:w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-20 pointer-events-none" />
+
+                    <div className="absolute right-0 top-0 h-full w-8 md:w-32 bg-gradient-to-l from-white via-white/80 to-transparent z-20 pointer-events-none" />
+
+
+                    {/* The Moving Track */}
+                    <motion.div
+                        className="flex gap-4 md:gap-8 w-max py-4"
+                        animate={{ x: ["20%", "-50%"] }}
+                        transition={{
+                            ease: "easeInOut", 
+                            duration: 10,      
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                        }}
+                    >
+                        {duplicatedPartners.map((partner, index) => (
+                            <div
+                                key={index}
+                                className="bg-white relative z-10 p-4 rounded-xl border border-slate-200/80 flex items-center justify-center w-48 h-24 shadow-sm"
+                            >
+                                <img
+                                    src={partner.logo}
+                                    alt={partner.name}
+                                    className="max-h-10 md:max-h-16 max-w-[80%] object-contain opacity-90 hover:opacity-100 transition-all duration-100"
+                                />
+                            </div>
+                        ))}
+                    </motion.div>
+                </div>
             </div>
         </section>
     );
 };
 
 export default Partners;
-

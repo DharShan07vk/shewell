@@ -4,7 +4,7 @@ import { InteractiveButton } from "./ui/interactive-button";
 
 export default function Hero(): JSX.Element {
   return (
-    <section className="relative  h-[500px] w-full overflow-hidden bg-white sm:h-[600px] md:h-[700px] lg:h-[800px] xl:h-[880px] pl-2 md:pl-12 pt-12 pb-8 lg:pl-12 lg:pt-12 lg:pb-12">
+    <section className="relative h-[500px] w-full overflow-hidden bg-white sm:h-[600px] md:h-[700px] lg:h-[800px] xl:h-[880px] pl-2 md:pl-12 pt-12 pb-8 lg:pl-12 lg:pt-12 lg:pb-12">
       <div
         className=""
       >
@@ -27,6 +27,16 @@ export default function Hero(): JSX.Element {
           wellbeing, and mindful living—curated by experts and designed for
           every stage of womanhood.
         </p>
+      </div>
+
+      {/* Right-side hero image */}
+      <div className="pointer-events-none absolute right-0 top-0 hidden h-full w-[40%] md:block">
+        <img
+          src="/home/hero.webp"
+          alt="Expecting mother"
+          className="h-full w-full object-contain object-right-bottom"
+          loading="eager"
+        />
       </div>
       <div
         className="pointer-events-none   
@@ -57,12 +67,12 @@ export default function Hero(): JSX.Element {
           </div>
         </Link>
       </div>
-      {/* Background Circle - Always 40vw responsive */}
+      {/* Background Circle - Always 40vw responsive
       <div
         className="absolute right-[-35vw] top-[50%] z-20 hidden translate-y-[-50%] rounded-full bg-[#9D9D8D] md:block"
         style={{ width: "80vw", height: "80vw" }}
       />
-      {/* Hero Image - Always 40% of screen width */}
+      
       <div
         className="absolute right-0 top-0 z-30 hidden h-full md:block"
         style={{ width: "40%" }}
@@ -72,7 +82,7 @@ export default function Hero(): JSX.Element {
           alt="SheFit Hero"
           className="h-full w-full object-contain object-right-top transition-transform duration-500 hover:scale-[1.02]"
         />
-      </div>
+      </div> */}
     </section>
   );
 }
