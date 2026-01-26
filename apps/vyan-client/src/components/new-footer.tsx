@@ -18,16 +18,20 @@ export default function NewFooter() {
             </div>
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://x.com/shewellcare"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 text-gray-400 transition-colors hover:text-white"
               >
                 <div className="rounded-full bg-white p-2 text-black">
-                  <img src="/icons/x.svg" alt="Twitter" width={18} height={18} />
+                  <img src="/icons/x.svg" alt="X" width={18} height={18} />
                 </div>
-                <span className="text-sm">Twitter</span>
+                <span className="text-sm">X</span>
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/shewellcare"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 text-gray-400 transition-colors hover:text-white"
               >
                 <div className="rounded-full bg-white p-2 text-black">
@@ -36,16 +40,20 @@ export default function NewFooter() {
                 <span className="text-sm">Instagram</span>
               </a>
               <a
-                href="#"
+                href="https://www.facebook.com/people/Shewellcare/61566486577092"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 text-gray-400 transition-colors hover:text-white"
               >
                 <div className="rounded-full bg-white p-2 text-black">
-                  <img src="/icons/linkedin.svg" alt="LinkedIn" width={18} height={18} />
+                  <img src="/icons/facebook.svg" alt="Facebook" width={18} height={18} />
                 </div>
-                <span className="text-sm">LinkedIn</span>
+                <span className="text-sm">Facebook</span>
               </a>
               <a
-                href="#"
+                href="https://www.youtube.com/@Shewellcare"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 text-gray-400 transition-colors hover:text-white"
               >
                 <div className="rounded-full bg-white p-2 text-black">
@@ -59,18 +67,18 @@ export default function NewFooter() {
           {/* Links & Contact aligned horizontally */}
           <div className="flex flex-col gap-10 lg:w-2/3 lg:flex-row lg:justify-end lg:gap-16">
             <div>
-              <h4 className="mb-6 text-2xl font-light">Quick links</h4>
+              <h4 className="mb-6 text-2xl font-light">Quick Links</h4>
               <ul className="flex flex-col gap-4 text-gray-300">
                 <li>
                   <a href="#" className="transition-colors hover:text-[#167D71]">
                     About Us
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a href="#" className="transition-colors hover:text-[#167D71]">
                     Blog
                   </a>
-                </li>
+                </li> */}
                 <li>
                   <a href="#" className="transition-colors hover:text-[#167D71]">
                     Recipe
