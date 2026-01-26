@@ -1,5 +1,3 @@
-
-
 "use client";
 import UIFormInput from "@repo/ui/src/@/components/form/input";
 import UIFormLabel from "@repo/ui/src/@/components/form/label";
@@ -67,7 +65,7 @@ const LoginForm = () => {
   }
 
   const USER = env.NEXT_PUBLIC_USER;
-  const PROFESSIONAL = env.NEXT_PUBLIC_PROFESSIONAL
+  const PROFESSIONAL = env.NEXT_PUBLIC_PROFESSIONAL;
 
   const loginHandler = async ({
     email,
@@ -79,8 +77,6 @@ const LoginForm = () => {
       password,
       redirect: false,
     });
-
-    
 
     if (signInData?.ok) {
       toast({
@@ -99,8 +95,8 @@ const LoginForm = () => {
   };
 
   const loginErrorHandler = (e: unknown) => {
-    console.log("loginErrorHandler", e),
-      (errorMessage = "Invalid Email or Password");
+    (console.log("loginErrorHandler", e),
+      (errorMessage = "Invalid Email or Password"));
   };
 
   const [openDialog, setOpenDialog] = useState<boolean>(false);
@@ -118,16 +114,18 @@ const LoginForm = () => {
         </div>
       )}
 
-      <div className="mb-6 text-center font-inter text-2xl font-semibold md:mb-8 md:text-left xl:mb-9 2xl:mb-[50px] 2xl:text-3xl">
+      <div className="mb-6 text-center font-poppins text-2xl font-semibold text-[#333333] md:mb-8 md:text-left xl:mb-9 2xl:mb-[50px] 2xl:text-3xl">
         Login into your account
       </div>
       <form
-        className="rounded-md border-2 border-primary p-4 md:p-6"
+        className="rounded-3xl border border-gray-100 bg-white p-6 shadow-[0_4px_20px_rgba(0,0,0,0.08)] md:p-10"
         onSubmit={handleSubmit(loginHandler, loginErrorHandler)}
       >
         <div className="flex flex-col gap-6">
           <div>
-            <UIFormLabel className="">Email*</UIFormLabel>
+            <UIFormLabel className="font-poppins text-sm font-medium text-[#333333]">
+              Email*
+            </UIFormLabel>
             <Controller
               name="email"
               control={control}
@@ -139,9 +137,12 @@ const LoginForm = () => {
                       value={field.value}
                       onChange={field.onChange}
                       placeholder="Enter your email id"
+                      className="rounded-xl border-gray-200 bg-gray-50 font-inter focus:border-[#00898F] focus:bg-white"
                     />
                     {errors && errors.email && (
-                      <p className="text-red-500">{errors.email.message}</p>
+                      <p className="mt-1 text-xs text-red-500">
+                        {errors.email.message}
+                      </p>
                     )}
                   </>
                 );
@@ -149,7 +150,9 @@ const LoginForm = () => {
             />
           </div>
           <div className="">
-            <UIFormLabel>Password*</UIFormLabel>
+            <UIFormLabel className="font-poppins text-sm font-medium text-[#333333]">
+              Password*
+            </UIFormLabel>
             <Controller
               name="password"
               control={control}
@@ -160,9 +163,12 @@ const LoginForm = () => {
                       value={field.value}
                       onChange={field.onChange}
                       placeholder="Enter your password"
+                      className="rounded-xl border-gray-200 bg-gray-50 font-inter focus:border-[#00898F] focus:bg-white"
                     />
                     {errors && errors.password && (
-                      <p className="text-red-500">{errors.password.message}</p>
+                      <p className="mt-1 text-xs text-red-500">
+                        {errors.password.message}
+                      </p>
                     )}
                   </>
                 );
@@ -170,35 +176,36 @@ const LoginForm = () => {
             />
           </div>
           <Button
-            className="mx-auto w-full md:w-[324px]"
+            className="mx-auto w-full rounded-xl py-6 font-poppins text-base font-semibold md:w-[324px]"
             variant="OTP"
             type="submit"
           >
             Login
           </Button>
 
-          <div className="text-center font-inter text-base font-normal">
+          <div className="text-center font-inter text-base font-normal text-[#666666]">
             Don't have SheWellCare account
-          <Link href="/auth/register">
-          <div
-            //  onClick={() => handleOpenDialog()} 
-            className="ml-4 mt-2  block font-poppins text-base font-medium text-primary md:mt-0 md:inline cursor-pointer" >
-              Create Account
-              <svg
-                className="ml-1 inline"
-                width="15"
-                height="8"
-                viewBox="0 0 15 8"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+            <Link href="/auth/register">
+              <div
+                //  onClick={() => handleOpenDialog()}
+                className="ml-2 mt-2 block cursor-pointer font-poppins text-base font-medium text-[#00898F] hover:underline md:mt-0 md:inline"
               >
-                <path
-                  d="M1.13634 3.36357L12.3273 3.36357L10.2318 1.26807C9.98332 1.01959 9.98332 0.616643 10.2318 0.368122C10.4803 0.119643 10.8833 0.119643 11.1318 0.368122L14.3136 3.54994C14.5621 3.79842 14.5621 4.20136 14.3136 4.44989L11.1318 7.6317C11.0075 7.75596 10.8447 7.81812 10.6818 7.81812C10.5189 7.81812 10.3561 7.75596 10.2318 7.6317C9.98332 7.38322 9.98332 6.98028 10.2318 6.73176L12.3273 4.6363L1.13634 4.6363C0.7849 4.6363 0.499979 4.35138 0.499979 3.99993C0.499979 3.64849 0.7849 3.36357 1.13634 3.36357Z"
-                  fill="#00898F"
-                />
-              </svg>
-            </div>
-          </Link>
+                Create Account
+                <svg
+                  className="ml-1 inline"
+                  width="15"
+                  height="8"
+                  viewBox="0 0 15 8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1.13634 3.36357L12.3273 3.36357L10.2318 1.26807C9.98332 1.01959 9.98332 0.616643 10.2318 0.368122C10.4803 0.119643 10.8833 0.119643 11.1318 0.368122L14.3136 3.54994C14.5621 3.79842 14.5621 4.20136 14.3136 4.44989L11.1318 7.6317C11.0075 7.75596 10.8447 7.81812 10.6818 7.81812C10.5189 7.81812 10.3561 7.75596 10.2318 7.6317C9.98332 7.38322 9.98332 6.98028 10.2318 6.73176L12.3273 4.6363L1.13634 4.6363C0.7849 4.6363 0.499979 4.35138 0.499979 3.99993C0.499979 3.64849 0.7849 3.36357 1.13634 3.36357Z"
+                    fill="#00898F"
+                  />
+                </svg>
+              </div>
+            </Link>
           </div>
         </div>
       </form>
@@ -207,14 +214,16 @@ const LoginForm = () => {
         <div className="mb-1 font-inter text-sm font-normal 2xl:text-base">
           By proceeding, you agree to the{" "}
           <Link
-            href="/terms" target="_blank"
+            href="/terms"
+            target="_blank"
             className="font-inter text-sm font-normal text-primary 2xl:text-base"
           >
             Terms and Conditions
           </Link>{" "}
           and{" "}
           <Link
-            href="/" target="_blank"
+            href="/"
+            target="_blank"
             className="font-inter text-sm font-normal text-primary 2xl:text-base"
           >
             Privacy Policy
@@ -235,7 +244,8 @@ const LoginForm = () => {
           </Link>
           <Link
             className="font-inter text-sm font-normal 2xl:text-base"
-            href="/terms" target="_blank"
+            href="/terms"
+            target="_blank"
           >
             Terms
           </Link>
@@ -246,4 +256,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
