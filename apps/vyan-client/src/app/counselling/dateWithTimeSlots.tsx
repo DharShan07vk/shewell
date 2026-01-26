@@ -114,7 +114,10 @@ const DayNavigatorWithTimeSlots = ({
 
   const filteredTimeSlots = filterAvailableTimeSlots(
     timeSlots,
-    timeSlotsData?.bookedSlots ?? [],
+    timeSlotsData?.bookedSlots.map((slot) => ({
+      startingTime: new Date(slot.startTime),
+      endingTime: new Date(slot.endTime),
+    })),
   );
 
   const { data: minTimeDurationData } =
