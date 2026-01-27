@@ -241,11 +241,14 @@ export const sessionRouter = createTRPCRouter({
               fileUrl: true,
             },
           },
-          bannerMediaId: true,
-          bannerMedia: {
+          banners: {
             select: {
-              id: true,
-              fileUrl: true,
+              media: {
+                select: {
+                  id: true,
+                  fileUrl: true,
+                },
+              },
             },
           },
           overview: true,

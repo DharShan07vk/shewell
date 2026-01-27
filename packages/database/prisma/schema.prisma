@@ -578,7 +578,7 @@ model Media {
   testimonials                 Testimonials[]                             @relation("TestimonialMediaImage")
   specializationParentCategory ProfessionalSpecializationParentCategory[]
   sessionThumbnails            Session[]                                  @relation("SessionThumbnail")
-  sessionBanners               Session[]                                  @relation("SessionBanner")
+  sessionBanners               SessionBanner[]
 }
 
 enum DocumentType {
@@ -879,11 +879,11 @@ model Session {
   status      SessionStatus @default(DRAFT)
 
   // Media fields
+  // Media fields
   thumbnailMediaId  String?
   thumbnailMedia    Media?   @relation("SessionThumbnail", fields: [thumbnailMediaId], references: [id])
   
-  bannerMediaId     String?
-  bannerMedia       Media?   @relation("SessionBanner", fields: [bannerMediaId], references: [id])
+  banners           SessionBanner[]
   
   // Content fields
   overview          String?  @db.Text
@@ -900,6 +900,21 @@ model Session {
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model SessionBanner {
+  id        String   @id @default(cuid())
+  
+  sessionId String
+  session   Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  
+  mediaId   String
+  media     Media    @relation(fields: [mediaId], references: [id])
+  
+  order     Int      @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model SessionRegistration {

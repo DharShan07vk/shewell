@@ -9,10 +9,11 @@ export interface ISession {
   price: number; // Decimal in schema, number in TS usually ok, or string/Decimal type
   status: SessionStatus;
   categoryId: string;
-
+  banners?: { media: { id: string; fileUrl: string | null } }[];
   // New fields for enhancements
   thumbnailMediaId?: string | null;
-  bannerMediaId?: string | null;
+  thumbnailMedia?: { id: string; fileUrl: string | null } | null;
+  bannerMediaIds?: string[];
   overview?: string | null;
   meetingLink?: string | null;
   language?: string;

@@ -17,10 +17,10 @@ const createSessionSchema = (type?: SessionType) => {
       price: z.coerce.number().min(0, 'Price must be 0 or greater'),
       status: z.nativeEnum(SessionStatus),
       categoryId: z.string().min(1, 'Category is required'),
-
+      banners: z.array(z.object({ media: z.object({ id: z.string(), fileUrl: z.string().nullable() }) })).optional(),
       // New fields
       thumbnailMediaId: z.string().optional().nullable(),
-      bannerMediaId: z.string().optional().nullable(),
+      bannerMediaIds: z.array(z.string()).optional(),
       overview: z.string().optional().nullable(),
       meetingLink: z.string().url('Meeting link must be a valid URL').optional().nullable().or(z.literal('')),
       language: z.string().default('English'),
@@ -60,7 +60,9 @@ export const createSession = async (data: ISession) => {
     };
   }
 
-  const { title, slug, startAt, endAt, price, status, categoryId, thumbnailMediaId, bannerMediaId, overview, meetingLink, language, type } = data;
+  const { title, slug, startAt, endAt, price, status, categoryId, thumbnailMediaId, bannerMediaIds, overview, meetingLink, language, type, banners } = data;
+
+  console.log('createSession data:', { bannerMediaIds, banners });
 
   const Schema = createSessionSchema(type);
 
@@ -72,8 +74,9 @@ export const createSession = async (data: ISession) => {
     price,
     status,
     categoryId,
+    banners,
     thumbnailMediaId,
-    bannerMediaId,
+    bannerMediaIds,
     overview,
     meetingLink: meetingLink || null,
     language: language || 'English',
@@ -98,7 +101,9 @@ export const createSession = async (data: ISession) => {
         status,
         categoryId,
         thumbnailMediaId,
-        bannerMediaId,
+        banners: {
+          create: bannerMediaIds ? bannerMediaIds.map((id) => ({ mediaId: id })) : []
+        },
         overview,
         meetingLink: meetingLink || null,
         language: language || 'English',
@@ -130,7 +135,9 @@ export const updateSession = async (data: ISession) => {
     };
   }
 
-  const { id, title, slug, startAt, endAt, price, status, categoryId, thumbnailMediaId, bannerMediaId, overview, meetingLink, language, type } = data;
+  const { id, title, slug, startAt, endAt, price, status, categoryId, thumbnailMediaId, bannerMediaIds, overview, meetingLink, language, type, banners } = data;
+
+  console.log('updateSession data:', { id, bannerMediaIds, banners });
 
   if (!id) {
     return {
@@ -148,8 +155,9 @@ export const updateSession = async (data: ISession) => {
     price,
     status,
     categoryId,
+    banners,
     thumbnailMediaId,
-    bannerMediaId,
+    bannerMediaIds,
     overview,
     meetingLink: meetingLink || null,
     language: language || 'English',
@@ -164,6 +172,8 @@ export const updateSession = async (data: ISession) => {
   }
 
   try {
+    // For simplicity, delete existing banners and recreate
+    // In a more complex scenario, we might want to diff them
     await db.session.update({
       where: {
         id: id
@@ -177,7 +187,10 @@ export const updateSession = async (data: ISession) => {
         status,
         categoryId,
         thumbnailMediaId,
-        bannerMediaId,
+        banners: {
+          deleteMany: {}, // Clear existing
+          create: bannerMediaIds ? bannerMediaIds.map((id) => ({ mediaId: id })) : []
+        },
         overview,
         meetingLink: meetingLink || null,
         language: language || 'English',

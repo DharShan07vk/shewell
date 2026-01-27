@@ -24,7 +24,7 @@ export async function generateMetadata({
 
     return {
       title: `${session.title} | Shewell`,
-      description: session.category?.name || session.title,
+      description: session.overview || session.title,
     };
   } catch (error) {
     return {
@@ -119,6 +119,7 @@ export default async function SessionDetailPage({
         hasRecording={session.type === "RECORDING"}
         date={sessionDate}
         time={sessionTime}
+        banners={session.banners}
       />
 
       <SessionOverviewSection
@@ -137,11 +138,11 @@ export default async function SessionDetailPage({
       )}
 
       <BookingSection
-        imageUrl={
-          session.bannerMedia?.fileUrl || "/home/session-banner-sample.png"
-        }
+        banners={session.banners}
         price={Number(session.price)}
         sessionId={session.id}
+        isRegistered={userRegistration !== undefined}
+        meetingLink={session.meetingLink}
       />
       <FooterInfoSection terms={terms} />
 

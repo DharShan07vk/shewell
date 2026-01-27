@@ -331,16 +331,42 @@ export const createSessionOrder = async (bookingData: ISessionBookingData) => {
       };
     }
 
-    // Create pending SessionRegistration
-    await db.sessionRegistration.create({
-      data: {
+    // Check for existing registration before creating a new one
+    const existingRegistration = await db.sessionRegistration.findFirst({
+      where: {
         userId: user.id,
         sessionId: bookingData.sessionId,
-        paymentStatus: "PENDING",
-        amountPaid: sessionDetails.price,
-        razorpayOrderId: razorpayOrder.id,
       },
     });
+
+    if (existingRegistration) {
+      // If already has a successful payment, don't create a new one
+      if (existingRegistration.paymentStatus === "COMPLETED") {
+        return {
+          error: "You have already registered for this session.",
+        };
+      }
+
+      // If pending, we can either reuse the razorpayOrderId or create a new one.
+      // For simplicity, let's update the existing one with a new razorpayOrderId
+      await db.sessionRegistration.update({
+        where: { id: existingRegistration.id },
+        data: {
+          razorpayOrderId: razorpayOrder.id,
+        },
+      });
+    } else {
+      // Create pending SessionRegistration
+      await db.sessionRegistration.create({
+        data: {
+          userId: user.id,
+          sessionId: bookingData.sessionId,
+          paymentStatus: "PENDING",
+          amountPaid: sessionDetails.price,
+          razorpayOrderId: razorpayOrder.id,
+        },
+      });
+    }
 
     revalidatePath(`/session/${sessionDetails.slug}`);
 

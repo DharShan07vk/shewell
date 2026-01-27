@@ -30,9 +30,24 @@ const SessionForm = ({ hideDialog, session, categories }: SessionFormProps) => {
   const bannerFileInputRef = useRef<FileUpload>(null);
 
   const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(null);
-  const [bannerUrl, setBannerUrl] = useState<string | null>(null);
+  const [bannerUrls, setBannerUrls] = useState<{ id: string; url: string }[]>([]);
   const [isUploadingThumbnail, setIsUploadingThumbnail] = useState(false);
   const [isUploadingBanner, setIsUploadingBanner] = useState(false);
+
+  // Initialize URLs from existing session data
+  useEffect(() => {
+    if (session.thumbnailMedia?.fileUrl) {
+      setThumbnailUrl(session.thumbnailMedia.fileUrl);
+    }
+    if (session.banners) {
+      const existingBanners = session.banners.filter((b) => b.media.fileUrl).map((b) => ({ id: b.media.id || '', url: b.media.fileUrl! }));
+      setBannerUrls(existingBanners);
+      setValue(
+        'bannerMediaIds',
+        existingBanners.map((b) => b.id)
+      );
+    }
+  }, [session]);
 
   const { control, handleSubmit, watch, setValue } = useForm<ISession>({
     defaultValues: {
@@ -106,27 +121,43 @@ const SessionForm = ({ hideDialog, session, categories }: SessionFormProps) => {
   };
 
   const onSelectBanner = async (event: FileUploadSelectEvent) => {
+    // Check if we already have 2 banners
+    if (bannerUrls.length >= 2) {
+      showToast('error', 'Error', 'Maximum 2 banners allowed');
+      if (bannerFileInputRef.current) bannerFileInputRef.current.clear();
+      return;
+    }
+
     setIsUploadingBanner(true);
-    const file = event.files[0] as File;
+    const files = event.files as File[];
+    const newBanners = [...bannerUrls];
+    const newIds = watch('bannerMediaIds') || [];
 
     try {
-      const resp = await uploadProductImage(file.name, file.type, 'Session Banner');
-      const { id, fileUrl, presignedUrl } = resp;
-      if (!presignedUrl || !id || !fileUrl) {
-        throw new Error('Failed to get upload URL');
-      }
-      // Upload to S3
-      await fetch(presignedUrl, {
-        method: 'PUT',
-        body: file,
-        headers: {
-          'Content-Type': file.type
-        }
-      });
+      for (const file of files) {
+        if (newBanners.length >= 2) break;
 
-      setValue('bannerMediaId', id);
-      setBannerUrl(fileUrl);
-      showToast('success', 'Success', 'Banner uploaded successfully');
+        const resp = await uploadProductImage(file.name, file.type, 'Session Banner');
+        const { id, fileUrl, presignedUrl } = resp;
+        if (!presignedUrl || !id || !fileUrl) {
+          throw new Error('Failed to get upload URL');
+        }
+        // Upload to S3
+        await fetch(presignedUrl, {
+          method: 'PUT',
+          body: file,
+          headers: {
+            'Content-Type': file.type
+          }
+        });
+
+        newBanners.push({ id, url: fileUrl });
+        newIds.push(id);
+      }
+
+      setValue('bannerMediaIds', newIds);
+      setBannerUrls(newBanners);
+      showToast('success', 'Success', 'Banner(s) uploaded successfully');
     } catch (error) {
       showToast('error', 'Error', 'Failed to upload banner');
       console.error(error);
@@ -138,6 +169,15 @@ const SessionForm = ({ hideDialog, session, categories }: SessionFormProps) => {
     }
   };
 
+  const removeBanner = (id: string) => {
+    const updatedBanners = bannerUrls.filter((b) => b.id !== id);
+    setBannerUrls(updatedBanners);
+    setValue(
+      'bannerMediaIds',
+      updatedBanners.map((b) => b.id)
+    );
+  };
+
   const callServerAction = (data: ISession) => {
     if (session?.id) return updateSession({ ...data, id: session.id });
     else return createSession(data);
@@ -146,6 +186,7 @@ const SessionForm = ({ hideDialog, session, categories }: SessionFormProps) => {
   const submitForm = (data: ISession) => {
     // Remove duration field before submitting (it's UI-only)
     const { duration, ...submitData } = data;
+    console.log('SessionForm submitting data:', submitData);
 
     return callServerAction(submitData)
       .then((resp) => {
@@ -572,19 +613,37 @@ const SessionForm = ({ hideDialog, session, categories }: SessionFormProps) => {
 
         {/* Banner Upload */}
         <div className="field">
-          <label htmlFor="banner">Banner Image</label>
+          <label htmlFor="banner">Banner Images (Min-Max 2)</label>
           <Controller
-            name="bannerMediaId"
+            name="bannerMediaIds"
             control={control}
-            render={({ field }) => {
+            rules={{
+              validate: (value) => (value && value.length >= 1) || 'At least 1 banner image is required'
+            }}
+            render={({ field, fieldState }) => {
               return (
                 <div>
-                  <FileUpload ref={bannerFileInputRef} mode="basic" accept="image/*" maxFileSize={5000000} onSelect={onSelectBanner} disabled={isUploadingBanner} chooseLabel={isUploadingBanner ? 'Uploading...' : 'Choose Banner'} auto />
-                  {bannerUrl && (
-                    <div className="mt-2">
-                      <img src={bannerUrl} alt="Banner preview" style={{ maxWidth: '100%', maxHeight: '200px' }} />
-                    </div>
-                  )}
+                  <FileUpload
+                    ref={bannerFileInputRef}
+                    mode="basic"
+                    accept="image/*"
+                    maxFileSize={5000000}
+                    onSelect={onSelectBanner}
+                    disabled={isUploadingBanner || bannerUrls.length >= 2}
+                    chooseLabel={isUploadingBanner ? 'Uploading...' : 'Choose Banners'}
+                    multiple
+                    auto
+                  />
+                  {fieldState.error && <small className="p-error block mt-1">{fieldState.error.message}</small>}
+                  <div className="flex flex-wrap gap-4 mt-2">
+                    {bannerUrls.map((banner) => (
+                      <div key={banner.id} className="relative group">
+                        <img src={banner.url} alt="Banner preview" style={{ width: '200px', height: '120px', objectFit: 'cover', borderRadius: '8px' }} />
+                        <Button type="button" icon="pi pi-times" rounded severity="danger" size="small" className="absolute -top-2 -right-2 p-button-sm" style={{ width: '2rem', height: '2rem' }} onClick={() => removeBanner(banner.id)} />
+                      </div>
+                    ))}
+                  </div>
+                  {bannerUrls.length < 2 && !isUploadingBanner && <small className="p-text-secondary">You can upload {2 - bannerUrls.length} more image(s)</small>}
                 </div>
               );
             }}
