@@ -93,11 +93,10 @@ export default function PlatformSection() {
     <section className="w-full overflow-hidden px-4 py-8 sm:px-6 sm:py-10 md:px-12 md:py-12 lg:px-[100px] lg:py-16">
       <div className="mb-16 text-center sm:mb-20 md:mb-24 lg:mb-32">
         <h3 className="mb-3 text-xl font-medium text-gray-900 sm:text-2xl md:mb-4 md:text-3xl lg:text-4xl xl:text-[54px]">
-          Courses That Support You - Every Step of the Way
+          Courses That Support You Every Step of the Way
         </h3>
         <p className="mx-auto text-base text-[#33333399] sm:text-lg md:text-xl lg:text-2xl xl:text-[24px]">
-          From fertility to first steps – evidence-based, heart-led,
-          expert-designed just for you.
+          From fertility to first steps evidence based heart led expert designed just for you.
         </p>
       </div>
       <div className="flex h-auto max-w-full flex-col overflow-hidden rounded-[20px] bg-white shadow-sm sm:rounded-[28px] lg:h-[650px] lg:flex-row lg:rounded-[32px] xl:h-[795px]">

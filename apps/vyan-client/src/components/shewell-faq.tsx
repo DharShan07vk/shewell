@@ -41,7 +41,7 @@ const ShewellFAQ = () => {
                         Something on Your Mind? Let's Talk.
                     </h2>
                     <p className="text-[24px] text-[#33333399]">
-                        Whether you're unsure, overwhelmed, or just curious - ask away. We're listening.
+                        Whether you're unsure, overwhelmed, or just curious ask away we're listening.
                     </p>
                 </div>
 

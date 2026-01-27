@@ -11,10 +11,10 @@ const COURSES_DATA = [
     category: "Woman Wellbeing",
     mainImage: "/home/service-wellbeing.webp",
     services: [
-      { label: "Lifestyle Issue", position: "top-[10%] left-[5%]" },
-      { label: "Mental Wellbeing", position: "top-[10%] right-[5%]" },
-      { label: "Overweight", position: "bottom-[20%] left-[5%]" },
-      { label: "Physical Health", position: "bottom-[20%] right-[5%]" },
+      { label: "Lifestyle Issue", position: "top-[25%] left-[20%]" },
+      { label: "Mental Wellbeing", position: "top-[25%] right-[20%]" },
+      { label: "Overweight", position: "bottom-[10%] left-[15%]" },
+      { label: "Physical Health", position: "bottom-[10%] right-[15%]" },
     ],
   },
   {
@@ -22,10 +22,10 @@ const COURSES_DATA = [
     category: "Prenatal Care",
     mainImage: "/home/service-prenatal.webp",
     services: [
-      { label: "Pregnancy Loss", position: "top-[10%] right-[5%]" },
-      { label: "Prenatal Weight Issue", position: "bottom-[20%] right-[5%]" },
-      { label: "Childbirth Education", position: "top-[10%] left-[5%]" },
-      { label: "Gestational Diabetes", position: "bottom-[20%] left-[5%]" },
+      { label: "Pregnancy Loss", position: "top-[25%] right-[20%]" },
+      { label: "Prenatal Weight Issue", position: "bottom-[10%] right-[20%]" },
+      { label: "Childbirth Education", position: "top-[25%] left-[20%]" },
+      { label: "Gestational Diabetes", position: "bottom-[10%] left-[20%]" },
     ],
   },
   {
@@ -33,13 +33,13 @@ const COURSES_DATA = [
     category: "Postnatal Care",
     mainImage: "/home/service-postnatal.webp",
     services: [
-      { label: "Lactation Counselling", position: "top-[10%] left-[5%]" },
+      { label: "Lactation Counselling", position: "top-[25%] left-[20%]" },
       {
         label: "Postpartum Mental Wellbeing",
-        position: "top-[10%] right-[5%]",
+        position: "top-[25%] right-[20%]",
       },
-      { label: "Postnatal Weight Loss", position: "bottom-[20%] left-[5%]" },
-      { label: "Postnatal Recovery", position: "bottom-[20%] right-[5%]" },
+      { label: "Postnatal Weight Loss", position: "bottom-[10%] left-[20%]" },
+      { label: "Postnatal Recovery", position: "bottom-[20%] right-[20%]" },
     ],
   },
   {
@@ -47,9 +47,9 @@ const COURSES_DATA = [
     category: "PCOS",
     mainImage: "/home/service-pcos.webp",
     services: [
-      { label: "Polycystic Ovary Syndrome", position: "top-[10%] left-[5%]" },
-      { label: "Psychological Support", position: "top-[10%] right-[5%]" },
-      { label: "Overweight Issue", position: "bottom-[20%] left-[5%]" },
+      { label: "Polycystic Ovary Syndrome", position: "top-[25%] left-[20%]" },
+      { label: "Psychological Support", position: "top-[25%] right-[20%]" },
+      { label: "Overweight Issue", position: "bottom-[10%] left-[20%]" },
     ],
   },
   {
@@ -57,10 +57,10 @@ const COURSES_DATA = [
     category: "Child Healthcare",
     mainImage: "/home/service-child.webp",
     services: [
-      { label: "Parenting Tips", position: "top-[10%] left-[5%]" },
-      { label: "Development Challenges", position: "top-[10%] right-[5%]" },
-      { label: "Nutritional Issue", position: "bottom-[20%] left-[5%]" },
-      { label: "Behavioral Challenges", position: "bottom-[20%] right-[5%]" },
+      { label: "Parenting Tips", position: "top-[25%] left-[20%]" },
+      { label: "Development Challenges", position: "top-[25%] right-[20%]" },
+      { label: "Nutritional Issue", position: "bottom-[10%] left-[20%]" },
+      { label: "Behavioral Challenges", position: "bottom-[10%] right-[20%]" },
     ],
   },
 ];
@@ -100,7 +100,7 @@ const ServicesCarousel = () => {
           className="mb-12 px-2 text-lg text-[#33333399] sm:mb-16 sm:px-4 sm:text-xl md:mb-24 md:px-6 md:text-2xl lg:text-[26px] xl:text-[28px]"
         >
           Tap into curated care programs and ancient wisdom to raise happy moms
-          and healthy babies with expert-led sessions and wellness products.
+          and healthy babies with expert led sessions and wellness products.
           Shewell isn’t just for India. It’s for every woman, everywhere
         </motion.p>
       </div>

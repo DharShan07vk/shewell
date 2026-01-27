@@ -25,7 +25,7 @@ export default function Hero(): JSX.Element {
           xl:text-[22px] xl:leading-[1.4] 2xl:text-[26px]"
         >
           A trusted digital companion for women's health, motherhood, mental
-          wellbeing, and mindful living—curated by experts and designed for
+          wellbeing, and mindful living curated by experts and designed for
           every stage of womanhood.
         </p>
       </div>
@@ -57,7 +57,7 @@ export default function Hero(): JSX.Element {
             <InteractiveButton />
           </div>
         </Link>
-        <Link href="/products" className="w-full sm:w-auto sm:flex-1">
+        <Link href="/session" className="w-full sm:w-auto sm:flex-1">
           <div className="group flex h-[64px] w-full items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-4 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5] sm:h-[72px] sm:px-5 md:h-[80px] md:px-6">
             <span className="text-base font-medium text-[#00000066] sm:text-lg md:text-xl">
               Explore Our Sessions

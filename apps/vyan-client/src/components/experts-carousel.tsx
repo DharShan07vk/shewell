@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { InteractiveButton } from "./ui/interactive-button";
+import router from "next/router";
 
 const EXPERTS_DATA = [
   {
@@ -94,7 +95,7 @@ export default function ExpertsCarousel() {
         {/* Section Header */}
         <div className="mb-12 text-center md:mb-16">
           <h2 className="mb-4 text-3xl font-medium text-gray-900 md:text-4xl lg:text-5xl">
-            You're Not Alone - We're Just a Click Away
+            You're Not Alone  We're Just a Click Away
           </h2>
           <p className="mx-auto text-[24px] text-[#33333399]">
             Consult with empathetic, qualified specialists who listen, guide,
@@ -190,7 +191,10 @@ export default function ExpertsCarousel() {
         </div>
 
         {/* CTA Button */}
-        <div className="mt-12 flex w-full justify-center md:mt-16">
+        <div
+          className="mt-12 flex w-full justify-center md:mt-16 "
+          onClick={() => window.location.href = "/counselling"}
+        >
           <div className="order-0 group flex h-[80px] w-full cursor-pointer items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
             <div className="flex flex-1 justify-center">
               <span className="text-2xl font-semibold text-[#00000066] sm:text-2xl">
