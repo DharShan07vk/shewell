@@ -1,7 +1,7 @@
 const SimilarDoctorCardSkeleton = () => {
     return (
       <>
-        <div className="flex animate-pulse gap-4 rounded-md border border-border-300 p-3 md:p-4 lg:gap-6 lg:p-6 w-fit">
+        <div className="flex animate-pulse gap-4 rounded-3xl border border-gray-100 p-4 md:p-5 lg:gap-6 lg:p-6 w-fit shadow-sm">
           {/* Image skeleton */}
           <div className="flex flex-col items-center justify-center gap-3 self-center">
             <div className="flex aspect-square w-[135px] items-center justify-center self-center bg-gray-200">
