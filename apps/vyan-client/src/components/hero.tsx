@@ -50,7 +50,7 @@ export default function Hero(): JSX.Element {
       </div>
 
       {/* CTA Buttons - Responsive positioning */}
-      <div className="z-40 mt-6 flex flex-col flex-wrap items-stretch gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4 md:mt-10">
+      <div className="z-40 mt-6 w-[60%] flex flex-col flex-wrap items-stretch gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4 md:mt-10">
         <Link href="/counselling" className="w-full sm:w-auto sm:flex-1">
           <div className="group flex h-[64px] w-full items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-4 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5] sm:h-[72px] sm:px-5 md:h-[80px] md:px-6">
             <span className="text-base font-medium text-[#00000066] sm:text-lg md:text-xl">
