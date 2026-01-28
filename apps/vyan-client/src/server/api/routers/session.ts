@@ -73,7 +73,7 @@ export const sessionRouter = createTRPCRouter({
           endAt: { lte: new Date(input.endDate) },
         });
       }
-
+      whereCondition.startAt = { gte: new Date() }; // Only future sessions
       // Combine price conditions with existing where conditions if any price filters exist
       if (priceConditions.length > 0) {
         whereCondition = {
