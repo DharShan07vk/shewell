@@ -1,6 +1,8 @@
 "use server";
 
-{/*old ui components*/}
+{
+  /*old ui components*/
+}
 // import Header from "~/components/shared/header";
 // import News from "./(news)/news";
 // import KeyFeatures from "./(key-features)/key-features";
@@ -11,18 +13,14 @@
 // import Features from "./(features)/features";
 // import CounsellingCard from "~/components/counselling-card";
 // import ExamplePopover from "~/components/exam-popover";
-import { useSession } from "next-auth/react";
 // import SectionTitle from "~/components/shared/section-title";
 // import BlogSlider from "./(blogs)/blogs-slider";
-import { startOfDay } from "date-fns";
 // import WhySheWellCare from "./(why-shewellcare)/why-she-well-care";
 // import HomePageProducts from "./(homepage-products)/homepage-products";
 // import Testimonials from "./(testimonials)/testimonials";
 // import { Header as NewHeader } from "~/components/header";
 import Partners from "~/components/partners";
 import Hero from "~/components/hero";
-import { db } from "~/server/db";
-import { HomeBannerType } from "@repo/database";
 import WellnessCircle from "~/components/wellness-circle";
 import ServicesCarousel from "~/components/services-carousel";
 import PlatformSection from "~/components/platform-section";
@@ -34,25 +32,10 @@ import WisdomSection from "~/components/wisdom-section";
 import ShewellFAQ from "~/components/shewell-faq";
 
 const HomePage = async () => {
-  const heroMedias = await db.homeBanner.findMany({
-    select: {
-      id: true,
-      url: true,
-      media: {
-        select: {
-          id: true,
-          fileUrl: true,
-        },
-      },
-    },
-    where: {
-      active: true,
-      usedFor: HomeBannerType.HomeBannerClient,
-    },
-  });
+
   return (
     <>
-      <div>
+      <div className="px-0">
         <Hero />
         <WellnessCircle />
         <ServicesCarousel />
@@ -75,7 +58,7 @@ const HomePage = async () => {
 
         {/* <HomePageProducts /> */}
         <WhyShewell />
-        <WisdomSection />
+        {/* <WisdomSection /> */}
         <ShewellFAQ />
         {/* <Testimonials /> */}
         {/* <Subscribe /> */}

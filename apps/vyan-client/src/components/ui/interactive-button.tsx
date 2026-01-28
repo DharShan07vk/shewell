@@ -21,11 +21,23 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
   size = "medium",
   as: Component = "button",
 }) => {
+  const sizeClasses = {
+    small: "h-5 sm:h-6 md:h-7 w-5 sm:w-6 md:w-7",
+    medium: "h-7 sm:h-8 md:h-10 w-7 sm:w-8 md:w-10",
+    large: "h-8 sm:h-10 md:h-12 w-8 sm:w-10 md:w-12",
+  };
+
+  const arrowSizes = {
+    small: 16,
+    medium: 24,
+    large: 32,
+  };
+
   const baseProps = {
     onClick,
     className: `
       group 
-      flex ${size === "small" ? "h-8 w-8" : size === "large" ? "h-16 w-16" : "h-12 w-12"}
+      flex ${sizeClasses[size]}
       items-center justify-center 
       rounded-full
       hover:bg-white
@@ -43,22 +55,16 @@ export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
 
   return (
     <Component {...baseProps} {...ariaProps}>
-      {/* LUCIDE ICON
-         - size: 24px (standard icon size)
-         - strokeWidth: 2.5 (makes it bold like your design)
-         - color: #00898F (Teal)
-         - Rotation Logic: Starts at 30deg -> Rotates to 210deg on hover
-      */}
       <ArrowUp
-        size={64}
+        size={arrowSizes[size]}
         strokeWidth={1.25}
         color="currentColor"
         className={`
           
-          ${active ? `rotate-[30deg]`  : `rotate-[210deg]`}
+          ${active ? `rotate-[45deg]`  : `rotate-[225deg]`}
           ${active ? `text-[#00898F]` : `text-[#E1EBED] `} 
           transition-all duration-500 ease-in-out
-          group-hover:rotate-[30deg]
+          group-hover:rotate-[45deg]
           group-hover:text-[#00898F]
         `}
       />

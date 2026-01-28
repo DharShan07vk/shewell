@@ -14,25 +14,25 @@ import Image from "next/image";
 interface IDoctorProfileProps {
   // doctorProfile: IProfessionalUser;
   doctorProfile: {
-    id: string;
-    firstName: string | null;
-    displayQualification: {
-      specialization: string | null;
+    id?: string;
+    firstName?: string | null;
+    displayQualification?: {
+      specialization?: string | null;
     } | null;
-    avgRating: string | null | undefined;
-    totalConsultations: number | null;
-    userName: string | null;
-    languages : {
-      language : string
-    }[]
-    media: {
-      fileUrl: string | null;
+    avgRating?: string | null | undefined;
+    totalConsultations?: number | null;
+    userName?: string | null;
+    languages?: {
+      language?: string;
+    }[];
+    media?: {
+      fileUrl?: string | null;
     } | null;
   };
 
   // cardImage: React.ReactNode;
-  specialization: {
-    specialization: string;
+  specialization?: {
+    specialization?: string;
   }[];
   isCouple: boolean;
 }
@@ -53,18 +53,15 @@ const CompleteDoctorProfile = ({
   const [duration, setDuration] = useState<number>();
   const handleDuration = (value: number) => {
     setDuration(value);
-   
   };
 
-  
   const handleDateTimeSelect = (dateTime: {
     date: Date;
     // timeSlots: { startTime: Date; endTime: Date }[];
-    timeSlots: { startTime: Date; endTime: Date }|null;
-    priceInCents: number|null;
+    timeSlots: { startTime: Date; endTime: Date } | null;
+    priceInCents: number | null;
   }) => {
     setSelectedDateTime(dateTime);
-   
   };
 
   // const handleReselectTimeSlot = () => {
@@ -85,69 +82,69 @@ const CompleteDoctorProfile = ({
   const customStyles = {
     itemShapes: StarDrawing,
     activeFillColor: "#00898F",
-    inactiveFillColor: "#B5B5B5",
+    inactiveFillColor: "#E0E0E0",
   };
 
   return (
-    <div className="w-full">
-      <div className=" flex flex-col gap-6 rounded-md  border border-border-300 xs:px-2  sm:px-3 py-4 md:flex-row md:px-[30px] md:py-[30px] md:justify-between xl:flex-col">
-        <div className=" flex flex-col gap-[18px] ">
+    <div className="group w-full">
+      <div className="flex flex-col gap-6 rounded-3xl border border-gray-100 bg-white/80 py-6 shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm transition-all duration-300 ease-in-out hover:border-gray-200 hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] xs:px-4 sm:px-5 md:flex-row md:justify-between md:px-8 md:py-8 xl:flex-col">
+        <div className="flex flex-col gap-[18px]">
           {/* image + text */}
           <div className="flex gap-4 lg:gap-6 2xl:gap-8">
             {/* image */}
-            <div className=" flex aspect-square xs:w-[116px]  sm:w-[138px]   items-center justify-center  sm:bg-[url('/images/doctor-bg.png')] bg-center bg-no-repeat">
-              {" "}
-              <div className=" xs:w-[90px] sm:w-[116px] ">
-                <div className="relative aspect-square ">
+            <div className="relative flex aspect-square items-center justify-center xs:w-[116px] sm:w-[138px]">
+              {/* Decorative ring */}
+              <div className="absolute inset-0 h-[150px] w-[150px] rounded-full bg-gradient-to-br from-[#00898F]/20 to-[#51AF5A]/20 p-1 sm:p-2">
+                {/* <div className="h-[140px] w-[140px] rounded-full bg-white"></div> */}
+                <div className="relative aspect-square overflow-hidden rounded-full bg-white shadow-lg ring-2 ring-white">
                   <Image
                     src={
                       doctorProfile.media?.fileUrl ||
                       "/images/fallback-user-profile.png"
                     }
                     alt="feature-card"
-                    className=" rounded-full  object-cover"
+                    className="rounded-full object-cover transition-transform duration-300 group-hover:scale-105"
                     fill={true}
                   />
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col gap-1">
-              <h3 className="font-inter text-base font-medium md:text-[30px] md:leading-[30px] xl:text-2xl 2xl:text-[28px] 2xl:leading-[38px]">
+            <div className="flex flex-col gap-2">
+              <h3 className="font-poppins text-lg font-semibold text-[#333333] md:text-[28px] md:leading-[34px] xl:text-2xl 2xl:text-[28px] 2xl:leading-[38px]">
                 {doctorProfile.firstName}
               </h3>
-              <div className="font-inter text-sm font-medium md:text-lg 2xl:text-[20px] 2xl:leading-[30px]">
+              <div className="font-poppins text-sm font-medium text-[#00898F] md:text-base 2xl:text-[18px] 2xl:leading-[28px]">
                 {doctorProfile.displayQualification?.specialization}
               </div>
 
-              <div className="flex w-full items-center  gap-2 md:justify-start flex-wrap">
-                <div className="flex">
+              <div className="mt-1 flex w-full flex-wrap items-center gap-3 md:justify-start">
+                <div className="flex items-center gap-2 rounded-full bg-[#F8F8F8] px-3 py-1.5">
                   <Rating
                     className="inline"
                     readOnly={true}
-                    style={{ maxWidth: 95 }}
+                    style={{ maxWidth: 85 }}
                     value={parseFloat(doctorProfile.avgRating || "0")}
                     itemStyles={customStyles}
                   />
-
-                  <div className="border-r border-primary pr-2 font-inter text-sm font-medium text-active 2xl:text-base">
+                  <div className="font-poppins text-sm font-semibold text-[#00898F]">
                     {parseFloat(doctorProfile.avgRating || "0").toFixed(1)}
                   </div>
                 </div>
-                <div className="font-inter text-sm font-normal 2xl:text-base">
+                <div className="font-poppins text-sm font-normal text-[#666666]">
                   {doctorProfile?.totalConsultations
                     ? doctorProfile?.totalConsultations
                     : 0}{" "}
-                  Consultation
+                  Consultations
                 </div>
               </div>
 
               <Link href={`counselling/${doctorProfile.userName}`}>
-                <Button className="mt-4 w-fit 2xl:mt-5 hover:bg-primary">
+                <Button className="mt-4 w-fit rounded-xl bg-[#00898F] px-5 py-2.5 shadow-md transition-all duration-300 hover:bg-[#007a80] hover:shadow-lg 2xl:mt-5">
                   <svg
-                    className="mr-[2px]"
-                    width="24"
-                    height="24"
+                    className="mr-2"
+                    width="20"
+                    height="20"
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -174,39 +171,43 @@ const CompleteDoctorProfile = ({
             </div>
           </div>
           {/* specialized-in */}
-          <div className="flex flex-wrap gap-1 font-inter text-xs font-normal text-inactive md:text-sm items-center">
-            <span className="font-medium text-active ">Specialized In: </span>
+          <div className="flex flex-wrap items-center gap-2 font-poppins text-sm font-normal text-[#666666]">
+            <span className="font-semibold text-[#333333]">
+              Specialized In:
+            </span>
 
             {specialization &&
               specialization.map((item, index) => {
                 return (
-                  <>
-                    <div className="font-inter text-xs font-medium leading-[16px] text-inactive py-1 px-[6px] rounded-[6px] bg-[#F6F6F6]" key={index}>{item.specialization}{index < specialization.length - 1 ? "/" : ""}</div>
-                  </>
+                  <div
+                    className="rounded-full border border-[#00898F]/20 bg-gradient-to-r from-[#00898F]/10 to-[#51AF5A]/10 px-3 py-1.5 font-poppins text-xs font-medium text-[#00898F]"
+                    key={index}
+                  >
+                    {item.specialization}
+                  </div>
                 );
               })}
           </div>
 
           {/* languages */}
-          <div className="flex flex-wrap gap-1 font-inter text-xs font-normal text-inactive md:text-sm items-center">
-            <span className="font-medium text-active ">Languages: </span>
+          <div className="flex flex-wrap items-center gap-2 font-poppins text-sm font-normal text-[#666666]">
+            <span className="font-semibold text-[#333333]">Languages:</span>
 
-            {
-              doctorProfile.languages.map((item, index) => {
-                return (
-                  <>
-                    <div className="font-inter text-xs font-medium leading-[16px] text-inactive py-1 px-[6px] rounded-[6px] bg-[#F6F6F6]" key={index}>{item.language}{index < doctorProfile.languages.length - 1 ? "/" : ""}</div>
-                  </>
-                );
-              })}
+            {doctorProfile.languages?.map((item, index) => {
+              return (
+                <div
+                  className="rounded-full border border-gray-200 bg-[#F5F5F5] px-3 py-1.5 font-poppins text-xs font-medium text-[#666666]"
+                  key={index}
+                >
+                  {item.language}
+                </div>
+              );
+            })}
           </div>
 
           {/* Available time slots */}
-          <div className="mb-6 mt-[18px] md:my-6">
-            <div className="border-b border-primary pb-1 font-inter text-base font-medium 2xl:text-lg">
-              Available Time Slots
-            </div>
-            <div>
+          <div className="mb-6 mt-6 md:my-8">
+            <div className="mt-4">
               <DayNavigatorWithTimeSlots
                 onSelectDuration={handleDuration}
                 // reSelectTimeSlot={}

@@ -78,7 +78,7 @@ const ProfileNav = ({ email, name }: { email: string; name: string }) => {
             </div>
           </div>
           <div className="flex flex-col">
-            <div className="font-inter text-base font-semibold text-active">
+            <div className="font-poppins text-lg font-semibold text-active">
               {name}
             </div>
             <div className="font-inter text-sm font-normal text-inactive ">
@@ -90,7 +90,7 @@ const ProfileNav = ({ email, name }: { email: string; name: string }) => {
         <div className="flex flex-col gap-6">
           {/* profile */}
           <div>
-            <div className="mt-5 pl-5 font-inter text-lg font-bold text-active">
+            <div className="mt-5 pl-5 font-poppins text-lg font-bold text-active">
               Profile
             </div>
             {profile &&
@@ -111,7 +111,7 @@ const ProfileNav = ({ email, name }: { email: string; name: string }) => {
           </div>
           {/* Account */}
           <div>
-            <div className="pl-5 font-inter text-lg font-bold text-active">
+            <div className="pl-5 font-poppins text-lg font-bold text-active">
               Account
             </div>
             {account &&
@@ -119,6 +119,7 @@ const ProfileNav = ({ email, name }: { email: string; name: string }) => {
                 return (
                   <>
                     <div
+                      key={index}
                       className={`hover:bg-[#E6F4EE] ${pathname === item.path ? "bg-[#E6F4EE]" : ""}`}
                     >
                       <div className="px-6 py-[14px]">
@@ -132,7 +133,7 @@ const ProfileNav = ({ email, name }: { email: string; name: string }) => {
         </div>
         <div className="mb-3 mt-3 px-3 text-center">
           <Button
-            className=" border-text-active w-full rounded-md border bg-white py-[14px] text-black hover:bg-primary hover:text-white"
+            className="w-full rounded-xl border border-gray-200 bg-white py-[14px] font-poppins font-medium text-black shadow-sm transition-all hover:bg-primary hover:text-white hover:shadow-md"
             onClick={() => {
               signOut({ redirect: false }).then(() => router.push("/"));
               emptyCart();

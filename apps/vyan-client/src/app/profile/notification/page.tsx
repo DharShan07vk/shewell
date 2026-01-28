@@ -13,11 +13,11 @@ import { format } from "date-fns";
 
 export default async function Notification() {
   const session = await getServerSession();
-  if(!session){
-    return
+  if (!session) {
+    return;
   }
-  if(!session.user.email){
-    return
+  if (!session.user.email) {
+    return;
   }
   const userDetails = await db.user.findUnique({
     select: {
@@ -30,8 +30,8 @@ export default async function Notification() {
       email: session.user.email,
     },
   });
-  if(!userDetails){
-    return
+  if (!userDetails) {
+    return;
   }
 
   const notifications = await db.notification.findMany({
@@ -58,9 +58,7 @@ export default async function Notification() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbLink >
-                    Notifications
-                  </BreadcrumbLink>
+                  <BreadcrumbLink>Notifications</BreadcrumbLink>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
@@ -68,10 +66,10 @@ export default async function Notification() {
 
           <div className="pb-[32px] lg:pb-[55px] xl:pb-[60px] 2xl:pb-[65px]">
             <div className="items-start justify-between xl:flex xl:flex-row xl:justify-center xl:gap-[46px] 2xl:gap-[60px] ">
-              <div className="b basis-full rounded-md border border-border-400 bg-white px-6 py-9">
-                <div className="mb-10 text-base  text-[#181818] lg:text-xl font-semibold xl:text-2xl 2xl:text-[28px] 2xl:leading-[38px]">
+              <div className="basis-full rounded-3xl border border-gray-100 bg-white p-6 shadow-[0_4px_20px_rgba(0,0,0,0.08)] md:p-10">
+                <div className="mb-10 flex items-center gap-3 font-poppins text-xl font-semibold text-[#181818] lg:text-2xl xl:text-3xl">
                   <svg
-                    className="mr-2 inline size-[18px] lg:size-6 xl:size-[28px] 2xl:size-[32px]"
+                    className="size-6 xl:size-8"
                     viewBox="0 0 32 32"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -79,16 +77,16 @@ export default async function Notification() {
                     <path
                       d="M25.3307 16H6.66406"
                       stroke="#434343"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M15.9974 25.3334L6.66406 16.0001L15.9974 6.66675"
                       stroke="#434343"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                   Notification
@@ -118,7 +116,7 @@ export default async function Notification() {
                     </>
                   ) : (
                     <>
-                      <div className="mx-auto flex w-full items-center justify-center">
+                      <div className="mx-auto flex w-full items-center justify-center font-inter text-[#666666]">
                         No notifications
                       </div>
                     </>

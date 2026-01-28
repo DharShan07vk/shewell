@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@repo/ui/src/@/components/button";
+import { ShewellButton } from "~/components/ui";
 import React, { useEffect, useState } from "react";
 import DatePickerWithRange from "./date-range-picker";
 import EditAvailability from "../appointment/add-unavailability";
@@ -210,45 +211,50 @@ const DashboardContent = () => {
 
   console.log("table values", tableValues);
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-6 sm:py-8 md:py-10">
       {/* buttons */}
       <div className="flex justify-center gap-2  sm:justify-end sm:gap-6">
-        <Link href="/doctor-profile">
-          <Button className="rounded-md bg-black px-4 py-2 font-inter font-medium shadow-[2px_2px_4px_0px_rgba(64,64,64,0.25)] hover:bg-black ">
-            <svg
-              className="mr-1 inline"
-              width="20"
-              height="21"
-              viewBox="0 0 20 21"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g clip-path="url(#clip0_4616_30594)">
-                <path
-                  d="M19.6757 9.30851C18.5533 7.86933 17.0993 6.6789 15.4712 5.86601C13.8091 5.03621 12.0211 4.60566 10.1546 4.58309C10.1032 4.58168 9.8968 4.58168 9.84539 4.58309C7.97891 4.6057 6.19087 5.03621 4.52884 5.86601C2.90068 6.6789 1.44681 7.86929 0.324316 9.30851C-0.108105 9.86292 -0.108105 10.6373 0.324316 11.1917C1.44677 12.6309 2.90068 13.8214 4.52884 14.6342C6.19087 15.464 7.97887 15.8946 9.84539 15.9172C9.8968 15.9186 10.1032 15.9186 10.1546 15.9172C12.0211 15.8945 13.8091 15.464 15.4712 14.6342C17.0993 13.8214 18.5532 12.631 19.6757 11.1917C20.1081 10.6373 20.1081 9.86292 19.6757 9.30851ZM4.89231 13.9063C3.37201 13.1473 2.01427 12.0355 0.965877 10.6914C0.76326 10.4316 0.76326 10.0687 0.965877 9.8089C2.01423 8.46472 3.37197 7.353 4.89231 6.59394C5.32411 6.37839 5.76505 6.19199 6.21415 6.03418C5.05876 7.07277 4.33083 8.57792 4.33083 10.2501C4.33083 11.9224 5.0588 13.4276 6.2143 14.4662C5.7652 14.3084 5.32415 14.1219 4.89231 13.9063ZM10 15.1057C7.32262 15.1057 5.14442 12.9275 5.14442 10.2501C5.14442 7.57265 7.32262 5.39449 10 5.39449C12.6775 5.39449 14.8557 7.57269 14.8557 10.2501C14.8557 12.9275 12.6775 15.1057 10 15.1057ZM19.0342 10.6913C17.9858 12.0355 16.6281 13.1472 15.1078 13.9063C14.6765 14.1216 14.2358 14.3072 13.7873 14.4648C14.9419 13.4263 15.6692 11.9216 15.6692 10.2501C15.6692 8.57765 14.9411 7.0723 13.7855 6.03371C14.2348 6.19156 14.6759 6.3782 15.1078 6.59386C16.6281 7.35292 17.9858 8.46464 19.0342 9.80882C19.2368 10.0687 19.2368 10.4315 19.0342 10.6913Z"
+        <ShewellButton 
+          variant="medium"
+          href="/doctor-profile"
+          className="bg-white text-gray-700 hover:bg-gray-100"
+          withIcon={false}
+        >
+          <svg
+            className="mr-1 inline"
+            width="20"
+            height="21"
+            viewBox="0 0 20 21"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0_4616_30594)">
+              <path
+                d="M19.6757 9.30851C18.5533 7.86933 17.0993 6.6789 15.4712 5.86601C13.8091 5.03621 12.0211 4.60566 10.1546 4.58309C10.1032 4.58168 9.8968 4.58168 9.84539 4.58309C7.97891 4.6057 6.19087 5.03621 4.52884 5.86601C2.90068 6.6789 1.44681 7.86929 0.324316 9.30851C-0.108105 9.86292 -0.108105 10.6373 0.324316 11.1917C1.44677 12.6309 2.90068 13.8214 4.52884 14.6342C6.19087 15.464 7.97887 15.8946 9.84539 15.9172C9.8968 15.9186 10.1032 15.9186 10.1546 15.9172C12.0211 15.8945 13.8091 15.464 15.4712 14.6342C17.0993 13.8214 18.5532 12.631 19.6757 11.1917C20.1081 10.6373 20.1081 9.86292 19.6757 9.30851ZM4.89231 13.9063C3.37201 13.1473 2.01427 12.0355 0.965877 10.6914C0.76326 10.4316 0.76326 10.0687 0.965877 9.8089C2.01423 8.46472 3.37197 7.353 4.89231 6.59394C5.32411 6.37839 5.76505 6.19199 6.21415 6.03418C5.05876 7.07277 4.33083 8.57792 4.33083 10.2501C4.33083 11.9224 5.0588 13.4276 6.2143 14.4662C5.7652 14.3084 5.32415 14.1219 4.89231 13.9063ZM10 15.1057C7.32262 15.1057 5.14442 12.9275 5.14442 10.2501C5.14442 7.57265 7.32262 5.39449 10 5.39449C12.6775 5.39449 14.8557 7.57269 14.8557 10.2501C14.8557 12.9275 12.6775 15.1057 10 15.1057ZM19.0342 10.6913C17.9858 12.0355 16.6281 13.1472 15.1078 13.9063C14.6765 14.1216 14.2358 14.3072 13.7873 14.4648C14.9419 13.4263 15.6692 11.9216 15.6692 10.2501C15.6692 8.57765 14.9411 7.0723 13.7855 6.03371C14.2348 6.19156 14.6759 6.3782 15.1078 6.59386C16.6281 7.35292 17.9858 8.46464 19.0342 9.80882C19.2368 10.0687 19.2368 10.4315 19.0342 10.6913Z"
+                fill="currentColor"
+              />
+              <path
+                d="M9.9998 8.17188C8.85402 8.17188 7.92188 9.10402 7.92188 10.2498C7.92188 11.3956 8.85402 12.3277 9.9998 12.3277C11.1456 12.3277 12.0777 11.3956 12.0777 10.2498C12.0778 9.10402 11.1456 8.17188 9.9998 8.17188ZM9.9998 11.5142C9.30265 11.5142 8.73543 10.947 8.73543 10.2498C8.73543 9.55261 9.30258 8.98547 9.9998 8.98547C10.6969 8.98547 11.2641 9.55261 11.2641 10.2498C11.2642 10.947 10.6969 11.5142 9.9998 11.5142Z"
+                fill="currentColor"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_4616_30594">
+                <rect
+                  width="20"
+                  height="20"
                   fill="white"
+                  transform="translate(0 0.25)"
                 />
-                <path
-                  d="M9.9998 8.17188C8.85402 8.17188 7.92188 9.10402 7.92188 10.2498C7.92188 11.3956 8.85402 12.3277 9.9998 12.3277C11.1456 12.3277 12.0777 11.3956 12.0777 10.2498C12.0778 9.10402 11.1456 8.17188 9.9998 8.17188ZM9.9998 11.5142C9.30265 11.5142 8.73543 10.947 8.73543 10.2498C8.73543 9.55261 9.30258 8.98547 9.9998 8.98547C10.6969 8.98547 11.2641 9.55261 11.2641 10.2498C11.2642 10.947 10.6969 11.5142 9.9998 11.5142Z"
-                  fill="white"
-                />
-              </g>
-              <defs>
-                <clipPath id="clip0_4616_30594">
-                  <rect
-                    width="20"
-                    height="20"
-                    fill="white"
-                    transform="translate(0 0.25)"
-                  />
-                </clipPath>
-              </defs>
-            </svg>
-            Preview
-          </Button>
-        </Link>
-        <Link href="/edit-profile/personal-info">
-          <Button className="rounded-md bg-secondary px-4 py-2 font-inter text-base font-medium shadow-[2px_2px_4px_0px_rgba(64,64,64,0.25)] hover:bg-black">
+              </clipPath>
+            </defs>
+          </svg>
+          Preview
+        </ShewellButton>
+        <ShewellButton 
+          variant="medium"
+          href="/edit-profile/personal-info"
+        >
             <svg
               className="mr-1 inline"
               width="22"
@@ -272,10 +278,9 @@ const DashboardContent = () => {
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
-            </svg>
-            Edit Profile
-          </Button>
-        </Link>
+          </svg>
+          Edit Profile
+        </ShewellButton>
       </div>
 
       {/* add-availability , date-picker and drop-down */}
@@ -307,8 +312,8 @@ const DashboardContent = () => {
         </div> */}
       </div>
 
-      {/* dashboard-card */}
-      <div className="mb-4 flex w-full flex-wrap items-center justify-center gap-5 sm:gap-8 md:mb-9 lg:mb-10">
+      {/* Dashboard Cards */}
+      <div className="mb-6 sm:mb-8 md:mb-10 lg:mb-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
         {cards.map((item, index) => {
           return (
             <DashboardCard
@@ -325,104 +330,21 @@ const DashboardContent = () => {
         })}
       </div>
 
-      {/* vacant-and-booked-slots */}
-      <div className="mb-5 md:mb-9 md:hidden lg:mb-10">
+      {/* Analytics Grid - Responsive layout that adapts automatically */}
+      <div className="mb-6 sm:mb-8 md:mb-10 lg:mb-12 grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+        <VisitorAnalytics />
         <VacantAndBookedSlots />
       </div>
 
-      {/* visitor-analytics */}
-      <div className="mb-5 block md:mb-9 md:hidden lg:mb-10">
-        <VisitorAnalytics  />
-      </div>
-
-      {/* appointment */}
-      <div className="mb-5 block md:mb-9 md:hidden lg:mb-10">
-        <Appointment  appointments={appointments}/>
-      </div>
-
-      {/* balance */}
-      <div className="mb-5 block md:mb-9 md:hidden lg:mb-10">
-        <Balance balance={data?.totalBalance._sum.priceInCents || 0}/>
-      </div>
-
-      {/* notification */}
-      <div className="mb-5 block md:mb-9 md:hidden lg:mb-10">
+      {/* Secondary Stats Grid */}
+      <div className="mb-6 sm:mb-8 md:mb-10 lg:mb-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+        <Appointment appointments={appointments} />
+        <Balance balance={data?.totalBalance._sum.priceInCents || 0} />
         <DashboardNotification />
       </div>
 
-      {/* for 1024px */}
-
-      {/* visitor-analytics and appointment */}
-      <div className="hidden md:block xl:hidden">
-        <div className="mb-5">
-          <VacantAndBookedSlots />
-        </div>
-        <div className="flex gap-8 ">
-          {/* visitor-analytics */}
-          <div className="mb-5 md:mb-9 lg:mb-10">
-            <VisitorAnalytics />
-          </div>
-
-          {/* appointment */}
-          <div className="mb-5 md:mb-9 lg:mb-10">
-            {/* <Appointment appointments={appointments} /> */}
-          </div>
-        </div>
-      </div>
-
-      {/* balance and notification */}
-      <div className="hidden md:block xl:hidden">
-        <div className="flex gap-8">
-          {/* balance */}
-          <div className="mb-5 md:mb-9 lg:mb-10 ">
-            <Balance balance={data?.totalBalance._sum.priceInCents || 0} />
-          </div>
-
-          {/* notification */}
-          <div className="mb-5 md:mb-9 lg:mb-10 ">
-            <DashboardNotification />
-          </div>
-        </div>
-      </div>
-
-      {/* for 1440px */}
-
-      {/* visitor-analytics and  vacant-and-booked-slots*/}
-      <div className="hidden xl:block ">
-        <div className="flex gap-8">
-          {/* visitor-analytics */}
-          <div className="mb-5  md:mb-9 lg:mb-10 ">
-            <VisitorAnalytics />
-          </div>
-          {/* vacant-and-booked-slots */}
-          <div className="mb-5 md:mb-9 lg:mb-10">
-            <VacantAndBookedSlots />
-          </div>
-        </div>
-      </div>
-
-      {/* appointment, balance and notification */}
-      <div className="hidden xl:block">
-        <div className="flex gap-8">
-          {/* appointment */}
-          <div className="mb-5  w-full max-w-[354px] md:mb-9 lg:mb-10 2xl:max-w-[442px]">
-            <Appointment appointments={appointments} />
-          </div>
-
-          {/* balance */}
-          <div className="mb-5  md:mb-9 lg:mb-10 ">
-            <Balance  balance={data?.totalBalance._sum.priceInCents || 0}/>
-          </div>
-
-          {/* notification */}
-          <div className="mb-5  md:mb-9 lg:mb-10 ">
-            <DashboardNotification />
-          </div>
-        </div>
-      </div>
-
-      {/* table */}
-      <div className="mb-5 md:mb-9 lg:mb-10">
+      {/* Appointments Table */}
+      <div className="mb-6 sm:mb-8 md:mb-10">
        {tableValues &&  <DashboardDataTable tableValue={tableValues} />}
       </div>
     </div>

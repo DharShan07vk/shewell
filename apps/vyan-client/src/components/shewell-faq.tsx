@@ -33,19 +33,19 @@ const ShewellFAQ = () => {
     const tabs = ["What We Offer", "Plans & Pricing", "Trust & Safety"];
 
     return (
-        <section className="bg-white min-h-screen py-20 px-4">
-            <div className="max-w-4xl mx-auto">
+        <section className="bg-white px-4 sm:px-6 md:px-12 lg:px-[100px] py-8 sm:py-12 md:py-16 overflow-hidden">
+            <div className="w-full">
                 {/* Title Section */}
-                <div className="text-center mb-12">
-                    <h2 className="text-4xl font-semibold text-gray-800 mb-2">
+                <div className="text-center mb-8 sm:mb-12">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[48px] font-medium mb-2 sm:mb-4">
                         Something on Your Mind? Let's Talk.
                     </h2>
-                    <p className="text-gray-500 text-sm">
-                        Whether you're unsure, overwhelmed, or just curious - ask away. We're listening.
+                    <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[24px] text-[#33333399]">
+                        Whether you're unsure, overwhelmed, or just curious ask away we're listening.
                     </p>
                 </div>
 
-                {/* Pill Tabs */}
+                {/*  Pill Tabs 
                 <div className="flex justify-center gap-3 mb-12">
                     {tabs.map((tab) => (
                         <button
@@ -60,43 +60,40 @@ const ShewellFAQ = () => {
                             {tab}
                         </button>
                     ))}
-                </div>
+                </div> */}
 
                 {/* FAQ List */}
-                <div className="space-y-4">
+                <div className="space-y-2 sm:space-y-3 md:space-y-4">
                     {FAQ_CONTENT.map((item, index) => (
                         <motion.div
                             key={index}
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}
-                            className={`relative rounded-2xl transition-all duration-300 border overflow-hidden ${
-                                hoveredIndex === index
-                                    ? "bg-[#167D71] border-[#167D71] shadow-lg"
+                            className={`relative rounded-lg sm:rounded-xl md:rounded-2xl transition-all duration-300 border overflow-hidden ${hoveredIndex === index
+                                    ? "bg-[#00898F] border-[#167D71] shadow-lg"
                                     : "bg-[#F8F9FA] border-transparent"
-                            }`}
+                                }`}
                         >
                             {/* Question Row */}
-                            <div className="flex items-center justify-between px-8 py-6 cursor-pointer">
+                            <div className="flex items-center justify-between px-3 sm:px-6 md:px-8 py-3 sm:py-4 md:py-6 cursor-pointer gap-2">
                                 <span
-                                    className={`text-lg font-medium transition-colors duration-300 ${
-                                        hoveredIndex === index ? "text-white" : "text-gray-700"
-                                    }`}
+                                    className={`text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] font-medium transition-colors duration-300 line-clamp-2 ${hoveredIndex === index ? "text-white" : "text-[#0F4946]"
+                                        }`}
                                 >
                                     {item.question}
                                 </span>
 
                                 {/* Dynamic Icon */}
                                 <div
-                                    className={`p-1.5 rounded-full transition-all duration-300 border ${
-                                        hoveredIndex === index
-                                            ? "bg-white text-[#167D71] border-white rotate-0"
+                                    className={`p-1 sm:p-1.5 flex-shrink-0 rounded-full transition-all duration-300 border ${hoveredIndex === index
+                                            ? "bg-white text-[#167D71]  border-white rotate-0"
                                             : "bg-white text-[#167D71] border-gray-100"
-                                    }`}
+                                        }`}
                                 >
                                     {hoveredIndex === index ? (
-                                        <ChevronDown size={20} />
+                                        <ChevronDown size={16} className="sm:size-5" />
                                     ) : (
-                                        <ChevronRight size={20} />
+                                        <ChevronRight size={16} className="sm:size-5" />
                                     )}
                                 </div>
                             </div>
@@ -110,8 +107,8 @@ const ShewellFAQ = () => {
                                         exit={{ height: 0, opacity: 0 }}
                                         transition={{ duration: 0.3, ease: "easeOut" }}
                                     >
-                                        <div className="px-8 pb-8">
-                                            <p className="text-white/90 text-base leading-relaxed">
+                                        <div className="px-3 sm:px-6 md:px-8 pb-3 sm:pb-4 md:pb-8">
+                                            <p className="text-white/90 text-xs sm:text-sm md:text-base lg:text-lg xl:text-[20px] leading-relaxed">
                                                 {item.answer}
                                             </p>
                                         </div>

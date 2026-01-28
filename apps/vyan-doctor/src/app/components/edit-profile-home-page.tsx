@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@repo/ui/src/@/components/button";
+import { ShewellButton } from "~/components/ui";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -20,11 +20,12 @@ const EditProfileHomePage = () => {
                 ipsum dolor sit.
               </div>
               <div>
-                <Link href="/doctor-profile">
-                  <Button className="rounded-md bg-primary px-4 py-3 font-inter text-base  font-medium leading-[24px] text-white shadow-[2px_2px_4px_0px_rgba(64,64,64,0.25)]">
-                    Edit Now
-                  </Button>
-                </Link>
+                <ShewellButton 
+                  variant="medium"
+                  href="/doctor-profile"
+                >
+                  Edit Now
+                </ShewellButton>
               </div>
             </div>
             <div className="xl:basis-2/3">

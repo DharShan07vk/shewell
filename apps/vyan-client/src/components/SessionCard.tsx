@@ -60,7 +60,7 @@ export const SessionCard: React.FC<SessionCardProps> = ({
           />
         </Link>
       )}
-
+      
       {/* Image */}
       <div className="h-40 w-56 flex-shrink-0 overflow-hidden rounded-lg bg-gray-200">
         {imageUrl ? (
@@ -108,7 +108,7 @@ export const SessionCard: React.FC<SessionCardProps> = ({
         </div>
 
         <div className="mt-4 flex flex-wrap gap-3">
-          <InfoChip icon={<Calendar />} label={date}  />
+          <InfoChip icon={<Calendar />} label={date} />
           <InfoChip icon={<IndianRupee />} label={`₹ ${price}`} />
           <InfoChip icon={<Clock />} label={timeSlot} />
         </div>

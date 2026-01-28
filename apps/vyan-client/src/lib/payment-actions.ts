@@ -7,6 +7,7 @@ import { ICart, ICartLineItem } from "~/models/cart.model";
 import { db } from "~/server/db";
 import { calculateDiscountedPrice } from "./discountPrice";
 import { recalculateCart } from "~/store/cart.store";
+import { receiveMessageOnPort } from "worker_threads";
 interface IRazorPayDetails {
   razorpay_order_id: string;
   razorpay_payment_id: string;
@@ -315,6 +316,7 @@ export const createSessionOrder = async (bookingData: ISessionBookingData) => {
 
   try {
     // Create Razorpay order
+    console.log("Creating razorpay order for session booking",amountInPaise);
     const razorpayOrder = await createRazorpayOrder({
       amount: amountInPaise,
       currency: "INR",
@@ -331,16 +333,42 @@ export const createSessionOrder = async (bookingData: ISessionBookingData) => {
       };
     }
 
-    // Create pending SessionRegistration
-    await db.sessionRegistration.create({
-      data: {
+    // Check for existing registration before creating a new one
+    const existingRegistration = await db.sessionRegistration.findFirst({
+      where: {
         userId: user.id,
         sessionId: bookingData.sessionId,
-        paymentStatus: "PENDING",
-        amountPaid: sessionDetails.price,
-        razorpayOrderId: razorpayOrder.id,
       },
     });
+
+    if (existingRegistration) {
+      // If already has a successful payment, don't create a new one
+      if (existingRegistration.paymentStatus === "COMPLETED") {
+        return {
+          error: "You have already registered for this session.",
+        };
+      }
+
+      // If pending, we can either reuse the razorpayOrderId or create a new one.
+      // For simplicity, let's update the existing one with a new razorpayOrderId
+      await db.sessionRegistration.update({
+        where: { id: existingRegistration.id },
+        data: {
+          razorpayOrderId: razorpayOrder.id,
+        },
+      });
+    } else {
+      // Create pending SessionRegistration
+      await db.sessionRegistration.create({
+        data: {
+          userId: user.id,
+          sessionId: bookingData.sessionId,
+          paymentStatus: "PENDING",
+          amountPaid: sessionDetails.price,
+          razorpayOrderId: razorpayOrder.id,
+        },
+      });
+    }
 
     revalidatePath(`/session/${sessionDetails.slug}`);
 

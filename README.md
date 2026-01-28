@@ -1,81 +1,133 @@
-# Turborepo starter
+# Shewell
 
-This is an official starter Turborepo.
+Shewell is a comprehensive healthcare platform monorepo containing multiple applications and shared packages. It is built using a modern tech stack focused on performance, scalability, and developer experience.
 
-## Using this example
+## Tech Stack
 
-Run the following command:
+- **Monorepo Manager**: [Turbo](https://turbo.build/) + [PNPM](https://pnpm.io/)
+- **Framework**: [Next.js](https://nextjs.org/) (Apps)
+- **Database**: [PostgreSQL](https://www.postgresql.org/) with [Prisma ORM](https://www.prisma.io/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **UI Libraries**:
+  - [Tailwind CSS](https://tailwindcss.com/)
+  - [Radix UI](https://www.radix-ui.com/)
+  - [PrimeReact](https://primereact.org/)
+- **Validation**: [Zod](https://zod.dev/)
 
-```sh
-npx create-turbo@latest
-```
+## Project Structure
 
-## What's inside?
+This monorepo is organized into `apps` and `packages`:
 
-This Turborepo includes the following packages/apps:
+### Apps
 
-### Apps and Packages
+| App             | Description                                 | Port   | Path                                     |
+| :-------------- | :------------------------------------------ | :----- | :--------------------------------------- |
+| **vyan-client** | proper client-facing application for users. | `3001` | [`apps/vyan-client`](./apps/vyan-client) |
+| **vyan-doctor** | Interface for doctors/specialists.          | `3002` | [`apps/vyan-doctor`](./apps/vyan-doctor) |
+| **admin**       | Admin dashboard for platform management.    | `3004` | [`apps/admin`](./apps/admin)             |
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### Packages
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+Shared configuration and libraries:
 
-### Utilities
+- `packages/database`: Prisma schema and client.
+- `packages/ui`: Shared UI components (Tailwind + Radix/Prime).
+- `packages/config`: Shared configuration (env, etc.).
+- `packages/typescript-config`: Shared `tsconfig` bases.
+- `packages/eslint-config`: Shared ESLint configurations.
+- `packages/shiprocket`: Shiprocket integration.
+- `packages/aws`: AWS S3 integration.
+- `packages/mail`: Email service integration.
 
-This Turborepo has some additional tools already setup for you:
+## Getting Started
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+### Prerequisites
 
-### Build
+- **Node.js**: >= 18.0.0
+- **PNPM**: >= 8.0.0 (Recommended package manager)
 
-To build all apps and packages, run the following command:
+### Installation
 
-```
-cd my-turborepo
-pnpm build
-```
+1.  **Clone the repository:**
 
-### Develop
+    ```bash
+    git clone <repository-url>
+    cd Shewell
+    ```
 
-To develop all apps and packages, run the following command:
+2.  **Install dependencies:**
 
-```
-cd my-turborepo
+    ```bash
+    pnpm install
+    ```
+
+3.  **Environment Setup:**
+
+    Copy the example environment file to `.env`:
+
+    ```bash
+    cp .env.example .env
+    ```
+
+    > **Note:** You may need to set up environment variables for specific apps in their respective directories if they are not covered by the root `.env`.
+
+### Database Setup
+
+1.  **Run Migrations:**
+    Apply the Prisma schema to your local database.
+
+    ```bash
+    pnpm database:migration:dev
+    ```
+
+2.  **Generate Client:**
+    Generate the Prisma client types for use across the repo.
+
+    ```bash
+    npx turbo run prisma:generate
+    ```
+
+## Running the Project
+
+### Development Mode
+
+To start all applications in development mode parallelly:
+
+```bash
 pnpm dev
 ```
 
-### Remote Caching
+This will run:
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+- **Client**: http://localhost:3001
+- **Doctor**: http://localhost:3002
+- **Admin**: http://localhost:3004
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+### Filtered Execution
 
+To run a specific app only, use the `--filter` flag with Turbo:
+
+```bash
+# Run only the Client app
+pnpm dev --filter=vyan-client
+
+# Run only the Admin app
+pnpm dev --filter=admin
 ```
-cd my-turborepo
-npx turbo login
-```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+## Available Scripts
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+| Script                         | Description                       |
+| :----------------------------- | :-------------------------------- |
+| `pnpm build`                   | Build all apps and packages.      |
+| `pnpm dev`                     | Run all apps in development mode. |
+| `pnpm lint`                    | Lint all apps and packages.       |
+| `pnpm format`                  | Format code using Prettier.       |
+| `pnpm database:migration:dev`  | Run Prisma migrations (dev).      |
+| `pnpm database:migration:prod` | Deploy Prisma migrations (prod).  |
 
-```
-npx turbo link
-```
+## Contribution
 
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+1.  Ensure you are using `pnpm`.
+2.  Follow the commit message convention.
+3.  Ensure `pnpm lint` and `pnpm build` pass before pushing.

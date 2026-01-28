@@ -65,14 +65,14 @@ export const makePayment = async ({
     return;
   }
 
-  // console.log(
-  //   "checkout&RazorpayData",
-  //   serviceMode,
-  //   professionalUser,
-  //   patient,
-  //   startingTime,
-  //   endingTime,
-  // );
+  console.log(
+    "checkout&RazorpayData",
+    serviceMode,
+    professionalUser,
+    patient,
+    startingTime,
+    endingTime,
+  );
 
   console.log("startingTime", startingTime)
   // Make API call to initiate the checkout process on the server with the provided bookAppointmentId

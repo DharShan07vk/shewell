@@ -29,7 +29,7 @@ import Past from "./past";
 import Cancelled from "./cancelled";
 import React from "react";
 
- enum Duration {
+enum Duration {
   ONE_WEEK = "1_WEEK",
   ONE_MONTH = "1_MONTH",
   THREE_MONTHS = "3_MONTHS",
@@ -56,9 +56,7 @@ const Orders = () => {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbLink >
-                    Appointments
-                  </BreadcrumbLink>
+                  <BreadcrumbLink>Appointments</BreadcrumbLink>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
@@ -66,13 +64,9 @@ const Orders = () => {
 
           <div className="pb-[32px] lg:pb-[55px] xl:pb-[60px] 2xl:pb-[65px]">
             <div className="items-start  xl:flex xl:flex-row xl:gap-[46px] 2xl:gap-[60px] ">
-             
-              <div className="w-full rounded-md border border-border-400 bg-white px-2 py-4 lg:px-4 lg:py-[28px] xl:px-5 xl:py-8 2xl:px-6 2xl:py-9">
-                <div className="mb-6 flex justify-between text-base font-semibold text-black-500 lg:mb-[30px] lg:text-xl xl:mb-9 xl:text-2xl 2xl:mb-10 2xl:text-[28px] 2xl:leading-[38px]">
-                  <div>
-                    {" "}
-                    Appointments
-                  </div>
+              <div className="w-full rounded-3xl border border-gray-100 bg-white p-6 shadow-[0_4px_20px_rgba(0,0,0,0.08)] md:p-10">
+                <div className="mb-6 flex justify-between font-poppins text-base font-semibold text-[#181818] lg:mb-[30px] lg:text-xl xl:mb-9 xl:text-2xl 2xl:mb-10 2xl:text-[28px] 2xl:leading-[38px]">
+                  <div> Appointments</div>
                   <div>
                     <Select
                       value={duration}
@@ -103,27 +97,27 @@ const Orders = () => {
                 </div>
                 <div>
                   <Tabs defaultValue="Ongoing">
-                    <TabsList className="flex justify-center gap-10 gap-y-5 text-sm font-medium text-inactive md:text-base 2xl:text-lg flex-wrap ">
+                    <TabsList className="flex flex-wrap justify-center gap-10 gap-y-5 text-sm font-medium text-[#666666] md:text-base 2xl:text-lg">
                       <TabsTrigger
-                        className="border-b-primary data-[state=active]:border-b-2 "
+                        className="border-b-primary font-poppins data-[state=active]:border-b-2"
                         value="Ongoing"
                       >
                         Today
                       </TabsTrigger>
                       <TabsTrigger
-                        className="border-b-primary data-[state=active]:border-b-2"
+                        className="border-b-primary font-poppins data-[state=active]:border-b-2"
                         value="Upcoming"
                       >
                         Upcoming
                       </TabsTrigger>
                       <TabsTrigger
-                        className="border-b-primary data-[state=active]:border-b-2"
+                        className="border-b-primary font-poppins data-[state=active]:border-b-2"
                         value="Past"
                       >
                         Past
                       </TabsTrigger>
-                      <TabsTrigger 
-                       className="border-b-primary data-[state=active]:border-b-2"
+                      <TabsTrigger
+                        className="border-b-primary font-poppins data-[state=active]:border-b-2"
                         value="Cancelled"
                       >
                         Cancelled
@@ -149,11 +143,11 @@ const Orders = () => {
                       <Past duration={duration} />
                     </TabsContent>
 
-                    <TabsContent 
-                    value="Cancelled"
+                    <TabsContent
+                      value="Cancelled"
                       className="mt-7 lg:mt-[30px] xl:mt-9 2xl:mt-10"
                     >
-                      <Cancelled/>
+                      <Cancelled />
                     </TabsContent>
                   </Tabs>
                 </div>

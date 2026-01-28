@@ -1,4 +1,3 @@
-import { FooterSection } from "@/components/FooterSection";
 import { NavigationHeaderSection } from "@/components/NavigationHeaderSection";
 import { FilterBar } from "@/components/FilterBar";
 import { SessionCard } from "@/components/SessionCard";
@@ -107,7 +106,7 @@ export default async function SessionsPage({ searchParams }: SessionPageProps) {
             </p>
           </div>
         ) : (
-          sessions.map((session : any ) => {
+          sessions.map((session: any) => {
             const sessionDate = format(
               new Date(session.startAt),
               "dd MMM yyyy",

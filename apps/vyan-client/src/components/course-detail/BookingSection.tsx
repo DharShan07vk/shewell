@@ -5,17 +5,22 @@ import { Input } from "@/components/ui/input";
 import { InteractiveButton } from "@/components/ui/interactive-button";
 import { ChevronDown, Calendar, Check } from "lucide-react";
 import Image from "next/image";
+import { Media } from "@/types/media";
 
 interface BookingSectionProps {
   price: number;
-  imageUrl: string;
+  banners: Media[];
   sessionId: string;
+  isRegistered?: boolean;
+  meetingLink?: string | null;
 }
 
 export const BookingSection = ({
   price,
-  imageUrl,
+  banners,
   sessionId,
+  isRegistered = false,
+  meetingLink,
 }: BookingSectionProps): JSX.Element => {
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [isPregnant, setIsPregnant] = useState(false);
@@ -44,13 +49,12 @@ export const BookingSection = ({
   const getStepImage = () => {
     switch (step) {
       case 1:
-        return "/shefit/why-shefit-1.png";
+        return banners?.[0].media.fileUrl;
       case 2:
-        return "/shefit/why-shefit-2.png";
-      case 3:
-        return "/shefit/why-shefit-3.png";
+        return banners?.[1].media.fileUrl;
+
       default:
-        return "/shefit/hero.png";
+        return banners?.[0].media.fileUrl;
     }
   };
 
@@ -177,8 +181,10 @@ export const BookingSection = ({
                   className="h-full w-full object-cover object-center"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src =
-                      imageUrl ||
+                      banners?.[0].media.fileUrl ||
                       "https://placehold.co/800x1200?text=Booking+Session";
+
+                    console.log("banners", banners);
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#F8FAFB]/30 md:to-transparent" />
@@ -195,233 +201,275 @@ export const BookingSection = ({
               className="  relative flex min-h-[640px] w-full max-w-[520px] flex-col p-8 md:p-12"
             >
               {/* PRICE PILL */}
-              <div className="mb-8 flex justify-center">
-                <motion.div
-                  initial={{ scale: 0.9, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  className="flex items-center gap-3 rounded-full border border-[#00898F]/10 bg-[#e6eff1] px-8 py-4 shadow-sm"
-                >
-                  <span className="font-poppins text-2xl font-bold text-[#00898F]">
-                    ₹{price}
-                  </span>
-                  <span className="font-poppins font-medium text-gray-700">
-                    confirm your seat
-                  </span>
-                </motion.div>
-              </div>
-
-              {/* STEPPER */}
-              <div className="mb-10 flex items-center justify-center">
-                {[1, 2, 3].map((s, i) => (
-                  <div key={s} className="flex items-center">
-                    <div className="relative flex flex-col items-center">
-                      <motion.div
-                        animate={{
-                          backgroundColor: step >= s ? "#00898F" : "#E5E7EB",
-                          color: step >= s ? "#FFFFFF" : "#4B5563",
-                        }}
-                        onClick={() => setStep(s as 1 | 2 | 3)}
-                        className={`relative z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-xs font-bold transition-transform hover:scale-110`}
-                      >
-                        {step > s ? <Check size={16} /> : s}
-                      </motion.div>
-                      {step === s && (
-                        <motion.div
-                          layoutId="step-label"
-                          className="absolute -bottom-6 whitespace-nowrap text-[10px] font-bold uppercase tracking-tighter text-[#00898F]"
-                        >
-                          Step {s}
-                        </motion.div>
-                      )}
-                    </div>
-
-                    {i < 2 && (
-                      <div className="relative mx-2 h-[2px] w-12 bg-gray-100">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: step > s ? "100%" : "0%" }}
-                          className="absolute inset-0 bg-[#00898F]"
-                        />
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* FORM BODY */}
-              <div className="flex-1 overflow-hidden">
-                <AnimatePresence mode="wait">
+              {!isRegistered && (
+                <div className="mb-8 flex justify-center">
                   <motion.div
-                    key={step}
-                    variants={containerVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    transition={{ duration: 0.4, ease: "easeInOut" }}
-                    className="space-y-5"
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="flex items-center gap-3 rounded-full border border-[#00898F]/10 bg-[#e6eff1] px-8 py-4 shadow-sm"
                   >
-                    {/* STEP 1 */}
-                    {step === 1 && (
-                      <>
-                        <div className="space-y-1">
-                          <label className="ml-2 text-xs font-semibold text-gray-500">
-                            MOM NAME
-                          </label>
-                          <Input
-                            placeholder="Enter your full name"
-                            className="h-14 rounded-2xl border-none bg-[#F3F7F8] focus-visible:ring-1 focus-visible:ring-[#00898F]"
-                            value={formData.name}
-                            onChange={(e) =>
-                              setFormData({ ...formData, name: e.target.value })
-                            }
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="ml-2 text-xs font-semibold text-gray-500">
-                            EMAIL ADDRESS
-                          </label>
-                          <Input
-                            placeholder="Enter your email"
-                            type="email"
-                            className="h-14 rounded-2xl border-none bg-[#F3F7F8] focus-visible:ring-1 focus-visible:ring-[#00898F]"
-                            value={formData.email}
-                            onChange={(e) =>
-                              setFormData({
-                                ...formData,
-                                email: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="ml-2 text-xs font-semibold text-gray-500">
-                            MOBILE NUMBER
-                          </label>
-                          <Input
-                            placeholder="Enter contact number"
-                            className="h-14 rounded-2xl border-none bg-[#F3F7F8] focus-visible:ring-1 focus-visible:ring-[#00898F]"
-                            value={formData.mobile}
-                            onChange={(e) =>
-                              setFormData({
-                                ...formData,
-                                mobile: e.target.value,
-                              })
-                            }
-                          />
-                        </div>
-                      </>
-                    )}
+                    <span className="font-poppins text-2xl font-bold text-[#00898F]">
+                      ₹{price}
+                    </span>
+                    <span className="font-poppins font-medium text-gray-700">
+                      confirm your seat
+                    </span>
+                  </motion.div>
+                </div>
+              )}
 
-                    {/* STEP 2 */}
-                    {step === 2 && (
-                      <div className="space-y-6">
-                        {/* Pregnant Toggle */}
-                        <div className="rounded-2xl border border-gray-100 bg-[#F3F7F8] p-4">
-                          <div className="mb-2 flex items-center justify-between">
-                            <span className="font-poppins font-medium text-gray-800">
-                              Currently pregnant?
-                            </span>
-                            <button
-                              type="button"
-                              onClick={() => setIsPregnant(!isPregnant)}
-                              className={`h-6 w-12 rounded-full p-1 transition-colors duration-300 ${isPregnant ? "bg-[#00898F]" : "bg-gray-300"}`}
-                            >
-                              <motion.div
-                                animate={{ x: isPregnant ? 24 : 0 }}
-                                className="h-4 w-4 rounded-full bg-white shadow-sm"
-                              />
-                            </button>
-                          </div>
-
-                          <div
-                            className={`space-y-3 transition-all duration-300 ${isPregnant ? "opacity-100" : "pointer-events-none opacity-30"}`}
-                          >
-                            <div className="relative">
-                              <select
-                                disabled={!isPregnant}
-                                value={formData.trimester}
-                                onChange={(e) =>
-                                  setFormData({
-                                    ...formData,
-                                    trimester: e.target.value,
-                                  })
-                                }
-                                className="h-12 w-full appearance-none rounded-xl border-none bg-white px-4 pr-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#00898F]"
-                              >
-                                <option value="">Select Trimester</option>
-                                <option value="first">
-                                  First Trimester (1-12 weeks)
-                                </option>
-                                <option value="second">
-                                  Second Trimester (13-26 weeks)
-                                </option>
-                                <option value="third">
-                                  Third Trimester (27-40 weeks)
-                                </option>
-                              </select>
-                              <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                            </div>
-                            <div className="relative">
-                              <input
-                                type="date"
-                                disabled={!isPregnant}
-                                value={formData.dueDate}
-                                onChange={(e) =>
-                                  setFormData({
-                                    ...formData,
-                                    dueDate: e.target.value,
-                                  })
-                                }
-                                placeholder="Expected Due Date"
-                                className="h-12 w-full rounded-xl border-none bg-white px-4 pr-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#00898F]"
-                              />
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* New Mom Toggle */}
-                        <div className="rounded-2xl border border-gray-100 bg-[#F3F7F8] p-4">
-                          <div className="mb-2 flex items-center justify-between">
-                            <span className="font-poppins font-medium text-gray-800">
-                              Are you a new mom?
-                            </span>
-                            <button
-                              type="button"
-                              onClick={() => setIsNewMom(!isNewMom)}
-                              className={`h-6 w-12 rounded-full p-1 transition-colors duration-300 ${isNewMom ? "bg-[#00898F]" : "bg-gray-300"}`}
-                            >
-                              <motion.div
-                                animate={{ x: isNewMom ? 24 : 0 }}
-                                className="h-4 w-4 rounded-full bg-white shadow-sm"
-                              />
-                            </button>
-                          </div>
-
-                          <div
-                            className={`transition-all duration-300 ${isNewMom ? "opacity-100" : "pointer-events-none opacity-30"}`}
-                          >
-                            <div className="relative">
-                              <input
-                                type="date"
-                                disabled={!isNewMom}
-                                value={formData.babyDob}
-                                onChange={(e) =>
-                                  setFormData({
-                                    ...formData,
-                                    babyDob: e.target.value,
-                                  })
-                                }
-                                placeholder="Baby's Date of Birth"
-                                className="h-12 w-full rounded-xl border-none bg-white px-4 pr-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#00898F]"
-                              />
-                            </div>
-                          </div>
-                        </div>
+              {/* REGISTERED STATE */}
+              {isRegistered ? (
+                <div className="flex flex-1 flex-col items-center justify-center text-center">
+                  <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#00898F]/10 text-[#00898F]">
+                    <Check size={40} />
+                  </div>
+                  <h3 className="mb-2 font-poppins text-2xl font-bold text-gray-900">
+                    You're Registered!
+                  </h3>
+                  <p className="mb-8 text-gray-600">
+                    You have successfully booked your seat for this session.
+                    Click below to join the meeting when it's time.
+                  </p>
+                  {meetingLink ? (
+                    <a
+                      href={meetingLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex w-full items-center justify-between gap-2.5 rounded-2xl bg-[#00898F] px-6 py-4 text-white transition-all duration-300 ease-in-out hover:bg-teal-700"
+                    >
+                      <span className="text-lg font-medium sm:text-xl">
+                        Join Meeting Now
+                      </span>
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 transition-transform group-hover:translate-x-1">
+                        <InteractiveButton />
                       </div>
-                    )}
+                    </a>
+                  ) : (
+                    <div className="rounded-2xl bg-amber-50 p-4 text-sm text-amber-700">
+                      The meeting link will be shared here closer to the session
+                      start time.
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <>
+                  {/* STEPPER */}
+                  <div className="mb-10 flex items-center justify-center">
+                    {[1, 2].map((s, i) => (
+                      <div key={s} className="flex items-center">
+                        <div className="relative flex flex-col items-center">
+                          <motion.div
+                            animate={{
+                              backgroundColor:
+                                step >= s ? "#00898F" : "#E5E7EB",
+                              color: step >= s ? "#FFFFFF" : "#4B5563",
+                            }}
+                            onClick={() => setStep(s as 1 | 2 | 3)}
+                            className={`relative z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-xs font-bold transition-transform hover:scale-110`}
+                          >
+                            {step > s ? <Check size={16} /> : s}
+                          </motion.div>
+                          {step === s && (
+                            <motion.div
+                              layoutId="step-label"
+                              className="absolute -bottom-6 whitespace-nowrap text-[10px] font-bold uppercase tracking-tighter text-[#00898F]"
+                            >
+                              Step {s}
+                            </motion.div>
+                          )}
+                        </div>
 
-                    {/* STEP 3 */}
-                    {step === 3 && (
+                        {i < 1 && (
+                          <div className="relative mx-2 h-[2px] w-12 bg-gray-100">
+                            <motion.div
+                              initial={{ width: 0 }}
+                              animate={{ width: step > s ? "100%" : "0%" }}
+                              className="absolute inset-0 bg-[#00898F]"
+                            />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* FORM BODY */}
+                  <div className="flex-1 overflow-hidden">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={step}
+                        variants={containerVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                        className="space-y-5"
+                      >
+                        {/* STEP 1 */}
+                        {step === 1 && (
+                          <>
+                            <div className="space-y-1">
+                              <label className="ml-2 text-xs font-semibold text-gray-500">
+                                MOM NAME
+                              </label>
+                              <Input
+                                placeholder="Enter your full name"
+                                className="h-14 rounded-2xl border-none bg-[#F3F7F8] focus-visible:ring-1 focus-visible:ring-[#00898F]"
+                                value={formData.name}
+                                onChange={(e) =>
+                                  setFormData({
+                                    ...formData,
+                                    name: e.target.value,
+                                  })
+                                }
+                              />
+                            </div>
+                            <div className="space-y-1">
+                              <label className="ml-2 text-xs font-semibold text-gray-500">
+                                EMAIL ADDRESS
+                              </label>
+                              <Input
+                                placeholder="Enter your email"
+                                type="email"
+                                className="h-14 rounded-2xl border-none bg-[#F3F7F8] focus-visible:ring-1 focus-visible:ring-[#00898F]"
+                                value={formData.email}
+                                onChange={(e) =>
+                                  setFormData({
+                                    ...formData,
+                                    email: e.target.value,
+                                  })
+                                }
+                              />
+                            </div>
+                            <div className="space-y-1">
+                              <label className="ml-2 text-xs font-semibold text-gray-500">
+                                MOBILE NUMBER
+                              </label>
+                              <Input
+                                placeholder="Enter contact number"
+                                className="h-14 rounded-2xl border-none bg-[#F3F7F8] focus-visible:ring-1 focus-visible:ring-[#00898F]"
+                                value={formData.mobile}
+                                onChange={(e) =>
+                                  setFormData({
+                                    ...formData,
+                                    mobile: e.target.value,
+                                  })
+                                }
+                              />
+                            </div>
+                          </>
+                        )}
+
+                        {/* STEP 2 */}
+                        {step === 2 && (
+                          <div className="space-y-6">
+                            {/* Pregnant Toggle */}
+                            <div className="rounded-2xl border border-gray-100 bg-[#F3F7F8] p-4">
+                              <div className="mb-2 flex items-center justify-between">
+                                <span className="font-poppins font-medium text-gray-800">
+                                  Currently pregnant?
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => setIsPregnant(!isPregnant)}
+                                  className={`h-6 w-12 rounded-full p-1 transition-colors duration-300 ${isPregnant ? "bg-[#00898F]" : "bg-gray-300"}`}
+                                >
+                                  <motion.div
+                                    animate={{ x: isPregnant ? 24 : 0 }}
+                                    className="h-4 w-4 rounded-full bg-white shadow-sm"
+                                  />
+                                </button>
+                              </div>
+
+                              <div
+                                className={`space-y-3 transition-all duration-300 ${isPregnant ? "opacity-100" : "pointer-events-none opacity-30"}`}
+                              >
+                                <div className="relative">
+                                  <select
+                                    disabled={!isPregnant}
+                                    value={formData.trimester}
+                                    onChange={(e) =>
+                                      setFormData({
+                                        ...formData,
+                                        trimester: e.target.value,
+                                      })
+                                    }
+                                    className="h-12 w-full appearance-none rounded-xl border-none bg-white px-4 pr-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#00898F]"
+                                  >
+                                    <option value="">Select Trimester</option>
+                                    <option value="first">
+                                      First Trimester (1-12 weeks)
+                                    </option>
+                                    <option value="second">
+                                      Second Trimester (13-26 weeks)
+                                    </option>
+                                    <option value="third">
+                                      Third Trimester (27-40 weeks)
+                                    </option>
+                                  </select>
+                                  <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                                </div>
+                                <div className="relative">
+                                  <input
+                                    type="date"
+                                    disabled={!isPregnant}
+                                    value={formData.dueDate}
+                                    onChange={(e) =>
+                                      setFormData({
+                                        ...formData,
+                                        dueDate: e.target.value,
+                                      })
+                                    }
+                                    placeholder="Expected Due Date"
+                                    className="h-12 w-full rounded-xl border-none bg-white px-4 pr-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#00898F]"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* New Mom Toggle */}
+                            <div className="rounded-2xl border border-gray-100 bg-[#F3F7F8] p-4">
+                              <div className="mb-2 flex items-center justify-between">
+                                <span className="font-poppins font-medium text-gray-800">
+                                  Are you a new mom?
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => setIsNewMom(!isNewMom)}
+                                  className={`h-6 w-12 rounded-full p-1 transition-colors duration-300 ${isNewMom ? "bg-[#00898F]" : "bg-gray-300"}`}
+                                >
+                                  <motion.div
+                                    animate={{ x: isNewMom ? 24 : 0 }}
+                                    className="h-4 w-4 rounded-full bg-white shadow-sm"
+                                  />
+                                </button>
+                              </div>
+
+                              <div
+                                className={`transition-all duration-300 ${isNewMom ? "opacity-100" : "pointer-events-none opacity-30"}`}
+                              >
+                                <div className="relative">
+                                  <input
+                                    type="date"
+                                    disabled={!isNewMom}
+                                    value={formData.babyDob}
+                                    onChange={(e) =>
+                                      setFormData({
+                                        ...formData,
+                                        babyDob: e.target.value,
+                                      })
+                                    }
+                                    placeholder="Baby's Date of Birth"
+                                    className="h-12 w-full rounded-xl border-none bg-white px-4 pr-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#00898F]"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* STEP 3 */}
+                        {/* {step === 3 && (
                       <div className="space-y-6">
                         <div className="space-y-3">
                           <label className="ml-2 text-xs font-semibold text-gray-500">
@@ -509,43 +557,47 @@ export const BookingSection = ({
                             <ChevronDown className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#00898F]" />
                           </div>
                         </div>
-                      </div>
-                    )}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
+                      </div> */}
+                        {/* )} */}
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
 
-              {/* ERROR MESSAGE */}
-              {error && (
-                <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-                  {error}
-                </div>
+                  {/* ERROR MESSAGE */}
+                  {error && (
+                    <div className="mb-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                      {error}
+                    </div>
+                  )}
+
+                  {/* WHITE SEPARATOR WITH BLUR */}
+                  <div className="my-8 h-[2px] bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+
+                  {/* CONTINUE BUTTON */}
+                  <div
+                    onClick={() => {
+                      if (isProcessing) return;
+                      if (step === 2) {
+                        handleBooking();
+                      } else {
+                        setStep((prev) =>
+                          prev < 2 ? ((prev + 1) as any) : prev,
+                        );
+                      }
+                    }}
+                    className="order-0 group flex w-full cursor-pointer items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#00898F] hover:text-white"
+                  >
+                    <span className="text-lg font-medium text-[#00000066] group-hover:text-white sm:text-xl">
+                      {isProcessing
+                        ? "Processing..."
+                        : step === 2
+                          ? "Proceed to Pay"
+                          : "Continue"}
+                    </span>
+                    <InteractiveButton />
+                  </div>
+                </>
               )}
-
-              {/* WHITE SEPARATOR WITH BLUR */}
-              <div className="my-8 h-[2px] bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
-
-              {/* CONTINUE BUTTON */}
-              <div
-                onClick={() => {
-                  if (isProcessing) return;
-                  if (step === 3) {
-                    handleBooking();
-                  } else {
-                    setStep((prev) => (prev < 3 ? ((prev + 1) as any) : prev));
-                  }
-                }}
-                className="order-0 group flex w-full cursor-pointer items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#00898F] hover:text-white"
-              >
-                <span className="text-lg font-medium text-[#00000066] group-hover:text-white sm:text-xl">
-                  {isProcessing
-                    ? "Processing..."
-                    : step === 3
-                      ? "Proceed to Pay"
-                      : "Continue"}
-                </span>
-                <InteractiveButton />
-              </div>
             </motion.div>
           </div>
         </div>

@@ -2,8 +2,8 @@
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { Label } from "../../../components/ui/label";
-import AddFormInput from "../../../components/address-form-input";
+import UIFormInput from "@repo/ui/src/@/components/form/input";
+import UIFormLabel from "@repo/ui/src/@/components/form/label";
 import {
   Select,
   SelectGroup,
@@ -120,10 +120,10 @@ export default function AddressForm({
     setValue("countryId", initialValues.countryId.toString());
   }, [initialValues]);
 
-  console.log("states before fetching", states)
+  console.log("states before fetching", states);
   useEffect(() => {
     fetchStates(selectedCountry).then((resp) => setStates(resp?.states));
-    console.log("fetch states", states)
+    console.log("fetch states", states);
   }, [selectedCountry]);
   useEffect(() => {
     setValue("stateId", initialValues.stateId.toString());
@@ -133,14 +133,16 @@ export default function AddressForm({
     );
   }, [initialValues]);
 
-  console.log('states after fetching', states)
+  console.log("states after fetching", states);
   return (
     <>
       <form onSubmit={handleSubmit(submitForm, errorHandler)}>
-        <div className="flex flex-col gap-3 md:gap-6">
+        <div className="flex flex-col gap-6">
           {/* div-1 */}
           <div>
-            <Label>Country/ Region</Label>
+            <UIFormLabel className="font-poppins text-sm font-medium text-[#333333]">
+              Country/ Region
+            </UIFormLabel>
             <Controller
               name="countryId"
               control={control}
@@ -154,9 +156,9 @@ export default function AddressForm({
                         setSelectedCountry(e);
                       }}
                     >
-                      <SelectTrigger className="w-full">
+                      <SelectTrigger className="w-full rounded-xl border-gray-200 bg-gray-50 font-inter focus:border-[#00898F] focus:bg-white">
                         <SelectValue
-                          className="tex-sm font-inter font-normal text-[#777777]"
+                          className="font-inter text-sm font-normal text-[#777777]"
                           placeholder="Select Country"
                         />
                       </SelectTrigger>
@@ -173,7 +175,7 @@ export default function AddressForm({
                       </SelectContent>
                     </Select>
                     {fieldState.error && (
-                      <p className="text-sm text-red-500">
+                      <p className="mt-1 text-xs text-red-500">
                         {fieldState.error.message}
                       </p>
                     )}
@@ -185,7 +187,9 @@ export default function AddressForm({
 
           <div className="flex flex-col gap-3 md:flex-row md:gap-6">
             <div className="w-full">
-              <Label>State</Label>
+              <UIFormLabel className="font-poppins text-sm font-medium text-[#333333]">
+                State
+              </UIFormLabel>
               <Controller
                 name="stateId"
                 control={control}
@@ -198,9 +202,9 @@ export default function AddressForm({
                           field.onChange(e);
                         }}
                       >
-                        <SelectTrigger className="w-full">
+                        <SelectTrigger className="w-full rounded-xl border-gray-200 bg-gray-50 font-inter focus:border-[#00898F] focus:bg-white">
                           <SelectValue
-                            className="tex-sm font-inter font-normal text-[#777777]"
+                            className="font-inter text-sm font-normal text-[#777777]"
                             placeholder="Select state"
                           />
                         </SelectTrigger>
@@ -218,7 +222,7 @@ export default function AddressForm({
                         </SelectContent>
                       </Select>
                       {fieldState.error && (
-                        <p className="text-sm text-red-500">
+                        <p className="mt-1 text-xs text-red-500">
                           {fieldState.error.message}
                         </p>
                       )}
@@ -229,21 +233,24 @@ export default function AddressForm({
             </div>
 
             <div className="w-full">
-              <Label>City</Label>
+              <UIFormLabel className="font-poppins text-sm font-medium text-[#333333]">
+                City
+              </UIFormLabel>
               <Controller
                 name="city"
                 control={control}
                 render={({ field, fieldState }) => {
                   return (
                     <>
-                      <AddFormInput
-                        type="city"
+                      <UIFormInput
+                        type="text"
                         placeholder="Enter your city"
                         value={field.value}
                         onChange={field.onChange}
+                        className="rounded-xl border-gray-200 bg-gray-50 font-inter focus:border-[#00898F] focus:bg-white"
                       />
                       {fieldState.error && (
-                        <p className="text-sm text-red-500">
+                        <p className="mt-1 text-xs text-red-500">
                           {fieldState.error.message}
                         </p>
                       )}
@@ -259,21 +266,24 @@ export default function AddressForm({
           <div className="flex flex-col gap-3 md:flex-row md:gap-6">
             {/* div-2-a */}
             <div className="w-full">
-              <Label>Name </Label>
+              <UIFormLabel className="font-poppins text-sm font-medium text-[#333333]">
+                Name
+              </UIFormLabel>
               <Controller
                 control={control}
                 name="name"
                 render={({ field, fieldState }) => {
                   return (
                     <>
-                      <AddFormInput
+                      <UIFormInput
                         type="text"
                         placeholder="Enter your name"
                         value={field.value}
                         onChange={field.onChange}
+                        className="rounded-xl border-gray-200 bg-gray-50 font-inter focus:border-[#00898F] focus:bg-white"
                       />
                       {fieldState.error && (
-                        <p className="text-sm text-red-500">
+                        <p className="mt-1 text-xs text-red-500">
                           {fieldState.error.message}
                         </p>
                       )}
@@ -284,21 +294,24 @@ export default function AddressForm({
             </div>
             {/* div-2-b */}
             <div className="w-full">
-              <Label>Phone Number </Label>
+              <UIFormLabel className="font-poppins text-sm font-medium text-[#333333]">
+                Phone Number
+              </UIFormLabel>
               <Controller
                 control={control}
                 name="mobile"
                 render={({ field, fieldState }) => {
                   return (
                     <>
-                      <AddFormInput
+                      <UIFormInput
                         type="text"
                         placeholder="Enter your phone number"
                         value={field.value}
                         onChange={field.onChange}
+                        className="rounded-xl border-gray-200 bg-gray-50 font-inter focus:border-[#00898F] focus:bg-white"
                       />
                       {fieldState.error && (
-                        <p className="text-sm text-red-500">
+                        <p className="mt-1 text-xs text-red-500">
                           {fieldState.error.message}
                         </p>
                       )}
@@ -309,21 +322,24 @@ export default function AddressForm({
             </div>
           </div>
           <div className="w-full">
-            <Label>House No. </Label>
+            <UIFormLabel className="font-poppins text-sm font-medium text-[#333333]">
+              House No.
+            </UIFormLabel>
             <Controller
               control={control}
               name="houseNo"
               render={({ field, fieldState }) => {
                 return (
                   <>
-                    <AddFormInput
+                    <UIFormInput
                       type="text"
                       placeholder="Flat,House no.,Building,Company"
                       value={field.value}
                       onChange={field.onChange}
+                      className="rounded-xl border-gray-200 bg-gray-50 font-inter focus:border-[#00898F] focus:bg-white"
                     />
                     {fieldState.error && (
-                      <p className="text-sm text-red-500">
+                      <p className="mt-1 text-xs text-red-500">
                         {fieldState.error.message}
                       </p>
                     )}
@@ -336,21 +352,23 @@ export default function AddressForm({
           <div className="flex flex-col gap-3 md:flex-row md:gap-6">
             {/* div-3-a */}
             <div className="w-full">
-              <Label>Landmark</Label>
+              <UIFormLabel className="font-poppins text-sm font-medium text-[#333333]">
+                Landmark
+              </UIFormLabel>
               <Controller
                 control={control}
                 name="landmark"
                 render={({ field, fieldState }) => {
                   return (
                     <>
-                      <AddFormInput
-                        className="w-full rounded-md border border-[#E9E9E9] py-[11px] pl-[14px] font-inter text-sm font-normal text-active outline-primary placeholder:font-inter placeholder:text-sm placeholder:font-normal placeholder:text-[#777777]"
+                      <UIFormInput
+                        className="rounded-xl border-gray-200 bg-gray-50 font-inter focus:border-[#00898F] focus:bg-white"
                         placeholder="Enter your landmark"
                         value={field.value}
                         onChange={field.onChange}
-                      ></AddFormInput>
+                      />
                       {fieldState.error && (
-                        <p className="text-sm text-red-500">
+                        <p className="mt-1 text-xs text-red-500">
                           {fieldState.error.message}
                         </p>
                       )}
@@ -361,23 +379,24 @@ export default function AddressForm({
             </div>
             {/* div-3-b */}
             <div className="w-full">
-              <Label>Pin code </Label>
+              <UIFormLabel className="font-poppins text-sm font-medium text-[#333333]">
+                Pin code
+              </UIFormLabel>
               <Controller
                 control={control}
                 name="pincode"
                 render={({ field, fieldState }) => {
-                  console.log("fieldState", fieldState);
-                  console.log("fieldState.error", fieldState.error);
                   return (
                     <>
-                      <AddFormInput
+                      <UIFormInput
                         type="text"
                         placeholder="Enter the pincode"
                         value={field.value}
                         onChange={field.onChange}
+                        className="rounded-xl border-gray-200 bg-gray-50 font-inter focus:border-[#00898F] focus:bg-white"
                       />
                       {fieldState.error && (
-                        <p className="text-sm text-red-500">
+                        <p className="mt-1 text-xs text-red-500">
                           {fieldState.error.message}
                         </p>
                       )}
@@ -390,21 +409,24 @@ export default function AddressForm({
 
           {/* div-4 */}
           <div>
-            <Label>Locality</Label>
+            <UIFormLabel className="font-poppins text-sm font-medium text-[#333333]">
+              Locality
+            </UIFormLabel>
             <Controller
               control={control}
               name="area"
               render={({ field, fieldState }) => {
                 return (
                   <>
-                    <AddFormInput
+                    <UIFormInput
                       type="text"
                       placeholder="Add your locality"
                       value={field.value}
                       onChange={field.onChange}
+                      className="rounded-xl border-gray-200 bg-gray-50 font-inter focus:border-[#00898F] focus:bg-white"
                     />
                     {fieldState.error && (
-                      <p className="text-sm text-red-500">
+                      <p className="mt-1 text-xs text-red-500">
                         {fieldState.error.message}
                       </p>
                     )}
@@ -416,7 +438,9 @@ export default function AddressForm({
 
           {/* div-5 */}
           <div>
-            <Label>Save Address as</Label>
+            <UIFormLabel className="font-poppins text-sm font-medium text-[#333333]">
+              Save Address as
+            </UIFormLabel>
             <Controller
               control={control}
               name="addressType"
@@ -424,7 +448,7 @@ export default function AddressForm({
               render={({ field, fieldState }) => {
                 return (
                   <>
-                    <div className="flex flex-wrap gap-3 rounded-md border border-[#E9E9E9] py-[13px] pl-[14px] ">
+                    <div className="flex flex-wrap gap-3 rounded-xl border border-gray-200 bg-white p-3">
                       <Badge
                         className="cursor-pointer"
                         onClick={() => handleBadgeClick("Work")}
@@ -470,7 +494,7 @@ export default function AddressForm({
           <div className="flex items-center justify-center">
             <Button
               type="submit"
-              className=" bg-primary px-[51px] py-2 font-inter text-[14px] font-medium leading-6 shadow-[2px_2px_4px_0px_rgb(64,64,64,0.25)] "
+              className="w-full rounded-xl bg-[#00898F] py-6 font-poppins text-base font-semibold shadow-[0_4px_14px_rgba(0,137,143,0.3)] hover:bg-[#007b80] hover:shadow-[0_6px_20px_rgba(0,137,143,0.4)] md:w-auto md:px-[60px]"
             >
               Save Address
             </Button>

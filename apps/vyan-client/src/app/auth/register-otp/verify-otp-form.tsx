@@ -53,7 +53,7 @@ const VerifyOTPForm = ({ verifiedAt }: { verifiedAt: Date }) => {
     redirect("/auth/login");
   }
   const onSubmit = (data: IFormSchema) => {
-    console.log("otp",data.otp);
+    console.log("otp", data.otp);
     const verifyData = {
       // email: email!,
       otp: data.otp,
@@ -76,7 +76,25 @@ const VerifyOTPForm = ({ verifiedAt }: { verifiedAt: Date }) => {
       });
   };
 
+  const [timer, setTimer] = React.useState(30);
+  const [canResend, setCanResend] = React.useState(false);
+
+  React.useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+    } else {
+      setCanResend(true);
+    }
+    return () => clearInterval(interval);
+  }, [timer]);
+
   const handleResendOTP = () => {
+    if (!canResend) return;
+    setCanResend(false);
+    setTimer(30);
     resendOTP()
       .then(async (resp) => {
         toast({
@@ -119,10 +137,12 @@ const VerifyOTPForm = ({ verifiedAt }: { verifiedAt: Date }) => {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center justify-center rounded-md border-2 border-primary p-4 md:px-[50px] md:py-6 2xl:px-[97px] "
+        className="flex flex-col items-center justify-center rounded-3xl border border-gray-100 bg-white p-6 shadow-[0_4px_20px_rgba(0,0,0,0.08)] md:px-[50px] md:py-10 2xl:px-[97px]"
       >
-        <div className="font-poppins text-base font-normal">Enter OTP*</div>
-        <div className="my-2">
+        <div className="font-poppins text-xl font-semibold text-[#333333]">
+          Enter OTP*
+        </div>
+        <div className="my-6">
           <Controller
             control={control}
             name="otp"
@@ -135,17 +155,37 @@ const VerifyOTPForm = ({ verifiedAt }: { verifiedAt: Date }) => {
                     value={field.value}
                     onChange={field.onChange}
                   >
-                    <InputOTPGroup className="mx-auto">
-                      <InputOTPSlot index={0} />
-                      <InputOTPSlot index={1} />
-                      <InputOTPSlot index={2} />
-                      <InputOTPSlot index={3} />
-                      <InputOTPSlot index={4} />
-                      <InputOTPSlot index={5} />
+                    <InputOTPGroup className="mx-auto gap-2">
+                      <InputOTPSlot
+                        index={0}
+                        className="rounded-lg border-gray-200 bg-gray-50 font-poppins text-lg transition-all focus:border-[#00898F] focus:bg-white"
+                      />
+                      <InputOTPSlot
+                        index={1}
+                        className="rounded-lg border-gray-200 bg-gray-50 font-poppins text-lg transition-all focus:border-[#00898F] focus:bg-white"
+                      />
+                      <InputOTPSlot
+                        index={2}
+                        className="rounded-lg border-gray-200 bg-gray-50 font-poppins text-lg transition-all focus:border-[#00898F] focus:bg-white"
+                      />
+                      <InputOTPSlot
+                        index={3}
+                        className="rounded-lg border-gray-200 bg-gray-50 font-poppins text-lg transition-all focus:border-[#00898F] focus:bg-white"
+                      />
+                      <InputOTPSlot
+                        index={4}
+                        className="rounded-lg border-gray-200 bg-gray-50 font-poppins text-lg transition-all focus:border-[#00898F] focus:bg-white"
+                      />
+                      <InputOTPSlot
+                        index={5}
+                        className="rounded-lg border-gray-200 bg-gray-50 font-poppins text-lg transition-all focus:border-[#00898F] focus:bg-white"
+                      />
                     </InputOTPGroup>
                   </InputOTP>
                   {errors && errors.otp && (
-                    <p className="text-red-500">{errors.otp.message}</p>
+                    <p className="mt-2 text-center text-sm text-red-500">
+                      {errors.otp.message}
+                    </p>
                   )}
                 </>
               );
@@ -153,46 +193,28 @@ const VerifyOTPForm = ({ verifiedAt }: { verifiedAt: Date }) => {
           />
         </div>
         <div className="text-center">
-          <div
-            className="cursor-pointer font-poppins text-sm font-medium text-primary"
-            onClick={() => handleResendOTP()}
+          <button
+            type="button"
+            disabled={!canResend}
+            className={`font-poppins text-sm font-medium ${
+              canResend
+                ? "cursor-pointer text-[#00898F] hover:underline"
+                : "cursor-not-allowed text-[#00898F]"
+            }`}
+            onClick={handleResendOTP}
           >
-            {" "}
-            Resend OTP
-          </div>
+            {canResend ? "Resend OTP" : `Resend OTP in ${timer}s`}
+          </button>
         </div>
 
         <Button
           //   onClick={() => router.push("/auth/login")}
-          className="mb-4 mt-6 w-[240px] md:my-8"
+          className="my-6 w-full rounded-xl py-6 font-poppins text-base font-semibold md:w-[324px]"
           variant="OTP"
           type="submit"
         >
           Verify
         </Button>
-
-        <div className="text-center font-inter text-base font-normal">
-          Already have a account
-          <Link
-            className="ml-4 mt-2 block font-poppins text-base font-medium text-primary md:mt-0 md:inline"
-            href="/auth/login"
-          >
-            Login{" "}
-            <svg
-              className="inline"
-              width="15"
-              height="8"
-              viewBox="0 0 15 8"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1.13634 3.36357L12.3273 3.36357L10.2318 1.26807C9.98332 1.01959 9.98332 0.616643 10.2318 0.368122C10.4803 0.119643 10.8833 0.119643 11.1318 0.368122L14.3136 3.54994C14.5621 3.79842 14.5621 4.20136 14.3136 4.44989L11.1318 7.6317C11.0075 7.75596 10.8447 7.81812 10.6818 7.81812C10.5189 7.81812 10.3561 7.75596 10.2318 7.6317C9.98332 7.38322 9.98332 6.98028 10.2318 6.73176L12.3273 4.6363L1.13634 4.6363C0.7849 4.6363 0.499979 4.35138 0.499979 3.99993C0.499979 3.64849 0.7849 3.36357 1.13634 3.36357Z"
-                fill="#00898F"
-              />
-            </svg>
-          </Link>
-        </div>
       </form>
       <div className="mt-[45px] hidden md:block">
         <div className="mb-1 font-inter text-sm font-normal 2xl:text-base">

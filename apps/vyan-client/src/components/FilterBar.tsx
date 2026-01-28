@@ -187,7 +187,7 @@ export const FilterBar = ({
       return;
     }
     setErrorMessage("");
-    
+
     updateURLParams({
       minPrice: minPrice || null,
       maxPrice: maxPrice || null,
@@ -238,13 +238,13 @@ export const FilterBar = ({
       {/* CENTERED FILTER BAR */}
       <div className="flex justify-center">
         <div className="inline-flex items-center rounded-full bg-[#EEEEEE] px-6 py-3 text-sm">
-          <FilterToggle
+          {/* <FilterToggle
             label="Only Online Courses"
             enabled={isOnlineCourses}
             onClick={() => setIsOnlineCourses(handleOnlyOnlineCoursesToggle())}
           />
 
-          <Divider />
+          <Divider /> */}
 
           {/* Category Dropdown */}
           <Popover>
@@ -321,7 +321,9 @@ export const FilterBar = ({
                     type="number"
                     placeholder="Min"
                     value={minPrice}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMinPrice(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setMinPrice(e.target.value)
+                    }
                     className="w-24"
                   />
                   <span>-</span>
@@ -329,12 +331,14 @@ export const FilterBar = ({
                     type="number"
                     placeholder="Max"
                     value={maxPrice}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMaxPrice(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setMaxPrice(e.target.value)
+                    }
                     className="w-24"
                   />
                 </div>
                 {errorMessage && (
-                  <div className="text-red-500 text-xs">{errorMessage}</div>
+                  <div className="text-xs text-red-500">{errorMessage}</div>
                 )}
                 <Button
                   onClick={handlePriceChange}
@@ -368,7 +372,9 @@ export const FilterBar = ({
                     <Input
                       type="date"
                       value={startDate}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStartDate(e.target.value)}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setStartDate(e.target.value)
+                      }
                       className="w-full"
                     />
                   </div>
@@ -379,7 +385,9 @@ export const FilterBar = ({
                     <Input
                       type="date"
                       value={endDate}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEndDate(e.target.value)}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setEndDate(e.target.value)
+                      }
                       className="w-full"
                     />
                   </div>

@@ -1,5 +1,3 @@
-
-
 "use client";
 import { Button } from "@repo/ui/src/@/components/button";
 import { Calendar } from "@repo/ui/src/@/components/calendar";
@@ -23,7 +21,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui/src/@/components/select";
-import { createTimeDate, createTimeDateSeconds, filterAvailableTimeSlots } from "~/lib/utils";
+import {
+  createTimeDate,
+  createTimeDateSeconds,
+  filterAvailableTimeSlots,
+} from "~/lib/utils";
 
 interface ISelectDateTime {
   expertId: string;
@@ -42,9 +44,14 @@ interface ISelectDateTime {
 }
 interface TimeSlot {
   availableTimings: {
-    startTime: Date;
-    endTime: Date;
+    startingTime: Date;
+    endingTime: Date;
   }[];
+}
+
+interface TimeSlotsData {
+  timeSlots: TimeSlot[];
+  bookedSlots: { startingTime: Date; endingTime: Date }[];
 }
 const SelectDateTime = ({
   expertId,
@@ -66,9 +73,17 @@ const SelectDateTime = ({
   // >([]);
   const [selectedPrice, setSelectedPrice] = useState<number>(0);
   const setSecondsToZeroDefaultTimeSlots = {
-    startTime : createTimeDateSeconds(getHours(defaultTimeSlots.startTime), getMinutes(defaultTimeSlots.startTime), new Date(defaultTimeSlots.startTime)),
-    endTime : createTimeDateSeconds(getHours(defaultTimeSlots.endTime), getMinutes(defaultTimeSlots.endTime), new Date(defaultTimeSlots.endTime))
-  }
+    startTime: createTimeDateSeconds(
+      getHours(defaultTimeSlots.startTime),
+      getMinutes(defaultTimeSlots.startTime),
+      new Date(defaultTimeSlots.startTime),
+    ),
+    endTime: createTimeDateSeconds(
+      getHours(defaultTimeSlots.endTime),
+      getMinutes(defaultTimeSlots.endTime),
+      new Date(defaultTimeSlots.endTime),
+    ),
+  };
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<{
     startTime: Date;
     endTime: Date;
@@ -80,29 +95,26 @@ const SelectDateTime = ({
   today.setHours(0, 0, 0, 0);
   const disabledDays = { before: today };
 
-
-
   useEffect(() => {
     if (duration === defaultDuration) {
-     
       setSelectedTimeSlot(defaultTimeSlots);
       // console.log("selected time slot", selectedTimeSlot)
     } else {
-      
-
       setSelectedTimeSlot(null);
       //  console.log("selected time slot", selectedTimeSlot)
     }
   }, [duration]);
-  useEffect(() => {
-   
-  }, [selectedTimeSlot]);
+  useEffect(() => {}, [selectedTimeSlot]);
 
   useEffect(() => {
-    setSelectedTimeSlot(defaultTimeSlots)
-  },[defaultTimeSlots])
+    setSelectedTimeSlot(defaultTimeSlots);
+  }, [defaultTimeSlots]);
 
-  const { data, refetch, isLoading } =
+  const {
+    data,
+    refetch,
+    isLoading,
+  }: { data: TimeSlotsData; refetch: () => void; isLoading: boolean } =
     api.searchTimeSlots.searchTimeSlots.useQuery(
       {
         date: formatDate!,
@@ -180,7 +192,7 @@ const SelectDateTime = ({
   useEffect(() => {
     setDate(date);
   }, [date]);
- 
+
   const handleTimeSlot = (selectedTimeSlot: {
     startTime: Date;
     endTime: Date;
@@ -201,16 +213,15 @@ const SelectDateTime = ({
   };
 
   const refactoredTimeSlots = timeSlots.map((item) => ({
-    availableTimings : item.availableTimings.map((items) => ({
-      startingTime : items.startTime,
-      endingTime : items.endTime
-    }))
-  }))
+    availableTimings: item.availableTimings.map((items) => ({
+      startingTime: items.startingTime,
+      endingTime: items.endingTime,
+    })),
+  }));
   const filteredBookedSlotsFromTimeSlots = filterAvailableTimeSlots(
-    refactoredTimeSlots, data?.bookedSlots ?? []
-  )
- 
-  
+    refactoredTimeSlots,
+    data?.bookedSlots ?? [],
+  );
 
   const generateTimeSlots = (
     timeSlots: { startTime: Date; endTime: Date }[],
@@ -233,8 +244,8 @@ const SelectDateTime = ({
         generatedTimeSlots.push({
           availableTimings: [
             {
-              startTime: new Date(currentTime),
-              endTime: new Date(currentTime.getTime() + duration * 60000),
+              startingTime: new Date(currentTime),
+              endingTime: new Date(currentTime.getTime() + duration * 60000),
             },
           ],
         });
@@ -265,7 +276,6 @@ const SelectDateTime = ({
             <Select
               value={duration?.toString()}
               onValueChange={(selectedValue: string) => {
-               
                 setDuration(parseInt(selectedValue));
                 onSelectDuration(parseInt(selectedValue));
               }}
@@ -341,44 +351,46 @@ const SelectDateTime = ({
                           <div key={idx} className="flex items-center">
                             <span
                               className={`cursor-pointer rounded-md border border-primary px-2 py-1 font-inter text-sm font-medium text-black hover:bg-primary hover:text-white ${
-                                selectedTimeSlot?.startTime === timing.startingTime && selectedTimeSlot.endTime === timing.endingTime
+                                selectedTimeSlot?.startTime ===
+                                  timing.startingTime &&
+                                selectedTimeSlot.endTime === timing.endingTime
                                   ? "bg-primary text-white"
                                   : "bg-white text-black hover:bg-primary hover:text-white"
                               }`}
                               onClick={() => {
                                 const updatedTiming = {
-                                  startTime : timing.startingTime,
-                                  endTime : timing.endingTime
-                                }
-                                handleTimeSlot(updatedTiming),
+                                  startTime: timing.startingTime,
+                                  endTime: timing.endingTime,
+                                };
+                                (handleTimeSlot(updatedTiming),
                                   console.log(
                                     " selectedTimeSlotStartTime",
                                     createTimeDateSeconds(
-                                    getHours(selectedTimeSlot?.startTime!),
-                                    getMinutes(selectedTimeSlot?.startTime!),
-                                    new Date(selectedTimeSlot?.startTime!),
-                                  ) ,
-                                  
+                                      getHours(selectedTimeSlot?.startTime!),
+                                      getMinutes(selectedTimeSlot?.startTime!),
+                                      new Date(selectedTimeSlot?.startTime!),
+                                    ),
+
                                     // "createTimeDateStartingTime",
                                     createTimeDateSeconds(
                                       getHours(timing.startingTime),
                                       getMinutes(timing.startingTime),
                                       new Date(timing.startingTime),
-                                    ) , 
-                                 
+                                    ),
+
                                     // " selectedTimeSlotEndTime",
                                     createTimeDateSeconds(
                                       getHours(selectedTimeSlot?.endTime!),
                                       getMinutes(selectedTimeSlot?.endTime!),
                                       new Date(selectedTimeSlot?.endTime!),
-                                    )   ,
+                                    ),
                                     // "createTimeDateEndDate",
                                     createTimeDateSeconds(
                                       getHours(timing.endingTime),
                                       getMinutes(timing.endingTime),
                                       new Date(timing.endingTime),
                                     ),
-                                  );
+                                  ));
                               }}
                             >
                               {formatTimeSlot(

@@ -2,6 +2,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, Languages } from "lucide-react";
 
+import { Media } from "@/types/media";
+
 interface CourseDetailHeaderSectionProps {
   title: string;
   instructor: string;
@@ -9,6 +11,7 @@ interface CourseDetailHeaderSectionProps {
   isOnline: boolean;
   hasRecording: boolean;
   date: string;
+  banners: Media[];
   time: string;
 }
 
@@ -18,6 +21,7 @@ export const CourseDetailHeaderSection = ({
   language,
   isOnline,
   hasRecording,
+  banners,
   date,
   time,
 }: CourseDetailHeaderSectionProps): JSX.Element => {
@@ -47,7 +51,7 @@ export const CourseDetailHeaderSection = ({
 
             {hasRecording && (
               <Badge className="rounded-full border border-gray-200 bg-white px-4 py-2">
-                . Live
+                Recording
               </Badge>
             )}
           </div>

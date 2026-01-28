@@ -1,10 +1,10 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@repo/ui/src/@/components/button";
-import { Label } from "@repo/ui/src/@/components/label";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
-import AddFormInput from "~/components/address-form-input";
+import UIFormInput from "@repo/ui/src/@/components/form/input";
+import UIFormLabel from "@repo/ui/src/@/components/form/label";
 
 import { toast, useToast } from "@repo/ui/src/@/components/use-toast";
 import {
@@ -20,7 +20,7 @@ import {
 } from "@repo/ui/src/@/components/alert-dialog";
 // import EmailChangeForm from "./email-change-form";
 import { useState } from "react";
-import UpdatePersonalInfo, { emailChange, } from "./personal-info-actions";
+import UpdatePersonalInfo, { emailChange } from "./personal-info-actions";
 import EmailChangeForm from "./email-change-form";
 type IUser = {
   name: string;
@@ -61,7 +61,6 @@ const PersonalInformationForm = ({ user }: { user: IUser }) => {
   });
 
   const sendEmailChangeOtp = () => {
-   
     emailChange()
       .then((resp) => {
         console.log(resp.message);
@@ -106,28 +105,31 @@ const PersonalInformationForm = ({ user }: { user: IUser }) => {
   return (
     <>
       <form onSubmit={handleSubmit(submitInfo, (err) => console.log(err))}>
-        <div className="flex flex-col justify-center border-t-2 border-t-[#F2F7EA] pt-10 font-inter md:flex-row ">
-          <div className="flex w-10/12 flex-col gap-5 md:gap-6 xl:gap-[30px] 2xl:gap-8">
-            <div className="text-center text-sm font-normal text-active">
+        <div className="flex flex-col justify-center border-t border-t-gray-100 pt-10 font-inter md:flex-row ">
+          <div className="flex w-full flex-col gap-6 md:w-10/12 xl:gap-8">
+            <div className="text-center font-inter text-sm font-normal text-[#666666]">
               Make changes to your account here. Click save when you're done.
             </div>
-            <div className="flex flex-col gap-3 md:gap-4 xl:gap-5 2xl:gap-6">
+            <div className="flex flex-col gap-6">
               <div className="w-full">
-                <Label>Name*</Label>
+                <UIFormLabel className="font-poppins text-sm font-medium text-[#333333]">
+                  Name*
+                </UIFormLabel>
                 <Controller
                   control={control}
                   name="name"
                   render={({ field }) => {
                     return (
                       <>
-                        <AddFormInput
+                        <UIFormInput
                           type="text"
                           placeholder="eg. Jon Doe"
                           value={field.value}
                           onChange={field.onChange}
+                          className="rounded-xl border-gray-200 bg-gray-50 font-inter focus:border-[#00898F] focus:bg-white"
                         />
                         {errors && errors.name && (
-                          <p className="text-sm text-red-500">
+                          <p className="mt-1 text-xs text-red-500">
                             {errors.name.message}
                           </p>
                         )}
@@ -138,22 +140,25 @@ const PersonalInformationForm = ({ user }: { user: IUser }) => {
               </div>
 
               <div className="w-full">
-                <Label>Phone Number *</Label>
+                <UIFormLabel className="font-poppins text-sm font-medium text-[#333333]">
+                  Phone Number *
+                </UIFormLabel>
                 <Controller
                   control={control}
                   name="phoneNumber"
                   render={({ field }) => {
                     return (
                       <>
-                        <AddFormInput
+                        <UIFormInput
                           type="tel"
                           value={field.value}
                           placeholder="eg. +91-9778977898"
                           onChange={field.onChange}
                           disabled
+                          className="rounded-xl border-gray-200 bg-gray-50 font-inter text-gray-500"
                         />
                         {errors && errors.phoneNumber && (
-                          <p className="text-sm text-red-500">
+                          <p className="mt-1 text-xs text-red-500">
                             {errors.phoneNumber.message}
                           </p>
                         )}
@@ -165,10 +170,12 @@ const PersonalInformationForm = ({ user }: { user: IUser }) => {
 
               <div className="w-full">
                 <div className="flex justify-between">
-                  <Label>Email *</Label>
+                  <UIFormLabel className="font-poppins text-sm font-medium text-[#333333]">
+                    Email *
+                  </UIFormLabel>
                   <div
                     onClick={handleClick}
-                    className="cursor-pointer text-sm font-medium text-primary underline"
+                    className="cursor-pointer font-poppins text-sm font-medium text-[#00898F] hover:underline"
                   >
                     Change email
                   </div>
@@ -180,15 +187,16 @@ const PersonalInformationForm = ({ user }: { user: IUser }) => {
                   render={({ field }) => {
                     return (
                       <>
-                        <AddFormInput
+                        <UIFormInput
                           type="email"
                           placeholder="eg. appleseed@gmail.com"
                           value={field.value}
                           onChange={field.onChange}
                           disabled
+                          className="rounded-xl border-gray-200 bg-gray-50 font-inter text-gray-500"
                         />
                         {errors && errors.email && (
-                          <p className="text-sm text-red-500">
+                          <p className="mt-1 text-xs text-red-500">
                             {errors.email.message}
                           </p>
                         )}
@@ -200,7 +208,8 @@ const PersonalInformationForm = ({ user }: { user: IUser }) => {
             </div>
             <Button
               type="submit"
-              className="mx-auto w-fit bg-primary px-[49px] py-2 font-inter text-[14px] font-medium leading-6 shadow-[2px_2px_4px_0px_rgba(64,64,64,0.4)] hover:bg-primary"
+              className="mx-auto w-fit rounded-xl px-[49px] py-6 font-poppins text-base font-semibold shadow-[0_4px_14px_rgba(0,137,143,0.3)] hover:shadow-[0_6px_20px_rgba(0,137,143,0.4)]"
+              variant="default"
             >
               Save Changes
             </Button>

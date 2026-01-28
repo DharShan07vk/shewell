@@ -15,6 +15,12 @@ const Sessions = async () => {
             id: true,
             paymentStatus: true
           }
+        },
+        thumbnailMedia: true,
+        banners: {
+          include: {
+            media: true
+          }
         }
       },
       orderBy: {

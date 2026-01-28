@@ -30,7 +30,7 @@ const ProfileImageText = ({
   const customStyles = {
     itemShapes: StarDrawing,
     activeFillColor: "#00898F",
-       inactiveFillColor:"#B5B5B5",
+    inactiveFillColor: "#B5B5B5",
   };
 
   return (
@@ -42,9 +42,13 @@ const ProfileImageText = ({
             <div className="flex flex-col items-center  gap-4 lg:flex-row lg:gap-6  2xl:gap-8">
               {/* image */}
 
-              <div className=" flex items-center justify-center self-center aspect-square w-[225px]  bg-[url('/images/bg.png')] bg-no-repeat bg-center">
-                {" "}
-                <div className="flex items-center justify-center  ">{cardImage}</div>
+              <div className="relative flex aspect-square items-center justify-center xs:w-[150px] sm:w-[225px]">
+                {/* Decorative ring */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#00898F]/20 to-[#51AF5A]/20 p-2">
+                  <div className="relative h-full w-full overflow-hidden rounded-full bg-white shadow-lg ring-2 ring-white">
+                    {cardImage}
+                  </div>
+                </div>
               </div>
 
               {/* text */}
@@ -53,7 +57,6 @@ const ProfileImageText = ({
                   Dr. {doctorProfile.firstName || ""}
                 </h2>
                 <div className="font-inter text-[20px] font-normal leading-[30px] text-inactive xl:text-2xl">
-                  
                   {doctorProfile.displayQualification}
                 </div>
                 <div className="flex items-center gap-2">
@@ -79,7 +82,7 @@ const ProfileImageText = ({
                     month
                   </div>
                 </div>
-                <div className="flex w-full items-center justify-center md:justify-start gap-2 ">
+                <div className="flex w-full items-center justify-center gap-2 md:justify-start ">
                   <div className="flex">
                     <Rating
                       className="inline"
@@ -90,11 +93,14 @@ const ProfileImageText = ({
                     />
 
                     <div className="border-r border-primary pr-2 font-inter text-sm font-medium text-active 2xl:text-base">
-                      {(parseFloat(doctorProfile.avgRating || "0")).toFixed(1)}
+                      {parseFloat(doctorProfile.avgRating || "0").toFixed(1)}
                     </div>
                   </div>
                   <div className="font-inter text-sm font-normal 2xl:text-base">
-                   {doctorProfile?.totalConsultations ? doctorProfile?.totalConsultations : 0} Consultation
+                    {doctorProfile?.totalConsultations
+                      ? doctorProfile?.totalConsultations
+                      : 0}{" "}
+                    Consultation
                   </div>
                 </div>
               </div>
@@ -108,39 +114,16 @@ const ProfileImageText = ({
             <h3 className="mb-3 font-inter text-base font-semibold md:text-lg  xl:text-[20px] xl:leading-[30px] 2xl:text-[28px] 2xl:leading-[38px]">
               Specialization
             </h3>
-            <div className="flex flex-wrap items-center justify-center gap-[14px] px-[60px] lg:justify-start md:px-0 2xl:gap-[18px]">
+            <div className="flex flex-wrap items-center justify-center gap-[14px] px-[60px] md:px-0 lg:justify-start 2xl:gap-[18px]">
               {specialization &&
                 specialization.map((item, index) => {
                   return (
-                    <>
-                      <div
-                        className="font-inter text-sm font-normal text-active 2xl:text-base"
-                        key={index}
-                      >
-                        <svg
-                          className="mr-[2px] inline"
-                          width="16"
-                          height="17"
-                          viewBox="0 0 16 17"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12.0002 4.25L4.66683 11.5833L1.3335 8.25"
-                            stroke="#008F4E"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                          <path
-                            d="M14.6665 6.91602L9.6665 11.916L8.6665 10.916"
-                            stroke="#008F4E"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        {item.specialization}
-                      </div>
-                    </>
+                    <div
+                      className="rounded-full border border-[#00898F]/20 bg-gradient-to-r from-[#00898F]/10 to-[#51AF5A]/10 px-3 py-1.5 font-poppins text-xs font-medium text-[#00898F]"
+                      key={index}
+                    >
+                      {item.specialization}
+                    </div>
                   );
                 })}
             </div>

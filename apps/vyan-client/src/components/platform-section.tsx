@@ -10,7 +10,7 @@ const PLATFORM_DATA = [
     title: "Pre-Pregnancy Webinars",
     description:
       "Prepare your mind and body for a healthy pregnancy journey with expert lifestyle and nutrition guidance.",
-    image: "/home/4.png",
+    image: "/home/1.webp",
     color: "bg-[#1D4D4F]",
   },
   {
@@ -18,7 +18,7 @@ const PLATFORM_DATA = [
     title: "Childbirth Preparatory Classes",
     description:
       "Understand every trimester, your body changes, and how to confidently prepare for labor and delivery.",
-    image: "/home/5.png",
+    image: "/home/1-1.webp",
     color: "bg-[#5B418F]",
   },
   {
@@ -26,7 +26,7 @@ const PLATFORM_DATA = [
     title: "Breastfeeding Classes",
     description:
       "Master latching, milk supply, and common challenges to make breastfeeding natural and stress-free.",
-    image: "/home/6.png",
+    image: "/home/1-2.webp",
     color: "bg-[#917C5D]",
   },
   {
@@ -34,7 +34,7 @@ const PLATFORM_DATA = [
     title: "Starting Solids",
     description:
       "Learn when and how to start solids with balanced, safe meal plans curated by child nutrition experts.",
-    image: "/home/7.png",
+    image: "/home/1-3.webp",
     color: "bg-[#167D71]",
   },
   {
@@ -42,15 +42,15 @@ const PLATFORM_DATA = [
     title: "Postpartum Mental Wellbeing",
     description:
       "Prioritize your emotional health with tools and therapy to navigate postpartum changes with strength.",
-    image: "/home/2.png",
+    image: "/home/1-4.webp",
     color: "bg-[#7A6451]",
   },
   {
     id: "6",
-    title: "Postpartum Mental Wellbeing",
+    title: "Workshop",
     description:
-      "Prioritize your emotional health with tools and therapy to navigate postpartum changes with strength.",
-    image: "/home/3.png",
+      "Explore ancient prenatal wisdom with guided meditation, positive affirmations, and mindful parenting",
+    image: "/home/1-5.webp",
     color: "bg-[#7A6451]",
   },
 ];
@@ -64,7 +64,7 @@ export default function PlatformSection() {
     intervalRef.current = setInterval(() => {
       indexRef.current = (indexRef.current + 1) % PLATFORM_DATA.length;
       setActiveTab(PLATFORM_DATA[indexRef.current]);
-    }, 2000); // Change every 4 seconds
+    }, 4000);
 
     return () => {
       if (intervalRef.current) {
@@ -73,7 +73,6 @@ export default function PlatformSection() {
     };
   }, []);
 
-  // Reset timer when user manually selects a tab
   const handleTabClick = (
     item: (typeof PLATFORM_DATA)[0],
     isHover: boolean,
@@ -86,39 +85,38 @@ export default function PlatformSection() {
       intervalRef.current = setInterval(() => {
         indexRef.current = (indexRef.current + 1) % PLATFORM_DATA.length;
         setActiveTab(PLATFORM_DATA[indexRef.current]);
-      }, 2000); // Change every 4 seconds
+      }, 4000);
     }
   };
 
   return (
-    <section className="w-full  overflow-hidden py-16   md:py-24">
-      <div className="mb-16 text-center">
-        <h3 className="mb-3 text-2xl font-bold text-gray-900 md:mb-4 md:text-3xl lg:text-4xl">
-          Courses That Support You - Every Step of the Way
+    <section className="w-full overflow-hidden px-4 py-3 sm:py-4 sm:px-6 md:px-12 md:py-6 lg:px-[100px] lg:py-10">
+      <div className="mb-3 sm:mb-4 text-center md:mb-8 lg:mb-12">
+        <h3 className="mb-2 sm:mb-3 text-base sm:text-lg font-medium text-gray-900 md:mb-4 md:text-2xl lg:text-3xl xl:text-4xl">
+          Courses That Support You Every Step of the Way
         </h3>
-        <p className="mx-auto max-w-2xl text-sm text-gray-500 md:text-base lg:text-lg">
-          From fertility to first steps – evidence-based, heart-led,
-          expert-designed just for you.
+        <p className="mx-auto text-xs sm:text-sm md:text-base text-[#33333399] lg:text-lg xl:text-xl">
+          From fertility to first steps evidence based heart led expert designed just for you.
         </p>
       </div>
-      <div className="mx-auto flex   h-[650px] max-w-[1720px] flex-col overflow-hidden rounded-[32px] bg-white shadow-sm lg:h-[795px] lg:flex-row">
+      <div className="flex h-auto w-full flex-col overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl lg:rounded-[28px] bg-white shadow-sm lg:h-[650px] lg:flex-row lg:rounded-[32px] xl:h-[795px]">
         {/* LEFT NAVIGATION */}
-        <div className="z-10 flex w-full flex-col  bg-white lg:w-[50%]">
-          <div className="">
+        <div className="z-10 flex w-full flex-col bg-white lg:w-[50%]">
+          <div className="flex flex-col max-h-none overflow-hidden">
             {PLATFORM_DATA.map((item) => (
               <button
                 key={item.id}
                 onMouseEnter={() => handleTabClick(item, true)}
                 onMouseLeave={() => handleTabClick(item, false)}
                 onClick={() => handleTabClick(item, false)}
-                className={`rounded-lt-[32px] group flex h-[132.5px] w-full items-center justify-between px-8 py-4 text-left transition-colors duration-200
+                className={`rounded-lt-[32px] group flex h-7 sm:h-10 md:h-14 lg:h-[132.5px] w-full items-center justify-between gap-2 px-2 sm:px-3 md:px-5 lg:px-8 py-1 sm:py-1.5 md:py-2 lg:py-4 text-left transition-colors duration-200
                             ${
                               activeTab?.id === item.id
                                 ? "bg-[#005F5F] text-white"
                                 : "bg-[#F2F2F2] text-[#00000066] hover:bg-gray-200"
                             }`}
               >
-                <span className="text-base font-medium md:text-[32px]">
+                <span className="text-xs sm:text-xs md:text-sm lg:text-lg xl:text-xl font-medium line-clamp-1 flex-1">
                   {item.title}
                 </span>
 
@@ -127,8 +125,9 @@ export default function PlatformSection() {
                 <InteractiveButton
                   as="span"
                   color="bg-[#C1C1C1]"
-                  size="large"
+                  size="small"
                   active={activeTab?.id === item.id}
+                  className="flex-shrink-0"
                 />
               </button>
             ))}
@@ -136,7 +135,7 @@ export default function PlatformSection() {
         </div>
 
         {/* RIGHT CONTENT AREA */}
-        <div className="relative h-full w-full overflow-hidden lg:w-[55%]">
+        <div className="relative h-[180px] sm:h-[240px] md:h-[320px] lg:h-[650px] xl:h-[795px] w-full overflow-hidden lg:w-[55%]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab?.id}
@@ -162,7 +161,7 @@ export default function PlatformSection() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1, duration: 0.4 }}
-                className="relative z-20 w-full px-8 pt-12 md:px-12 md:pt-16"
+                className="relative z-20 w-full px-4 pt-8 sm:px-6 sm:pt-10 md:px-8 md:pt-12 lg:px-12 lg:pt-16"
               >
                 {/* <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium text-white leading-tight drop-shadow-sm max-w-2xl">
                                     {activeTab?.description}

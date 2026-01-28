@@ -27,28 +27,29 @@ export function Header() {
             href="/session"
             className="font-medium text-white transition-colors hover:text-[#A5F3FC]"
           >
-            Session
+            Sessions
           </Link>
 
-          <Link
-            href="/products"
-            className="font-medium text-white transition-colors hover:text-[#A5F3FC]"
-          >
-            Product
-          </Link>
           <Link
             href="/counselling"
             className="font-medium text-white transition-colors hover:text-[#A5F3FC] whitespace-nowrap"
           >
-            Book experts
+            Book Experts
           </Link>
 
-          <Link
+          {/* <Link
+            href="/products"
+            className="font-medium text-white transition-colors hover:text-[#A5F3FC]"
+          >
+            Product
+          </Link> */}
+
+          {/* <Link
             href="/blogs"
             className="font-medium text-white transition-colors hover:text-[#A5F3FC]"
           >
             Blog
-          </Link>
+          </Link> */}
 
           <div
             className="relative"
@@ -71,18 +72,18 @@ export function Header() {
               <div className="absolute left-0 top-full z-10 ">
                 <div className="w-48 rounded-md bg-white shadow-lg">
                   <Link
-                    href="/shefit"
+                    href="/"
                     className="block rounded-t-md px-4 py-2 text-sm text-gray-700 hover:bg-[#f3f4f6]"
                     onClick={() => setIsMoreOpen(false)}
                   >
                     SheFit
                   </Link>
                   <Link
-                    href="/shefit/sessions"
+                    href="/"
                     className="block rounded-b-md px-4 py-2 text-sm text-gray-700 hover:bg-[#f3f4f6]"
                     onClick={() => setIsMoreOpen(false)}
                   >
-                    Retreat Retreat
+                    Products
                   </Link>
                 </div>
               </div>

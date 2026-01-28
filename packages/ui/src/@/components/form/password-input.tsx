@@ -2,11 +2,11 @@
 import { useState, MouseEvent, useRef, forwardRef } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
-interface IUIInputPasswordProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+interface IUIInputPasswordProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const UIFormPasswordInput = ({
   placeholder,
+  className,
   ...props
 }: IUIInputPasswordProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -21,24 +21,22 @@ const UIFormPasswordInput = ({
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <input
         ref={inputRef}
-        style={{ border: "1px solid rgba(233,233,233, 1)" }}
-        className="rounded-md placeholder:text-placeholder-color placeholder:font-inter placeholder:font-normal placeholder:text-sm  w-full py-3 pl-4 outline-primary  "
+        className={`w-full rounded-md border border-gray-200 px-4 py-3 placeholder:font-inter placeholder:text-sm placeholder:font-normal placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-primary ${className}`}
         type={isVisible ? "text" : "password"}
         placeholder={placeholder}
         {...props}
       />
-      {!isVisible && (
-        <Eye
-          className="absolute top-3 right-4 text-primary lg:bottom-5"
+      {isVisible ? (
+        <EyeOff
+          className="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 cursor-pointer text-gray-500 hover:text-primary"
           onClick={onEyeIconClick}
         />
-      )}
-      {isVisible && (
-        <EyeOff
-          className="absolute top-3  right-4 text-primary lg:bottom-5"
+      ) : (
+        <Eye
+          className="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 cursor-pointer text-gray-500 hover:text-primary"
           onClick={onEyeIconClick}
         />
       )}

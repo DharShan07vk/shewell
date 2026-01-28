@@ -56,7 +56,7 @@ const cards = [
 ];
 const DashboardNotification = () => {
   return (
-    <div className="rounded-[9.37px] border border-[#DFE7EF] p-4 sm:p-6 xl:p-5 2xl:p-[26px]">
+    <div className="rounded-2xl border border-gray-100 p-4 sm:p-6 xl:p-5 2xl:p-[26px] shadow-sm hover:shadow-md transition-shadow">
       {/* notification and dropdown */}
       <div className="mb-3 flex items-center justify-between 2xl:mb-[14px]">
         <div className="font-inter text-base font-semibold text-active lg:text-xl 2xl:text-2xl">

@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { NavigationHeaderSection } from "@/components/NavigationHeaderSection";
-import { FooterSection } from "@/components/FooterSection";
 import { CourseDetailHeaderSection } from "@/components/course-detail/CourseDetailHeaderSection";
 import { SessionOverviewSection } from "@/components/course-detail/SessionOverviewSection";
 import { CourseInfoSection } from "@/components/course-detail/CourseInfoSection";
@@ -25,7 +24,7 @@ export async function generateMetadata({
 
     return {
       title: `${session.title} | Shewell`,
-      description: session.category?.name || session.title,
+      description: session.overview || session.title,
     };
   } catch (error) {
     return {
@@ -120,6 +119,7 @@ export default async function SessionDetailPage({
         hasRecording={session.type === "RECORDING"}
         date={sessionDate}
         time={sessionTime}
+        banners={session.banners}
       />
 
       <SessionOverviewSection
@@ -138,11 +138,11 @@ export default async function SessionDetailPage({
       )}
 
       <BookingSection
-        imageUrl={
-          session.bannerMedia?.fileUrl || "/home/session-banner-sample.png"
-        }
+        banners={session.banners}
         price={Number(session.price)}
         sessionId={session.id}
+        isRegistered={userRegistration !== undefined}
+        meetingLink={session.meetingLink}
       />
       <FooterInfoSection terms={terms} />
 
