@@ -87,14 +87,14 @@ const CompleteDoctorProfile = ({
 
   return (
     <div className="group w-full">
-      <div className="flex flex-col gap-6 rounded-3xl border border-gray-100 bg-white/80 py-6 shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm transition-all duration-300 ease-in-out hover:border-gray-200 hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] xs:px-4 sm:px-5 md:flex-row md:justify-between md:px-8 md:py-8 xl:flex-col">
-        <div className="flex flex-col gap-[18px]">
+      <div className="flex flex-col gap-4 sm:gap-5 md:gap-6 rounded-2xl sm:rounded-2xl md:rounded-3xl border border-gray-100 bg-white/80 py-4 sm:py-5 md:py-8 px-3 sm:px-4 md:px-8 shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm transition-all duration-300 ease-in-out hover:border-gray-200 hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] md:flex-row md:justify-between">
+        <div className="flex flex-col gap-4 sm:gap-4 md:gap-[18px]">
           {/* image + text */}
-          <div className="flex gap-4 lg:gap-6 2xl:gap-8">
+          <div className="flex gap-3 sm:gap-4 md:gap-6 lg:gap-6 2xl:gap-8">
             {/* image */}
-            <div className="relative flex aspect-square items-center justify-center xs:w-[116px] sm:w-[138px]">
+            <div className="relative flex aspect-square items-center justify-center w-24 sm:w-28 md:w-32 lg:w-40">
               {/* Decorative ring */}
-              <div className="absolute inset-0 h-[150px] w-[150px] rounded-full bg-gradient-to-br from-[#00898F]/20 to-[#51AF5A]/20 p-1 sm:p-2">
+              <div className="absolute inset-0 h-28 sm:h-32 md:h-36 lg:h-44 w-28 sm:w-32 md:w-36 lg:w-44 rounded-full bg-gradient-to-br from-[#00898F]/20 to-[#51AF5A]/20 p-0.5 sm:p-1 md:p-2">
                 {/* <div className="h-[140px] w-[140px] rounded-full bg-white"></div> */}
                 <div className="relative aspect-square overflow-hidden rounded-full bg-white shadow-lg ring-2 ring-white">
                   <Image
@@ -110,28 +110,28 @@ const CompleteDoctorProfile = ({
               </div>
             </div>
 
-            <div className="flex flex-col gap-2">
-              <h3 className="font-poppins text-lg font-semibold text-[#333333] md:text-[28px] md:leading-[34px] xl:text-2xl 2xl:text-[28px] 2xl:leading-[38px]">
+            <div className="flex flex-col gap-1.5 sm:gap-2">
+              <h3 className="font-poppins text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-[#333333] leading-tight">
                 {doctorProfile.firstName}
               </h3>
-              <div className="font-poppins text-sm font-medium text-[#00898F] md:text-base 2xl:text-[18px] 2xl:leading-[28px]">
+              <div className="font-poppins text-xs sm:text-sm md:text-base font-medium text-[#00898F]">
                 {doctorProfile.displayQualification?.specialization}
               </div>
 
-              <div className="mt-1 flex w-full flex-wrap items-center gap-3 md:justify-start">
-                <div className="flex items-center gap-2 rounded-full bg-[#F8F8F8] px-3 py-1.5">
+              <div className="mt-0.5 flex w-full flex-wrap items-center gap-2 md:justify-start">
+                <div className="flex items-center gap-2 rounded-full bg-[#F8F8F8] px-2.5 sm:px-3 py-1">
                   <Rating
                     className="inline"
                     readOnly={true}
-                    style={{ maxWidth: 85 }}
+                    style={{ maxWidth: 70 }}
                     value={parseFloat(doctorProfile.avgRating || "0")}
                     itemStyles={customStyles}
                   />
-                  <div className="font-poppins text-sm font-semibold text-[#00898F]">
+                  <div className="font-poppins text-xs sm:text-sm font-semibold text-[#00898F]">
                     {parseFloat(doctorProfile.avgRating || "0").toFixed(1)}
                   </div>
                 </div>
-                <div className="font-poppins text-sm font-normal text-[#666666]">
+                <div className="font-poppins text-xs sm:text-sm font-normal text-[#666666]">
                   {doctorProfile?.totalConsultations
                     ? doctorProfile?.totalConsultations
                     : 0}{" "}
@@ -140,11 +140,11 @@ const CompleteDoctorProfile = ({
               </div>
 
               <Link href={`counselling/${doctorProfile.userName}`}>
-                <Button className="mt-4 w-fit rounded-xl bg-[#00898F] px-5 py-2.5 shadow-md transition-all duration-300 hover:bg-[#007a80] hover:shadow-lg 2xl:mt-5">
+                <Button className="mt-2.5 sm:mt-3 md:mt-4 w-fit rounded-lg sm:rounded-xl bg-[#00898F] px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 md:py-2.5 text-xs sm:text-sm shadow-md transition-all duration-300 hover:bg-[#007a80] hover:shadow-lg">
                   <svg
-                    className="mr-2"
-                    width="20"
-                    height="20"
+                    className="mr-1.5 sm:mr-2"
+                    width="14"
+                    height="14"
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -171,7 +171,7 @@ const CompleteDoctorProfile = ({
             </div>
           </div>
           {/* specialized-in */}
-          <div className="flex flex-wrap items-center gap-2 font-poppins text-sm font-normal text-[#666666]">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 font-poppins text-xs sm:text-sm font-normal text-[#666666]">
             <span className="font-semibold text-[#333333]">
               Specialized In:
             </span>
@@ -180,7 +180,7 @@ const CompleteDoctorProfile = ({
               specialization.map((item, index) => {
                 return (
                   <div
-                    className="rounded-full border border-[#00898F]/20 bg-gradient-to-r from-[#00898F]/10 to-[#51AF5A]/10 px-3 py-1.5 font-poppins text-xs font-medium text-[#00898F]"
+                    className="rounded-full border border-[#00898F]/20 bg-gradient-to-r from-[#00898F]/10 to-[#51AF5A]/10 px-2 sm:px-3 py-1 font-poppins text-xs font-medium text-[#00898F]"
                     key={index}
                   >
                     {item.specialization}
@@ -190,13 +190,13 @@ const CompleteDoctorProfile = ({
           </div>
 
           {/* languages */}
-          <div className="flex flex-wrap items-center gap-2 font-poppins text-sm font-normal text-[#666666]">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 font-poppins text-xs sm:text-sm font-normal text-[#666666]">
             <span className="font-semibold text-[#333333]">Languages:</span>
 
             {doctorProfile.languages?.map((item, index) => {
               return (
                 <div
-                  className="rounded-full border border-gray-200 bg-[#F5F5F5] px-3 py-1.5 font-poppins text-xs font-medium text-[#666666]"
+                  className="rounded-full border border-gray-200 bg-[#F5F5F5] px-2 sm:px-3 py-1 font-poppins text-xs font-medium text-[#666666]"
                   key={index}
                 >
                   {item.language}
@@ -206,8 +206,8 @@ const CompleteDoctorProfile = ({
           </div>
 
           {/* Available time slots */}
-          <div className="mb-6 mt-6 md:my-8">
-            <div className="mt-4">
+          <div className="mb-4 sm:mb-5 md:mb-8 mt-4 sm:mt-5 md:mt-6">
+            <div className="mt-2 sm:mt-3 md:mt-4">
               <DayNavigatorWithTimeSlots
                 onSelectDuration={handleDuration}
                 // reSelectTimeSlot={}

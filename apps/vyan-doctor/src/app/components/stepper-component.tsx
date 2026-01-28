@@ -42,20 +42,20 @@ const Stepper = ({ steps, setStep }: IStepperProps) => {
   }, [searchParams, currentStep, steps.length]);
 
   return (
-    <div className="relative flex flex-col gap-[47px]">
-      <div className="absolute left-[14px] top-[15px] h-full w-[1px] bg-gray-200">
+    <div className="relative flex flex-col gap-8 sm:gap-10 md:gap-12 lg:gap-[47px]">
+      <div className="absolute left-3 sm:left-4 md:left-[14px] top-3 sm:top-4 md:top-[15px] h-full w-0.5 bg-gray-200">
         {/* Background line */}
       </div>
       <div
-        className="absolute left-[14px] top-[15px] w-[1px] bg-primary transition-all duration-300"
+        className="absolute left-3 sm:left-4 md:left-[14px] top-3 sm:top-4 md:top-[15px] w-0.5 bg-primary transition-all duration-300"
         style={{ height: `${stepPercentage * (currentStep - 1)}%` }}
       >
         {/* Progress line */}
       </div>
       {steps.map((item, index) => (
-        <div key={index} className="flex items-center gap-1">
+        <div key={index} className="flex items-center gap-1 sm:gap-1.5 md:gap-2">
           <div
-            className={`relative z-10 flex items-center justify-center rounded-[50%] border border-gray-200 px-2 text-gray-500 ${
+            className={`relative z-10 flex items-center justify-center rounded-full border-2 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm md:text-base font-medium w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 border-gray-200 text-gray-500 ${
               currentStep > index + 1
                 ? "border-primary bg-primary text-white"
                 : "bg-white"
@@ -69,7 +69,7 @@ const Stepper = ({ steps, setStep }: IStepperProps) => {
                 handleSetStep(index + 1);
               }
             }}
-            className={`cursor-pointer font-poppins text-base font-medium text-[#656D78] ${
+            className={`cursor-pointer font-poppins text-xs sm:text-sm md:text-base font-medium text-[#656D78] ${
               index < currentStep - 1 ? "" : "cursor-not-allowed"
             }`}
           >

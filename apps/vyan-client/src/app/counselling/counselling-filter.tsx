@@ -156,9 +156,9 @@ const CounsellingFilter = ({
   const disabledDays = { before: today };
   return (
     <>
-      <div className="w-full space-y-6 font-poppins">
+      <div className="w-full space-y-4 sm:space-y-5 md:space-y-6 font-poppins">
         {/* Search Section */}
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-3 sm:gap-4 md:flex-row md:items-center md:justify-between">
           <div className="w-full md:max-w-lg">
             <div className="relative flex w-full items-center gap-2">
               <input
@@ -166,15 +166,15 @@ const CounsellingFilter = ({
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setSearchTherapist(e.target.value)
                 }
-                className="w-full rounded-2xl border border-gray-200 bg-white px-5 py-3 pl-12 text-sm font-medium text-[#333333] shadow-sm outline-none transition-all placeholder:text-[#999999] hover:border-[#00898F] focus:border-[#00898F] focus:ring-1 focus:ring-[#00898F]"
+                className="w-full rounded-lg sm:rounded-xl md:rounded-2xl border border-gray-200 bg-white px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 pl-8 sm:pl-10 md:pl-12 text-xs sm:text-sm font-medium text-[#333333] shadow-sm outline-none transition-all placeholder:text-[#999999] hover:border-[#00898F] focus:border-[#00898F] focus:ring-1 focus:ring-[#00898F]"
                 placeholder="Search by therapist name..."
                 type="text"
                 name="therapist"
               />
               <svg
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-[#999999]"
-                width="20"
-                height="20"
+                className="absolute left-3 sm:left-3.5 md:left-4 top-1/2 -translate-y-1/2 text-[#999999]"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -188,7 +188,7 @@ const CounsellingFilter = ({
                 />
               </svg>
               <Button
-                className="hidden rounded-xl bg-[#00898F] px-6 py-3 font-medium text-white hover:bg-[#007a80] md:flex"
+                className="hidden rounded-lg sm:rounded-xl bg-[#00898F] px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 text-xs sm:text-sm font-medium text-white hover:bg-[#007a80] md:flex"
                 onClick={handleSearch}
               >
                 Search
@@ -197,21 +197,21 @@ const CounsellingFilter = ({
           </div>
 
           {/* Sort Section - kept clean */}
-          <div className="flex items-center gap-3">
-            <span className="text-sm font-medium text-[#666666]">Sort by:</span>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span className="text-xs sm:text-sm font-medium text-[#666666]">Sort by:</span>
             <Select>
-              <SelectTrigger className="w-[160px] rounded-xl border-gray-200 bg-white text-sm font-medium text-[#333333]">
+              <SelectTrigger className="w-[120px] sm:w-[140px] md:w-[160px] rounded-lg sm:rounded-xl border-gray-200 bg-white text-xs sm:text-sm font-medium text-[#333333]">
                 <SelectValue placeholder="Price" />
               </SelectTrigger>
-              <SelectContent className="rounded-xl border-gray-100 bg-white p-1 shadow-lg">
+              <SelectContent className="rounded-lg sm:rounded-xl border-gray-100 bg-white p-1 shadow-lg">
                 <SelectItem
-                  className="cursor-pointer rounded-lg px-2 py-1.5 hover:bg-gray-50"
+                  className="cursor-pointer rounded-lg px-2 py-1.5 text-xs sm:text-sm hover:bg-gray-50"
                   value="asc"
                 >
                   Low to High
                 </SelectItem>
                 <SelectItem
-                  className="cursor-pointer rounded-lg px-2 py-1.5 hover:bg-gray-50"
+                  className="cursor-pointer rounded-lg px-2 py-1.5 text-xs sm:text-sm hover:bg-gray-50"
                   value="desc"
                 >
                   High to Low
@@ -222,22 +222,22 @@ const CounsellingFilter = ({
         </div>
 
         {/* Filter Bar - Pill Style matching Session Page */}
-        <div className="flex w-full items-center justify-center">
-          <div className="inline-flex w-full flex-wrap items-center gap-4 rounded-3xl bg-[#F5F5F5] px-6 py-3 md:w-auto">
+        <div className="flex w-full items-center justify-center overflow-x-auto">
+          <div className="inline-flex w-full flex-wrap items-center gap-2 sm:gap-3 md:gap-4 rounded-2xl sm:rounded-3xl bg-[#F5F5F5] px-3 sm:px-4 md:px-6 py-2.5 sm:py-3 md:py-3 md:w-auto">
             {/* Languages Filter */}
             <div>
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className="flex items-center gap-1 text-black hover:text-gray-600">
+                  <button className="flex items-center gap-1 text-xs sm:text-sm text-black hover:text-gray-600">
                     Languages
-                    <ChevronDown size={14} />
+                    <ChevronDown size={12} className="sm:w-4 sm:h-4" />
                   </button>
                 </PopoverTrigger>
-                <PopoverContent className="w-64 gap-4 bg-white">
+                <PopoverContent className="w-56 sm:w-64 gap-4 bg-white rounded-lg sm:rounded-xl">
                   {languages?.languages.map((item) => (
                     <div
                       key={item.id}
-                      className="pointer-events-auto cursor-pointer rounded-lg hover:bg-gray-50"
+                      className="pointer-events-auto cursor-pointer rounded-lg px-2 py-1.5 text-xs sm:text-sm hover:bg-gray-50"
                       onClick={() => {
                         languageIdArray.includes(item.id)
                           ? handleLanguageChange(false, item.id)
@@ -251,22 +251,22 @@ const CounsellingFilter = ({
                 </PopoverContent>
               </Popover>
             </div>
-            <div className="h-6 w-px bg-gray-300"></div>
+            <div className="h-4 sm:h-5 md:h-6 w-px bg-gray-300"></div>
 
             {/* Specialization Filter */}
 
             <Popover>
               <PopoverTrigger asChild>
-                <button className="flex items-center gap-1 text-black hover:text-gray-600">
+                <button className="flex items-center gap-1 text-xs sm:text-sm text-black hover:text-gray-600">
                   Specialization
-                  <ChevronDown size={14} />
+                  <ChevronDown size={12} className="sm:w-4 sm:h-4" />
                 </button>
               </PopoverTrigger>
-              <PopoverContent className="w-64 gap-4 bg-white">
+              <PopoverContent className="w-56 sm:w-64 gap-4 bg-white rounded-lg sm:rounded-xl">
                 {formatSpecialisation?.map((item) => (
                   <div
                     key={item.value}
-                    className="pointer-events-auto cursor-pointer rounded-lg hover:bg-gray-50"
+                    className="pointer-events-auto cursor-pointer rounded-lg px-2 py-1.5 text-xs sm:text-sm hover:bg-gray-50"
                     onClick={() => {
                       getSpecialisationId === item.value
                         ? handleSpecialisationChange("")
@@ -279,15 +279,15 @@ const CounsellingFilter = ({
                 ))}
               </PopoverContent>
             </Popover>
-            <div className="h-6 w-px bg-gray-300"></div>
+            <div className="h-4 sm:h-5 md:h-6 w-px bg-gray-300"></div>
 
             {/* Date Filter */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2">
               <Dialog open={dateDialog} onOpenChange={setDateDialog}>
-                <DialogTrigger className="flex items-center gap-1 text-sm font-medium text-[#333333] hover:text-[#00898F]">
+                <DialogTrigger className="flex items-center gap-1 text-xs sm:text-sm font-medium text-[#333333] hover:text-[#00898F]">
                   <span>Date</span>
                 </DialogTrigger>
-                <DialogContent className="rounded-3xl border-none bg-white p-6 shadow-2xl">
+                <DialogContent className="rounded-2xl sm:rounded-3xl border-none bg-white p-4 sm:p-6 shadow-2xl">
                   <Calendar
                     disabled={disabledDays}
                     mode="single"
@@ -297,19 +297,19 @@ const CounsellingFilter = ({
                       if (e) handleDateSelect(e);
                       setDateDialog(false);
                     }}
-                    className="rounded-md border-none"
+                    className="rounded-md border-none text-xs sm:text-sm"
                   />
                 </DialogContent>
               </Dialog>
-              <ChevronDown size={14} className="text-[#666666]" />
+              <ChevronDown size={12} className="text-[#666666] sm:w-4 sm:h-4" />
             </div>
 
-            <div className="h-6 w-px bg-gray-300"></div>
+            <div className="h-4 sm:h-5 md:h-6 w-px bg-gray-300"></div>
 
             {/* Clear Filters */}
             <button
               onClick={handleClearFilters}
-              className="text-sm font-medium text-red-500 transition-colors hover:text-red-600"
+              className="text-xs sm:text-sm font-medium text-red-500 transition-colors hover:text-red-600 whitespace-nowrap"
             >
               Clear All
             </button>

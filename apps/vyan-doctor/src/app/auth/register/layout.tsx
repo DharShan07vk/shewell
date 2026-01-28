@@ -28,19 +28,19 @@ const RegisterLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <div className="w-full">
-        <div className="mb-[50px]">{/* <Header /> */}</div>
-        <div className="container mx-auto ">
+        <div className="mb-8 sm:mb-10 md:mb-12 lg:mb-0">{/* <Header /> */}</div>
+        <div className="container mx-auto px-3 sm:px-4 md:px-8 lg:px-0">
           {/* 1-s */}
 
           {/* 2-s */}
 
-          <div className=" mt-5 flex flex-col gap-5 md:gap-[53px]  lg:flex-row xl:gap-[60px] 2xl:gap-[198px]">
+          <div className="mt-3 sm:mt-4 md:mt-5 flex flex-col gap-4 sm:gap-5 md:gap-8 lg:gap-12 xl:gap-[60px] 2xl:gap-[198px] lg:flex-row">
             {/* form */}
 
             
             <div className="lg:basis-1/2 lg:self-center">
 
-            <div className="mb-6 text-center  font-inter text-2xl font-semibold md:mb-8  xl:mb-9 2xl:mb-[50px] 2xl:text-3xl">
+            <div className="mb-4 sm:mb-6 md:mb-8 text-center font-inter text-lg sm:text-xl md:text-2xl xl:mb-9 2xl:mb-[50px] 2xl:text-3xl font-semibold">
         Create your free account
       </div>
               {/* <StepperComponent/> */}
@@ -53,18 +53,18 @@ const RegisterLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
 
             {/* text + image */}
-            <div className="flex flex-col items-center lg:self-center  lg:order-first lg:basis-1/2 ">
-              <div className="mb-[7px] text-center	font-poppins text-[21.46px]  font-bold  leading-[27.9px] md:text-[24px] md:leading-8 xl:mb-3 xl:text-[40px] xl:leading-[52px] 2xl:text-[41px] 2xl:leading-[54px]">
+            <div className="flex flex-col items-center lg:self-center lg:order-first lg:basis-1/2">
+              <div className="mb-2 sm:mb-3 md:mb-4 text-center font-poppins text-base sm:text-lg md:text-2xl lg:text-3xl xl:mb-3 xl:text-4xl 2xl:text-[41px] 2xl:leading-[54px] font-bold leading-tight">
                 Provide wellness virtuality{" "}
               </div>
-              <div className="text-center font-poppins text-xs font-normal md:px-[80px] md:text-sm xl:text-2xl 2xl:px-[150px]">
+              <div className="text-center font-poppins text-xs sm:text-sm md:text-base lg:text-lg xl:text-2xl px-2 sm:px-4 md:px-12 lg:px-0 2xl:px-[150px] font-normal">
                 Provide best services to your client with SheWellCare
               </div>
 
               <TestimonialCarousel />
 
-              <div className=" hidden md:block">
-                <div className="mb-1 mt-[50px] font-inter text-sm font-normal 2xl:text-base">
+              <div className="hidden md:block">
+                <div className="mb-1 mt-8 sm:mt-10 md:mt-12 lg:mt-[50px] font-inter text-xs sm:text-sm font-normal 2xl:text-base">
                   By proceeding, you agree to the{" "}
                   <Link href="/terms" target="_blank" className="text-primary">
                     Terms and Conditions
@@ -74,7 +74,7 @@ const RegisterLayout = ({ children }: { children: React.ReactNode }) => {
                     Privacy Policy
                   </Link>
                 </div>
-                <div className="flex justify-center gap-6">
+                <div className="flex justify-center gap-4 sm:gap-5 md:gap-6">
                   <Link href={""}>Help</Link>
                   <Link href={""}>Privacy</Link>
                   <Link href={""}>Terms</Link>
