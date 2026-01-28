@@ -70,81 +70,21 @@ export default async function RootLayout({
     verifiedAt = user?.verifiedAt;
   }
 
-  const products = await db.product.findMany({
-    select: {
-      id: true,
-      name: true,
-      slug: true,
-    },
-  });
-  const categories = await db.category.findMany({
-    select: {
-      id: true,
-      name: true,
-      order: true,
-      childCategories: {
-        select: {
-          id: true,
-          name: true,
-
-          childCategories: {
-            select: {
-              id: true,
-              name: true,
-            },
-          },
-        },
-      },
-    },
-    where: {
-      deletedAt: null,
-      parentCategoryId: null,
-    },
-  });
+  
 
   let userDetails;
 
-  if (session?.user?.email) {
-    userDetails = await db.user.findFirst({
-      select: {
-        wishlistedProducts: true,
-      },
-      where: {
-        email: session.user.email,
-      },
-    });
-  }
+  // if (session?.user?.email) {
+  //   userDetails = await db.user.findFirst({
+  //     select: {
+  //       wishlistedProducts: true,
+  //     },
+  //     where: {
+  //       email: session.user.email,
+  //     },
+  //   });
+  // }
 
-  const specialisationParentCategories =
-    await db.professionalSpecializationParentCategory.findMany({
-      select: {
-        id: true,
-        name: true,
-        specializations: {
-          select: {
-            id: true,
-            specialization: true,
-          },
-          where: {
-            active: true,
-          },
-        },
-      },
-      where: {
-        active: true,
-      },
-    });
-
-  const specializations = await db.professionalSpecializations.findMany({
-    select: {
-      id: true,
-      specialization: true,
-    },
-    where: {
-      active: true,
-    },
-    take: 4,
-  });
 
   return (
     <html className="scroll-smooth" lang="en">

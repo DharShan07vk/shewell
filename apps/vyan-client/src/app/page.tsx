@@ -19,8 +19,6 @@
 // import { Header as NewHeader } from "~/components/header";
 import Partners from "~/components/partners";
 import Hero from "~/components/hero";
-import { db } from "~/server/db";
-import { HomeBannerType } from "@repo/database";
 import WellnessCircle from "~/components/wellness-circle";
 import ServicesCarousel from "~/components/services-carousel";
 import PlatformSection from "~/components/platform-section";
@@ -32,22 +30,7 @@ import WisdomSection from "~/components/wisdom-section";
 import ShewellFAQ from "~/components/shewell-faq";
 
 const HomePage = async () => {
-  const heroMedias = await db.homeBanner.findMany({
-    select: {
-      id: true,
-      url: true,
-      media: {
-        select: {
-          id: true,
-          fileUrl: true,
-        },
-      },
-    },
-    where: {
-      active: true,
-      usedFor: HomeBannerType.HomeBannerClient,
-    },
-  });
+
   return (
     <>
       <div className="px-0 sm:px-8 md:px-12 lg:px-[0] xl:px-[0]">

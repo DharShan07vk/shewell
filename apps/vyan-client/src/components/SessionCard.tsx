@@ -60,7 +60,7 @@ export const SessionCard: React.FC<SessionCardProps> = ({
           />
         </Link>
       )}
-
+      
       {/* Image */}
       <div className="h-40 w-56 flex-shrink-0 overflow-hidden rounded-lg bg-gray-200">
         {imageUrl ? (
