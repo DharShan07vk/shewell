@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Utility class to hide scrollbar on specific elements */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @font-face {
   font-family: 'Epicgant';
   src: url('/font/Epicgant Personal Use.ttf') format('truetype');
@@ -25,32 +36,32 @@
 
 .hm-hero .swiper-pagination-bullet-active {
   background-color: #00898f;
-  width: 10px;
-  height: 10px;
+  width: 4px;
+  height: 4px;
 }
-@media only screen and (max-width: 580px) {
+/* @media only screen and (max-width: 580px) {
   .overflow-item{
         justify-content: start;
         overflow-x: auto;
   }
 
-}
+} */
 /* width */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 4px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
   background: #ffffff;
-  box-shadow: inset 0 0 5px grey; 
-  border-radius: 10px;
+  box-shadow: inset 0 0 4px grey; 
+  border-radius: 4px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #00898F;
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 /* Handle on hover */

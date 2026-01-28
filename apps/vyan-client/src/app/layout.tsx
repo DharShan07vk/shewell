@@ -147,9 +147,12 @@ export default async function RootLayout({
   });
 
   return (
-    <html className="scroll-smooth" lang="en">
+    <html 
+      className={`scroll-smooth scroll-smooth ${poppins.variable} ${inter.variable} ${pacifico.variable} ${playfair.variable} ${amaticSC.variable}`}
+      lang="en"
+    >
       <body
-        className={`relative font-sans ${poppins.variable} ${inter.variable} ${pacifico.variable} ${playfair.variable} ${amaticSC.variable}`}
+        className={"relative font-sans"}
       >
         <div className="sticky top-0 z-40">
           <ClientSessionProvider session={session} verifiedAt={verifiedAt!}>

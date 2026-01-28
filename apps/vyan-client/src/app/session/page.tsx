@@ -1,4 +1,3 @@
-import { NavigationHeaderSection } from "@/components/NavigationHeaderSection";
 import { FilterBar } from "@/components/FilterBar";
 import { SessionCard } from "@/components/SessionCard";
 import { api } from "~/trpc/server";
@@ -68,7 +67,14 @@ export default async function SessionsPage({ searchParams }: SessionPageProps) {
     isOnlyOnline,
   });
 
-  const sessions = result.sessions || [];
+  let sessions = result.sessions || [];
+
+  // Sort sessions by date (earliest first)
+  sessions.sort((a, b) => {
+    const dateA = new Date(a.startAt).getTime();
+    const dateB = new Date(b.startAt).getTime();
+    return dateA - dateB;
+  });
 
   // Fetch categories for filter dropdown
   const categories = await api.session.getAllCategories({});
@@ -77,15 +83,14 @@ export default async function SessionsPage({ searchParams }: SessionPageProps) {
 
   return (
     <main className="flex w-full flex-col items-center bg-white">
-      {/* <NavigationHeaderSection /> */}
 
       {/* Hero Section */}
       <div className="mx-auto max-w-7xl px-6 py-16 text-center">
-        <h1 className=" font-inter text-[48px] font-bold leading-[48px] text-[#333333]">
-          Courses That Support You – Every Step of the Way
+        <h1 className=" font-inter text-[48px] font-medium leading-[48px] text-[#333333]">
+          Courses That Support You Every Step of the Way
         </h1>
         <p className="mt-3 font-inter text-base text-gray-500">
-          From fertility to first steps – evidence-based, heart-led,
+          From fertility to first steps. Evidence based, heart led,
           expert-designed just for you.
         </p>
       </div>
