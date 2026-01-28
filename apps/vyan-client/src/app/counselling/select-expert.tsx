@@ -114,10 +114,10 @@ const SelectExpert = ({
   }, [selectedDoctorDetails, selectedDoctorId]);
 
   return (
-    <div className="flex flex-col gap-3 rounded-md border-[1.5px] p-3  lg:px-4 lg:py-[14px] xl:gap-4 xl:px-6 xl:py-5">
-      <div className="flex flex-col gap-3 xl:flex-row xl:gap-4">
-        <div className="flex flex-col gap-3 lg:flex-row xl:gap-4">
-          <div>
+    <div className="flex flex-col gap-3 rounded-md border-[1.5px] p-3 sm:gap-4 sm:p-4 md:p-5 lg:px-4 lg:py-[14px] xl:gap-4 xl:px-6 xl:py-5">
+      <div className="flex flex-col gap-3 sm:gap-4 md:gap-5 xl:flex-row xl:gap-4">
+        <div className="flex flex-col gap-3 sm:gap-4 lg:flex-row xl:gap-4">
+          <div className="w-full sm:w-auto">
             <SelectFilter
               defaultValue={defaultSpecialisation}
               Filter={transformData!}
@@ -133,7 +133,7 @@ const SelectExpert = ({
       </div>
 
      
-      <div className="flex h-[260px] flex-col gap-4 overflow-y-auto">
+      <div className="flex max-h-[260px] flex-col gap-3 overflow-y-auto sm:gap-4 md:max-h-[350px] lg:max-h-[400px]">
   {selectedDoctorId &&
     expertData?.experts
       .sort((a, b) => {
@@ -145,9 +145,9 @@ const SelectExpert = ({
       .map((doctor, index) => (
         <div
           key={index}
-          className={`flex gap-2 rounded-md border ${
+          className={`flex flex-col gap-3 rounded-md border p-3 sm:flex-row sm:gap-2 sm:p-4 md:gap-3 md:p-4 ${
             selectedDoctorId === doctor.id ? "border-primary" : "border-gray-300"
-          } py-3 xs:px-1 sm:px-3 xl:gap-4`}
+          } xs:px-1`}
         >
           <input
             type="radio"
@@ -158,9 +158,10 @@ const SelectExpert = ({
                 firstName: doctor.firstName!,
               })
             }
+            className="mt-1 sm:mt-2"
           />
-          <div className="flex gap-4 lg:gap-6 xl:gap-[40px]">
-            <div className="w-[95px] self-center">
+          <div className="flex flex-col gap-2 sm:flex-row sm:gap-3 md:gap-4 lg:gap-6 xl:gap-[40px] flex-1">
+            <div className="w-full sm:w-[70px] md:w-[85px] lg:w-[95px] self-center">
               <div className="relative aspect-square">
                 <Image
                   src={
@@ -173,23 +174,23 @@ const SelectExpert = ({
                 />
               </div>
             </div>
-            <div className="flex flex-col gap-2 xl:flex-row xl:gap-[40px] xl:self-center">
+            <div className="flex flex-col gap-2 flex-1 sm:gap-3 xl:flex-row xl:gap-[40px] xl:self-center">
               <div className="flex flex-col gap-1">
-                <div className="font-inter text-base font-semibold lg:text-lg">
+                <div className="font-inter text-sm font-semibold sm:text-base md:text-lg lg:text-lg">
                   {doctor.firstName}
                 </div>
-                <div className="flex flex-wrap items-center gap-1">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-1">
                   <div className="flex gap-1">
                     <div>
                       <Rating
                         className="inline"
                         readOnly={true}
-                        style={{ maxWidth: 95 }}
+                        style={{ maxWidth: 80 }}
                         value={Number(doctor.avgRating || "0")}
                         itemStyles={customStyles}
                       />
                     </div>
-                    <div className="border-r border-primary pr-2 font-inter text-sm font-medium">
+                    <div className="border-r border-primary pr-2 font-inter text-xs font-medium sm:text-sm">
                       {Number(doctor.avgRating || "0").toFixed(1)}
                     </div>
                   </div>
@@ -198,9 +199,9 @@ const SelectExpert = ({
                   </div>
                 </div>
               </div>
-              <div className="xl:self-center">
-                <Link href={`/doctor-profile/${doctor.userName}`}>
-                  <Button className="rounded-md bg-black px-3 py-2 text-white hover:bg-black">
+              <div className="w-full sm:w-auto sm:self-center">
+                <Link href={`/doctor-profile/${doctor.userName}`} className="w-full">
+                  <Button className="w-full rounded-md bg-black px-3 py-2 text-xs font-medium text-white hover:bg-black sm:w-auto sm:text-sm">
                     View Profile
                   </Button>
                 </Link>
@@ -212,7 +213,7 @@ const SelectExpert = ({
 </div>
 
       <Button
-        className="self-end rounded-md bg-secondary px-[30px] py-2 font-inter text-base font-medium hover:bg-secondary"
+        className="self-end rounded-md bg-secondary px-4 py-2 text-sm font-medium hover:bg-secondary sm:px-6 sm:py-2 sm:text-base md:px-[30px]"
         onClick={onNextStep}
         disabled={!isActive}
       >
