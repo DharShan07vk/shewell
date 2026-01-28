@@ -6,7 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogClose
+  DialogClose,
 } from "@repo/ui/src/@/components/dialog";
 
 import { Button } from "@repo/ui/src/@/components/button";
@@ -55,10 +55,10 @@ interface IPatientProps {
   firstName: string;
   lastName?: string | null | undefined;
   phoneNumber: string;
-  email: string
+  email: string;
   additionalPatients: {
     firstName: string;
-    lastName?: string | null |undefined;
+    lastName?: string | null | undefined;
     phoneNumber: string;
     message?: string | null | undefined;
     email: string;
@@ -70,10 +70,10 @@ interface IAppointmentState {
   selectedExpert: IExpertDetails | null;
   selectedServiceMode: IServiceModeDetails | null;
   // selectedPatient: IPatientInformation | null;
-  selectedPatient : IPatientProps | null;
+  selectedPatient: IPatientProps | null;
   selectedDefaultDuration: number | null;
   selectedDuration: number | null;
-  selectedSpecialisation : string | null;
+  selectedSpecialisation: string | null;
   selectedCouple: boolean | null;
   selectedDateTime: {
     date: Date;
@@ -114,7 +114,7 @@ const OnlineAppointment = ({
   const [step, setStep] = useState<number>(currentStep);
   const { toast } = useToast();
   const [close, setClose] = useState<boolean>();
-  const router = useRouter()
+  const router = useRouter();
 
   // state saving all data for booking the appointment
   const [appointmentState, setAppointmentState] = useState<IAppointmentState>({
@@ -123,7 +123,7 @@ const OnlineAppointment = ({
     selectedPatient: null,
     selectedDefaultDuration: null,
     selectedDuration: null,
-    selectedSpecialisation : null,
+    selectedSpecialisation: null,
     selectedCouple: null,
     selectedDateTime: null,
     selectedPrice: null,
@@ -178,17 +178,12 @@ const OnlineAppointment = ({
     [],
   );
 
-  const handleSelectedSpecialisation = useCallback(
-    (
-      value : string
-    ) => {
-      setAppointmentState((prevState) => ({
-        ...prevState,
-        selectedSpecialisation : value
-      }));
-    },
-    [],
-  );
+  const handleSelectedSpecialisation = useCallback((value: string) => {
+    setAppointmentState((prevState) => ({
+      ...prevState,
+      selectedSpecialisation: value,
+    }));
+  }, []);
 
   useEffect(() => {
     setAppointmentState((prevState) => ({
@@ -197,9 +192,6 @@ const OnlineAppointment = ({
     }));
   }, [date, timeSlots]);
 
-  
-  
- 
   useEffect(() => {
     setAppointmentState((prevState) => ({
       ...prevState,
@@ -255,7 +247,6 @@ const OnlineAppointment = ({
     }));
   }, []);
 
-  
   const handleSubmit = async () => {
     const {
       selectedExpert,
@@ -276,9 +267,7 @@ const OnlineAppointment = ({
       return;
     }
     const { date } = selectedDateTime;
-  
 
-   
     const startingTime = createTimeDate(
       // extract hour from startTime
       // getHours(new Date(selectedDateTime.timeSlots[0]?.startTime!)),
@@ -290,8 +279,6 @@ const OnlineAppointment = ({
       new Date(date),
     );
 
-   
-
     const endingTime = createTimeDate(
       // Extract hour from endTime
       // getHours(new Date(selectedDateTime.timeSlots[0]?.endTime!)),
@@ -302,15 +289,18 @@ const OnlineAppointment = ({
       new Date(date),
     );
 
-    const taxedAmount = (parseInt(env.NEXT_PUBLIC_GST)/100)*selectedPrice.priceInCents
-    const totalPriceInCents = selectedPrice.priceInCents + (parseInt(env.NEXT_PUBLIC_GST)/100)*selectedPrice.priceInCents
+    const taxedAmount =
+      (parseInt(env.NEXT_PUBLIC_GST) / 100) * selectedPrice.priceInCents;
+    const totalPriceInCents =
+      selectedPrice.priceInCents +
+      (parseInt(env.NEXT_PUBLIC_GST) / 100) * selectedPrice.priceInCents;
 
     const transformedData = {
       serviceMode: {
         serviceType: selectedServiceMode.type,
         priceInCents: selectedPrice.priceInCents,
-        taxedAmount : taxedAmount,
-        totalPriceInCents : totalPriceInCents,
+        taxedAmount: taxedAmount,
+        totalPriceInCents: totalPriceInCents,
         description: selectedServiceMode.description,
         planName: selectedServiceMode.planName,
       },
@@ -322,12 +312,12 @@ const OnlineAppointment = ({
         firstName: selectedPatient.firstName,
         email: selectedPatient.email,
         phoneNumber: selectedPatient.phoneNumber,
-        message : selectedPatient.message!,
-        additionalPatients : selectedPatient.additionalPatients.map((item) => ({
-          firstName : item.firstName,
-          email : item.email,
-          phoneNumber : item.phoneNumber
-        }))
+        message: selectedPatient.message!,
+        additionalPatients: selectedPatient.additionalPatients.map((item) => ({
+          firstName: item.firstName,
+          email: item.email,
+          phoneNumber: item.phoneNumber,
+        })),
       },
       startingTime: startingTime,
       endingTime: endingTime,
@@ -335,12 +325,13 @@ const OnlineAppointment = ({
 
     await makePayment(transformedData)
       .then((resp) => {
-        // toast({
-        //   title: resp?.message,
-        //   variant: "success",
-        // });
-       
-        
+        toast({
+          title: resp?.message,
+        });
+        console.log(
+          "🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀resp",
+          resp,
+        );
         setAppointmentState((prevState) => ({
           ...prevState,
           selectedServiceMode: {
@@ -352,7 +343,7 @@ const OnlineAppointment = ({
           },
         }));
         setClose(false);
-      
+
         setAppointmentState((prevState) => ({
           ...prevState,
           selectedExpert: {
@@ -369,9 +360,9 @@ const OnlineAppointment = ({
           },
         }));
         setStep(1);
-        
-        onOpenChange(false)
-        router.push("/profile/appointments")
+
+        onOpenChange(false);
+        router.push("/profile/appointments");
       })
       .catch((err) => {
         // toast({
@@ -416,48 +407,48 @@ const OnlineAppointment = ({
       setStep(4);
     }
   }, [timeSlots]);
-  
-  
 
   // const {data : priceInCentsForCouple} = api.timeDurationAndPriceForCouple.timeDurationAndPriceForCouple.useQuery({
   //   professionalUserId : selectedExpert.id
   // })
   // console.log("priceInCentsForCoup;e", priceInCentsForCouple)
- 
+
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
-       
-        <DialogContent className=" w-full xs:max-w-[300px] sm:max-w-[393px] p-0 lg:max-w-[904px] xl:max-w-[1100px] 2xl:max-w-[1280px] overflow-y-auto h-[90vh]">
-       
+        <DialogContent className=" h-[90vh] w-full overflow-y-auto p-0 xs:max-w-[300px] sm:max-w-[393px] lg:max-w-[904px] xl:max-w-[1100px] 2xl:max-w-[1280px]">
           {/* heading */}
           <div className=" border-b border-border-color">
             <div className="flex justify-between px-3  pb-2 pt-[30px] lg:px-[30px]">
               <div className="flex items-center gap-4">
-             
-                  <div className="bg-[#F5F5F5] p-[10px] font-inter text-sm font-medium hidden lg:block">
-                    <div className="flex items-center gap-[3px]">
-                      <div>
-                        <svg
-                          width="8"
-                          height="14"
-                          viewBox="0 0 8 14"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M7 13L1 7L7 1"
-                            stroke="#121212"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          /> 
-                        </svg>
-                      </div>
-                      <div className="cursor-pointer" onClick={() => setStep(step - 1)}>Back</div>
+                <div className="hidden bg-[#F5F5F5] p-[10px] font-inter text-sm font-medium lg:block">
+                  <div className="flex items-center gap-[3px]">
+                    <div>
+                      <svg
+                        width="8"
+                        height="14"
+                        viewBox="0 0 8 14"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7 13L1 7L7 1"
+                          stroke="#121212"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </div>
+                    <div
+                      className="cursor-pointer"
+                      onClick={() => setStep(step - 1)}
+                    >
+                      Back
                     </div>
                   </div>
-              
+                </div>
+
                 <div className="font-inter text-[20px] font-semibold leading-[30px]">
                   Register for appointment
                 </div>
@@ -465,7 +456,7 @@ const OnlineAppointment = ({
             </div>
           </div>
           {/* main-content */}
-          <div className="flex flex-col lg:flex-row pb-[100px]  lg:gap-[76px] lg:px-[60px] xl:gap-[100px] 2xl:gap-[144px]">
+          <div className="flex flex-col pb-[100px] lg:flex-row  lg:gap-[76px] lg:px-[60px] xl:gap-[100px] 2xl:gap-[144px]">
             {/* left-options */}
             <div className="lg:basis-[231px]">
               <Stepper currentStep={step} steps={steps} setStep={setStep} />
@@ -480,7 +471,9 @@ const OnlineAppointment = ({
                   isActive={step === 1}
                   onNextStep={() => setStep(step + 1)}
                   onOptionSelect={handleServiceMode}
-                  priceInCentsForSingle={appointmentState.selectedPrice?.priceInCents!/100}
+                  priceInCentsForSingle={
+                    appointmentState.selectedPrice?.priceInCents! / 100
+                  }
                   // initialSelectOption={
                   //   appointmentState.selectedServiceMode?.title!
                   // }
@@ -489,18 +482,21 @@ const OnlineAppointment = ({
               {step === 2 && (
                 <SelectExpert
                   defaultDoctorId={appointmentState.selectedExpert?.id!}
-                  defaultSpecialisation={appointmentState.selectedSpecialisation!}
+                  defaultSpecialisation={
+                    appointmentState.selectedSpecialisation!
+                  }
                   isActive={step === 2}
                   onNextStep={() => setStep(step + 1)}
                   onSelectDoctor={handleExpertSelection}
                   onSelectSpecialisation={handleSelectedSpecialisation}
-                  
                 />
               )}
               {step === 3 && (
                 <SelectDateTime
                   defaultDate={appointmentState.selectedDateTime?.date!}
-                  defaultTimeSlots={appointmentState.selectedDateTime?.timeSlots!}
+                  defaultTimeSlots={
+                    appointmentState.selectedDateTime?.timeSlots!
+                  }
                   defaultDuration={appointmentState.selectedDuration!}
                   defaultCouple={appointmentState.selectedCouple!}
                   onPrice={handlePrice}
@@ -546,14 +542,14 @@ const OnlineAppointment = ({
                 />
               )}
               {step === 5 && (
-               <div className="flex justify-end mr-3">
-                 <Button
-                  className="self-end rounded-md bg-secondary px-[30px] py-2 font-inter text-base font-medium hover:bg-secondary"
-                  onClick={handleSubmit}
-                >
-                  CheckOut
-                </Button>
-               </div>
+                <div className="mr-3 flex justify-end">
+                  <Button
+                    className="self-end rounded-md bg-secondary px-[30px] py-2 font-inter text-base font-medium hover:bg-secondary"
+                    onClick={handleSubmit}
+                  >
+                    CheckOut
+                  </Button>
+                </div>
               )}
             </div>
           </div>
