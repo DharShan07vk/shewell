@@ -82,13 +82,13 @@ const ServicesCarousel = () => {
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-white px-4 py-6 sm:px-6 md:px-12 lg:px-[100px]">
+    <section className="relative w-full bg-white px-4 py-6 sm:px-6 md:px-12 lg:px-[100px]">
       <div className="z-10 max-w-full px-0 text-center">
         <motion.h1
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
-          className="mb-6 font-poppins text-lg font-medium leading-tight text-[#333333] sm:text-xl md:text-2xl lg:text-4xl xl:text-[54px]"
+          className="mb-4 sm:mb-6 font-poppins text-base sm:text-lg md:text-2xl lg:text-4xl xl:text-[54px] font-medium leading-tight text-[#333333]"
         >
           India's Wellness Circle For Women Who Mother With Intention
         </motion.h1>
@@ -97,7 +97,7 @@ const ServicesCarousel = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.1, duration: 0.8 }}
-          className="mb-12 px-2 text-lg text-[#33333399] sm:mb-16 sm:px-4 sm:text-xl md:mb-24 md:px-6 md:text-2xl lg:text-[26px] xl:text-[28px]"
+          className="mb-6 sm:mb-8 px-2 text-xs sm:text-sm md:text-lg lg:text-2xl xl:text-[26px] text-[#33333399] md:mb-12 sm:px-4 md:px-6 lg:text-[26px] xl:text-[28px]"
         >
           Tap into curated care programs and ancient wisdom to raise happy moms
           and healthy babies with expert led sessions and wellness products.
@@ -108,7 +108,7 @@ const ServicesCarousel = () => {
         {/* Carousel Container */}
         <div className="relative flex flex-col items-center">
           {/* Main Image Area with Title Integrated */}
-          <div className="relative mb-12 flex w-full items-center justify-center md:mb-16">
+          <div className="relative mb-8 sm:mb-12 flex w-full items-center justify-center md:mb-16">
             {/* Main Image */}
             <AnimatePresence mode="wait">
               <motion.div
@@ -117,7 +117,7 @@ const ServicesCarousel = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.6 }}
-                className="relative h-[300px] w-full max-w-4xl sm:h-[400px] md:h-[500px] lg:h-[600px]"
+                className="relative h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px] w-full max-w-4xl"
               >
                 <Image
                   src={current?.mainImage + ""}
@@ -125,7 +125,7 @@ const ServicesCarousel = () => {
                   fill
                   className="object-contain"
                   priority
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1024px"
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1024px"
                 />
               </motion.div>
             </AnimatePresence>
@@ -139,21 +139,18 @@ const ServicesCarousel = () => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: idx % 2 === 0 ? -50 : 50 }}
                   transition={{ delay: 0.2 + idx * 0.1 }}
-                  className={`absolute z-20 flex h-[50px] w-[160px] cursor-pointer
+                  className={`absolute z-20 hidden sm:flex h-10 sm:h-14 md:h-20 lg:h-[100px] w-28 sm:w-36 md:w-64 lg:w-[380px] cursor-pointer
                                     flex-row items-center justify-between
-                                    gap-2 rounded-[18px] border
-                                    border-white/30 bg-white/20 px-3 py-2
+                                    gap-1.5 sm:gap-2 md:gap-3 rounded-lg sm:rounded-2xl md:rounded-[18px] border
+                                    border-white/30 bg-white/20 px-1.5 sm:px-2.5 md:px-4 lg:px-5 py-1.5 sm:py-2 md:py-3
                                     shadow-lg backdrop-blur-[7px]
                                     transition-all duration-300 hover:scale-105
-                                    hover:bg-white/30 sm:h-[60px] sm:w-[200px] sm:px-4 sm:py-3
-                                    md:h-[80px] md:w-[300px]
-                                    md:px-5 lg:h-[100px] lg:w-[380px] ${service.position}`}
+                                    hover:bg-white/30 ${service.position}`}
                 >
-                  <div className="flex-shrink-0 p-2 text-white md:p-3">
-                    {/* <ArrowUpRight size={18} className="md:h-5 md:w-5" /> */}
+                  <div className="flex-shrink-0 p-0.5 sm:p-1.5 md:p-2.5 text-white">
                     <InteractiveButton />
                   </div>
-                  <span className="whitespace-nowrap text-xs font-semibold text-gray-800 sm:text-sm md:text-base lg:text-lg">
+                  <span className="whitespace-nowrap text-[8px] sm:text-xs md:text-sm lg:text-base font-semibold text-gray-800">
                     {service.label}
                   </span>
                 </motion.div>
@@ -163,15 +160,15 @@ const ServicesCarousel = () => {
             {/* Navigation Arrows */}
             <button
               onClick={prevSlide}
-              className="absolute left-[0px] top-1/2 z-30 -translate-y-1/2 cursor-pointer rounded-full border border-gray-200 p-2 text-gray-600 transition-all hover:bg-gray-50 hover:text-gray-600 md:left-0 md:p-3"
+              className="absolute left-1 sm:left-2 md:left-0 top-1/2 z-30 -translate-y-1/2 cursor-pointer rounded-full border border-gray-200 p-1.5 sm:p-2 md:p-3 text-gray-600 transition-all hover:bg-gray-50 hover:text-gray-600"
             >
-              <ChevronLeft size={32} />
+              <ChevronLeft size={20} className="sm:size-6 md:size-8" />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-0 top-1/2 z-30 -translate-y-1/2 cursor-pointer rounded-full border border-gray-200 p-2 text-gray-600 transition-all hover:bg-gray-50 hover:text-gray-600 md:right-0 md:p-3"
+              className="absolute right-1 sm:right-2 md:right-0 top-1/2 z-30 -translate-y-1/2 cursor-pointer rounded-full border border-gray-200 p-1.5 sm:p-2 md:p-3 text-gray-600 transition-all hover:bg-gray-50 hover:text-gray-600"
             >
-              <ChevronRight size={32} />
+              <ChevronRight size={20} className="sm:size-6 md:size-8" />
             </button>
           </div>
 

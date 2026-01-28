@@ -30,24 +30,24 @@ const Footer = ({
   return (
     <>
       {/* Top part of footer start */}
-      <div className="w-full bg-black py-10 md:py-[50px] xl:py-[55px] 2xl:py-[60px]">
-        <div className="container mx-auto max-w-full">
-          <div className="  flex flex-col gap-6 border-b border-b-[#373737] bg-black pb-5 lg:flex-row  lg:justify-between  xl:pb-[25px] ">
+      <div className="w-full bg-black py-6 md:py-8 lg:py-10 xl:py-12">
+        <div className="container mx-auto max-w-full px-4 sm:px-6 md:px-12 lg:px-[100px]">
+          <div className="flex flex-col gap-4 sm:gap-6 border-b border-b-[#373737] bg-black pb-4 sm:pb-5 lg:flex-row lg:justify-between lg:pb-6 xl:pb-8">
             {/* part1 starts */}
-            <div className=" mx-auto flex flex-col gap-4 md:mx-0">
+            <div className="flex flex-col gap-3 sm:gap-4 md:mx-0">
               <Link href="/">
-                <div className="relative xs:h-[55px] h-[68px] xs:w-[200px] 2xl:w-[238px]">
+                <div className="relative h-12 sm:h-14 md:h-16 w-40 sm:w-48 md:w-56 2xl:w-64">
                   <Image src={"/images/vyan-logo.png"} fill={true} alt="logo" sizes="(max-width: 768px) 200px, 238px" />
                 </div>
               </Link>
-              <ul className="flex gap-5 2xl:gap-7">
+              <ul className="flex gap-3 sm:gap-4 md:gap-5 2xl:gap-6">
                 <li>
                   <Link
                     href="https://www.facebook.com/people/Shewellcare/61566486577092/"
                     target="_blank"
                   >
                     <svg
-                      className="h-6 w-6 fill-white 2xl:h-8 2xl:w-8"
+                      className="h-5 w-5 sm:h-6 sm:w-6 fill-white 2xl:h-7 2xl:w-7"
                       viewBox="0 0 8 14"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -66,8 +66,7 @@ const Footer = ({
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
+                      className="h-5 w-5 sm:h-6 sm:w-6 2xl:h-7 2xl:w-7"
                       viewBox="0 0 24 24"
                       fill="none"
                     >
@@ -135,10 +134,10 @@ const Footer = ({
             {/* part1 ends */}
 
             {/* part2 starts */}
-            <div className="flex flex-col flex-wrap gap-6 md:flex-row md:gap-[60px] lg:flex-row lg:gap-x-[40px] lg:gap-y-[30px] xl:gap-[108px] 2xl:gap-[199px] ">
-              <div className=" flex flex-col gap-2.5 font-medium text-white lg:text-base 2xl:text-lg">
+            <div className="flex flex-col gap-4 sm:gap-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 md:gap-6 lg:flex lg:flex-row lg:gap-x-4 lg:gap-y-0 xl:gap-8 2xl:gap-12">
+              <div className="flex flex-col gap-1.5 sm:gap-2 font-medium text-white text-sm lg:text-base 2xl:text-lg">
                 QUICK LINKS
-                <ul className="flex flex-col gap-2.5 text-[14px] font-normal 2xl:text-base">
+                <ul className="flex flex-col gap-1.5 sm:gap-2 text-xs sm:text-sm font-normal 2xl:text-base">
                   <Link href="/">
                     <li>About Us</li>
                   </Link>
@@ -150,9 +149,9 @@ const Footer = ({
                   </Link> */}
                 </ul>
               </div>
-              <div className=" flex flex-col gap-2.5 font-medium text-white lg:text-base 2xl:text-lg">
+              <div className="flex flex-col gap-1.5 sm:gap-2 font-medium text-white text-sm lg:text-base 2xl:text-lg">
                 Counselling
-                <ul className="flex flex-col gap-2.5 text-[14px] font-normal 2xl:text-base">
+                <ul className="flex flex-col gap-1.5 sm:gap-2 text-xs sm:text-sm font-normal 2xl:text-base">
                   {specializationParentCategories.map((item) => {
                     return (
                       <>
@@ -164,9 +163,9 @@ const Footer = ({
                   })}
                 </ul>
               </div>
-              <div className="  flex flex-col gap-2.5 font-medium text-white lg:text-base 2xl:text-lg">
+              <div className="flex flex-col gap-1.5 sm:gap-2 font-medium text-white text-sm lg:text-base 2xl:text-lg">
                 Services
-                <ul className="flex flex-col gap-2.5 text-[14px] font-normal 2xl:text-base">
+                <ul className="flex flex-col gap-1.5 sm:gap-2 text-xs sm:text-sm font-normal 2xl:text-base">
                   {specializations.map((item) => {
                     return (
                       <>
@@ -182,14 +181,14 @@ const Footer = ({
                   })}
                 </ul>
               </div>
-              <div className=" flex flex-col gap-2.5 font-medium text-white lg:text-base 2xl:text-lg">
+              <div className="flex flex-col gap-1.5 sm:gap-2 font-medium text-white text-sm lg:text-base 2xl:text-lg">
                 CONTACT US
-                <ul className="flex flex-col gap-2.5 text-[14px] font-normal 2xl:text-base">
+                <ul className="flex flex-col gap-1.5 sm:gap-2 text-xs sm:text-sm font-normal 2xl:text-base">
                   <div>
-                    <li className="flex items-start gap-[8px]">
+                    <li className="flex items-start gap-2">
                       <svg
-                        width="24"
-                        height="24"
+                        width="20"
+                        height="20"
                         viewBox="0 0 24 24"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -201,8 +200,7 @@ const Footer = ({
                           fill="#00898F"
                         />
                       </svg>
-                      
-                      123 colony Gurgram,<br/> Haryana- 122001
+                      <span className="text-xs sm:text-sm">123 colony Gurgram,<br/> Haryana- 122001</span>
                     </li>
                   </div>
                   <Link href="mailto:abcd@gmail.com">
@@ -250,8 +248,8 @@ const Footer = ({
             </div>
             {/* part2 ends */}
           </div>
-          <div className="flex flex-col justify-between border-t-[1px] border-white-200 pt-[25px] md:items-baseline lg:flex-row ">
-            <div className="flex flex-col gap-3 md:flex-row md:gap-5 lg:gap-3   ">
+          <div className="flex flex-col justify-between border-t border-t-[#373737] pt-4 sm:pt-6 md:items-baseline lg:flex-row gap-4 sm:gap-6">
+            <div className="flex flex-col gap-2 sm:gap-3 md:flex-row md:gap-4 lg:gap-3 text-xs sm:text-sm font-normal">
               {" "}
               <Link
                 className="font-inter text-base font-normal text-white"
@@ -273,8 +271,7 @@ const Footer = ({
               </Link>
             </div>
             <div>
-              {" "}
-              <div className="mt-[18px] font-inter text-base font-normal text-white 2xl:text-lg  ">
+              <div className="mt-3 sm:mt-4 font-inter text-xs sm:text-sm font-normal text-white 2xl:text-lg">
                 Developed By{" "}
                 <Link className="font-medium text-primary 2xl:text-lg" href="#">
                   NEXTFLY TECHNOLOGIES{" "}

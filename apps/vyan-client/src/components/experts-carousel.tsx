@@ -90,14 +90,14 @@ export default function ExpertsCarousel() {
   }, [handleNext, isHovered]);
 
   return (
-    <section className="w-full overflow-hidden bg-white px-[100px] py-12 md:py-16">
-      <div className="max-w-8xl mx-auto px-4">
+    <section className="w-full overflow-hidden bg-white px-4 sm:px-6 md:px-12 lg:px-[100px] py-6 sm:py-8 md:py-12">
+      <div className="max-w-8xl mx-auto px-0">
         {/* Section Header */}
-        <div className="mb-12 text-center md:mb-16">
-          <h2 className="mb-4 text-3xl font-medium text-gray-900 md:text-4xl lg:text-5xl">
+        <div className="mb-6 sm:mb-8 text-center md:mb-12">
+          <h2 className="mb-2 sm:mb-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium text-gray-900">
             You're Not Alone  We're Just a Click Away
           </h2>
-          <p className="mx-auto text-[24px] text-[#33333399]">
+          <p className="mx-auto text-sm sm:text-base md:text-lg lg:text-xl xl:text-[24px] text-[#33333399]">
             Consult with empathetic, qualified specialists who listen, guide,
             and support your health decisions.
           </p>
@@ -105,18 +105,18 @@ export default function ExpertsCarousel() {
 
         {/* Experts Carousel */}
         <div
-          className="relative flex h-[280px] items-center justify-center md:h-[350px]"
+          className="relative flex h-[200px] sm:h-[250px] md:h-[300px] lg:h-[350px] items-center justify-center"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
           <button
             onClick={handlePrev}
-            className="absolute left-0 z-30 rounded-full border border-gray-300 bg-white p-3 transition-colors hover:bg-gray-100 md:left-10"
+            className="absolute left-0 sm:left-2 z-30 rounded-full border border-gray-300 bg-white p-2 sm:p-3 transition-colors hover:bg-gray-100 md:left-10"
           >
-            <ChevronLeft size={24} className="text-gray-600" />
+            <ChevronLeft size={20} className="text-gray-600 sm:size-6" />
           </button>
 
-          <div className="flex items-center justify-center gap-8 md:gap-12">
+          <div className="flex items-center justify-center gap-3 sm:gap-5 md:gap-8 lg:gap-12">
             <AnimatePresence mode="popLayout" initial={false}>
               {items.slice(0, 5).map((expert, index) => {
                 const isCenter = index === 2;
@@ -153,8 +153,8 @@ export default function ExpertsCarousel() {
                     className="relative"
                   >
                     <div
-                      className={`relative overflow-hidden rounded-full  border-white shadow-xl
-                        ${isCenter ? "h-32 w-32 md:h-48 md:w-48" : "h-24 w-24 md:h-32 md:w-32"}`}
+                      className={`relative overflow-hidden rounded-full border-white shadow-xl
+                        ${isCenter ? "h-20 w-20 sm:h-28 sm:w-28 md:h-32 md:w-32 lg:h-48 lg:w-48" : "h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-32 lg:w-32"}`}
                     >
                       <img
                         src={expert.image}
@@ -166,11 +166,11 @@ export default function ExpertsCarousel() {
                       {/* Role Badge */}
                       <motion.div
                         animate={{ opacity: isCenter ? 1 : 0.7 }}
-                        className={`absolute  ${isCenter ? " bottom-8 " : " bottom-4"} l left-1/2 flex -translate-x-1/2 items-center gap-1 bg-transparent px-2 py-0.5 `}
+                        className={`absolute  ${isCenter ? " bottom-4 sm:bottom-6 lg:bottom-8 " : " bottom-2 sm:bottom-3"} l left-1/2 flex -translate-x-1/2 items-center gap-1 bg-transparent px-2 py-0.5 `}
                       >
-                        <span className="h-1.5 w-1.5 rounded-full bg-white"></span>
+                        <span className="h-1 sm:h-1.5 w-1 sm:w-1.5 rounded-full bg-white"></span>
                         <span
-                          className={` ${isCenter ? "text-[20px]" : "text-sm"} whitespace-nowrap font-medium text-white transition-all duration-300 ease-in-out`}
+                          className={` ${isCenter ? "text-xs sm:text-base lg:text-[20px]" : "text-[10px] sm:text-sm"} whitespace-nowrap font-medium text-white transition-all duration-300 ease-in-out`}
                         >
                           {expert.role}
                         </span>
@@ -184,20 +184,20 @@ export default function ExpertsCarousel() {
 
           <button
             onClick={handleNext}
-            className="absolute right-0 z-30 rounded-full border border-gray-300 bg-white p-3 transition-colors hover:bg-gray-100 md:right-10"
+            className="absolute right-0 sm:right-2 z-30 rounded-full border border-gray-300 bg-white p-2 sm:p-3 transition-colors hover:bg-gray-100 md:right-10"
           >
-            <ChevronRight size={24} className="text-gray-600" />
+            <ChevronRight size={20} className="text-gray-600 sm:size-6" />
           </button>
         </div>
 
         {/* CTA Button */}
         <div
-          className="mt-12 flex w-full justify-center md:mt-16 "
+          className="mt-8 sm:mt-12 flex w-full justify-center md:mt-16 "
           onClick={() => window.location.href = "/counselling"}
         >
-          <div className="order-0 group flex h-[80px] w-full cursor-pointer items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
+          <div className="order-0 group flex h-12 sm:h-16 md:h-20 lg:h-[80px] w-full cursor-pointer items-center justify-between gap-2.5 rounded-xl sm:rounded-2xl bg-[#F2F2F2] px-3 sm:px-4 md:px-6 py-3 sm:py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
             <div className="flex flex-1 justify-center">
-              <span className="text-2xl font-semibold text-[#00000066] sm:text-2xl">
+              <span className="text-xs sm:text-base md:text-lg lg:text-2xl font-semibold text-[#00000066]">
                 Book a Session with our experts
               </span>
             </div>
