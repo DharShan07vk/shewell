@@ -47,7 +47,7 @@ const data = [
 ];
 const Balance = ({balance} :{balance : number}) => {
   return (
-    <div className="rounded-[9.37px] border border-[#DFE7EF] p-4 sm:p-6 xl:p-5 2xl:p-[26px] w-full">
+    <div className="rounded-2xl border border-gray-100 p-4 sm:p-6 xl:p-5 2xl:p-[26px] w-full shadow-sm hover:shadow-md transition-shadow">
       {/* balance and horizontal-ellipsis */}
       <div className="mb-[12px] flex justify-between 2xl:mb-6">
         <div className="font-inter text-sm font-medium text-active lg:text-lg 2xl:text-2xl">

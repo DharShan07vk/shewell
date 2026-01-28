@@ -90,17 +90,16 @@ export default function PlatformSection() {
   };
 
   return (
-    <section className="px-[100px] py-12 md:py-16 w-full overflow-hidden">
-      <div className="mb-32 text-center">
-        <h3 className="mb-3 text-2xl font-medium text-gray-900 md:mb-4 md:text-4xl lg:text-[54px]">
-          Courses That Support You - Every Step of the Way
+    <section className="w-full overflow-hidden px-4 py-8 sm:px-6 sm:py-10 md:px-12 md:py-12 lg:px-[100px] lg:py-16">
+      <div className="mb-16 text-center sm:mb-20 md:mb-24 lg:mb-32">
+        <h3 className="mb-3 text-xl font-medium text-gray-900 sm:text-2xl md:mb-4 md:text-3xl lg:text-4xl xl:text-[54px]">
+          Courses That Support You Every Step of the Way
         </h3>
-        <p className="mx-auto text-[#33333399] text-[24px]  ">
-          From fertility to first steps – evidence-based, heart-led,
-          expert-designed just for you.
+        <p className="mx-auto text-base text-[#33333399] sm:text-lg md:text-xl lg:text-2xl xl:text-[24px]">
+          From fertility to first steps evidence based heart led expert designed just for you.
         </p>
       </div>
-      <div className=" flex   h-[650px] max-w-full flex-col overflow-hidden rounded-[32px] bg-white shadow-sm lg:h-[795px] lg:flex-row">
+      <div className="flex h-auto max-w-full flex-col overflow-hidden rounded-[20px] bg-white shadow-sm sm:rounded-[28px] lg:h-[650px] lg:flex-row lg:rounded-[32px] xl:h-[795px]">
         {/* LEFT NAVIGATION */}
         <div className="z-10 flex w-full flex-col  bg-white lg:w-[50%]">
           <div className="">
@@ -110,14 +109,14 @@ export default function PlatformSection() {
                 onMouseEnter={() => handleTabClick(item, true)}
                 onMouseLeave={() => handleTabClick(item, false)}
                 onClick={() => handleTabClick(item, false)}
-                className={`rounded-lt-[32px] group flex h-[132.5px] w-full items-center justify-between px-8 py-4 text-left transition-colors duration-200
+                className={`rounded-lt-[32px] group flex h-[80px] w-full items-center justify-between px-4 py-3 text-left transition-colors duration-200 sm:h-[100px] sm:px-6 sm:py-4 lg:h-[132.5px] lg:px-8
                             ${
                               activeTab?.id === item.id
                                 ? "bg-[#005F5F] text-white"
                                 : "bg-[#F2F2F2] text-[#00000066] hover:bg-gray-200"
                             }`}
               >
-                <span className="text-base font-medium md:text-[32px]">
+                <span className="text-base font-medium sm:text-lg md:text-xl lg:text-2xl xl:text-[32px]">
                   {item.title}
                 </span>
 
@@ -161,7 +160,7 @@ export default function PlatformSection() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1, duration: 0.4 }}
-                className="relative z-20 w-full px-8 pt-12 md:px-12 md:pt-16"
+                className="relative z-20 w-full px-4 pt-8 sm:px-6 sm:pt-10 md:px-8 md:pt-12 lg:px-12 lg:pt-16"
               >
                 {/* <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium text-white leading-tight drop-shadow-sm max-w-2xl">
                                     {activeTab?.description}

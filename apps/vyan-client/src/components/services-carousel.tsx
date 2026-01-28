@@ -11,10 +11,10 @@ const COURSES_DATA = [
     category: "Woman Wellbeing",
     mainImage: "/home/service-wellbeing.webp",
     services: [
-      { label: "Lifestyle Issue", position: "top-[10%] left-[5%]" },
-      { label: "Mental Wellbeing", position: "top-[10%] right-[5%]" },
-      { label: "Overweight", position: "bottom-[20%] left-[5%]" },
-      { label: "Physical Health", position: "bottom-[20%] right-[5%]" },
+      { label: "Lifestyle Issue", position: "top-[25%] left-[20%]" },
+      { label: "Mental Wellbeing", position: "top-[25%] right-[20%]" },
+      { label: "Overweight", position: "bottom-[10%] left-[15%]" },
+      { label: "Physical Health", position: "bottom-[10%] right-[15%]" },
     ],
   },
   {
@@ -22,10 +22,10 @@ const COURSES_DATA = [
     category: "Prenatal Care",
     mainImage: "/home/service-prenatal.webp",
     services: [
-      { label: "Pregnancy Loss", position: "top-[10%] right-[5%]" },
-      { label: "Prenatal Weight Issue", position: "bottom-[20%] right-[5%]" },
-      { label: "Childbirth Education", position: "top-[10%] left-[5%]" },
-      { label: "Gestational Diabetes", position: "bottom-[20%] left-[5%]" },
+      { label: "Pregnancy Loss", position: "top-[25%] right-[20%]" },
+      { label: "Prenatal Weight Issue", position: "bottom-[10%] right-[20%]" },
+      { label: "Childbirth Education", position: "top-[25%] left-[20%]" },
+      { label: "Gestational Diabetes", position: "bottom-[10%] left-[20%]" },
     ],
   },
   {
@@ -33,10 +33,13 @@ const COURSES_DATA = [
     category: "Postnatal Care",
     mainImage: "/home/service-postnatal.webp",
     services: [
-      { label: "Lactation Counselling", position: "top-[10%] left-[5%]" },
-      { label: "Postpartum Mental Wellbeing", position: "top-[10%] right-[5%]" },
-      { label: "Postnatal Weight Loss", position: "bottom-[20%] left-[5%]" },
-      { label: "Postnatal Recovery", position: "bottom-[20%] right-[5%]" },
+      { label: "Lactation Counselling", position: "top-[25%] left-[20%]" },
+      {
+        label: "Postpartum Mental Wellbeing",
+        position: "top-[25%] right-[20%]",
+      },
+      { label: "Postnatal Weight Loss", position: "bottom-[10%] left-[20%]" },
+      { label: "Postnatal Recovery", position: "bottom-[20%] right-[20%]" },
     ],
   },
   {
@@ -44,9 +47,9 @@ const COURSES_DATA = [
     category: "PCOS",
     mainImage: "/home/service-pcos.webp",
     services: [
-      { label: "Polycystic Ovary Syndrome", position: "top-[10%] left-[5%]" },
-      { label: "Psychological Support", position: "top-[10%] right-[5%]" },
-      { label: "Overweight Issue", position: "bottom-[20%] left-[5%]" },
+      { label: "Polycystic Ovary Syndrome", position: "top-[25%] left-[20%]" },
+      { label: "Psychological Support", position: "top-[25%] right-[20%]" },
+      { label: "Overweight Issue", position: "bottom-[10%] left-[20%]" },
     ],
   },
   {
@@ -54,10 +57,10 @@ const COURSES_DATA = [
     category: "Child Healthcare",
     mainImage: "/home/service-child.webp",
     services: [
-      { label: "Parenting Tips", position: "top-[10%] left-[5%]" },
-      { label: "Development Challenges", position: "top-[10%] right-[5%]" },
-      { label: "Nutritional Issue", position: "bottom-[20%] left-[5%]" },
-      { label: "Behavioral Challenges", position: "bottom-[20%] right-[5%]" },
+      { label: "Parenting Tips", position: "top-[25%] left-[20%]" },
+      { label: "Development Challenges", position: "top-[25%] right-[20%]" },
+      { label: "Nutritional Issue", position: "bottom-[10%] left-[20%]" },
+      { label: "Behavioral Challenges", position: "bottom-[10%] right-[20%]" },
     ],
   },
 ];
@@ -79,13 +82,13 @@ const ServicesCarousel = () => {
   };
 
   return (
-    <section className="px-[100px] py-6 relative w-full overflow-hidden bg-white">
+    <section className="relative w-full overflow-hidden bg-white px-4 py-6 sm:px-6 md:px-12 lg:px-[100px]">
       <div className="z-10 max-w-full px-0 text-center">
         <motion.h1
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
-          className=" mb-6 font-poppins text-xl font-medium leading-tight text-[#333333] md:text-2xl lg:text-[54px]"
+          className="mb-6 font-poppins text-lg font-medium leading-tight text-[#333333] sm:text-xl md:text-2xl lg:text-4xl xl:text-[54px]"
         >
           India's Wellness Circle For Women Who Mother With Intention
         </motion.h1>
@@ -94,10 +97,10 @@ const ServicesCarousel = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.1, duration: 0.8 }}
-          className=" text-[24px] text-[#33333399] md:text-[26px] lg:text-[28px] mb-24 px-4 md:px-6 lg:px-6"
+          className="mb-12 px-2 text-lg text-[#33333399] sm:mb-16 sm:px-4 sm:text-xl md:mb-24 md:px-6 md:text-2xl lg:text-[26px] xl:text-[28px]"
         >
           Tap into curated care programs and ancient wisdom to raise happy moms
-          and healthy babies with expert-led sessions and wellness products.
+          and healthy babies with expert led sessions and wellness products.
           Shewell isn’t just for India. It’s for every woman, everywhere
         </motion.p>
       </div>
@@ -114,7 +117,7 @@ const ServicesCarousel = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.6 }}
-                className="relative h-[400px] w-full max-w-4xl md:h-[500px] lg:h-[600px]"
+                className="relative h-[300px] w-full max-w-4xl sm:h-[400px] md:h-[500px] lg:h-[600px]"
               >
                 <Image
                   src={current?.mainImage + ""}
@@ -136,20 +139,21 @@ const ServicesCarousel = () => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: idx % 2 === 0 ? -50 : 50 }}
                   transition={{ delay: 0.2 + idx * 0.1 }}
-                  className={`absolute z-20 flex h-[60px] w-[200px] cursor-pointer
+                  className={`absolute z-20 flex h-[50px] w-[160px] cursor-pointer
                                     flex-row items-center justify-between
                                     gap-2 rounded-[18px] border
-                                    border-white/30 bg-white/20 px-4 py-3
+                                    border-white/30 bg-white/20 px-3 py-2
                                     shadow-lg backdrop-blur-[7px]
                                     transition-all duration-300 hover:scale-105
-                                    hover:bg-white/30 md:h-[80px] md:w-[300px]
+                                    hover:bg-white/30 sm:h-[60px] sm:w-[200px] sm:px-4 sm:py-3
+                                    md:h-[80px] md:w-[300px]
                                     md:px-5 lg:h-[100px] lg:w-[380px] ${service.position}`}
                 >
                   <div className="flex-shrink-0 p-2 text-white md:p-3">
                     {/* <ArrowUpRight size={18} className="md:h-5 md:w-5" /> */}
                     <InteractiveButton />
                   </div>
-                  <span className="whitespace-nowrap text-sm font-semibold text-gray-800 md:text-base lg:text-lg">
+                  <span className="whitespace-nowrap text-xs font-semibold text-gray-800 sm:text-sm md:text-base lg:text-lg">
                     {service.label}
                   </span>
                 </motion.div>
@@ -184,7 +188,6 @@ const ServicesCarousel = () => {
               />
             ))}
           </div> */}
-
         </div>
       </div>
     </section>

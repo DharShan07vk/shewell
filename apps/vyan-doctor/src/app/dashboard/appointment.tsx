@@ -90,7 +90,7 @@ interface IAppointment {
 }
 const Appointment = ({appointments}:{appointments : IAppointment[]}) => {
   return (
-    <div className="rounded-[9.37px] border border-[#DFE7EF] p-4 sm:p-6 xl:p-5 2xl:p-[26px]">
+    <div className="rounded-2xl border border-gray-100 p-4 sm:p-6 xl:p-5 2xl:p-[26px] shadow-sm hover:shadow-md transition-shadow">
       {/* appointment and dropdown */}
       <div className="mb-[17px] flex items-center justify-between 2xl:mb-5 ">
         {/* appointment */}

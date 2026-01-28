@@ -24,18 +24,16 @@ export default function Hero({ heroMedias }: { heroMedias: IHeroMedia[] }) {
   const session = useSession();
   console.log("session", session);
   return (
-    <>
+    <div className="w-full px-4 sm:px-6 md:px-12 lg:px-[100px]">
       <Swiper
-        className="hm-hero"
+        className="hm-hero rounded-xl sm:rounded-2xl overflow-hidden"
         pagination={{
           dynamicBullets: true,
           clickable: true,
         }}
         modules={[Autoplay, Pagination]}
-        // loop={true}
         autoplay={{
           delay: 3000,
-          // disableOnInteraction: false,
         }}
       >
         {heroMedias.map((item) => {
@@ -89,6 +87,6 @@ export default function Hero({ heroMedias }: { heroMedias: IHeroMedia[] }) {
           </Link>
         </SwiperSlide> */}
       </Swiper>
-    </>
+    </div>
   );
 }

@@ -30,8 +30,7 @@ export default async function Home() {
     })
   return (
     <>
-      <div>
-       
+      <div className="min-h-screen bg-white">
         <Hero heroMedias={heroMedias} />
         <MyAppointments />
         <PremiumMembership />

@@ -3,16 +3,57 @@ import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { InteractiveButton } from "./ui/interactive-button";
+import router from "next/router";
 
 const EXPERTS_DATA = [
-  { id: 1, role: "Specialist", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&h=300&q=80" },
-  { id: 2, role: "Specialist", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&h=300&q=80" },
-  { id: 3, role: "Specialist", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&h=300&q=80" },
-  { id: 4, role: "Specialist", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&h=300&q=80" },
-  { id: 5, role: "Specialist", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&h=300&q=80" },
-  { id: 6, role: "Specialist", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&h=300&q=80" },
-  { id: 7, role: "Specialist", image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&h=300&q=80" },
-  { id: 8, role: "Specialist", image: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&h=300&q=80" },
+  {
+    id: 1,
+    role: "Specialist",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&h=300&q=80",
+  },
+  {
+    id: 2,
+    role: "Specialist",
+    image:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&h=300&q=80",
+  },
+  {
+    id: 3,
+    role: "Specialist",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&h=300&q=80",
+  },
+  {
+    id: 4,
+    role: "Specialist",
+    image:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&h=300&q=80",
+  },
+  {
+    id: 5,
+    role: "Specialist",
+    image:
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&h=300&q=80",
+  },
+  {
+    id: 6,
+    role: "Specialist",
+    image:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&h=300&q=80",
+  },
+  {
+    id: 7,
+    role: "Specialist",
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&h=300&q=80",
+  },
+  {
+    id: 8,
+    role: "Specialist",
+    image:
+      "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&h=300&q=80",
+  },
 ];
 
 export default function ExpertsCarousel() {
@@ -20,8 +61,8 @@ export default function ExpertsCarousel() {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleNext = useCallback(() => {
-    setItems((prev ) => {
-      const newArr = [...prev ];
+    setItems((prev) => {
+      const newArr = [...prev];
       const first = newArr.shift();
       if (first) newArr.push(first);
       return newArr;
@@ -50,11 +91,11 @@ export default function ExpertsCarousel() {
 
   return (
     <section className="w-full overflow-hidden bg-white px-[100px] py-12 md:py-16">
-      <div className="mx-auto max-w-8xl px-4">
+      <div className="max-w-8xl mx-auto px-4">
         {/* Section Header */}
         <div className="mb-12 text-center md:mb-16">
           <h2 className="mb-4 text-3xl font-medium text-gray-900 md:text-4xl lg:text-5xl">
-            You're Not Alone - We're Just a Click Away
+            You're Not Alone  We're Just a Click Away
           </h2>
           <p className="mx-auto text-[24px] text-[#33333399]">
             Consult with empathetic, qualified specialists who listen, guide,
@@ -63,24 +104,24 @@ export default function ExpertsCarousel() {
         </div>
 
         {/* Experts Carousel */}
-        <div 
-          className="relative flex items-center justify-center h-[280px] md:h-[350px]"
+        <div
+          className="relative flex h-[280px] items-center justify-center md:h-[350px]"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          <button 
-            onClick={handlePrev} 
-            className="absolute left-0 md:left-10 z-30 p-3 border border-gray-300 rounded-full bg-white hover:bg-gray-100 transition-colors"
+          <button
+            onClick={handlePrev}
+            className="absolute left-0 z-30 rounded-full border border-gray-300 bg-white p-3 transition-colors hover:bg-gray-100 md:left-10"
           >
             <ChevronLeft size={24} className="text-gray-600" />
           </button>
-          
+
           <div className="flex items-center justify-center gap-8 md:gap-12">
             <AnimatePresence mode="popLayout" initial={false}>
               {items.slice(0, 5).map((expert, index) => {
                 const isCenter = index === 2;
                 const isSide = index === 1 || index === 3;
-                
+
                 return (
                   <motion.div
                     key={expert.id}
@@ -90,8 +131,18 @@ export default function ExpertsCarousel() {
                       opacity: 1,
                       scale: isCenter ? 1.5 : isSide ? 1.4 : 1.1,
                       zIndex: isCenter ? 20 : 10,
-                      marginLeft: index === 2 ? "2rem" : index === 3 || index === 4 ? "1rem" : "0",
-                      marginRight: index === 2 ? "2rem" : index === 1 || index === 0 ? "1rem" : "0",
+                      marginLeft:
+                        index === 2
+                          ? "2rem"
+                          : index === 3 || index === 4
+                            ? "1rem"
+                            : "0",
+                      marginRight:
+                        index === 2
+                          ? "2rem"
+                          : index === 1 || index === 0
+                            ? "1rem"
+                            : "0",
                     }}
                     exit={{ opacity: 0, scale: 0.5 }}
                     transition={{
@@ -101,19 +152,28 @@ export default function ExpertsCarousel() {
                     }}
                     className="relative"
                   >
-                    <div className={`relative overflow-hidden rounded-full  border-white shadow-xl
+                    <div
+                      className={`relative overflow-hidden rounded-full  border-white shadow-xl
                         ${isCenter ? "h-32 w-32 md:h-48 md:w-48" : "h-24 w-24 md:h-32 md:w-32"}`}
                     >
-                      <img src={expert.image} alt="Expert" className="h-full w-full object-cover" />
+                      <img
+                        src={expert.image}
+                        alt="Expert"
+                        className="h-full w-full object-cover"
+                      />
                       {/* overlay */}
-                      <div className="absolute top-[60%] inset-0 bg-black/25   shadow-lg blur-[3px] " />
+                      <div className="absolute inset-0 top-[60%] bg-black/25   shadow-lg blur-[3px] " />
                       {/* Role Badge */}
-                      <motion.div 
+                      <motion.div
                         animate={{ opacity: isCenter ? 1 : 0.7 }}
-                        className= {`absolute  ${isCenter ? " bottom-8 " : " bottom-4"} left-1/2 -translate-x-1/2 flex items-center gap-1 l bg-transparent px-2 py-0.5 `}
+                        className={`absolute  ${isCenter ? " bottom-8 " : " bottom-4"} l left-1/2 flex -translate-x-1/2 items-center gap-1 bg-transparent px-2 py-0.5 `}
                       >
                         <span className="h-1.5 w-1.5 rounded-full bg-white"></span>
-                        <span className={` ${isCenter ? "text-[20px]" : "text-sm"} transition-all duration-300 ease-in-out font-medium text-white whitespace-nowrap`}>{expert.role}</span>
+                        <span
+                          className={` ${isCenter ? "text-[20px]" : "text-sm"} whitespace-nowrap font-medium text-white transition-all duration-300 ease-in-out`}
+                        >
+                          {expert.role}
+                        </span>
                       </motion.div>
                     </div>
                   </motion.div>
@@ -122,20 +182,25 @@ export default function ExpertsCarousel() {
             </AnimatePresence>
           </div>
 
-          <button 
-            onClick={handleNext} 
-            className="absolute right-0 md:right-10 z-30 p-3 border border-gray-300 rounded-full bg-white hover:bg-gray-100 transition-colors"
+          <button
+            onClick={handleNext}
+            className="absolute right-0 z-30 rounded-full border border-gray-300 bg-white p-3 transition-colors hover:bg-gray-100 md:right-10"
           >
             <ChevronRight size={24} className="text-gray-600" />
           </button>
         </div>
 
         {/* CTA Button */}
-        <div className="mt-12 flex w-full justify-center md:mt-16">
-          <div className="order-0 group flex h-[80px] w-full items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5] cursor-pointer">
-            <span className="text-lg text-center font-medium text-[#00000066] sm:text-xl">
-              Consult an Expert Now
-            </span>
+        <div
+          className="mt-12 flex w-full justify-center md:mt-16 "
+          onClick={() => window.location.href = "/counselling"}
+        >
+          <div className="order-0 group flex h-[80px] w-full cursor-pointer items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#e5e5e5]">
+            <div className="flex flex-1 justify-center">
+              <span className="text-2xl font-semibold text-[#00000066] sm:text-2xl">
+                Book a Session with our experts
+              </span>
+            </div>
             <InteractiveButton />
           </div>
         </div>

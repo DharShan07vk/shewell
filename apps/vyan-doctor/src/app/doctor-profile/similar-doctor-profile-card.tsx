@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@repo/ui/src/@/components/button";
-
+import { Badge, DoctorAvatar } from "~/components/ui";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import Link from "next/link";
@@ -53,23 +53,14 @@ const SimilarDoctorProfileCard = ({
   };
   return (
     <>
-      <div className="flex gap-4 rounded-md border border-border-300  p-3 md:p-4 lg:gap-6 lg:p-6">
+      <div className="group relative flex gap-4 rounded-3xl border border-gray-100 bg-white p-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] transition-all duration-300 ease-in-out hover:border-gray-200 hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] md:p-5 lg:gap-6 lg:p-6">
         {/* image  */}
-        <div className="flex flex-col items-center justify-center gap-3 self-center  ">
-          {/* <div className="">{cardImage}</div> */}
-          <div className="flex aspect-square w-[135px] items-center justify-center self-center bg-[url('/images/doctor-bg.png')] bg-center bg-no-repeat">
-            <div className="relative aspect-square w-[116px]">
-              <Image
-                src={
-                  doctorProfile.media?.fileUrl ||
-                  "/images/fallback-user-profile.png"
-                }
-                alt="feature-card"
-                className="rounded-full object-cover"
-                fill={true}
-              />
-            </div>
-          </div>
+        <div className="flex flex-col items-center justify-center gap-3 self-center">
+          <DoctorAvatar 
+            src={doctorProfile.media?.fileUrl || "/images/fallback-user-profile.png"}
+            alt={doctorProfile.firstName || "Doctor"}
+            size="medium"
+          />
           {doctorProfile.professionalUserAppointmentPrices?.length! > 0 ? (
             <div className="font-inter text-[16px] font-semibold text-secondary sm:text-lg">
               {doctorProfile.professionalUserAppointmentPrices![0]
@@ -155,38 +146,22 @@ const SimilarDoctorProfileCard = ({
           <div className="flex flex-wrap items-center gap-1 font-inter text-xs font-normal text-inactive md:text-sm">
             <span className="font-medium text-active ">Specialized In: </span>
 
-            {specialization.map((item, index) => {
-              return (
-                <>
-                  <div
-                    className="rounded-[6px] bg-[#F6F6F6] px-[6px] py-1 text-xs text-inactive"
-                    key={index}
-                  >
-                    {item.specialization}
-                    {index < specialization.length - 1 ? "/" : ""}
-                  </div>
-                </>
-              );
-            })}
+            {specialization.map((item, index) => (
+              <Badge key={index} variant="specialization">
+                {item.specialization}
+              </Badge>
+            ))}
           </div>
 
           {/* languages */}
           <div className="flex flex-wrap items-center gap-1 font-inter text-xs font-normal text-inactive md:text-sm">
             <span className="font-medium text-active ">Languages: </span>
 
-            {doctorProfile.languages.map((item, index) => {
-              return (
-                <>
-                  <div
-                    className="rounded-[6px] bg-[#F6F6F6] px-[6px] py-1 text-xs text-inactive"
-                    key={index}
-                  >
-                    {item.language}
-                    {index < doctorProfile.languages.length - 1 ? "/" : ""}
-                  </div>
-                </>
-              );
-            })}
+            {doctorProfile.languages.map((item, index) => (
+              <Badge key={index} variant="language">
+                {item.language}
+              </Badge>
+            ))}
           </div>
         </div>
       </div>
