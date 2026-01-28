@@ -7,6 +7,7 @@ import { ICart, ICartLineItem } from "~/models/cart.model";
 import { db } from "~/server/db";
 import { calculateDiscountedPrice } from "./discountPrice";
 import { recalculateCart } from "~/store/cart.store";
+import { receiveMessageOnPort } from "worker_threads";
 interface IRazorPayDetails {
   razorpay_order_id: string;
   razorpay_payment_id: string;
@@ -315,6 +316,7 @@ export const createSessionOrder = async (bookingData: ISessionBookingData) => {
 
   try {
     // Create Razorpay order
+    console.log("Creating razorpay order for session booking",amountInPaise);
     const razorpayOrder = await createRazorpayOrder({
       amount: amountInPaise,
       currency: "INR",

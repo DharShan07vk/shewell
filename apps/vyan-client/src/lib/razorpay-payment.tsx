@@ -24,8 +24,8 @@ export const initializeRazorpay = () => {
 };
 interface IBookAppointmentDetailsProps {
   serviceMode: {
-    taxedAmount: number;
-    totalPriceInCents: number;
+    taxedAmount : number;
+    totalPriceInCents : number;
     serviceType: AppointmentType;
     priceInCents: number;
     description: string;
@@ -35,16 +35,16 @@ interface IBookAppointmentDetailsProps {
     professionalUserId: string;
   };
   patient: {
-    id: string;
+    id: string,
     firstName: string;
     email: string;
     phoneNumber: string;
-    message: string;
-    additionalPatients: {
-      firstName: string;
-      email: string;
-      phoneNumber: string;
-    }[];
+    message : string;
+    additionalPatients : {
+      firstName : string;
+      email : string;
+      phoneNumber : string;
+    }[]
   };
   startingTime: Date;
   endingTime: Date;
@@ -65,16 +65,16 @@ export const makePayment = async ({
     return;
   }
 
-  // console.log(
-  //   "checkout&RazorpayData",
-  //   serviceMode,
-  //   professionalUser,
-  //   patient,
-  //   startingTime,
-  //   endingTime,
-  // );
+  console.log(
+    "checkout&RazorpayData",
+    serviceMode,
+    professionalUser,
+    patient,
+    startingTime,
+    endingTime,
+  );
 
-  console.log("startingTime", startingTime);
+  console.log("startingTime", startingTime)
   // Make API call to initiate the checkout process on the server with the provided bookAppointmentId
   try {
     await CheckoutAction({

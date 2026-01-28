@@ -76,8 +76,8 @@
 - **Issue:** Order status type mismatches
 
 **Location: `apps/vyan-client/src/lib/razorpay-payment.tsx`**
-- Line 130: `@ts-ignore` for Razorpay window object
-- Line 99, 68: `any` types for Razorpay handler responses
+- Line 130: `@ts-ign ore` for Razorpay window object
+- Line 99, 68: `any`types for Razorpay handler responses
 
 **Impact:** ⚠️ **MEDIUM** - Type safety compromised, potential runtime errors
 

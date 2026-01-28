@@ -103,15 +103,15 @@ export default function ProductsGrid() {
   };
 
   return (
-    <section className="w-full bg-gradient-to-b from-gray-50 to-white px-[100px] py-16 md:py-24">
+    <section className="w-full bg-gradient-to-b from-gray-50 to-white px-4 sm:px-6 md:px-12 lg:px-[100px] py-8 sm:py-12 md:py-16 lg:py-24">
       <div className=" w-full px-0">
         {/* Section Header */}
-        <div className="mb-10 flex items-start justify-between">
+        <div className="mb-6 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4">
           <div>
-            <h2 className="mb-3 text-3xl font-medium text-gray-900 md:text-4xl lg:text-5xl">
+            <h2 className="mb-2 sm:mb-3 text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium text-gray-900">
               Clean, Safe, Conscious For You and Baby.
             </h2>
-            <p className="text-[24px] text-[#33333399]">
+            <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-[24px] text-[#33333399]">
               Toxin-free, cruelty-free, and consciously created maternity
               products all validated by experts and moms alike.
             </p>
@@ -135,23 +135,23 @@ export default function ProductsGrid() {
         </div>
 
         {/* Coming Soon Premium Cards */}
-        <div className="z-10 flex gap-4 overflow-hidden pb-4 pl-2 pt-4 md:gap-6">
+        <div className="z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
           {[1, 2, 3, 4].map((index) => (
             <div
               key={index}
-              className="relative w-64 flex-shrink-0 overflow-hidden rounded-3xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl md:w-72"
+              className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl"
             >
               {/* Product Image Area with Gradient & Coming Soon */}
-              <div className="relative flex h-48 w-full items-center justify-center overflow-hidden bg-[#1B8A8E] p-4 opacity-50 md:h-56">
+              <div className="relative flex h-32 sm:h-40 md:h-48 lg:h-56 w-full items-center justify-center overflow-hidden bg-[#1B8A8E] p-3 sm:p-4 opacity-50 md:p-4">
                 {/* Decorative circles */}
                 <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[#00898F]/5"></div>
                 <div className="absolute -bottom-12 -left-12 h-40 w-40 rounded-full bg-[#51AF5A]/5"></div>
 
                 {/* Coming Soon Content */}
                 <div className="relative z-10 text-center">
-                  <div className="mb-3 inline-flex items-center justify-center">
+                  <div className="mb-2 sm:mb-3 inline-flex items-center justify-center">
                     <svg
-                      className="h-16 w-16 text-[#00898F]/40"
+                      className="h-10 sm:h-12 md:h-16 w-10 sm:w-12 md:w-16 text-[#00898F]/40"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -164,10 +164,10 @@ export default function ProductsGrid() {
                       />
                     </svg>
                   </div>
-                  <p className="bg-white bg-clip-text text-2xl font-bold text-transparent">
+                  <p className="bg-white bg-clip-text text-sm sm:text-lg md:text-2xl font-bold text-transparent">
                     Coming Soon
                   </p>
-                  <p className="mt-1 text-xs text-white">
+                  <p className="mt-0.5 sm:mt-1 text-[10px] sm:text-xs text-white">
                     Curated just for you
                   </p>
                 </div>
@@ -177,26 +177,26 @@ export default function ProductsGrid() {
               </div>
 
               {/* Product Details Skeleton */}
-              <div className="p-4">
+              <div className="p-3 sm:p-4">
                 {/* Title skeleton */}
-                <div className="mb-2 h-4 w-3/4 animate-pulse rounded-full bg-gradient-to-r from-gray-200 to-gray-100"></div>
-                <div className="mb-3 h-3 w-1/2 animate-pulse rounded-full bg-gradient-to-r from-gray-200 to-gray-100"></div>
+                <div className="mb-1 sm:mb-2 h-3 sm:h-4 w-3/4 animate-pulse rounded-full bg-gradient-to-r from-gray-200 to-gray-100"></div>
+                <div className="mb-2 sm:mb-3 h-2 sm:h-3 w-1/2 animate-pulse rounded-full bg-gradient-to-r from-gray-200 to-gray-100"></div>
 
                 {/* Price skeleton */}
-                <div className="mb-3 h-6 w-1/3 animate-pulse rounded-full bg-gradient-to-r from-gray-200 to-gray-100"></div>
+                <div className="mb-2 sm:mb-3 h-4 sm:h-6 w-1/3 animate-pulse rounded-full bg-gradient-to-r from-gray-200 to-gray-100"></div>
 
                 {/* Rating skeleton */}
-                <div className="mb-4 flex items-center gap-2">
-                  <div className="flex gap-1">
+                <div className="mb-3 sm:mb-4 flex items-center gap-1 sm:gap-2">
+                  <div className="flex gap-0.5 sm:gap-1">
                     {[1, 2, 3, 4, 5].map((star) => (
-                      <Star key={star} size={14} className="text-gray-200" />
+                      <Star key={star} size={12} className="sm:size-3.5 text-gray-200" />
                     ))}
                   </div>
                 </div>
 
                 {/* Button skeleton */}
-                <div className="flex h-[45px] w-full items-center justify-center rounded-2xl bg-gradient-to-r from-gray-100 to-gray-200">
-                  <span className="text-sm font-medium text-white">
+                <div className="flex h-10 sm:h-11 md:h-[45px] w-full items-center justify-center rounded-lg sm:rounded-2xl bg-gradient-to-r from-gray-100 to-gray-200">
+                  <span className="text-xs sm:text-sm font-medium text-white">
                     Shop Now
                   </span>
                 </div>

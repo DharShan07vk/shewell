@@ -90,33 +90,33 @@ export default function PlatformSection() {
   };
 
   return (
-    <section className="w-full overflow-hidden px-4 py-8 sm:px-6 sm:py-10 md:px-12 md:py-12 lg:px-[100px] lg:py-16">
-      <div className="mb-16 text-center sm:mb-20 md:mb-24 lg:mb-32">
-        <h3 className="mb-3 text-xl font-medium text-gray-900 sm:text-2xl md:mb-4 md:text-3xl lg:text-4xl xl:text-[54px]">
+    <section className="w-full overflow-hidden px-4 py-3 sm:py-4 sm:px-6 md:px-12 md:py-6 lg:px-[100px] lg:py-10">
+      <div className="mb-3 sm:mb-4 text-center md:mb-8 lg:mb-12">
+        <h3 className="mb-2 sm:mb-3 text-base sm:text-lg font-medium text-gray-900 md:mb-4 md:text-2xl lg:text-3xl xl:text-4xl">
           Courses That Support You Every Step of the Way
         </h3>
-        <p className="mx-auto text-base text-[#33333399] sm:text-lg md:text-xl lg:text-2xl xl:text-[24px]">
+        <p className="mx-auto text-xs sm:text-sm md:text-base text-[#33333399] lg:text-lg xl:text-xl">
           From fertility to first steps evidence based heart led expert designed just for you.
         </p>
       </div>
-      <div className="flex h-auto max-w-full flex-col overflow-hidden rounded-[20px] bg-white shadow-sm sm:rounded-[28px] lg:h-[650px] lg:flex-row lg:rounded-[32px] xl:h-[795px]">
+      <div className="flex h-auto w-full flex-col overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl lg:rounded-[28px] bg-white shadow-sm lg:h-[650px] lg:flex-row lg:rounded-[32px] xl:h-[795px]">
         {/* LEFT NAVIGATION */}
-        <div className="z-10 flex w-full flex-col  bg-white lg:w-[50%]">
-          <div className="">
+        <div className="z-10 flex w-full flex-col bg-white lg:w-[50%]">
+          <div className="flex flex-col max-h-none overflow-hidden">
             {PLATFORM_DATA.map((item) => (
               <button
                 key={item.id}
                 onMouseEnter={() => handleTabClick(item, true)}
                 onMouseLeave={() => handleTabClick(item, false)}
                 onClick={() => handleTabClick(item, false)}
-                className={`rounded-lt-[32px] group flex h-[80px] w-full items-center justify-between px-4 py-3 text-left transition-colors duration-200 sm:h-[100px] sm:px-6 sm:py-4 lg:h-[132.5px] lg:px-8
+                className={`rounded-lt-[32px] group flex h-7 sm:h-10 md:h-14 lg:h-[132.5px] w-full items-center justify-between gap-2 px-2 sm:px-3 md:px-5 lg:px-8 py-1 sm:py-1.5 md:py-2 lg:py-4 text-left transition-colors duration-200
                             ${
                               activeTab?.id === item.id
                                 ? "bg-[#005F5F] text-white"
                                 : "bg-[#F2F2F2] text-[#00000066] hover:bg-gray-200"
                             }`}
               >
-                <span className="text-base font-medium sm:text-lg md:text-xl lg:text-2xl xl:text-[32px]">
+                <span className="text-xs sm:text-xs md:text-sm lg:text-lg xl:text-xl font-medium line-clamp-1 flex-1">
                   {item.title}
                 </span>
 
@@ -125,8 +125,9 @@ export default function PlatformSection() {
                 <InteractiveButton
                   as="span"
                   color="bg-[#C1C1C1]"
-                  size="large"
+                  size="small"
                   active={activeTab?.id === item.id}
+                  className="flex-shrink-0"
                 />
               </button>
             ))}
@@ -134,7 +135,7 @@ export default function PlatformSection() {
         </div>
 
         {/* RIGHT CONTENT AREA */}
-        <div className="relative h-full w-full overflow-hidden lg:w-[55%]">
+        <div className="relative h-[180px] sm:h-[240px] md:h-[320px] lg:h-[650px] xl:h-[795px] w-full overflow-hidden lg:w-[55%]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab?.id}
