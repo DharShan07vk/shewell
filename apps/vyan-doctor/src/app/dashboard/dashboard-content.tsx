@@ -211,9 +211,9 @@ const DashboardContent = () => {
 
   console.log("table values", tableValues);
   return (
-    <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-6 sm:py-8 md:py-10">
+    <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 py-4 sm:py-6 md:py-8 lg:py-10">
       {/* buttons */}
-      <div className="flex justify-center gap-2  sm:justify-end sm:gap-6">
+      <div className="flex justify-center gap-2 sm:justify-end sm:gap-3 md:gap-4 lg:gap-6">
         <ShewellButton 
           variant="medium"
           href="/doctor-profile"
@@ -221,7 +221,7 @@ const DashboardContent = () => {
           withIcon={false}
         >
           <svg
-            className="mr-1 inline"
+            className="mr-1 inline w-5 h-5"
             width="20"
             height="21"
             viewBox="0 0 20 21"
@@ -256,7 +256,7 @@ const DashboardContent = () => {
           href="/edit-profile/personal-info"
         >
             <svg
-              className="mr-1 inline"
+              className="mr-1 inline w-5 h-5"
               width="22"
               height="22"
               viewBox="0 0 22 22"
