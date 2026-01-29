@@ -1,8 +1,4 @@
-import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
-import { api } from "~/trpc/server";
-import { SessionProvider } from "next-auth/react";
-import Hero from "~/components/hero";
 import "~/styles/globals.css";
 import { Inter, Pacifico, Playfair_Display, Amatic_SC } from "next/font/google";
 import { Toaster } from "@repo/ui/src/@/components/toaster";
@@ -70,37 +66,7 @@ export default async function RootLayout({
     verifiedAt = user?.verifiedAt;
   }
 
-  const products = await db.product.findMany({
-    select: {
-      id: true,
-      name: true,
-      slug: true,
-    },
-  });
-  const categories = await db.category.findMany({
-    select: {
-      id: true,
-      name: true,
-      order: true,
-      childCategories: {
-        select: {
-          id: true,
-          name: true,
-
-          childCategories: {
-            select: {
-              id: true,
-              name: true,
-            },
-          },
-        },
-      },
-    },
-    where: {
-      deletedAt: null,
-      parentCategoryId: null,
-    },
-  });
+  
 
   let userDetails;
 
@@ -115,36 +81,6 @@ export default async function RootLayout({
     });
   }
 
-  const specialisationParentCategories =
-    await db.professionalSpecializationParentCategory.findMany({
-      select: {
-        id: true,
-        name: true,
-        specializations: {
-          select: {
-            id: true,
-            specialization: true,
-          },
-          where: {
-            active: true,
-          },
-        },
-      },
-      where: {
-        active: true,
-      },
-    });
-
-  const specializations = await db.professionalSpecializations.findMany({
-    select: {
-      id: true,
-      specialization: true,
-    },
-    where: {
-      active: true,
-    },
-    take: 4,
-  });
 
   return (
     <html 

@@ -16,7 +16,6 @@ export const searchLanguagesRouter = createTRPCRouter({
           language: true,
         },
       });
-      console.log("languages", languages);
       return { languages };
     }),
 });

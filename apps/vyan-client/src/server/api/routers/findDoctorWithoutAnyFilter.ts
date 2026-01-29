@@ -25,7 +25,6 @@ export const findDoctorWithoutFilterRouter = createTRPCRouter({
           },
         },
       });
-      console.log("professionalUser", professionalUser);
       return { professionalUser };
     }),
 });
