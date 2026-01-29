@@ -84,9 +84,6 @@ export const makePayment = async ({
       startingTime,
       endingTime,
     }).then((data: any) => {
-      console.log("razorpayData", data);
-      console.log("keyId", process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID);
-
       var options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         name: data?.name,
@@ -96,8 +93,8 @@ export const makePayment = async ({
         description: data?.description,
         image: data?.image,
         //   callback function to handle payment response
-        handler: function (response: any) {
-          console.log("paymentResponse", response);
+        handler: function (response: any) {   
+           console.log("paymentResponse", response);  
           VerifyPayment(
             {
               razorpay_payment_id: response.razorpay_payment_id,

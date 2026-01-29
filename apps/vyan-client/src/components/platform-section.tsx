@@ -101,22 +101,22 @@ export default function PlatformSection() {
       </div>
       <div className="flex h-auto w-full flex-col overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl lg:rounded-[28px] bg-white shadow-sm lg:h-[650px] lg:flex-row lg:rounded-[32px] xl:h-[795px]">
         {/* LEFT NAVIGATION */}
-        <div className="z-10 flex w-full flex-col bg-white lg:w-[50%]">
-          <div className="flex flex-col max-h-none overflow-hidden">
+        <div className="z-10 flex w-full flex-col bg-white lg:w-[50%] overflow-y-auto">
+          <div className="flex flex-col">
             {PLATFORM_DATA.map((item) => (
               <button
                 key={item.id}
                 onMouseEnter={() => handleTabClick(item, true)}
                 onMouseLeave={() => handleTabClick(item, false)}
                 onClick={() => handleTabClick(item, false)}
-                className={`rounded-lt-[32px] group flex h-7 sm:h-10 md:h-14 lg:h-[132.5px] w-full items-center justify-between gap-2 px-2 sm:px-3 md:px-5 lg:px-8 py-1 sm:py-1.5 md:py-2 lg:py-4 text-left transition-colors duration-200
+                className={`rounded-lt-[32px] group flex h-12 sm:h-14 md:h-16 lg:h-[132.5px] w-full items-center justify-between gap-2 px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-2.5 md:py-3 lg:py-4 text-left transition-colors duration-200
                             ${
                               activeTab?.id === item.id
                                 ? "bg-[#005F5F] text-white"
                                 : "bg-[#F2F2F2] text-[#00000066] hover:bg-gray-200"
                             }`}
               >
-                <span className="text-xs sm:text-xs md:text-sm lg:text-lg xl:text-xl font-medium line-clamp-1 flex-1">
+                <span className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium line-clamp-2 lg:line-clamp-3 flex-1">
                   {item.title}
                 </span>
 
@@ -135,7 +135,7 @@ export default function PlatformSection() {
         </div>
 
         {/* RIGHT CONTENT AREA */}
-        <div className="relative h-[180px] sm:h-[240px] md:h-[320px] lg:h-[650px] xl:h-[795px] w-full overflow-hidden lg:w-[55%]">
+        <div className="relative h-[200px] sm:h-[280px] md:h-[400px] lg:h-[650px] xl:h-[795px] w-full overflow-hidden lg:w-[55%]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab?.id}
@@ -146,11 +146,11 @@ export default function PlatformSection() {
               className="absolute inset-0 h-full w-full"
             >
               {/* Full Height Image */}
-              <div className="absolute inset-0">
+              <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-gray-100">
                 <img
                   src={activeTab?.image}
                   alt={activeTab?.title}
-                  className="object-fit h-full w-full"
+                  className="w-full h-full object-contain sm:object-contain md:object-cover lg:object-cover"
                 />
                 {/* Gradient Overlay for Text Readability */}
                 {/* <div className="absolute inset-0 bg-gradient-to-b from-[#6B8E23]/90 via-[#6B8E23]/20 to-transparent" /> */}

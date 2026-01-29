@@ -27,7 +27,10 @@ export const searchTimeSlotsRouter = createTRPCRouter({
     )
     .query(async ({ input }) => {
       const { date, expertId } = input;
-      console.log("coming date", format(formatISO(date), "yyyy-MM-dd"));
+      console.log(
+        "coming date",
+        format(formatISO(date), "yyyy-MM-dd-hh:mm:ss"),
+      );
       const professionalUser = await db.professionalUser.findFirst({
         select: {
           id: true,
@@ -103,11 +106,9 @@ export const searchTimeSlotsRouter = createTRPCRouter({
         },
         where: {
           professionalUserId: professionalUser.id,
-          status : BookAppointmentStatus.PAYMENT_SUCCESSFUL
+          status: BookAppointmentStatus.PAYMENT_SUCCESSFUL,
         },
       });
-
-      
 
       const formattedBookedSlots = bookedSlots.map((item, index) => ({
         startingTime: createTimeDate(
@@ -137,14 +138,28 @@ export const searchTimeSlotsRouter = createTRPCRouter({
         })),
       }));
 
-     
-      console.log("booked slots",bookedSlots.map((item) => ({
-        startingTime : getHours(item.startingTime) ,
-        endingTime : getHours(item.endingTime)
-      })))
-      console.log("time slots",getHours(timeSlots[0]?.availableTimings[0]?.startingTime!), getMinutes(timeSlots[0]?.availableTimings[0]?.startingTime!))
-      console.log("time slots",getHours(timeSlots[0]?.availableTimings[0]?.endingTime!), getMinutes(timeSlots[0]?.availableTimings[0]?.endingTime!))  
-      console.log("time slots",getHours(formattedTimeSlots[0]?.availableTimings[0]?.endingTime!), getMinutes(timeSlots[0]?.availableTimings[0]?.endingTime!))   
+      console.log(
+        "booked slots",
+        bookedSlots.map((item) => ({
+          startingTime: getHours(item.startingTime),
+          endingTime: getHours(item.endingTime),
+        })),
+      );
+      console.log(
+        "time slots",
+        getHours(timeSlots[0]?.availableTimings[0]?.startingTime!),
+        getMinutes(timeSlots[0]?.availableTimings[0]?.startingTime!),
+      );
+      console.log(
+        "time slots",
+        getHours(timeSlots[0]?.availableTimings[0]?.endingTime!),
+        getMinutes(timeSlots[0]?.availableTimings[0]?.endingTime!),
+      );
+      console.log(
+        "time slots",
+        getHours(formattedTimeSlots[0]?.availableTimings[0]?.endingTime!),
+        getMinutes(timeSlots[0]?.availableTimings[0]?.endingTime!),
+      );
       console.log(
         "timeSlotsquery",
         createTimeDate(
@@ -154,6 +169,9 @@ export const searchTimeSlotsRouter = createTRPCRouter({
         ),
       );
       // return { timeSlots };
-      return { timeSlots: formattedTimeSlots , bookedSlots : formattedBookedSlots };
+      return {
+        timeSlots: formattedTimeSlots,
+        bookedSlots: formattedBookedSlots,
+      };
     }),
 });

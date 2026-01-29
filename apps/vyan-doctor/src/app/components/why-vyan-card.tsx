@@ -2,13 +2,14 @@
 const WhyVyanCard = () => {
   return (
     <>
-      <div className="border bg-[#FAFAFA] md:basis-1/3">
-        <div className="flex flex-col gap-[12px] p-[32px] pr-[50px] md:gap-[16px] md:p-[20px]">
-          <div className="rounded-full p-[9px]">
+      <div className="border bg-[#FAFAFA] md:basis-1/3 rounded-lg sm:rounded-lg">
+        <div className="flex flex-col gap-2 sm:gap-3 md:gap-4 p-4 sm:p-6 md:p-5 pr-6 sm:pr-8 md:pr-[50px]">
+          <div className="rounded-full p-1.5 sm:p-2 md:p-[9px]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="19"
-              height="19"
+              width="16"
+              height="16"
+              className="w-5 h-5 sm:w-6 sm:h-6 md:w-[19px] md:h-[19px]"
               viewBox="0 0 19 19"
               fill="none"
             >
@@ -54,10 +55,10 @@ const WhyVyanCard = () => {
               </defs>
             </svg>
           </div>
-          <div className="font-inter text-[18px] font-normal leading-[26px] text-[#2E2E27]">
+          <div className="font-inter text-sm sm:text-base md:text-lg font-normal leading-tight sm:leading-[26px] text-[#2E2E27]">
             One global login
           </div>
-          <div className="font-inter text-[15px] font-light leading-[23px]">
+          <div className="font-inter text-xs sm:text-sm md:text-base font-light leading-relaxed">
             Skip the login nightmare for all your different accounts, instead,
             see everything from one login.
           </div>
