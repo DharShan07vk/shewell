@@ -19,10 +19,8 @@ export const findPriceRouter = createTRPCRouter({
         where: {
           time: duration,
           professionalUserId: expertId,
-          // coupleSession : couple
         },
       });
-      console.log("price", price);
       return { price };
     }),
 });

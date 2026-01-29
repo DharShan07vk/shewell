@@ -16,7 +16,6 @@ export const searchSpecializationRouter = createTRPCRouter({
           specialization: true,
         },
       });
-      console.log("specializationss", specializations);
       return { specializations };
     }),
 });

@@ -25,8 +25,6 @@ export const sessionRouter = createTRPCRouter({
       }),
     )
     .query(async ({ input }) => {
-      console.log("filterSessions input:", JSON.stringify(input, null, 2));
-
       let whereCondition: Prisma.SessionWhereInput = {};
 
       // Filter by status
@@ -91,7 +89,6 @@ export const sessionRouter = createTRPCRouter({
           },
         ],
       }
-      console.log("whereCondition:", JSON.stringify(whereCondition, null, 2));
 
       // Fetch sessions
       let sessions = await db.session.findMany({
@@ -151,8 +148,6 @@ export const sessionRouter = createTRPCRouter({
             : bPrice - aPrice;
         });
       }
-
-      console.log("Filtered sessions count:", sessions.length);
 
       return { sessions };
     }),

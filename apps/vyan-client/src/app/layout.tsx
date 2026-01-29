@@ -1,8 +1,4 @@
-import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
-import { api } from "~/trpc/server";
-import { SessionProvider } from "next-auth/react";
-import Hero from "~/components/hero";
 import "~/styles/globals.css";
 import { Inter, Pacifico, Playfair_Display, Amatic_SC } from "next/font/google";
 import { Toaster } from "@repo/ui/src/@/components/toaster";
@@ -74,16 +70,16 @@ export default async function RootLayout({
 
   let userDetails;
 
-  // if (session?.user?.email) {
-  //   userDetails = await db.user.findFirst({
-  //     select: {
-  //       wishlistedProducts: true,
-  //     },
-  //     where: {
-  //       email: session.user.email,
-  //     },
-  //   });
-  // }
+  if (session?.user?.email) {
+    userDetails = await db.user.findFirst({
+      select: {
+        wishlistedProducts: true,
+      },
+      where: {
+        email: session.user.email,
+      },
+    });
+  }
 
 
   return (

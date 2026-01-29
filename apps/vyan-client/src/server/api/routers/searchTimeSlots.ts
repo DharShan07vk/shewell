@@ -27,10 +27,6 @@ export const searchTimeSlotsRouter = createTRPCRouter({
     )
     .query(async ({ input }) => {
       const { date, expertId } = input;
-      console.log(
-        "coming date",
-        format(formatISO(date), "yyyy-MM-dd-hh:mm:ss"),
-      );
       const professionalUser = await db.professionalUser.findFirst({
         select: {
           id: true,
@@ -53,21 +49,9 @@ export const searchTimeSlotsRouter = createTRPCRouter({
           professionalUserId: professionalUser.id,
         },
       });
-      console.log(
-        "unavailableDate",
-        unavailableDay?.date,
-        "professionalUserId",
-        professionalUser.id,
-        "coming-date",
-        new Date(format(formatISO(date), "yyyy-MM-dd")),
-      );
-      // console.log("selectedDate", date);
       if (unavailableDay) {
-        console.log("timeSlotsquery", unavailableDay);
-        console.log("time slots");
         return { timeSlots: [], bookedSlots: [] };
       }
-      console.log("time slots on unavailable day");
 
       // getting day(0: Sunday, 1: Monday ...): form the date
       // const dayofWeek = new Date(date).getUTCDay();
@@ -138,37 +122,6 @@ export const searchTimeSlotsRouter = createTRPCRouter({
         })),
       }));
 
-      console.log(
-        "booked slots",
-        bookedSlots.map((item) => ({
-          startingTime: getHours(item.startingTime),
-          endingTime: getHours(item.endingTime),
-        })),
-      );
-      console.log(
-        "time slots",
-        getHours(timeSlots[0]?.availableTimings[0]?.startingTime!),
-        getMinutes(timeSlots[0]?.availableTimings[0]?.startingTime!),
-      );
-      console.log(
-        "time slots",
-        getHours(timeSlots[0]?.availableTimings[0]?.endingTime!),
-        getMinutes(timeSlots[0]?.availableTimings[0]?.endingTime!),
-      );
-      console.log(
-        "time slots",
-        getHours(formattedTimeSlots[0]?.availableTimings[0]?.endingTime!),
-        getMinutes(timeSlots[0]?.availableTimings[0]?.endingTime!),
-      );
-      console.log(
-        "timeSlotsquery",
-        createTimeDate(
-          getHours(timeSlots[0]?.availableTimings[0]?.startingTime!),
-          getMinutes(timeSlots[0]?.availableTimings[0]?.startingTime!),
-          date,
-        ),
-      );
-      // return { timeSlots };
       return {
         timeSlots: formattedTimeSlots,
         bookedSlots: formattedBookedSlots,
