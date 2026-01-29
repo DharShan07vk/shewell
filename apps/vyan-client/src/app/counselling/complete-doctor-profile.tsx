@@ -87,7 +87,7 @@ const CompleteDoctorProfile = ({
 
   return (
     <div className="group w-full">
-      <div className="flex flex-col gap-4 sm:gap-5 md:gap-6 rounded-2xl sm:rounded-2xl md:rounded-3xl border border-gray-100 bg-white/80 py-4 sm:py-5 md:py-8 px-3 sm:px-4 md:px-8 shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm transition-all duration-300 ease-in-out hover:border-gray-200 hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] md:flex-row md:justify-between">
+      <div className="flex flex-col gap-4 sm:gap-5 flex-col md:gap-6 rounded-2xl sm:rounded-2xl md:rounded-3xl border border-gray-100 bg-white/80 py-4 sm:py-5 md:py-8 px-3 sm:px-4 md:px-8 shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm transition-all duration-300 ease-in-out hover:border-gray-200 hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] md:flex-col md:justify-between">
         <div className="flex flex-col gap-4 sm:gap-4 md:gap-[18px]">
           {/* image + text */}
           <div className="flex gap-3 sm:gap-4 md:gap-6 lg:gap-6 2xl:gap-8">
