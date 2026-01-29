@@ -161,9 +161,9 @@ export const BookingSection = ({
     }
   };
   return (
-    <section className="w-full overflow-hidden bg-white px-6 py-16 md:px-12">
+    <section className="w-full overflow-hidden bg-white px-4 py-10 sm:px-6 sm:py-14 md:px-12 md:py-16">
       <div className="mx-auto max-w-7xl">
-        <div className="relative flex min-h-[720px] items-center overflow-hidden rounded-[40px] border border-gray-100 bg-[#F8FAFB] shadow-xl">
+        <div className="relative flex min-h-[640px] flex-col items-center overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-[40px] border border-gray-100 bg-[#F8FAFB] shadow-xl sm:min-h-[680px] md:min-h-[720px] lg:flex-row">
           {/* LEFT IMAGE SECTION */}
           <div className="absolute inset-0 hidden h-full w-full md:block md:w-[50%]">
             <AnimatePresence mode="wait">
@@ -193,25 +193,25 @@ export const BookingSection = ({
           </div>
 
           {/* RIGHT BOOKING CARD */}
-          <div className="relative z-0 flex w-full justify-center py-12 md:justify-end md:pl-[50%] md:pr-12">
+          <div className="relative z-0 flex w-full justify-center py-6 px-3 sm:px-6 sm:py-8 md:justify-end md:pl-[50%] md:pr-8 md:py-10 lg:pr-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="  relative flex min-h-[640px] w-full max-w-[520px] flex-col p-8 md:p-12"
+              className="relative flex min-h-[560px] w-full max-w-[520px] flex-col p-4 sm:p-6 md:p-8 md:min-h-[640px] lg:p-12"
             >
               {/* PRICE PILL */}
               {!isRegistered && (
-                <div className="mb-8 flex justify-center">
+                <div className="mb-6 flex justify-center sm:mb-8 md:mb-10">
                   <motion.div
                     initial={{ scale: 0.9, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    className="flex items-center gap-3 rounded-full border border-[#00898F]/10 bg-[#e6eff1] px-8 py-4 shadow-sm"
+                    className="flex flex-col items-center gap-2 rounded-2xl border border-[#00898F]/10 bg-[#e6eff1] px-4 py-3 shadow-sm sm:flex-row sm:gap-3 sm:px-6 sm:py-4 md:rounded-full md:px-8"
                   >
-                    <span className="font-poppins text-2xl font-bold text-[#00898F]">
+                    <span className="font-poppins text-xl font-bold text-[#00898F] sm:text-2xl">
                       ₹{price}
                     </span>
-                    <span className="font-poppins font-medium text-gray-700">
+                    <span className="font-poppins text-xs font-medium text-gray-700 sm:text-sm">
                       confirm your seat
                     </span>
                   </motion.div>
@@ -221,13 +221,13 @@ export const BookingSection = ({
               {/* REGISTERED STATE */}
               {isRegistered ? (
                 <div className="flex flex-1 flex-col items-center justify-center text-center">
-                  <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#00898F]/10 text-[#00898F]">
-                    <Check size={40} />
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#00898F]/10 text-[#00898F] sm:mb-5 md:mb-6 md:h-20 md:w-20">
+                    <Check size={32} />
                   </div>
-                  <h3 className="mb-2 font-poppins text-2xl font-bold text-gray-900">
+                  <h3 className="mb-2 font-poppins text-lg font-bold text-gray-900 sm:text-xl md:text-2xl">
                     You're Registered!
                   </h3>
-                  <p className="mb-8 text-gray-600">
+                  <p className="mb-6 text-xs text-gray-600 sm:text-sm md:mb-8 md:text-base">
                     You have successfully booked your seat for this session.
                     Click below to join the meeting when it's time.
                   </p>
@@ -236,17 +236,17 @@ export const BookingSection = ({
                       href={meetingLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex w-full items-center justify-between gap-2.5 rounded-2xl bg-[#00898F] px-6 py-4 text-white transition-all duration-300 ease-in-out hover:bg-teal-700"
+                      className="group flex w-full items-center justify-between gap-2 rounded-lg bg-[#00898F] px-4 py-3 text-white transition-all duration-300 ease-in-out hover:bg-teal-700 sm:gap-2.5 sm:rounded-xl sm:px-5 sm:py-3.5 md:rounded-2xl md:px-6 md:py-4"
                     >
-                      <span className="text-lg font-medium sm:text-xl">
+                      <span className="text-sm font-medium sm:text-base md:text-lg">
                         Join Meeting Now
                       </span>
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 transition-transform group-hover:translate-x-1">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 transition-transform group-hover:translate-x-1 sm:h-9 sm:w-9 md:h-10 md:w-10">
                         <InteractiveButton />
                       </div>
                     </a>
                   ) : (
-                    <div className="rounded-2xl bg-amber-50 p-4 text-sm text-amber-700">
+                    <div className="w-full rounded-lg bg-amber-50 p-3 text-xs text-amber-700 sm:rounded-xl sm:p-4 sm:text-sm">
                       The meeting link will be shared here closer to the session
                       start time.
                     </div>
@@ -255,7 +255,7 @@ export const BookingSection = ({
               ) : (
                 <>
                   {/* STEPPER */}
-                  <div className="mb-10 flex items-center justify-center">
+                  <div className="mb-6 flex items-center justify-center sm:mb-8 md:mb-10">
                     {[1, 2].map((s, i) => (
                       <div key={s} className="flex items-center">
                         <div className="relative flex flex-col items-center">
@@ -266,14 +266,14 @@ export const BookingSection = ({
                               color: step >= s ? "#FFFFFF" : "#4B5563",
                             }}
                             onClick={() => setStep(s as 1 | 2 | 3)}
-                            className={`relative z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-xs font-bold transition-transform hover:scale-110`}
+                            className={`relative z-10 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full text-xs font-bold transition-transform hover:scale-110 sm:h-8 sm:w-8 md:h-9 md:w-9`}
                           >
-                            {step > s ? <Check size={16} /> : s}
+                            {step > s ? <Check size={14} /> : s}
                           </motion.div>
                           {step === s && (
                             <motion.div
                               layoutId="step-label"
-                              className="absolute -bottom-6 whitespace-nowrap text-[10px] font-bold uppercase tracking-tighter text-[#00898F]"
+                              className="absolute -bottom-5 whitespace-nowrap text-[8px] font-bold uppercase tracking-tighter text-[#00898F] sm:-bottom-6 sm:text-[9px] md:text-[10px]"
                             >
                               Step {s}
                             </motion.div>
@@ -281,7 +281,7 @@ export const BookingSection = ({
                         </div>
 
                         {i < 1 && (
-                          <div className="relative mx-2 h-[2px] w-12 bg-gray-100">
+                          <div className="relative mx-1.5 h-[1.5px] w-8 bg-gray-100 sm:mx-2 sm:w-10 md:w-12">
                             <motion.div
                               initial={{ width: 0 }}
                               animate={{ width: step > s ? "100%" : "0%" }}
@@ -309,12 +309,12 @@ export const BookingSection = ({
                         {step === 1 && (
                           <>
                             <div className="space-y-1">
-                              <label className="ml-2 text-xs font-semibold text-gray-500">
+                              <label className="ml-2 text-[10px] font-semibold text-gray-500 sm:text-xs">
                                 MOM NAME
                               </label>
                               <Input
                                 placeholder="Enter your full name"
-                                className="h-14 rounded-2xl border-none bg-[#F3F7F8] focus-visible:ring-1 focus-visible:ring-[#00898F]"
+                                className="h-10 rounded-xl border-none bg-[#F3F7F8] text-xs focus-visible:ring-1 focus-visible:ring-[#00898F] sm:h-12 sm:rounded-2xl sm:text-sm"
                                 value={formData.name}
                                 onChange={(e) =>
                                   setFormData({
@@ -325,13 +325,13 @@ export const BookingSection = ({
                               />
                             </div>
                             <div className="space-y-1">
-                              <label className="ml-2 text-xs font-semibold text-gray-500">
+                              <label className="ml-2 text-[10px] font-semibold text-gray-500 sm:text-xs">
                                 EMAIL ADDRESS
                               </label>
                               <Input
                                 placeholder="Enter your email"
                                 type="email"
-                                className="h-14 rounded-2xl border-none bg-[#F3F7F8] focus-visible:ring-1 focus-visible:ring-[#00898F]"
+                                className="h-10 rounded-xl border-none bg-[#F3F7F8] text-xs focus-visible:ring-1 focus-visible:ring-[#00898F] sm:h-12 sm:rounded-2xl sm:text-sm"
                                 value={formData.email}
                                 onChange={(e) =>
                                   setFormData({
@@ -342,12 +342,12 @@ export const BookingSection = ({
                               />
                             </div>
                             <div className="space-y-1">
-                              <label className="ml-2 text-xs font-semibold text-gray-500">
+                              <label className="ml-2 text-[10px] font-semibold text-gray-500 sm:text-xs">
                                 MOBILE NUMBER
                               </label>
                               <Input
                                 placeholder="Enter contact number"
-                                className="h-14 rounded-2xl border-none bg-[#F3F7F8] focus-visible:ring-1 focus-visible:ring-[#00898F]"
+                                className="h-10 rounded-xl border-none bg-[#F3F7F8] text-xs focus-visible:ring-1 focus-visible:ring-[#00898F] sm:h-12 sm:rounded-2xl sm:text-sm"
                                 value={formData.mobile}
                                 onChange={(e) =>
                                   setFormData({
@@ -362,27 +362,27 @@ export const BookingSection = ({
 
                         {/* STEP 2 */}
                         {step === 2 && (
-                          <div className="space-y-6">
+                          <div className="space-y-4 sm:space-y-6">
                             {/* Pregnant Toggle */}
-                            <div className="rounded-2xl border border-gray-100 bg-[#F3F7F8] p-4">
+                            <div className="rounded-lg border border-gray-100 bg-[#F3F7F8] p-3 sm:rounded-xl sm:p-4 md:rounded-2xl">
                               <div className="mb-2 flex items-center justify-between">
-                                <span className="font-poppins font-medium text-gray-800">
+                                <span className="font-poppins text-sm font-medium text-gray-800 sm:text-base">
                                   Currently pregnant?
                                 </span>
                                 <button
                                   type="button"
                                   onClick={() => setIsPregnant(!isPregnant)}
-                                  className={`h-6 w-12 rounded-full p-1 transition-colors duration-300 ${isPregnant ? "bg-[#00898F]" : "bg-gray-300"}`}
+                                  className={`h-5 w-10 rounded-full p-1 transition-colors duration-300 sm:h-6 sm:w-12 ${isPregnant ? "bg-[#00898F]" : "bg-gray-300"}`}
                                 >
                                   <motion.div
-                                    animate={{ x: isPregnant ? 24 : 0 }}
-                                    className="h-4 w-4 rounded-full bg-white shadow-sm"
+                                    animate={{ x: isPregnant ? 20 : 0 }}
+                                    className="h-3 w-3 rounded-full bg-white shadow-sm sm:h-4 sm:w-4"
                                   />
                                 </button>
                               </div>
 
                               <div
-                                className={`space-y-3 transition-all duration-300 ${isPregnant ? "opacity-100" : "pointer-events-none opacity-30"}`}
+                                className={`space-y-2 transition-all duration-300 sm:space-y-3 ${isPregnant ? "opacity-100" : "pointer-events-none opacity-30"}`}
                               >
                                 <div className="relative">
                                   <select
@@ -394,7 +394,7 @@ export const BookingSection = ({
                                         trimester: e.target.value,
                                       })
                                     }
-                                    className="h-12 w-full appearance-none rounded-xl border-none bg-white px-4 pr-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#00898F]"
+                                    className="h-10 w-full appearance-none rounded-lg border-none bg-white px-3 pr-8 text-xs text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#00898F] sm:h-11 sm:px-4 sm:pr-10 sm:text-sm md:rounded-xl"
                                   >
                                     <option value="">Select Trimester</option>
                                     <option value="first">
@@ -407,7 +407,7 @@ export const BookingSection = ({
                                       Third Trimester (27-40 weeks)
                                     </option>
                                   </select>
-                                  <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                                  <ChevronDown className="pointer-events-none absolute right-2 top-1/2 h-3 w-3 -translate-y-1/2 text-gray-400 sm:right-3 sm:h-4 sm:w-4" />
                                 </div>
                                 <div className="relative">
                                   <input
@@ -421,26 +421,26 @@ export const BookingSection = ({
                                       })
                                     }
                                     placeholder="Expected Due Date"
-                                    className="h-12 w-full rounded-xl border-none bg-white px-4 pr-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#00898F]"
+                                    className="h-10 w-full rounded-lg border-none bg-white px-3 pr-8 text-xs text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#00898F] sm:h-11 sm:px-4 sm:pr-10 sm:text-sm md:rounded-xl"
                                   />
                                 </div>
                               </div>
                             </div>
 
                             {/* New Mom Toggle */}
-                            <div className="rounded-2xl border border-gray-100 bg-[#F3F7F8] p-4">
+                            <div className="rounded-lg border border-gray-100 bg-[#F3F7F8] p-3 sm:rounded-xl sm:p-4 md:rounded-2xl">
                               <div className="mb-2 flex items-center justify-between">
-                                <span className="font-poppins font-medium text-gray-800">
+                                <span className="font-poppins text-sm font-medium text-gray-800 sm:text-base">
                                   Are you a new mom?
                                 </span>
                                 <button
                                   type="button"
                                   onClick={() => setIsNewMom(!isNewMom)}
-                                  className={`h-6 w-12 rounded-full p-1 transition-colors duration-300 ${isNewMom ? "bg-[#00898F]" : "bg-gray-300"}`}
+                                  className={`h-5 w-10 rounded-full p-1 transition-colors duration-300 sm:h-6 sm:w-12 ${isNewMom ? "bg-[#00898F]" : "bg-gray-300"}`}
                                 >
                                   <motion.div
-                                    animate={{ x: isNewMom ? 24 : 0 }}
-                                    className="h-4 w-4 rounded-full bg-white shadow-sm"
+                                    animate={{ x: isNewMom ? 20 : 0 }}
+                                    className="h-3 w-3 rounded-full bg-white shadow-sm sm:h-4 sm:w-4"
                                   />
                                 </button>
                               </div>
@@ -460,7 +460,7 @@ export const BookingSection = ({
                                       })
                                     }
                                     placeholder="Baby's Date of Birth"
-                                    className="h-12 w-full rounded-xl border-none bg-white px-4 pr-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#00898F]"
+                                    className="h-10 w-full rounded-lg border-none bg-white px-3 pr-8 text-xs text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#00898F] sm:h-11 sm:px-4 sm:pr-10 sm:text-sm md:rounded-xl"
                                   />
                                 </div>
                               </div>
@@ -519,8 +519,8 @@ export const BookingSection = ({
                           )}
                         </div>
 
-                        <div className="space-y-3">
-                          <label className="ml-2 text-xs font-semibold text-gray-500">
+                        <div className="space-y-2 sm:space-y-3">
+                          <label className="ml-2 text-[10px] font-semibold text-gray-500 sm:text-xs">
                             TIME SLOT
                           </label>
                           <div className="relative">
@@ -532,7 +532,7 @@ export const BookingSection = ({
                                   timeSlot: e.target.value,
                                 })
                               }
-                              className="h-14 w-full appearance-none rounded-2xl border-none bg-[#F3F7F8] px-4 pr-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#00898F]"
+                              className="h-10 w-full appearance-none rounded-xl border-none bg-[#F3F7F8] px-3 pr-8 text-xs text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#00898F] sm:h-12 sm:px-4 sm:pr-10 sm:text-sm md:rounded-2xl"
                             >
                               <option value="">Select Time Slot</option>
                               <option value="09:00-10:00">
@@ -554,7 +554,7 @@ export const BookingSection = ({
                                 04:00 PM - 05:00 PM
                               </option>
                             </select>
-                            <ChevronDown className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#00898F]" />
+                            <ChevronDown className="pointer-events-none absolute right-2 top-1/2 h-3 w-3 -translate-y-1/2 text-[#00898F] sm:right-3 sm:h-4 sm:w-4" />
                           </div>
                         </div>
                       </div> */}
@@ -565,13 +565,13 @@ export const BookingSection = ({
 
                   {/* ERROR MESSAGE */}
                   {error && (
-                    <div className="mb-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                    <div className="mb-3 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-700 sm:mb-4 sm:rounded-xl sm:px-4 sm:py-3 sm:text-sm md:rounded-2xl">
                       {error}
                     </div>
                   )}
 
                   {/* WHITE SEPARATOR WITH BLUR */}
-                  <div className="my-8 h-[2px] bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+                  <div className="my-5 h-[1.5px] bg-gradient-to-r from-transparent via-gray-200 to-transparent sm:my-6 md:my-8" />
 
                   {/* CONTINUE BUTTON */}
                   <div
@@ -585,9 +585,9 @@ export const BookingSection = ({
                         );
                       }
                     }}
-                    className="order-0 group flex w-full cursor-pointer items-center justify-between gap-2.5 rounded-2xl bg-[#F2F2F2] px-6 py-4 transition-all duration-300 ease-in-out hover:bg-[#00898F] hover:text-white"
+                    className="order-0 group flex w-full cursor-pointer items-center justify-between gap-2 rounded-lg bg-[#F2F2F2] px-3 py-2.5 transition-all duration-300 ease-in-out hover:bg-[#00898F] hover:text-white sm:gap-2.5 sm:rounded-xl sm:px-5 sm:py-3 md:rounded-2xl md:px-6 md:py-4"
                   >
-                    <span className="text-lg font-medium text-[#00000066] group-hover:text-white sm:text-xl">
+                    <span className="text-sm font-medium text-[#00000066] group-hover:text-white sm:text-base md:text-lg md:font-medium">
                       {isProcessing
                         ? "Processing..."
                         : step === 2

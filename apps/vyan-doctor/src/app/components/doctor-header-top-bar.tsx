@@ -5,13 +5,13 @@ const TopBar = () => {
     <>
       <div className="w-full bg-[#DCF7FB]">
         <div className="container mx-auto max-w-full">
-          <div className="flex items-center justify-between py-[4px] ">
+          <div className="flex items-center justify-between py-1.5 sm:py-2 md:py-[4px] px-2 sm:px-3 md:px-0">
             <Link
-              className="font-inter text-xs font-normal	md:text-sm	"
+              className="font-inter text-[10px] sm:text-xs md:text-sm font-normal"
               href="mailto:info@shewellcare.com"
             >
               <svg
-                className="mr-1 inline"
+                className="mr-1 inline w-4 h-4 sm:w-[18px] sm:h-[18px]"
                 width="18"
                 height="18"
                 viewBox="0 0 18 18"
@@ -26,7 +26,7 @@ const TopBar = () => {
               shewell@gmail.com
             </Link>
 
-            <div className="flex gap-1 sm:gap-3  md:gap-[18px] xl:gap-6  ">
+            <div className="flex gap-1 sm:gap-2 md:gap-3 lg:gap-[18px] xl:gap-6">
               <div className="group">
                 <Link
                   className="group-hover:hidden"

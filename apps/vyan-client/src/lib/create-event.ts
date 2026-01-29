@@ -77,41 +77,62 @@ const tokenUrl = "https://oauth2.googleapis.com/token";
 const calendarUrl =
   "https://www.googleapis.com/calendar/v3/calendars/primary/events";
 
-const session = await getServerSession();
-if(!session){
-  throw new Error("Session not found")
-}
-if(!session.user.email){
-  throw new Error("Unauthorised")
-}
-const refreshToken = await db.professionalUser.findFirst({
-  select: {
-    googleRefreshToken: true,
-  },
-  where: {
-    email: session.user.email,
-  },
-});
+// ❌ DO NOT put async code at module level - it will fail on import!
+// Session and DB queries must be inside functions
 
-export async function getAccessToken() {
+export async function getAccessToken(professionalUserId: string) {
   try {
+    console.log(
+      "🔑 getAccessToken: Starting token retrieval for doctor:",
+      professionalUserId,
+    );
+
+    // Get refresh token from database using the DOCTOR's ID (not session user!)
+    const refreshTokenRecord = await db.professionalUser.findFirst({
+      select: {
+        googleRefreshToken: true,
+        email: true,
+      },
+      where: {
+        id: professionalUserId,
+      },
+    });
+
+    if (!refreshTokenRecord?.googleRefreshToken) {
+      console.error(
+        "❌ getAccessToken: Refresh token not found for doctor:",
+        professionalUserId,
+      );
+      throw new Error(
+        "Doctor's Google refresh token not found. Doctor needs to reconnect Google account.",
+      );
+    }
+
+    console.log(
+      "✅ getAccessToken: Refresh token found for",
+      refreshTokenRecord.email,
+    );
+
     const response = await axios.post(tokenUrl, null, {
       params: {
         grant_type: "refresh_token",
         client_secret: env.GOOGLE_CLIENT_SECRET,
-        refresh_token: refreshToken,
+        refresh_token: refreshTokenRecord.googleRefreshToken,
         client_id: env.GOOGLE_CLIENT_ID,
       },
     });
+
+    console.log("✅ getAccessToken: Access token refreshed successfully");
     return response.data.access_token;
   } catch (error) {
-    console.error("Error getting access token:", error);
+    console.error("❌ getAccessToken ERROR:", error);
     throw error;
   }
 }
 
 export async function createEvent({
   professionalUserId,
+  appointmentId,
   startTime,
   endTime,
 }: {
@@ -120,53 +141,46 @@ export async function createEvent({
   startTime: Date;
   endTime: Date;
 }) {
-  // const accessTokenRecord = await db.professionalUser.findFirst({
-  //   select: {
-  //     googleAccessToken: true,
-  //   },
-  //   where: {
-  //     id: professionalUserId,
-  //   },
-  // });
-
-  // const access_token = accessTokenRecord?.googleAccessToken;
-  // console.log("access_token", access_token, professionalUserId);
-  const access_token = await getAccessToken();
-  const calendarUrl =
-    "https://www.googleapis.com/calendar/v3/calendars/primary/events";
-  const calendar = getGoogleCalendarClient(access_token!);
-
-  const event = {
-    summary: "Google Meet Meeting",
-    description: "A sample meeting with a Google Meet link",
-    start: {
-      dateTime: formatISO(startTime),
-      timeZone: "America/Los_Angeles",
-    },
-    end: {
-      dateTime: formatISO(endTime),
-      timeZone: "America/Los_Angeles",
-    },
-    conferenceData: {
-      createRequest: {
-        requestId: "randomString",
-        conferenceSolutionKey: { type: "hangoutsMeet" },
-      },
-    },
-  };
+  console.log("📅 createEvent: FUNCTION CALLED", {
+    professionalUserId,
+    startTime: startTime.toISOString(),
+    endTime: endTime.toISOString(),
+  });
 
   try {
-    // const response =  await calendar.events.insert({
-    //   calendarId: "primary",
+    console.log("📅 createEvent: Getting access token...");
+    const access_token = await getAccessToken(professionalUserId);
+    console.log("✅ createEvent: Access token retrieved");
 
-    //     resource: event,
-    //   conferenceDataVersion: 1, // Necessary to create Google Meet links
-    // });
+    const calendarUrl =
+      "https://www.googleapis.com/calendar/v3/calendars/primary/events";
+    const calendar = getGoogleCalendarClient(access_token!);
 
-    // console.log("create-google-event")
-    // return {
-    //   message : "Event has been generated"
-    // }
+    const event = {
+      summary: "Google Meet Meeting",
+      description: "A sample meeting with a Google Meet link",
+      start: {
+        dateTime: formatISO(startTime),
+        timeZone: "Asia/Kolkata",
+      },
+      end: {
+        dateTime: formatISO(endTime),
+        timeZone: "Asia/Kolkata",
+      },
+      conferenceData: {
+        createRequest: {
+          requestId: `meet-${Date.now()}`, // Use unique request ID
+          conferenceSolutionKey: { type: "hangoutsMeet" },
+        },
+      },
+    };
+
+    console.log("📅 createEvent: Sending request to Google Calendar API", {
+      summary: event.summary,
+      startTime: event.start.dateTime,
+      endTime: event.end.dateTime,
+      timezone: event.start.timeZone,
+    });
 
     const response = await axios.post(calendarUrl, event, {
       headers: {
@@ -177,12 +191,28 @@ export async function createEvent({
         conferenceDataVersion: 1,
       },
     });
-    console.log(" responseDataCreateEvent", response.data);
+
+    console.log("✅ createEvent: Event created successfully!", {
+      eventId: response.data.id,
+      meetLink: response.data.hangoutLink,
+      htmlLink: response.data.htmlLink,
+    });
 
     return response.data;
   } catch (error) {
-    console.log("create-event-error", error);
-    throw new Error("Event cannot be generated");
+    if (axios.isAxiosError(error)) {
+      console.error("❌ createEvent: Google Calendar API error", {
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data,
+        message: error.message,
+      });
+    } else {
+      console.error("❌ createEvent: Unexpected error", error);
+    }
+    throw new Error(
+      `Event cannot be generated: ${error instanceof Error ? error.message : "Unknown error"}`,
+    );
   }
 }
 export async function updateEvent({

@@ -26,13 +26,13 @@ export const AppointmentCard = ({
    
   return (
     <>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-1.5 sm:gap-2">
         <div className="flex justify-between">
-          <div className="font-inter text-sm font-normal text-active sm:text-lg xl:text-base 2xl:text-xl">
+          <div className="font-inter text-xs sm:text-sm md:text-base lg:text-lg xl:text-base 2xl:text-xl font-normal text-active">
             {title}
           </div>
          
-          <div className={`font-inter text-sm font-normal  sm:text-lg xl:text-base 2xl:text-xl text-[${color}]`}>
+          <div className={`font-inter text-xs sm:text-sm md:text-base lg:text-lg xl:text-base 2xl:text-xl font-normal text-[${color}]`}>
             {noOfAppointments}
           </div>
         </div>
@@ -90,11 +90,11 @@ interface IAppointment {
 }
 const Appointment = ({appointments}:{appointments : IAppointment[]}) => {
   return (
-    <div className="rounded-2xl border border-gray-100 p-4 sm:p-6 xl:p-5 2xl:p-[26px] shadow-sm hover:shadow-md transition-shadow">
+    <div className="rounded-lg sm:rounded-xl md:rounded-2xl border border-gray-100 p-3 sm:p-4 md:p-6 xl:p-5 2xl:p-[26px] shadow-sm hover:shadow-md transition-shadow">
       {/* appointment and dropdown */}
-      <div className="mb-[17px] flex items-center justify-between 2xl:mb-5 ">
+      <div className="mb-3 sm:mb-4 md:mb-[17px] flex items-center justify-between 2xl:mb-5">
         {/* appointment */}
-        <div className="font-inter text-sm font-medium text-active lg:text-lg xl:text-[22px] 2xl:text-2xl">
+        <div className="font-inter text-xs sm:text-sm md:text-base lg:text-lg xl:text-[22px] 2xl:text-2xl font-medium text-active">
           Appointment
         </div>
         {/* dropdown
@@ -112,7 +112,7 @@ const Appointment = ({appointments}:{appointments : IAppointment[]}) => {
         </div> */}
       </div>
       {/* appointment with progress */}
-      <div className="flex flex-col gap-[17px] xl:gap-4 2xl:gap-5" >
+      <div className="flex flex-col gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-4 2xl:gap-5">
         {
             appointments.map((item,index) => {
                 return(

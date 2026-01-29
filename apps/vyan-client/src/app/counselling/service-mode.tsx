@@ -64,17 +64,17 @@ const ServiceMode = ({
     <>
       <RadioGroup
         onValueChange={handleChange}
-        className="flex flex-col gap-[52px] px-[10px]"
+        className="flex flex-col gap-8 sm:gap-10 md:gap-12 px-2 sm:px-3 md:px-[10px]"
       >
         {serviceModeDetailsMap.map((details, index) => (
           <div
             key={details.type}
-            className="flex w-full flex-col rounded-[8px] border"
+            className="flex w-full flex-col rounded-lg sm:rounded-lg md:rounded-[8px] border"
           >
             <div
               className={`border-b ${selectedOption === details.type ? "bg-[#EBF8F9]" : ""}`}
             >
-              <div className="flex items-center gap-4 px-[26px] py-[22px]">
+              <div className="flex items-center gap-2 sm:gap-3 md:gap-4 px-3 sm:px-4 md:px-[26px] py-3 sm:py-4 md:py-[22px]">
                 <RadioGroupItem
                   value={details.type}
                   // value={selectedOption}
@@ -83,26 +83,26 @@ const ServiceMode = ({
                   id={`radio-${details.type}`}
                   disabled={details.type === AppointmentType.OFFLINE} // Disable the offline appointment
                 />
-                <div className="font-inter text-base font-medium text-[#344054]">
+                <div className="font-inter text-xs sm:text-sm md:text-base font-medium text-[#344054]">
                   {details.type === AppointmentType.ONLINE
                     ? "Online Appointment"
                     : "Offline Appointment"}
                 </div>
               </div>
             </div>
-            <div className="flex flex-col items-center gap-3 p-4 lg:flex-row lg:justify-between">
-              <div className="flex flex-col gap-3">
-                <div className=" ">
-                  <div className="flex items-center justify-between">
-                    <div className="block bg-[#F1FFF7] p-2 font-inter text-xl font-medium text-secondary lg:hidden lg:text-2xl">
+            <div className="flex flex-col items-start sm:items-center gap-3 sm:gap-4 md:gap-3 p-3 sm:p-4 md:p-4 lg:flex-row lg:justify-between">
+              <div className="flex flex-col gap-2 sm:gap-3">
+                <div className="">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 sm:gap-2">
+                    <div className="block bg-[#F1FFF7] p-1.5 sm:p-2 font-inter text-sm sm:text-lg md:text-xl font-medium text-secondary lg:hidden">
                       {details.planName}
                     </div>
                     <div
-                      className={`font-inter text-[30px] font-semibold leading-[38px] ${selectedOption === details.type ? "text-primary" : "text-[#656D78]"}`}
+                      className={`font-inter text-lg sm:text-2xl md:text-[30px] font-semibold leading-tight sm:leading-[38px] ${selectedOption === details.type ? "text-primary" : "text-[#656D78]"}`}
                     >
                       INR {details.price}
                       <span
-                        className={`text-sm font-normal ${selectedOption === details.type ? "text-black" : "text-[#667085]"}`}
+                        className={`text-xs sm:text-sm font-normal ${selectedOption === details.type ? "text-black" : "text-[#667085]"}`}
                       >
                         {" "}
                         per user
@@ -111,21 +111,21 @@ const ServiceMode = ({
                   </div>
                 </div>
                 <div
-                  className={`text-sm font-normal ${selectedOption === details.type ? "text-black" : "text-[#667085]"}`}
+                  className={`text-xs sm:text-sm font-normal ${selectedOption === details.type ? "text-black" : "text-[#667085]"}`}
                 >
                   {details.description}
                 </div>
               </div>
-              <div className="hidden  min-w-[134px] bg-[#F1FFF7] p-2 font-inter text-xl font-medium text-secondary lg:block lg:text-2xl">
+              <div className="hidden min-w-[120px] sm:min-w-[134px] bg-[#F1FFF7] p-1.5 sm:p-2 font-inter text-lg md:text-xl font-medium text-secondary lg:block">
                 {details.planName}
               </div>
             </div>
           </div>
         ))}
       </RadioGroup>
-      <div className="mr-[10px] mt-5 flex justify-end">
+      <div className="mr-2 sm:mr-3 md:mr-[10px] mt-4 sm:mt-5 flex justify-end">
         <Button
-          className="self-end rounded-md bg-secondary px-[30px] py-2 font-inter text-base font-medium hover:bg-secondary"
+          className="self-end rounded-md bg-secondary px-5 sm:px-6 md:px-[30px] py-1.5 sm:py-2 font-inter text-xs sm:text-sm md:text-base font-medium hover:bg-secondary"
           onClick={onNextStep}
           disabled={!isActive}
         >

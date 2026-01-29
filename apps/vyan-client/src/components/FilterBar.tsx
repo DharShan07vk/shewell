@@ -236,8 +236,8 @@ export const FilterBar = ({
   return (
     <div className="w-full space-y-3 font-inter">
       {/* CENTERED FILTER BAR */}
-      <div className="flex justify-center">
-        <div className="inline-flex items-center rounded-full bg-[#EEEEEE] px-6 py-3 text-sm">
+      <div className="mx-auto w-full max-w-7xl px-6">
+        <div className="flex sm:inline-flex flex-wrap sm:flex-nowrap items-center justify-center gap-2 sm:gap-0 rounded-full bg-[#EEEEEE] px-3 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm w-full sm:w-auto">
           {/* <FilterToggle
             label="Only Online Courses"
             enabled={isOnlineCourses}
@@ -249,11 +249,11 @@ export const FilterBar = ({
           {/* Category Dropdown */}
           <Popover>
             <PopoverTrigger asChild>
-              <button className="flex items-center gap-1 text-black hover:text-gray-600">
+              <button className="flex items-center gap-0.5 sm:gap-1 text-black hover:text-gray-600 text-xs sm:text-sm">
                 Category{" "}
                 {selectedCategories.length > 0 &&
                   `(${selectedCategories.length})`}
-                <ChevronDown size={14} />
+                <ChevronDown size={12} className="sm:w-3.5 sm:h-3.5" />
               </button>
             </PopoverTrigger>
             <PopoverContent className="w-64 bg-white">
@@ -277,9 +277,9 @@ export const FilterBar = ({
           {/* Trimester Dropdown */}
           <Popover>
             <PopoverTrigger asChild>
-              <button className="flex items-center gap-1 text-black hover:text-gray-600">
+              <button className="flex items-center gap-0.5 sm:gap-1 text-black hover:text-gray-600 text-xs sm:text-sm">
                 Trimester {selectedTrimester && `(${selectedTrimester})`}
-                <ChevronDown size={14} />
+                <ChevronDown size={12} className="sm:w-3.5 sm:h-3.5" />
               </button>
             </PopoverTrigger>
             <PopoverContent className="w-48 bg-white">
@@ -308,9 +308,9 @@ export const FilterBar = ({
           {/* Price Range Dropdown */}
           <Popover>
             <PopoverTrigger asChild>
-              <button className="flex items-center gap-1 text-black hover:text-gray-600">
+              <button className="flex items-center gap-0.5 sm:gap-1 text-black hover:text-gray-600 text-xs sm:text-sm">
                 Price {(minPrice || maxPrice) && "(Set)"}
-                <ChevronDown size={14} />
+                <ChevronDown size={12} className="sm:w-3.5 sm:h-3.5" />
               </button>
             </PopoverTrigger>
             <PopoverContent className="w-64 bg-white">
@@ -356,9 +356,9 @@ export const FilterBar = ({
           {/* Date Range Dropdown */}
           <Popover>
             <PopoverTrigger asChild>
-              <button className="flex items-center gap-1 text-black hover:text-gray-600">
+              <button className="flex items-center gap-0.5 sm:gap-1 text-black hover:text-gray-600 text-xs sm:text-sm">
                 Date {(startDate || endDate) && "(Set)"}
-                <ChevronDown size={14} />
+                <ChevronDown size={12} className="sm:w-3.5 sm:h-3.5" />
               </button>
             </PopoverTrigger>
             <PopoverContent className="w-64 bg-white">
@@ -408,9 +408,9 @@ export const FilterBar = ({
           {/* Sort By Dropdown */}
           <Popover>
             <PopoverTrigger asChild>
-              <button className="flex items-center gap-1 text-black hover:text-gray-600">
+              <button className="flex items-center gap-0.5 sm:gap-1 text-black hover:text-gray-600 text-xs sm:text-sm">
                 Sort {sortBy && "(Set)"}
-                <ChevronDown size={14} />
+                <ChevronDown size={12} className="sm:w-3.5 sm:h-3.5" />
               </button>
             </PopoverTrigger>
             <PopoverContent className="w-48 bg-white">
@@ -449,10 +449,10 @@ export const FilterBar = ({
 
       {/* FILTERS APPLIED */}
       {selectedFilters.length > 0 && (
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <div className="rounded-xl border bg-white px-6 py-4">
             <div className="mb-3 flex items-center justify-between">
-              <div className="text-xs font-medium text-black">
+              <div className="text-sm font-medium text-black">
                 Filters Applied
               </div>
               <Button
@@ -464,7 +464,7 @@ export const FilterBar = ({
               </Button>
             </div>
 
-            <div className="flex items-center justify-between gap-4">
+            <div className="flex items-start justify-between gap-4">
               <div className="flex flex-wrap gap-2">
                 {selectedFilters.map((filter, index) => (
                   <Badge
@@ -492,7 +492,7 @@ export const FilterBar = ({
 
 /* ------------------ Helpers ------------------ */
 
-const Divider = () => <span className="mx-4 h-6 w-px bg-gray-300" />;
+const Divider = () => <span className="hidden sm:inline-block mx-2 sm:mx-4 h-4 sm:h-6 w-px bg-gray-300" />;
 
 const FilterItem = ({ label }: { label: string }) => (
   <button
@@ -513,17 +513,17 @@ const FilterToggle = ({
   enabled: boolean;
   onClick: () => void;
 }) => (
-  <div className="flex items-center gap-3">
-    <span className="text-black">{label}</span>
+  <div className="flex items-center gap-2 sm:gap-3">
+    <span className="text-black text-xs sm:text-sm">{label}</span>
     <button
       onClick={onClick}
-      className={`relative h-5 w-9 rounded-full transition ${
+      className={`relative h-4 sm:h-5 w-8 sm:w-9 rounded-full transition ${
         enabled ? "bg-green-600" : "bg-gray-600"
       }`}
     >
       <span
-        className={`absolute top-0.5 h-4 w-4 rounded-full bg-white transition ${
-          enabled ? "left-4" : "left-1"
+        className={`absolute top-0.5 h-3 sm:h-4 w-3 sm:w-4 rounded-full bg-white transition ${
+          enabled ? "left-4 sm:left-4" : "left-0.5 sm:left-1"
         }`}
       />
     </button>
