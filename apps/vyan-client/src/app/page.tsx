@@ -6,7 +6,7 @@
 // import Header from "~/components/shared/header";
 // import News from "./(news)/news";
 // import KeyFeatures from "./(key-features)/key-features";
-
+import dynamic from "next/dynamic";
 // import Blogs from "./(blogs)/blogs";
 // import Subscribe from "./(subscirbe)/subscribe";
 // import Footer from "~/components/shared/footer";
@@ -19,20 +19,46 @@
 // import HomePageProducts from "./(homepage-products)/homepage-products";
 // import Testimonials from "./(testimonials)/testimonials";
 // import { Header as NewHeader } from "~/components/header";
-import Partners from "~/components/partners";
 import Hero from "~/components/hero";
-import WellnessCircle from "~/components/wellness-circle";
-import ServicesCarousel from "~/components/services-carousel";
-import PlatformSection from "~/components/platform-section";
-import PregnancyStages from "~/components/pregnancy-stages";
-import ExpertsCarousel from "~/components/experts-carousel";
-import ProductsGrid from "~/components/products-grid";
-import WhyShewell from "~/components/why-shewell";
-import WisdomSection from "~/components/wisdom-section";
-import ShewellFAQ from "~/components/shewell-faq";
+
+// Lazy load below-the-fold components with no SSR for better performance
+const WellnessCircle = dynamic(() => import("~/components/wellness-circle"), {
+  ssr: false,
+});
+
+const ServicesCarousel = dynamic(() => import("~/components/services-carousel"), {
+  ssr: false,
+});
+
+const PlatformSection = dynamic(() => import("~/components/platform-section"), {
+  ssr: false,
+});
+
+const PregnancyStages = dynamic(() => import("~/components/pregnancy-stages"), {
+  ssr: false,
+});
+
+const ExpertsCarousel = dynamic(() => import("~/components/experts-carousel"), {
+  ssr: false,
+});
+
+const ProductsGrid = dynamic(() => import("~/components/products-grid"), {
+  ssr: false,
+});
+
+const Partners = dynamic(() => import("~/components/partners"), {
+  ssr: false,
+});
+
+const WhyShewell = dynamic(() => import("~/components/why-shewell"), {
+  ssr: false,
+});
+
+const ShewellFAQ = dynamic(() => import("~/components/shewell-faq"), {
+  ssr: false,
+});
 
 const HomePage = async () => {
-
   return (
     <>
       <div className="px-0">
@@ -43,25 +69,9 @@ const HomePage = async () => {
         <PregnancyStages />
         <ExpertsCarousel />
         <ProductsGrid />
-        {/* <Features /> */}
-
-        {/* <div className="container mx-auto">
-     <div className="flex flex-col flex-wrap gap-5 xl:gap-8 items-center justify-center  md:flex-row">
-        <CounsellingCard counsellingCard={counsellingCard} />
-        
-      </div>
-     </div> */}
-        {/* <KeyFeatures/> */}
-        {/* <News /> */}
-
         <Partners />
-
-        {/* <HomePageProducts /> */}
         <WhyShewell />
-        {/* <WisdomSection /> */}
         <ShewellFAQ />
-        {/* <Testimonials /> */}
-        {/* <Subscribe /> */}
       </div>
     </>
   );

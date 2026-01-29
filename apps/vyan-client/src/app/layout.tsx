@@ -1,49 +1,33 @@
-import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
-import { api } from "~/trpc/server";
-import { SessionProvider } from "next-auth/react";
-import Hero from "~/components/hero";
 import "~/styles/globals.css";
-import { Inter, Pacifico, Playfair_Display, Amatic_SC } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import { Toaster } from "@repo/ui/src/@/components/toaster";
+import { db } from "~/server/db";
 import { Header } from "~/components/header";
 import NewFooter from "~/components/new-footer";
-import { db } from "~/server/db";
 import ClientSessionProvider from "./client-session-provider";
 import CardSheet from "~/components/card-sheet";
 import { TRPCReactProvider } from "~/trpc/react";
 
-import { Poppins } from "next/font/google";
-// import { Header as NewHeader } from "./components/header";
+// PERFORMANCE: Reduced from 5 fonts to 2 essential ones with display:swap
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
+  preload: true,
 });
 
-const pacifico = Pacifico({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-pacifico",
-});
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-});
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], // Adjust as needed
+  weight: ["400", "500", "600", "700"],
   variable: "--font-poppins",
-});
-
-const amaticSC = Amatic_SC({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  variable: "--font-amatic-sc",
+  display: "swap",
+  preload: true,
 });
 
 export const metadata = {
-  title: "Shewell",
-  description: "Shewell",
+  title: "Shewell - Empowering Women, Nurturing Families",
+  description: "A trusted digital companion for women's health, motherhood, mental wellbeing, and mindful living curated by experts",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
@@ -53,62 +37,25 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession();
-  let verifiedAt: Date | null | undefined = undefined;
-  if (session) {
+  
+  // PERFORMANCE: Only fetch verifiedAt for authenticated users to avoid unnecessary DB queries
+  let verifiedAt: Date | null = null;
+  if (session?.user?.email) {
     const user = await db.user.findFirst({
-      select: {
-        verifiedAt: true,
-        name: true,
-        email: true,
-        wishlistedProducts: true,
-      },
-      where: {
-        email: session.user.email!,
-      },
+      select: { verifiedAt: true },
+      where: { email: session.user.email },
     });
-
-    verifiedAt = user?.verifiedAt;
+    verifiedAt = user?.verifiedAt ?? null;
   }
 
-  
-
-  let userDetails;
-
-  // if (session?.user?.email) {
-  //   userDetails = await db.user.findFirst({
-  //     select: {
-  //       wishlistedProducts: true,
-  //     },
-  //     where: {
-  //       email: session.user.email,
-  //     },
-  //   });
-  // }
-
-
   return (
-    <html 
-      className={`scroll-smooth scroll-smooth ${poppins.variable} ${inter.variable} ${pacifico.variable} ${playfair.variable} ${amaticSC.variable}`}
-      lang="en"
-    >
-      <body
-        className={"relative font-sans"}
-      >
+    <html className={`scroll-smooth ${poppins.variable} ${inter.variable}`} lang="en">
+      <body className="relative font-sans">
         <div className="sticky top-0 z-40">
-          <ClientSessionProvider session={session} verifiedAt={verifiedAt!}>
+          <ClientSessionProvider session={session} verifiedAt={verifiedAt}>
             <TRPCReactProvider>
-              {/* <Header
-                email={session?.user.email!}
-                name={session?.user.name!}
-                categories={categories}
-                wishlistedProLength={
-                  userDetails?.wishlistedProducts.length || 0
-                }
-              /> */}
               <Header />
-              {/* <NewHeader /> */}
               {children}
-              {/* <NewHeader /> */}
               <NewFooter />
               <Toaster />
               <CardSheet />

@@ -1,25 +1,23 @@
 "use client";
 
-import Image from "next/image";
-
-import CompleteDoctorProfile from "~/app/counselling/complete-doctor-profile";
-import { db } from "~/server/db";
-import CousnsellingFilter from "./counselling-filter";
-import CounsellingFilter from "./counselling-filter";
-import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import { useEffect } from "react";
 import { api } from "~/trpc/react";
 import { useSearchParams } from "next/navigation";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@repo/ui/src/@/components/select";
-import { Button } from "@repo/ui/src/@/components/button";
 import CompleteDoctorProfileSkeleton from "./complete-doctor-profile-skeleton";
-import SkeletonLoader from "~/components/shared/skeleton-loader";
+
+// PERFORMANCE: Lazy load heavy components to reduce 5958 module bundle
+const CounsellingFilter = dynamic(() => import("./counselling-filter"), {
+  ssr: false,
+});
+
+const CompleteDoctorProfile = dynamic(
+  () => import("~/app/counselling/complete-doctor-profile"),
+  {
+    ssr: false,
+    loading: () => <CompleteDoctorProfileSkeleton />,
+  }
+);
 
 const Counselling = () => {
   function toUTCDate(date: Date) {
@@ -29,47 +27,49 @@ const Counselling = () => {
   }
 
   const searchParams = useSearchParams();
-  console.log("searchParams", searchParams);
   const specialisationId = searchParams.get("specialisationId");
   const selectedDate = searchParams.get("selectedDate");
   const languageId = searchParams.get("languageId");
   const time = searchParams.get("time");
   const inputSearch = searchParams.get("therapistSearch");
-  console.log("specialisationId", specialisationId);
+
+  // PERFORMANCE: Only fetch when filters applied
+  const shouldFetch = !!(specialisationId && selectedDate);
 
   const { data: doctor } =
-    api.findDoctorWithoutFilter.findDoctorWithoutFilter.useQuery();
-
-  const { data: specialisation } =
-    api.searchSpecialization.searchSpecialization.useQuery();
+    api.findDoctorWithoutFilter.findDoctorWithoutFilter.useQuery(undefined, {
+      enabled: !shouldFetch,
+    });
 
   const formattedLanguageIds: string[] =
     typeof languageId === "string" ? languageId.split(",") : [];
-  console.log("formattedLanguageIds", formattedLanguageIds);
-  console.log("selectedDate", selectedDate);
-  console.log("time", time);
-  console.log("inputSearch", inputSearch);
+
   const {
     data: filteredDoctors,
     refetch,
     isLoading,
-  } = api.findDoctor.findDoctor.useQuery({
-    specialisationId: specialisationId!,
-    date: toUTCDate(new Date(selectedDate!)),
-    languageIds: formattedLanguageIds,
-    time: time,
-    inputSearch: inputSearch,
-  });
-  console.log("filteredDoctors", filteredDoctors);
+  } = api.findDoctor.findDoctor.useQuery(
+    {
+      specialisationId: specialisationId!,
+      date: toUTCDate(new Date(selectedDate!)),
+      languageIds: formattedLanguageIds,
+      time: time,
+      inputSearch: inputSearch,
+    },
+    { enabled: shouldFetch }
+  );
+
   useEffect(() => {
-    refetch();
-  }, [specialisationId]);
+    if (shouldFetch) {
+      refetch();
+    }
+  }, [specialisationId, shouldFetch, refetch]);
 
   const handleSpecialisationId = (value: string) => {
-    // setSpecialisationId(value);
+    // Filter handler
   };
   const handleDate = (value: Date) => {
-    // setDate(value);
+    // Date handler
   };
 
   return (

@@ -18,15 +18,12 @@ export const appointmentTimeDurationRouter = createTRPCRouter({
         },
         where: {
           professionalUserId: professionalUserId,
-          // coupleSession : false
         },
       });
-      console.log("timeDurations", timeDurations);
       // Find the minimum time duration and its corresponding price
       const minTimeDuration = timeDurations.reduce((min, current) => {
         return current.time < min!.time ? current : min;
       }, timeDurations[0]);
-      console.log("minTimeDuration", minTimeDuration);
       return { timeDurations, minTimeDuration };
     }),
 });

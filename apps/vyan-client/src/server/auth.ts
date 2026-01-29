@@ -45,21 +45,21 @@ export const authOptions: NextAuthOptions = {
   },
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    session: async ({ session, user }) => {
-      console.log("session check callback", session, user);
-      const userAuth = await db.user.findFirst({
-        where: {
-          email: {
-            equals: session.user.email as string,
-            mode: "insensitive",
-          },
-        },
-      });
-      if (session.user && userAuth) {
-        session.user.id = userAuth.id;
+    jwt: async ({ token, user }) => {
+      // Cache user ID in JWT to avoid DB lookups on every request
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+    session: async ({ session, token }) => {
+      // Use cached ID from JWT instead of querying DB every time
+      if (token && session.user) {
+        session.user.id = token.id as string;
       }
       return session;
     },
@@ -88,25 +88,33 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
+        // CRITICAL FIX: Check if email belongs to a doctor account
+        // This prevents doctor accounts from accessing client app
+        const isDoctorAccount = await db.professionalUser.findFirst({
+          where: { email: credentials.email },
+          select: { id: true },
+        });
+
+        if (isDoctorAccount) {
+          throw new Error(
+            "Doctor accounts cannot access this portal. Please use the professional portal."
+          );
+        }
+
         const user = await db.user.findFirst({
           select: {
             id: true,
             email: true,
             phoneNumber: true,
             passwordHash: true,
-            name:true,
+            name: true,
           },
           where: {
             email: credentials.email,
           },
         });
 
-        console.log("login request", user, credentials.email);
-
-        if (!user) {
-          return null;
-        }
-        if (!user.passwordHash) {
+        if (!user?.passwordHash) {
           return null;
         }
 
@@ -114,10 +122,10 @@ export const authOptions: NextAuthOptions = {
         if (!isValid) {
           return null;
         }
-        console.log("user find", user);
+
         return {
           id: user.id,
-          name:user.name,
+          name: user.name,
           email: user.email,
           phoneNumber: user.phoneNumber,
         };
