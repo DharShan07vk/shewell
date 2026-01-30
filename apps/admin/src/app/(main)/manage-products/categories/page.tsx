@@ -4,6 +4,9 @@ import { db } from '@/src/server/db';
 import CategoriesTable from './categories-table';
 import { Skeleton } from 'primereact/skeleton';
 
+// Force dynamic rendering to prevent caching of database queries
+export const dynamic = 'force-dynamic';
+
 const Categories = async () => {
   const categories = await db.category.findMany({
     select: {

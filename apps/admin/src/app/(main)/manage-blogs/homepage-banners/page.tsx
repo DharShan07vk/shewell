@@ -3,6 +3,9 @@
 import { db } from '@/src/server/db';
 import HomepageBannersTable from '@/src/app/(main)/manage-blogs/homepage-banners/homepage-banners-table';
 
+// Force dynamic rendering to prevent caching of database queries
+export const dynamic = 'force-dynamic';
+
 const HomepageBannerPage = async () => {
   const homepageBanners = await db.homeBanner.findMany({
     select: {

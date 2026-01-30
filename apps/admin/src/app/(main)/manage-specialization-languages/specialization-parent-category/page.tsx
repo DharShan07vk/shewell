@@ -6,6 +6,9 @@ import { Skeleton } from 'primereact/skeleton';
 import SpecializationTable from './specialization-parent-category-table';
 import SpecializationParentCategoryTable from './specialization-parent-category-table';
 
+// Force dynamic rendering to prevent caching of database queries
+export const dynamic = 'force-dynamic';
+
 const SpecializationParentCategoryPage = async () => {
   //   const specializations = await db.professionalSpecializations.findMany({
   //     select: {

@@ -4,6 +4,9 @@ import { db } from '@/src/server/db';
 import PincodesTable from './pincodes-table';
 import { Skeleton } from 'primereact/skeleton';
 
+// Force dynamic rendering to prevent caching of database queries
+export const dynamic = 'force-dynamic';
+
 const StatesPage = async () => {
   const availablePincodes = await db.availablePincodes.findMany({
     select: {
