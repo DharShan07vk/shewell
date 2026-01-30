@@ -5,9 +5,6 @@ import ProductsTable from '@/src/app/(main)/manage-products/products/products-ta
 import { ICurrency } from '@/src/_models/product.model';
 import { Skeleton } from 'primereact/skeleton';
 
-// Force dynamic rendering to prevent caching of database queries
-export const dynamic = 'force-dynamic';
-
 const Products = async () => {
   const products = await db.product.findMany({
     select: {

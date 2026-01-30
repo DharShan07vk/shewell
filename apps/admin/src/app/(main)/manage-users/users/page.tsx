@@ -4,9 +4,6 @@ import { db } from '@/src/server/db';
 import UsersTable from './users-table';
 import { Skeleton } from 'primereact/skeleton';
 
-// Force dynamic rendering to prevent caching of database queries
-export const dynamic = 'force-dynamic';
-
 const Users = async () => {
   // const users = await db.user.findMany({
   //   select: {

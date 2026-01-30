@@ -4,10 +4,6 @@ import { db } from '@/src/server/db';
 import OrderTable from './orders-table';
 import { Suspense } from 'react';
 import { Skeleton } from 'primereact/skeleton';
-
-// Force dynamic rendering to prevent caching of database queries
-export const dynamic = 'force-dynamic';
-
 const Orders = async () => {
   const orders = await db.order.findMany({
     select: {

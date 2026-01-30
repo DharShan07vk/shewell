@@ -5,8 +5,6 @@ import { db } from '@/src/server/db';
 import { Skeleton } from 'primereact/skeleton';
 import LanguageTable from './language-table';
 
-// Force dynamic rendering to prevent caching of database queries
-export const dynamic = 'force-dynamic';
 
 const LanguagesPage = async () => {
   const languages = await db.professionalLanguages.findMany({
