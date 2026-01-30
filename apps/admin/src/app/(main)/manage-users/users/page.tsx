@@ -1,4 +1,9 @@
 'use server';
+
+// Force dynamic rendering - disable static caching
+
+export const revalidate = 0;
+
 import React, { Suspense } from 'react';
 import { db } from '@/src/server/db';
 import UsersTable from './users-table';

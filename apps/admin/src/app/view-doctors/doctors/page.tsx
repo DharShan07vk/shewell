@@ -1,4 +1,9 @@
 'use client';
+
+// Force dynamic rendering - disable static caching
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import { env } from '@/env';
 import { db } from '@/src/server/db';
 import { apiClient } from '@/src/trpc/react';

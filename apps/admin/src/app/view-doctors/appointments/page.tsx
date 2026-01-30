@@ -1,4 +1,9 @@
 'use client';
+
+// Force dynamic rendering - disable static caching
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import { apiClient } from '@/src/trpc/react';
 import { BookAppointmentStatus } from '@repo/database';
 import { format } from 'date-fns';
