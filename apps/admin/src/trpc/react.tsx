@@ -11,7 +11,19 @@ import { getUrl, transformer } from './shared';
 export const apiClient = createTRPCReact<AppRouter>();
 
 export function TRPCReactProvider(props: { children: React.ReactNode }) {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        // Disable automatic refetching to prevent performance issues
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
+        // Keep data fresh for 30 seconds before considering it stale
+        staleTime: 30 * 1000,
+        // Cache data for 5 minutes
+        cacheTime: 5 * 60 * 1000,
+      },
+    },
+  }));
 
   const [trpcClient] = useState(() =>
     apiClient.createClient({

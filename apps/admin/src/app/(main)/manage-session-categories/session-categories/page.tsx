@@ -5,6 +5,9 @@ import { Skeleton } from 'primereact/skeleton';
 import React, { Suspense } from 'react';
 import SessionCategoryTable from './session-category-table';
 
+// Force dynamic rendering to prevent caching of database queries
+export const dynamic = 'force-dynamic';
+
 const SessionCategories = async () => {
     const sessionCategories = await db.sessionCategory.findMany({
         orderBy: {

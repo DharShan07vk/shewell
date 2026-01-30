@@ -5,6 +5,9 @@ import { Skeleton } from 'primereact/skeleton';
 import React, { Suspense } from 'react';
 import SessionTable from './session-table';
 
+// Force dynamic rendering to prevent caching of database queries
+export const dynamic = 'force-dynamic';
+
 const Sessions = async () => {
   // Fetch sessions and categories in parallel
   const [sessions, categories] = await Promise.all([

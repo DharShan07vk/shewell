@@ -159,7 +159,7 @@ export const createProduct = async (data: IProductForm) => {
     }
   });
 
-  revalidatePath('/manage-products/products');
+  revalidatePath('/manage-products/products', 'page');
   return {
     message: 'Product created successfully'
   };
@@ -326,7 +326,7 @@ export const updateProduct = async (data: IProductForm) => {
     });
   });
 
-  revalidatePath('/manage-products/products');
+  revalidatePath('/manage-products/products', 'page');
   return {
     message: 'Product updated successfully'
   };
@@ -353,7 +353,7 @@ export const deleteProduct = async (productId: string) => {
         id: productId
       }
     });
-    revalidatePath('/manage-products/products');
+    revalidatePath('/manage-products/products', 'page');
     return {
       message: 'Product deleted successfully'
     };
@@ -395,7 +395,7 @@ export const updateProductImages = async (data: IMediaOnProducts[], id: string) 
       });
     });
 
-    revalidatePath('/manage-products/products');
+    revalidatePath('/manage-products/products', 'page');
     return {
       message: 'Product images updated successfully'
     };

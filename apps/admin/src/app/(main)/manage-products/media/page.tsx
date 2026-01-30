@@ -4,6 +4,9 @@ import { db } from '@/src/server/db';
 import MediaTable from './media-table';
 import { Skeleton } from 'primereact/skeleton';
 
+// Force dynamic rendering to prevent caching of database queries
+export const dynamic = 'force-dynamic';
+
 const Media = async () => {
   const media = await db.media.findMany({
     select: {
