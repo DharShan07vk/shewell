@@ -3,9 +3,6 @@
 import { db } from '@/src/server/db';
 import BlogsTable from '@/src/app/(main)/manage-blogs/blogs/blogs-table';
 
-// Force dynamic rendering to prevent caching of database queries
-export const dynamic = 'force-dynamic';
-
 const BlogsPage = async () => {
   const blogCategories = await db.blogCategory.findMany({
     select: {

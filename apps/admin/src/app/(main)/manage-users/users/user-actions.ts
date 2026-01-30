@@ -56,7 +56,7 @@ export const createUser = async (data: IUser) => {
   //   }
   // });
 
-  revalidatePath('/manage-users/users', 'page');
+  revalidatePath('/manage-users-users');
   return {
     message: 'User created successfully'
   };
@@ -121,7 +121,7 @@ export const updateUser = async (data: IUser) => {
     //   }
     // });
 
-    revalidatePath('/manage-users/users', 'page');
+    revalidatePath('/manage-users/users');
     return {
       message: 'User updated successfully'
     };

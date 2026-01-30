@@ -3,10 +3,6 @@ import React, { Suspense } from 'react';
 import { db } from '@/src/server/db';
 import { Skeleton } from 'primereact/skeleton';
 import TestimonialTable from './testimonial-table';
-
-// Force dynamic rendering to prevent caching of database queries
-export const dynamic = 'force-dynamic';
-
 const Testimonials = async () => {
   const testimonials = await db.testimonials.findMany({
     select: {
